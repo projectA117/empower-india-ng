@@ -1,0 +1,103 @@
+{
+    "DistrictDetails": [
+{
+"DistrictName":"ALLURI SITARAMARAJU",
+"DistrictCode":"745"
+},
+{
+    "DistrictName": "ANAKAPALLI",
+    "DistrictCode": "744"
+},{
+    "DistrictName": "ANNAMAYYA",
+    "DistrictCode": "753"
+},
+{
+"DistrictName": "BAPATLA",
+    "DistrictCode": "750"
+},
+{
+    "DistrictName": "CHITTOOR",
+    "DistrictCode": "503"
+},
+{
+     "DistrictName": "EAST GODAVARI",
+    "DistrictCode": "505"
+},
+{
+    "DistrictName": "ELURU",
+    "DistrictCode": "748"
+},
+{
+    "DistrictName": "GUNTUR",
+    "DistrictCode": "506"
+},
+{
+    "DistrictName": "KAKINADA",
+    "DistrictCode": "746"
+},
+{
+    "DistrictName": "KONASEEMA",
+    "DistrictCode": "747"
+},
+{
+     "DistrictName": "KRISHNA",
+    "DistrictCode": "510"
+},
+{
+    "DistrictName": "KURNOOL",
+    "DistrictCode": "511"
+},
+{
+    "DistrictName": "NANDYAL",
+    "DistrictCode": "755"
+},
+{
+    "DistrictName": "NTR",
+    "DistrictCode": "749"
+},
+{
+   "DistrictName": "PALNADU",
+    "DistrictCode": "751"
+},
+{
+    "DistrictName": "PARVATHIPURAM MANYAM",
+    "DistrictCode": "743"
+},
+{
+    "DistrictName": "PRAKASAM",
+    "DistrictCode": "517"
+},
+{
+    "DistrictName": "SPR NELLORE",
+    "DistrictCode": "515"
+},
+{
+    "DistrictName": "SRIKAKULAM",
+    "DistrictCode": "519"
+},
+{
+    "DistrictName": "SRI SATYA SAI",
+    "DistrictCode": "754"
+},
+{
+   "DistrictName": "TIRUPATI",
+    "DistrictCode": "752"
+},
+{
+    "DistrictName": "VISAKHAPATNAM",
+    "DistrictCode": "520"
+},
+{
+    "DistrictName": "VIZIANAGARAM",
+    "DistrictCode": "521"
+},
+{
+    "DistrictName": "WEST GODAVARI",
+    "DistrictCode": "523"
+},
+{
+    "DistrictName": "YSR KADAPA",
+    "DistrictCode": "504"
+}
+]
+}

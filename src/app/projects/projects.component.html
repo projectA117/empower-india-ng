@@ -1,0 +1,73 @@
+<p>projects works!</p>
+
+<!-- <select id="ddldistrict" class="form-control">
+  <option value="0">-Select district-</option>
+
+  <option value="745">ALLURI SITARAMARAJU(అల్లూరి సీతారామరాజు)</option>
+
+  <option value="744">ANAKAPALLI(అనకాపల్లి)</option>
+  <option value="753">ANNAMAYYA(అన్నమయ్య)</option>
+  <option value="502">ANANTAPURAMU(అనంతపురం)</option>
+  <option value="750">BAPATLA(బాపట్ల)</option>
+  <option value="503">CHITTOOR(చిత్తూరు)</option>
+  <option value="505">EAST GODAVARI(తూర్పు గోదావరి)</option>
+
+  <option value="748">ELURU(ఏలూరు)</option>
+
+  <option value="506">GUNTUR(గుంటూరు)</option>
+  <option value="746">KAKINADA(కాకినాడ)</option>
+  <option value="747">KONASEEMA(కోనసీమ)</option>
+  <option value="510">KRISHNA(కృష్ణా)</option>
+
+  <option value="511">KURNOOL(కర్నూలు)</option>
+
+  <option value="755">NANDYAL(నంద్యాల)</option>
+  <option value="749">NTR(ఎన్టీఆర్)</option>
+
+  <option value="751">PALNADU(పల్నాడు)</option>
+
+  <option value="743">PARVATHIPURAM MANYAM(పార్వతీపురం మన్యం)</option>
+
+  <option value="517">PRAKASAM(ప్రకాశం)</option>
+  <option value="515">SPR NELLORE(శ్రీ పొట్టి శ్రీరాములు నెల్లూరు)</option>
+  <option value="519">SRIKAKULAM(శ్రీకాకుళం)</option>
+
+  <option value="754">SRI SATYA SAI(శ్రీ సత్యసాయి)</option>
+  <option value="752">TIRUPATI(తిరుపతి)</option>
+
+  <option value="520">VISAKHAPATNAM(విశాఖపట్నం)</option>
+  <option value="521">VIZIANAGARAM(విజయనగరం)</option>
+  <option value="523">WEST GODAVARI(పశ్చిమ గోదావరి)</option>
+  <option value="504">YSR KADAPA(వైఎస్ఆర్ కడప)</option>
+</select> -->
+
+<div class="grid grid-cols-12 gap-4 grid-nogutter">
+  <div class="col-span-4">&nbsp;</div>
+  <div class="col-span-4">
+    <p-dropdown
+      [options]="DistrictDetails"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="DistrictName"
+      placeholder="Select a District"
+      (onChange)="getMandals($event)"
+    />
+  </div>
+  <div class="col-span-4">
+    <p-dropdown
+      [options]="mandals"
+      [(ngModel)]="selectMandals"
+      optionLabel="MandalName"
+      placeholder="Select a Mandal"
+      (onChange)="getvilages($event)"
+    />
+  </div>
+  <div class="col-span-4">
+    <p-dropdown
+      [options]="vilage"
+      [(ngModel)]="selectVilage"
+      optionLabel="Revenue_Name"
+      placeholder="Select a Vilage"
+    />
+  </div>
+  <div class="col-span-4">&nbsp;</div>
+</div>
