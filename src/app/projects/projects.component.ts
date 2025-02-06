@@ -1,15 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { Product } from '@domain/product';
+import { ProductService } from '@service/productservice';
+import { ImportsModule } from '../imports';
+import { CommonService } from '../../service/common.service';
 @Component({
   selector: 'app-projects',
-  standalone: true,
-  imports: [FormsModule, DropdownModule],
   templateUrl: './projects.component.html',
+  standalone: true,
+  imports: [ImportsModule, FormsModule, DropdownModule],
+  providers: [
+    MessageService,
+    ConfirmationService,
+    ProductService,
+    CommonService,
+  ],
   styleUrl: './projects.component.scss',
+  styles: [
+    `
+      :host ::ng-deep .p-dialog .product-image {
+        width: 150px;
+        margin: 0 auto 2rem auto;
+        display: block;
+      }
+    `,
+  ],
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
+  productDialog: boolean = false;
+
+  products!: Product[];
+
+  product!: Product;
+
+  selectedProducts!: Product[] | null;
+
+  submitted: boolean = false;
+
+  statuses!: any[];
+
   selectedDistrict: any = {};
   selectMandals: any = {};
   selectVilage: any = {};
@@ -3326,6 +3357,14 @@ export class ProjectsComponent {
   ];
   mandals = [];
   vilage = [];
+
+  constructor(
+    private productService: ProductService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private commonService: CommonService
+  ) {}
+
   getMandals(event: any) {
     console.log(event.value.DistrictCode);
     const districtCode = event.value.DistrictCode;
@@ -3333,10 +3372,143 @@ export class ProjectsComponent {
       (d: any) => d.DistrictCode === districtCode
     )?.Get_mandals;
   }
+
   getvilages(event: any) {
     const mandalCode = event.value.Mandal_Code;
     this.vilage = this.VilageDetais.find(
       (d: any) => d.MandalCode === mandalCode
     )?.Lgdrvmaster;
+  }
+
+  ngOnInit() {
+    this.productService.getProducts().then((data) => (this.products = data));
+
+    this.statuses = [
+      { label: 'New', value: 'New' },
+      { label: 'Existing', value: 'Existing' },
+      { label: 'Inprogress', value: 'Inprogress' },
+    ];
+
+    this.commonService.getProjects().subscribe((data) => {
+      // this.products = data;
+      console.log('commonService' + data);
+    });
+  }
+
+  openNew() {
+    this.product = {};
+    this.submitted = false;
+    this.productDialog = true;
+  }
+
+  deleteSelectedProducts() {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete the selected products?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.products = this.products.filter(
+          (val) => !this.selectedProducts?.includes(val)
+        );
+        this.selectedProducts = null;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Products Deleted',
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  editProduct(product: Product) {
+    this.product = { ...product };
+    this.productDialog = true;
+  }
+
+  deleteProduct(product: Product) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + product.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.products = this.products.filter((val) => val.id !== product.id);
+        this.product = {};
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Deleted',
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  hideDialog() {
+    this.productDialog = false;
+    this.submitted = false;
+  }
+
+  saveProduct() {
+    this.submitted = true;
+
+    if (this.product.name?.trim()) {
+      if (this.product.id) {
+        this.products[this.findIndexById(this.product.id)] = this.product;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Updated',
+          life: 3000,
+        });
+      } else {
+        this.product.id = this.createId();
+        this.product.image = 'product-placeholder.svg';
+        this.products.push(this.product);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Created',
+          life: 3000,
+        });
+      }
+
+      this.products = [...this.products];
+      this.productDialog = false;
+      this.product = {};
+    }
+  }
+
+  findIndexById(id: string): number {
+    let index = -1;
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+
+    return index;
+  }
+
+  createId(): string {
+    let id = '';
+    var chars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < 5; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  }
+
+  getSeverity(status: string) {
+    switch (status) {
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
+    }
   }
 }

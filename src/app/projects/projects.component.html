@@ -1,73 +1,419 @@
-<p>projects works!</p>
-
-<!-- <select id="ddldistrict" class="form-control">
-  <option value="0">-Select district-</option>
-
-  <option value="745">ALLURI SITARAMARAJU(అల్లూరి సీతారామరాజు)</option>
-
-  <option value="744">ANAKAPALLI(అనకాపల్లి)</option>
-  <option value="753">ANNAMAYYA(అన్నమయ్య)</option>
-  <option value="502">ANANTAPURAMU(అనంతపురం)</option>
-  <option value="750">BAPATLA(బాపట్ల)</option>
-  <option value="503">CHITTOOR(చిత్తూరు)</option>
-  <option value="505">EAST GODAVARI(తూర్పు గోదావరి)</option>
-
-  <option value="748">ELURU(ఏలూరు)</option>
-
-  <option value="506">GUNTUR(గుంటూరు)</option>
-  <option value="746">KAKINADA(కాకినాడ)</option>
-  <option value="747">KONASEEMA(కోనసీమ)</option>
-  <option value="510">KRISHNA(కృష్ణా)</option>
-
-  <option value="511">KURNOOL(కర్నూలు)</option>
-
-  <option value="755">NANDYAL(నంద్యాల)</option>
-  <option value="749">NTR(ఎన్టీఆర్)</option>
-
-  <option value="751">PALNADU(పల్నాడు)</option>
-
-  <option value="743">PARVATHIPURAM MANYAM(పార్వతీపురం మన్యం)</option>
-
-  <option value="517">PRAKASAM(ప్రకాశం)</option>
-  <option value="515">SPR NELLORE(శ్రీ పొట్టి శ్రీరాములు నెల్లూరు)</option>
-  <option value="519">SRIKAKULAM(శ్రీకాకుళం)</option>
-
-  <option value="754">SRI SATYA SAI(శ్రీ సత్యసాయి)</option>
-  <option value="752">TIRUPATI(తిరుపతి)</option>
-
-  <option value="520">VISAKHAPATNAM(విశాఖపట్నం)</option>
-  <option value="521">VIZIANAGARAM(విజయనగరం)</option>
-  <option value="523">WEST GODAVARI(పశ్చిమ గోదావరి)</option>
-  <option value="504">YSR KADAPA(వైఎస్ఆర్ కడప)</option>
-</select> -->
-
-<div class="grid grid-cols-12 gap-4 grid-nogutter">
-  <div class="col-span-4">&nbsp;</div>
-  <div class="col-span-4">
-    <p-dropdown
-      [options]="DistrictDetails"
-      [(ngModel)]="selectedDistrict"
-      optionLabel="DistrictName"
-      placeholder="Select a District"
-      (onChange)="getMandals($event)"
-    />
+<div class="card">
+  <div style="width: 100; display: block">
+    <div class="grid grid-cols-12 gap-4 grid-nogutter">
+      <div class="col-span-4">&nbsp;</div>
+      <div class="col-span-4">
+        <p-dropdown
+          [options]="DistrictDetails"
+          [(ngModel)]="selectedDistrict"
+          optionLabel="DistrictName"
+          placeholder="Select a District"
+          (onChange)="getMandals($event)"
+        />
+      </div>
+      <div class="col-span-4">
+        <p-dropdown
+          [options]="mandals"
+          [(ngModel)]="selectMandals"
+          optionLabel="MandalName"
+          placeholder="Select a Mandal"
+          (onChange)="getvilages($event)"
+        />
+      </div>
+      <div class="col-span-4">
+        <p-dropdown
+          [options]="vilage"
+          [(ngModel)]="selectVilage"
+          optionLabel="Revenue_Name"
+          placeholder="Select a Vilage"
+        />
+      </div>
+      <div class="col-span-4">&nbsp;</div>
+    </div>
   </div>
-  <div class="col-span-4">
-    <p-dropdown
-      [options]="mandals"
-      [(ngModel)]="selectMandals"
-      optionLabel="MandalName"
-      placeholder="Select a Mandal"
-      (onChange)="getvilages($event)"
-    />
-  </div>
-  <div class="col-span-4">
-    <p-dropdown
-      [options]="vilage"
-      [(ngModel)]="selectVilage"
-      optionLabel="Revenue_Name"
-      placeholder="Select a Vilage"
-    />
-  </div>
-  <div class="col-span-4">&nbsp;</div>
+  <p-toast />
+  <p-toolbar styleClass="mb-4 gap-2" style="width: 100">
+    <ng-template pTemplate="left">
+      <p-button
+        severity="success"
+        label="New"
+        icon="pi pi-plus"
+        class="mr-2"
+        (onClick)="openNew()"
+      />
+      <p-button
+        severity="danger"
+        label="Delete"
+        icon="pi pi-trash"
+        (onClick)="deleteSelectedProducts()"
+        [disabled]="!selectedProducts || !selectedProducts.length"
+      />
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mr-2 inline-block"
+      />
+      <!-- <p-button severity="help" label="Export" icon="pi pi-upload" /> -->
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="products"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="[
+      'name',
+      'country.name',
+      'representative.name',
+      'status'
+    ]"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedProducts"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Products</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+        <div class="col-span-4">
+          <p-dropdown
+            [options]="DistrictDetails"
+            [(ngModel)]="selectedDistrict"
+            optionLabel="DistrictName"
+            placeholder="Select a State"
+          />
+        </div>
+        <div class="col-span-4">
+          <p-dropdown
+            [options]="DistrictDetails"
+            [(ngModel)]="selectedDistrict"
+            optionLabel="DistrictName"
+            placeholder="Select a District"
+          />
+        </div>
+        <div class="col-span-4">
+          <p-dropdown
+            [options]="mandals"
+            [(ngModel)]="selectMandals"
+            optionLabel="MandalName"
+            placeholder="Select a Mandal"
+          />
+        </div>
+        <div class="col-span-4">
+          <p-dropdown
+            [options]="vilage"
+            [(ngModel)]="selectVilage"
+            optionLabel="Revenue_Name"
+            placeholder="Select a Vilage"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox />
+        </th>
+        <th pSortableColumn="name" style="min-width: 15rem">
+          Location <p-sortIcon field="name" />
+        </th>
+        <th pSortableColumn="name" style="min-width: 15rem">
+          Project Name <p-sortIcon field="name" />
+        </th>
+        <th>Image</th>
+        <th pSortableColumn="price">Estimation <p-sortIcon field="price" /></th>
+        <th pSortableColumn="category" style="min-width: 10rem">
+          Category <p-sortIcon field="category" />
+        </th>
+        <th pSortableColumn="rating">Reviews <p-sortIcon field="rating" /></th>
+        <th pSortableColumn="inventoryStatus" style="min-width: 10rem">
+          Status <p-sortIcon field="inventoryStatus" />
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="product" />
+        </td>
+        <td>Location</td>
+        <td>
+          {{ product.name }}
+        </td>
+        <td>
+          <img
+            [src]="
+              'https://primefaces.org/cdn/primeng/images/demo/product/' +
+              product.image
+            "
+            [alt]="product.name"
+            width="50"
+            class="shadow-4"
+          />
+        </td>
+        <td>
+          {{ product.price | currency : "USD" }}
+        </td>
+        <td>
+          {{ product.category }}
+        </td>
+        <td>
+          <p-rating
+            [(ngModel)]="product.rating"
+            [readonly]="true"
+            [cancel]="false"
+          />
+        </td>
+        <td>
+          <p-tag
+            [value]="product.inventoryStatus"
+            [severity]="getSeverity(product.inventoryStatus)"
+          />
+        </td>
+        <td>
+          <p-button
+            icon="pi pi-pencil"
+            class="mr-2"
+            [rounded]="true"
+            [outlined]="true"
+            severity="success"
+            (onClick)="editProduct(product)"
+          />
+          <p-button
+            icon="pi pi-trash"
+            severity="danger"
+            [rounded]="true"
+            [outlined]="true"
+            (onClick)="deleteProduct(product)"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    [(visible)]="productDialog"
+    [style]="{ width: '450px' }"
+    header="Product Details"
+    [modal]="true"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="content">
+      <img
+        [src]="
+          'https://primefaces.org/cdn/primeng/images/demo/product/' +
+          product.image
+        "
+        [alt]="product.image"
+        class="block m-auto pb-3"
+        *ngIf="product.image"
+      />
+
+      <form
+        action="forms/contact.php"
+        method="post"
+        role="form"
+        class="php-email-form"
+      >
+        <div class="rendered-form">
+          <div class="formbuilder-select form-group field-select-1738522537672">
+            <label for="select-1738522537672" class="formbuilder-select-label"
+              >State</label
+            >
+            <select
+              class="form-control form-select"
+              name="select-1738522537672"
+              id="select-1738522537672"
+            >
+              <option
+                value="Telangana"
+                selected="true"
+                id="select-1738522537672-0"
+              >
+                Andhra pradesh
+              </option>
+              <option value="option-2" id="select-1738522537672-1">
+                Option 2
+              </option>
+              <option value="option-3" id="select-1738522537672-2">
+                Option 3
+              </option>
+            </select>
+          </div>
+          <div class="formbuilder-select form-group field-select-1738515105639">
+            <label for="select-1738515105639" class="formbuilder-select-label"
+              >District</label
+            >
+            <select
+              class="form-control form-select"
+              name="select-1738515105639"
+              id="select-1738515105639"
+            >
+              <option
+                value="option-1"
+                selected="true"
+                id="select-1738515105639-0"
+              >
+                Option 1
+              </option>
+              <option value="option-2" id="select-1738515105639-1">
+                Option 2
+              </option>
+              <option value="option-3" id="select-1738515105639-2">
+                Option 3
+              </option>
+            </select>
+          </div>
+          <div class="formbuilder-select form-group field-select-1738522218203">
+            <label for="select-1738522218203" class="formbuilder-select-label"
+              >Mandal</label
+            >
+            <select
+              class="form-control form-select"
+              name="select-1738522218203"
+              id="select-1738522218203"
+            >
+              <option
+                value="option-1"
+                selected="true"
+                id="select-1738522218203-0"
+              >
+                Option 1
+              </option>
+              <option value="option-2" id="select-1738522218203-1">
+                Option 2
+              </option>
+              <option value="option-3" id="select-1738522218203-2">
+                Option 3
+              </option>
+            </select>
+          </div>
+          <div class="formbuilder-select form-group field-select-1738522221098">
+            <label for="select-1738522221098" class="formbuilder-select-label"
+              >Village</label
+            >
+            <select
+              class="form-control form-select"
+              name="select-1738522221098"
+              id="select-1738522221098"
+            >
+              <option
+                value="option-1"
+                selected="true"
+                id="select-1738522221098-0"
+              >
+                Option 1
+              </option>
+              <option value="option-2" id="select-1738522221098-1">
+                Option 2
+              </option>
+              <option value="option-3" id="select-1738522221098-2">
+                Option 3
+              </option>
+            </select>
+          </div>
+          <div class="formbuilder-select form-group field-select-1738522233201">
+            <label for="select-1738522233201" class="formbuilder-select-label"
+              >Project Category</label
+            >
+            <select
+              class="form-control form-select"
+              name="select-1738522233201"
+              id="select-1738522233201"
+            >
+              <option
+                value="option-1"
+                selected="true"
+                id="select-1738522233201-0"
+              >
+                Option 1
+              </option>
+              <option value="option-2" id="select-1738522233201-1">
+                Option 2
+              </option>
+              <option value="option-3" id="select-1738522233201-2">
+                Option 3
+              </option>
+            </select>
+          </div>
+        </div>
+      </form>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          pInputText
+          id="name"
+          [(ngModel)]="product.name"
+          required
+          autofocus
+        />
+        <small class="p-error" *ngIf="submitted && !product.name">
+          Name is required.
+        </small>
+      </div>
+      <div class="field">
+        <label for="description">Project Description</label>
+        <textarea
+          id="description"
+          pInputTextarea
+          [(ngModel)]="product.description"
+          required
+          rows="3"
+          cols="20"
+        >
+        </textarea>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col">
+          <label for="price">Project Amount</label>
+          <p-inputNumber
+            id="price"
+            [(ngModel)]="product.price"
+            mode="currency"
+            currency="USD"
+            locale="en-US"
+          />
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        [text]="true"
+        (onClick)="hideDialog()"
+      />
+      <p-button
+        label="Save"
+        icon="pi pi-check"
+        [text]="true"
+        (onClick)="saveProduct()"
+      />
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{ width: '100%' }" />
 </div>
