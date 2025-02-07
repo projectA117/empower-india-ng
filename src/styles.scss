@@ -427,10 +427,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .p-dialog {
   right: 0;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    max-height: inherit;
+  position: absolute;
+  top: 73px;
+  height: calc(100% - 73px);
+  max-height: inherit;
 }
 
 .main-container{
