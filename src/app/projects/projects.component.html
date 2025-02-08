@@ -3,42 +3,42 @@
     <h3>Projects List</h3>
     <div class="header-set-filter">
       <p-dropdown
-          [filter]="true"
-          [options]="DistrictDetails"
-          [(ngModel)]="selectedDistrict"
-          optionLabel="DistrictName"
-          placeholder="Select a District"
-          (onChange)="getMandals($event)"
+        [filter]="true"
+        [options]="DistrictDetails"
+        [(ngModel)]="selectedDistrict"
+        optionLabel="name"
+        placeholder="Select a District"
+        (onChange)="getMandals($event)"
+      />
+      <p-dropdown
+        [filter]="true"
+        [options]="mandals"
+        [(ngModel)]="selectMandals"
+        optionLabel="name"
+        placeholder="Select a Mandal"
+        (onChange)="getvilages($event)"
+      />
+      <p-dropdown
+        [filter]="true"
+        [options]="vilage"
+        [(ngModel)]="selectVilage"
+        optionLabel="name"
+        placeholder="Select a Vilage"
+      />
+
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Search..."
         />
-        <p-dropdown
-          [filter]="true"
-          [options]="mandals"
-          [(ngModel)]="selectMandals"
-          optionLabel="MandalName"
-          placeholder="Select a Mandal"
-          (onChange)="getvilages($event)"
-        />
-        <p-dropdown
-          [filter]="true"
-          [options]="vilage"
-          [(ngModel)]="selectVilage"
-          optionLabel="Revenue_Name"
-          placeholder="Select a Vilage"
-        />
-        
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            (input)="dt.filterGlobal($event.target.value, 'contains')"
-            placeholder="Search..."
-          />
-        </span>
-        <p-button label="Add New Project" (onClick)="openNew()"/>
+      </span>
+      <p-button label="Add New Project" (onClick)="openNew()" />
     </div>
   </div>
- 
+
   <p-toast />
   <p-toolbar styleClass="mb-4 gap-2" style="width: 100">
     <ng-template pTemplate="left">
@@ -56,7 +56,6 @@
         (onClick)="deleteSelectedProducts()"
         [disabled]="!selectedProducts || !selectedProducts.length"
       />
-      
     </ng-template>
 
     <ng-template pTemplate="right">
@@ -90,7 +89,6 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
   >
-    
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 4rem">
@@ -135,7 +133,7 @@
         <td>
           {{ product.name }}
         </td>
-       
+
         <td>
           {{ product.price | currency : "USD" }}
         </td>
@@ -195,189 +193,143 @@
       />
 
       <form
-        action="forms/contact.php"
-        method="post"
-        role="form"
+        [formGroup]="newProjectForm"
+        (ngSubmit)="savenewProjectForm()"
         class="php-email-form"
       >
         <div class="rendered-form">
-          <div class="formbuilder-select form-group field-select-1738522537672">
-            <label for="select-1738522537672" class="formbuilder-select-label"
-              >State</label
-            >
-            <select
-              class="form-control form-select"
-              name="select-1738522537672"
-              id="select-1738522537672"
-            >
-              <option
-                value="Telangana"
-                selected="true"
-                id="select-1738522537672-0"
-              >
-                Andhra pradesh
-              </option>
-              <option value="option-2" id="select-1738522537672-1">
-                Option 2
-              </option>
-              <option value="option-3" id="select-1738522537672-2">
-                Option 3
-              </option>
-            </select>
-          </div>
           <div class="formbuilder-select form-group field-select-1738515105639">
             <label for="select-1738515105639" class="formbuilder-select-label"
               >District</label
             >
-            <select
-              class="form-control form-select"
-              name="select-1738515105639"
-              id="select-1738515105639"
-            >
-              <option
-                value="option-1"
-                selected="true"
-                id="select-1738515105639-0"
-              >
-                Option 1
-              </option>
-              <option value="option-2" id="select-1738515105639-1">
-                Option 2
-              </option>
-              <option value="option-3" id="select-1738515105639-2">
-                Option 3
-              </option>
-            </select>
+            <p-dropdown
+              [filter]="true"
+              [options]="DistrictDetails"
+              formControlName="newProjectdistrict"
+              optionLabel="name"
+              placeholder="Select a District"
+              (onChange)="getMandals($event)"
+            />
           </div>
           <div class="formbuilder-select form-group field-select-1738522218203">
             <label for="select-1738522218203" class="formbuilder-select-label"
               >Mandal</label
             >
-            <select
-              class="form-control form-select"
-              name="select-1738522218203"
-              id="select-1738522218203"
-            >
-              <option
-                value="option-1"
-                selected="true"
-                id="select-1738522218203-0"
-              >
-                Option 1
-              </option>
-              <option value="option-2" id="select-1738522218203-1">
-                Option 2
-              </option>
-              <option value="option-3" id="select-1738522218203-2">
-                Option 3
-              </option>
-            </select>
+            <p-dropdown
+              [filter]="true"
+              [options]="mandals"
+              formControlName="newProjectmandal"
+              optionLabel="name"
+              placeholder="Select a Mandal"
+              (onChange)="getvilages($event)"
+            />
           </div>
           <div class="formbuilder-select form-group field-select-1738522221098">
             <label for="select-1738522221098" class="formbuilder-select-label"
               >Village</label
             >
-            <select
-              class="form-control form-select"
-              name="select-1738522221098"
-              id="select-1738522221098"
+            <p-dropdown
+              [filter]="true"
+              [options]="vilage"
+              formControlName="newProjectvillage"
+              optionLabel="name"
+              placeholder="Select a Village"
+            />
+          </div>
+
+          <div class="formbuilder-select form-group field-select-1738522221098">
+            <label for="select-1738522221098" class="formbuilder-select-label"
+              >Colony/Street/Location</label
             >
-              <option
-                value="option-1"
-                selected="true"
-                id="select-1738522221098-0"
-              >
-                Option 1
-              </option>
-              <option value="option-2" id="select-1738522221098-1">
-                Option 2
-              </option>
-              <option value="option-3" id="select-1738522221098-2">
-                Option 3
-              </option>
-            </select>
+            <input type="text" pInputText formControlName="newProjectAddress" />
           </div>
           <div class="formbuilder-select form-group field-select-1738522233201">
             <label for="select-1738522233201" class="formbuilder-select-label"
               >Project Category</label
             >
-            <select
-              class="form-control form-select"
-              name="select-1738522233201"
-              id="select-1738522233201"
-            >
-              <option
-                value="option-1"
-                selected="true"
-                id="select-1738522233201-0"
-              >
-                Option 1
-              </option>
-              <option value="option-2" id="select-1738522233201-1">
-                Option 2
-              </option>
-              <option value="option-3" id="select-1738522233201-2">
-                Option 3
-              </option>
-            </select>
+            <p-dropdown
+              [filter]="true"
+              [options]="newProjectDetails"
+              formControlName="newProjectCategory"
+              optionLabel="name"
+              placeholder="Select Projects Category"
+              (onChange)="getProjectNames($event)"
+            />
           </div>
         </div>
-      </form>
 
-      <div class="field">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          pInputText
-          id="name"
-          [(ngModel)]="product.name"
-          required
-          autofocus
-        />
-        <small class="p-error" *ngIf="submitted && !product.name">
-          Name is required.
-        </small>
-      </div>
-      <div class="field">
-        <label for="description">Project Description</label>
-        <textarea
-          id="description"
-          pInputTextarea
-          [(ngModel)]="product.description"
-          required
-          rows="3"
-          cols="20"
-        >
-        </textarea>
-      </div>
-
-      <div class="formgrid grid">
-        <div class="field col">
-          <label for="price">Project Amount</label>
-          <p-inputNumber
-            id="price"
-            [(ngModel)]="product.price"
-            mode="currency"
-            currency="USD"
-            locale="en-US"
+        <div class="field">
+          <label for="name">Project Name</label>
+          <p-dropdown
+            [filter]="true"
+            [options]="newProjectListNames"
+            formControlName="newProjectName"
+            optionLabel="description"
+            placeholder="Select Projects Name"
           />
+          <small class="p-error" *ngIf="submitted && !product.name">
+            Name is required.
+          </small>
         </div>
-      </div>
-    </ng-template>
+        <div class="field">
+          <label for="description">Project Description</label>
+          <textarea
+            pInputTextarea
+            formControlName="newProjectDescription"
+            required
+            rows="3"
+            cols="20"
+          >
+          </textarea>
+        </div>
 
-    <ng-template pTemplate="footer">
-      <p-button
-        label="Cancel"
-        icon="pi pi-times"
-        [text]="true"
-        (onClick)="hideDialog()"
-      />
-      <p-button
-        label="Save"
-        icon="pi pi-check"
-        [text]="true"
-        (onClick)="saveProduct()"
-      />
+        <div class="formgrid grid">
+          <div class="field col">
+            <label for="price">Project Estimation</label>
+            <p-inputNumber
+              id="price"
+              formControlName="newProjectEstimation"
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+            />
+          </div>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field col">
+            <label for="price">Govt Share</label>
+            <p-inputNumber
+              id="price"
+              formControlName="newProjectGovtShare"
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+            />
+          </div>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field col">
+            <label for="price">Public Share</label>
+            <p-inputNumber
+              id="price"
+              formControlName="newProjectPublicShare"
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+            />
+          </div>
+        </div>
+
+        <p-button
+          label="Cancel"
+          icon="pi pi-times"
+          [text]="true"
+          (onClick)="hideDialog()"
+        />
+        <p-button type="submit" label="Save" icon="pi pi-check" [text]="true" />
+      </form>
     </ng-template>
   </p-dialog>
 
