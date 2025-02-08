@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  FormControl,
+  ReactiveFormsModule,
+  FormGroup,
+} from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Product } from '@domain/product';
@@ -10,7 +15,7 @@ import { CommonService } from '../../service/common.service';
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   standalone: true,
-  imports: [ImportsModule, FormsModule, DropdownModule],
+  imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   providers: [
     MessageService,
     ConfirmationService,
@@ -44,108 +49,7 @@ export class ProjectsComponent implements OnInit {
   selectedDistrict: any = {};
   selectMandals: any = {};
   selectVilage: any = {};
-  DistrictDetails: any = [
-    {
-      DistrictName: 'ALLURI SITARAMARAJU(అల్లూరి సీతారామరాజు)',
-      DistrictCode: '745',
-    },
-    {
-      DistrictName: 'ANAKAPALLI(అనకాపల్లి)',
-      DistrictCode: '744',
-    },
-    {
-      DistrictName: 'ANNAMAYYA(అన్నమయ్య)',
-      DistrictCode: '753',
-    },
-    {
-      DistrictName: 'BAPATLA(బాపట్ల)',
-      DistrictCode: '750',
-    },
-    {
-      DistrictName: 'CHITTOOR(చిత్తూరు)',
-      DistrictCode: '503',
-    },
-    {
-      DistrictName: 'EAST GODAVARI(తూర్పు గోదావరి)',
-      DistrictCode: '505',
-    },
-    {
-      DistrictName: 'ELURU(ఏలూరు)',
-      DistrictCode: '748',
-    },
-    {
-      DistrictName: 'GUNTUR(గుంటూరు)',
-      DistrictCode: '506',
-    },
-    {
-      DistrictName: 'KAKINADA(కాకినాడ)',
-      DistrictCode: '746',
-    },
-    {
-      DistrictName: 'KONASEEMA(కోనసీమ)',
-      DistrictCode: '747',
-    },
-    {
-      DistrictName: 'KRISHNA(కృష్ణా)',
-      DistrictCode: '510',
-    },
-    {
-      DistrictName: 'KURNOOL(కర్నూలు)',
-      DistrictCode: '511',
-    },
-    {
-      DistrictName: 'NANDYAL(నంద్యాల)',
-      DistrictCode: '755',
-    },
-    {
-      DistrictName: 'NTR(ఎన్టీఆర్)',
-      DistrictCode: '749',
-    },
-    {
-      DistrictName: 'PALNADU(పల్నాడు)',
-      DistrictCode: '751',
-    },
-    {
-      DistrictName: 'PARVATHIPURAM MANYAM(పార్వతీపురం మన్యం)',
-      DistrictCode: '743',
-    },
-    {
-      DistrictName: 'PRAKASAM(ప్రకాశం)',
-      DistrictCode: '517',
-    },
-    {
-      DistrictName: 'SPR NELLORE(శ్రీ పొట్టి శ్రీరాములు నెల్లూరు)',
-      DistrictCode: '515',
-    },
-    {
-      DistrictName: 'SRIKAKULAM(శ్రీకాకుళం)',
-      DistrictCode: '519',
-    },
-    {
-      DistrictName: 'SRI SATYA SAI(శ్రీ సత్యసాయి)',
-      DistrictCode: '754',
-    },
-    {
-      DistrictName: 'TIRUPATI(తిరుపతి)',
-      DistrictCode: '752',
-    },
-    {
-      DistrictName: 'VISAKHAPATNAM(విశాఖపట్నం)',
-      DistrictCode: '520',
-    },
-    {
-      DistrictName: 'VIZIANAGARAM(విజయనగరం)',
-      DistrictCode: '521',
-    },
-    {
-      DistrictName: 'WEST GODAVARI(పశ్చిమ గోదావరి)',
-      DistrictCode: '523',
-    },
-    {
-      DistrictName: 'YSR KADAPA(వైఎస్ఆర్ కడప)',
-      DistrictCode: '504',
-    },
-  ];
+  DistrictDetails: any = [];
   MandalsDetails: any = [
     {
       DistrictName: 'ALLURI SITARAMARAJU',
@@ -3357,7 +3261,9 @@ export class ProjectsComponent implements OnInit {
   ];
   mandals = [];
   vilage = [];
-
+  newProjectDetails: any;
+  newProjectListNames: any;
+  newProjectForm: FormGroup = new FormGroup({});
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
@@ -3365,7 +3271,7 @@ export class ProjectsComponent implements OnInit {
     private commonService: CommonService
   ) {}
 
-  getMandals(event: any) {
+  getDistrict(event: any) {
     console.log(event.value.DistrictCode);
     const districtCode = event.value.DistrictCode;
     this.mandals = this.MandalsDetails.find(
@@ -3373,11 +3279,23 @@ export class ProjectsComponent implements OnInit {
     )?.Get_mandals;
   }
 
+  getMandals(event: any) {
+    const districtCode = event.value.id;
+    this.commonService.getMandals(districtCode).subscribe((data) => {
+      this.mandals = data;
+    });
+  }
+
   getvilages(event: any) {
-    const mandalCode = event.value.Mandal_Code;
-    this.vilage = this.VilageDetais.find(
-      (d: any) => d.MandalCode === mandalCode
-    )?.Lgdrvmaster;
+    const mandalCode = event.value.id;
+    this.commonService.getVillages(mandalCode).subscribe((data) => {
+      this.vilage = data;
+    });
+  }
+
+  getProjectNames(event: any) {
+    const projectCategoryCode = event.value.projects;
+    this.newProjectListNames = projectCategoryCode;
   }
 
   ngOnInit() {
@@ -3392,6 +3310,31 @@ export class ProjectsComponent implements OnInit {
     this.commonService.getProjects().subscribe((data) => {
       // this.products = data;
       console.log('commonService' + data);
+    });
+
+    this.commonService.getDistricts().subscribe((data) => {
+      this.DistrictDetails = data;
+    });
+
+    this.commonService.getNewProjectDetails().subscribe((data) => {
+      this.newProjectDetails = data;
+    });
+
+    this.newProjectForm = new FormGroup({
+      newProjectdistrict: new FormControl(''),
+      newProjectmandal: new FormControl(''),
+      newProjectvillage: new FormControl(''),
+      newProjectCategory: new FormControl(''),
+      newProjectListNames: new FormControl(''),
+      newProjectDescription: new FormControl(''),
+      newProjectLatitude: new FormControl(''),
+      newProjectLongitude: new FormControl(''),
+      newProjectAddress: new FormControl(''),
+      newProjectEstimation: new FormControl(''),
+      newProjectGovtShare: new FormControl(''),
+      newProjectPublicShare: new FormControl(''),
+      newProjectType: new FormControl(''),
+      newProjectCommitee: new FormControl(''),
     });
   }
 
@@ -3447,6 +3390,10 @@ export class ProjectsComponent implements OnInit {
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
+  }
+
+  savenewProjectForm() {
+    console.log(this.newProjectForm.value);
   }
 
   saveProduct() {
