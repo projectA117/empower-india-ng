@@ -3322,6 +3322,7 @@ export class ProjectsComponent implements OnInit {
 
     this.newProjectForm = new FormGroup({
       newProjectdistrict: new FormControl(''),
+      newProjectName: new FormControl(''),
       newProjectmandal: new FormControl(''),
       newProjectvillage: new FormControl(''),
       newProjectCategory: new FormControl(''),
