@@ -351,6 +351,11 @@ export class ProjectsComponent implements OnInit {
   newProjectDetails: any;
   newProjectListNames: any;
   newProjectForm: FormGroup = new FormGroup({});
+  categories: any[] = [
+    { name: 'New', key: 'New' },
+    { name: 'Existing', key: 'Existing' },
+  ];
+
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
@@ -367,20 +372,20 @@ export class ProjectsComponent implements OnInit {
   }
 
   getMandals(event: any) {
-    this.mandals = this.MandalsDetails;
+    // this.mandals = this.MandalsDetails;
     // this.mandals = data;
-    // const districtCode = event.value.id;
-    // this.commonService.getMandals(districtCode).subscribe((data) => {
-    //   this.mandals = data;
-    // });
+    const districtCode = event.value.id;
+    this.commonService.getMandals(districtCode).subscribe((data) => {
+      this.mandals = data;
+    });
   }
 
   getvilages(event: any) {
-    this.vilage = this.VilageDetais;
-    // const mandalCode = event.value.id;
-    // this.commonService.getVillages(mandalCode).subscribe((data) => {
-    //   this.vilage = data;
-    // });
+    // this.vilage = this.VilageDetais;
+    const mandalCode = event.value.id;
+    this.commonService.getVillages(mandalCode).subscribe((data) => {
+      this.vilage = data;
+    });
   }
 
   getProjectNames(event: any) {
@@ -397,18 +402,23 @@ export class ProjectsComponent implements OnInit {
       { label: 'Inprogress', value: 'Inprogress' },
     ];
 
-    // this.commonService.getProjects().subscribe((data) => {
-    //   // this.products = data;
-    //   console.log('commonService' + data);
-    // });
+    this.commonService.getProjects().subscribe((data) => {
+      if (data.length > 0) {
+        this.products = data;
+      }
+    });
 
-    // this.commonService.getDistricts().subscribe((data) => {
-    //   this.DistrictDetails = data;
-    // });
+    this.commonService.getDistricts().subscribe((data) => {
+      if (data.length > 0) {
+        this.DistrictDetails = data;
+      }
+    });
 
-    // this.commonService.getNewProjectDetails().subscribe((data) => {
-    //   this.newProjectDetails = data;
-    // });
+    this.commonService.getNewProjectDetails().subscribe((data) => {
+      if (data.length > 0) {
+        this.newProjectDetails = data;
+      }
+    });
     this.newProjectDetails = [
       {
         id: 1,
@@ -523,7 +533,7 @@ export class ProjectsComponent implements OnInit {
       newProjectEstimation: new FormControl(''),
       newProjectGovtShare: new FormControl(''),
       newProjectPublicShare: new FormControl(''),
-      newProjectType: new FormControl(''),
+      newProjectType: new FormControl('New'),
       newProjectCommitee: new FormControl(''),
     });
   }
@@ -584,6 +594,38 @@ export class ProjectsComponent implements OnInit {
 
   savenewProjectForm() {
     console.log(this.newProjectForm.value);
+
+    const requestData = {
+      district: this.newProjectForm.value.newProjectdistrict.name,
+      mandal: this.newProjectForm.value.newProjectmandal.name,
+      village: this.newProjectForm.value.newProjectvillage.name,
+      location: this.newProjectForm.value.newProjectAddress,
+      latitude:
+        this.newProjectForm.value.newProjectLatitude == ''
+          ? 16.519771
+          : this.newProjectForm.value.newProjectLatitude,
+      longitude:
+        this.newProjectForm.value.newProjectLongitude == ''
+          ? 80.777217
+          : this.newProjectForm.value.newProjectLongitude,
+      projectCategory: this.newProjectForm.value.newProjectCategory.name,
+      projectName: this.newProjectForm.value.newProjectName.description,
+      projectNeed: this.newProjectForm.value.newProjectType,
+      projectEstimation: this.newProjectForm.value.newProjectEstimation,
+      governmentShare: this.newProjectForm.value.newProjectGovtShare,
+      publicShare: this.newProjectForm.value.newProjectPublicShare,
+      description: this.newProjectForm.value.newProjectDescription,
+      // "projectType": this.newProjectForm.value.newProjectType,
+      // "commitee": this.newProjectForm.value.newProjectCommitee
+    };
+
+    this.commonService.PostSaveProject(requestData).subscribe((data) => {
+      this.commonService.getProjects().subscribe((data) => {
+        if (data.length > 0) {
+          this.products = data;
+        }
+      });
+    });
   }
 
   saveProduct() {

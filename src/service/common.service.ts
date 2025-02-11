@@ -1,5 +1,5 @@
 import { Observable, catchError, of, map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class CommonService {
 
   getStates(): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:8080/empower_andhra/states`)
+      .get<any>(`http://localhost:8080/empower_andhra/api/lookup/states`)
       .pipe(
         map((getStates) => {
           return getStates;
@@ -21,7 +21,9 @@ export class CommonService {
 
   getDistricts(): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:8080/empower_andhra/districts?stateId=1`)
+      .get<any>(
+        `http://localhost:8080/empower_andhra/api/lookup/districts?stateId=1`
+      )
       .pipe(
         map((Districts) => {
           return Districts;
@@ -32,7 +34,7 @@ export class CommonService {
   getMandals(districtCode: any): Observable<any> {
     return this.httpClient
       .get<any>(
-        `http://localhost:8080/empower_andhra/mandals?districtId=${districtCode}`
+        `http://localhost:8080/empower_andhra/api/lookup/mandals?districtId=${districtCode}`
       )
       .pipe(
         map((Mandals) => {
@@ -43,7 +45,9 @@ export class CommonService {
   }
   getVillages(mandalCode: string): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:8080/empower_andhra/villages?mandalId=1`)
+      .get<any>(
+        `http://localhost:8080/empower_andhra/api/lookup/villages?mandalId=${mandalCode}`
+      )
       .pipe(
         map((Villages) => {
           return Villages;
@@ -54,7 +58,9 @@ export class CommonService {
 
   getNewProjectDetails(): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:8080/empower_andhra/project-categories`)
+      .get<any>(
+        `http://localhost:8080/empower_andhra/api/lookup/project-categories`
+      )
       .pipe(
         map((projects) => {
           return projects;
@@ -65,7 +71,7 @@ export class CommonService {
 
   getProjects(): Observable<any> {
     return this.httpClient
-      .get<any>(`https://jsonplaceholder.typicode.com/posts`)
+      .get<any>(`http://localhost:8080/empower_andhra/projects/getProjects`)
       .pipe(
         map((Projects) => {
           return Projects;
@@ -74,9 +80,12 @@ export class CommonService {
       );
   }
 
-  PostSaveProject(): Observable<any> {
+  PostSaveProject(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(`https://jsonplaceholder.typicode.com/posts`, {})
+      .post<any>(
+        `http://localhost:8080/empower_andhra/projects/saveProject`,
+        payLoad
+      )
       .pipe(
         map((Projects) => {
           return Projects;
