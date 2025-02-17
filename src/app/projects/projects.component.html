@@ -41,6 +41,24 @@
 
   <p-toast />
 
+  <div class="flex align-items-center justify-content-start">
+    <div
+      class="hidden w-4rem h-4rem bg-primary font-bold p-4 border-round mr-3"
+    >
+      1
+    </div>
+    <div
+      class="w-4rem h-4rem bg-primary font-bold flex align-items-center justify-content-center p-4 border-round mr-3"
+    >
+      2
+    </div>
+    <div
+      class="w-4rem h-4rem bg-primary font-bold flex align-items-center justify-content-center p-4 border-round"
+    >
+      3
+    </div>
+  </div>
+
   <p-table
     #dt
     [value]="products"
@@ -60,7 +78,12 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-1">
-                <img src="assets/images/project-1.jpg" class="img-fluid" />
+                <a
+                  [routerLink]="'/project-details'"
+                  [queryParams]="{ id: product.id }"
+                >
+                  <img src="assets/images/project-1.jpg" class="img-fluid" />
+                </a>
               </div>
               <div class="col-11">
                 <div class="row">
