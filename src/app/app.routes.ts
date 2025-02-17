@@ -5,13 +5,15 @@ import { VisionComponent } from './vision/vision.component';
 import { VendordsComponent } from './vendords/vendords.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'about-us', component: AboutComponent },
-    { path: 'vision', component: VisionComponent },
-    { path: 'vendors', component: VendordsComponent },
-    { path: 'projects', component: ProjectsComponent },
-    { path: 'sponsors', component: SponsorsComponent },
-    { path: 'home', component: HomeComponent}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'about-us', component: AboutComponent },
+  { path: 'vision', component: VisionComponent },
+  { path: 'vendors', component: VendordsComponent },
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'sponsors', component: SponsorsComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'project-details', component: ProjectDetailsComponent },
 ];
