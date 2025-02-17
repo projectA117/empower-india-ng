@@ -470,3 +470,34 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+
+
+.projects-list{
+  background-color: #FAFAFA;
+  padding: 20px 0;
+  border: 1px solid #CACACA;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition:.3s ease;
+  .col-1{
+    img{
+      margin-top: -20px;
+    }
+  }
+  &:hover{
+    border: 1px solid #4F7619;
+    transition:.3s ease;
+  }
+  
+}
+
+.project-detail-set{
+  margin-bottom: 20px;
+  
+  .project-detail-set-h{
+
+  }
+  .project-detail-set-v{
+    font-weight: bold;
+  }
+}
