@@ -105,6 +105,7 @@ import { AutoFocusModule } from 'primeng/autofocus';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ProductService } from 'src/service/productservice';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -112,6 +113,7 @@ import { ProductService } from 'src/service/productservice';
     AvatarGroupModule,
     AnimateOnScrollModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AccordionModule,
     AutoCompleteModule,
@@ -218,6 +220,7 @@ import { ProductService } from 'src/service/productservice';
     AvatarGroupModule,
     AnimateOnScrollModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AccordionModule,
     AutoCompleteModule,
