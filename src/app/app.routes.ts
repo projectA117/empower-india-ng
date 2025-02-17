@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { VisionComponent } from './vision/vision.component';
 import { VendordsComponent } from './vendords/vendords.component';
-import { ProjectsComponent } from './projects/projects.component';
+import { ProjectsComponent } from './project-list/project-list.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 
 export const routes: Routes = [

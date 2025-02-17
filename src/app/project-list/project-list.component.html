@@ -1,0 +1,106 @@
+<div class="main-container">
+  <div class="header-set">
+    <h3>Projects List</h3>
+    <div class="header-set-filter">
+      <p-dropdown [filter]="true" [options]="districts" [(ngModel)]="selectedDistrict" optionLabel="name"
+        placeholder="Select a District" (onChange)="getMandals($event)" />
+      <p-dropdown [filter]="true" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
+        placeholder="Select a Mandal" (onChange)="getvilages($event)" />
+      <p-dropdown [filter]="true" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
+        placeholder="Select a Vilage" />
+
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Search..." />
+      </span>
+      <p-button label="Add New Project" (onClick)="createProject()" />
+    </div>
+  </div>
+
+  <p-toast />
+
+  <p-table #dt [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="project" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="body" let-product>
+      <div class="projects-list-set">
+        <div class="projects-list">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-1">
+                <img src="assets/images/project-1.jpg" class="img-fluid" />
+              </div>
+              <div class="col-11">
+                <div class="row">
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Project ID</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ product.id }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">District</div>
+                    <div class="project-detail-set-v mt-2">Krishna</div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Mandal</div>
+                    <div class="project-detail-set-v mt-2">Tiruvuru</div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Village</div>
+                    <div class="project-detail-set-v mt-2">Kakarla</div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Pin Code</div>
+                    <div class="project-detail-set-v mt-2">521227</div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Colony</div>
+                    <div class="project-detail-set-v mt-2">BC Colony</div>
+                  </div>
+
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Latitude</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ product.latitude }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Longitude</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ product.longitude }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Project Type</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ product.projectType ? "New" : "Existing" }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Status</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ product.status }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-12">
+                    <div class="project-detail-set-h">Description</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ product.description }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-table>
+
+  <p-dialog [(visible)]="showProjectDialog" [style]="{ width: '60%' }" header="Add Project" [modal]="true"
+    styleClass="p-fluid">
+    <app-project [project]="project" [addNewProject]="true"></app-project>
+   </p-dialog>
+</div>
