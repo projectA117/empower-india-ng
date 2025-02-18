@@ -369,6 +369,7 @@ export class ProjectsComponent implements OnInit {
     // this.mandals = this.MandalsDetails.find(
     //   (d: any) => d.DistrictCode === districtCode
     // )?.Get_mandals;
+    console.log(".....................");
   }
 
   getMandals(event: any) {
