@@ -10,6 +10,7 @@ import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from 'src/models/Project';
+import { Constants } from 'src/constants';
 @Component({
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
@@ -61,6 +62,9 @@ export class ProjectListComponent implements OnInit {
       if (data.length > 0) {
         this.projects = data;
       }
+    },err => {
+      //Temp fix for Gopi
+      this.projects = Constants.projects;
     });
   }
 
@@ -69,6 +73,9 @@ export class ProjectListComponent implements OnInit {
       if (data.length > 0) {
         this.districts = data;
       }
+    },err => {
+      //Temp fix for Gopi
+      this.districts = Constants.districts;
     });
     
   }
@@ -77,6 +84,9 @@ export class ProjectListComponent implements OnInit {
     const districtCode = event.value.id;
     this.commonService.getMandals(districtCode).subscribe((data) => {
       this.mandals = data;
+    },err => {
+      //Temp fix for Gopi
+      this.mandals = Constants.mandals;
     });
   }
 
@@ -84,6 +94,9 @@ export class ProjectListComponent implements OnInit {
     const mandalCode = event.value.id;
     this.commonService.getVillages(mandalCode).subscribe((data) => {
       this.villages = data;
+    },err => {
+      //Temp fix for Gopi
+      this.villages = Constants.villages;
     });
   }
 
@@ -91,11 +104,12 @@ export class ProjectListComponent implements OnInit {
     this.showProjectDialog = false;
   }
 
-  closeDialogEvent(val: boolean) {
+  refresh(val: boolean) {
     if(val) {
       this.hideDialog();
+      this.getProjects();
     }
-
+    console.log("........Refresh");
   }
 
   showDialog(){

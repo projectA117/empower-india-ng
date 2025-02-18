@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
+import { Constants } from 'src/constants';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -76,6 +77,9 @@ export class ProjectComponent implements OnInit {
       if (data.length > 0) {
         this.districts = data;
       }
+    }, err => {
+      //Temp fix for Gopi
+      this.districts = Constants.districts;
     });
   }
 
@@ -83,6 +87,9 @@ export class ProjectComponent implements OnInit {
     const districtCode = event.value;
     this.commonService.getMandals(districtCode).subscribe((data) => {
       this.mandals = data;
+    },err => {
+      //Temp fix for Gopi
+      this.mandals = Constants.mandals;
     });
   }
 
@@ -90,6 +97,9 @@ export class ProjectComponent implements OnInit {
     const mandalCode = event.value;
     this.commonService.getVillages(mandalCode).subscribe((data) => {
       this.villages = data;
+    },err => {
+      //Temp fix for Gopi
+      this.villages = Constants.villages;
     });
   }
 
@@ -97,6 +107,15 @@ export class ProjectComponent implements OnInit {
     this.commonService.getProjectCategories().subscribe((data) => {
       this.categories = data;
       this.allProjects = data.flatMap(category =>
+        category.projects.map(project => ({
+          ...project,
+          categoryId: category.id  // Assign category ID manually
+        }))
+      );
+    },err => {
+      //Temp fix for Gopi
+      this.categories = Constants.categories;
+      this.allProjects = this.categories.flatMap(category =>
         category.projects.map(project => ({
           ...project,
           categoryId: category.id  // Assign category ID manually
@@ -130,14 +149,15 @@ export class ProjectComponent implements OnInit {
       statusCode: this.projectForm.get('statusCode')?.value
     };
     this.commonService.saveProject(payload).subscribe((data) => {
+      console.log("...Data", data);
       this.closeDialog();
-      console.log(data);
     },
       err => {
         console.log(err);
       });
   }
   closeDialog() {
+    console.log(".......closeDialog.......");
     this.closeDialogEvent.emit(true);
   }
   cancel() {
