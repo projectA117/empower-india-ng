@@ -22,6 +22,7 @@
 
 .main-container-scroll{
     
-    
+    overflow: auto;
+    height: calc(100vh - 187px);
 }
 
