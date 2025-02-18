@@ -1,15 +1,60 @@
-<div class="main-container">
+<div class="project-detail-banner">
+  <div class="banner-txt">
+    <div class="banner-txt-set">
+      <div class="banner-txt-a">RO</div>
+      <div class="banner-txt-b">Plant</div>
+      <div class="banner-txt-c">Main Road | Kakarla</div>
+    </div> 
+  </div>
+  <img src="assets/images/ro-plant.jpg"/>
+</div>
+<div class="main-container-in">
   <div class="projects-list">
     <div class="container-fluid">
       <div class="row">
+        <div class="col-12"><h4 class="projects-detail-h">Project Details</h4></div>
+      </div>
+      <div class="row">
         <div class="col-12">
           <div class="row">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project ID</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.id }}
-              </div>
+
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Project ID</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.id }}
             </div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Project Type</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.projectType ? "New" : "Existing" }}
+            </div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Status</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.status }}
+            </div>
+          </div>
+
+          <div class="project-detail-set col-6">
+            <div class="project-detail-set-h">Description</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.description }}
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12"><h4 class="projects-detail-h">Location Details</h4></div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            
             <div class="project-detail-set col-2">
               <div class="project-detail-set-h">District</div>
               <div class="project-detail-set-v mt-2">Krishna</div>
@@ -43,34 +88,17 @@
                 {{ product.longitude }}
               </div>
             </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.projectType ? "New" : "Existing" }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.status }}
-              </div>
-            </div>
-            <div class="project-detail-set col-12">
-              <div class="project-detail-set-h">Description</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.description }}
-              </div>
-            </div>
+            
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="projects-list mt-3">
+  <div class="projects-list-tab mt-3">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
           <p-tabView styleClass="tabview-custom">
             <p-tabPanel>
               <ng-template pTemplate="header">
@@ -173,7 +201,6 @@
               <app-project-work-in-progress></app-project-work-in-progress>
             </p-tabPanel>
           </p-tabView>
-        </div>
       </div>
     </div>
   </div>

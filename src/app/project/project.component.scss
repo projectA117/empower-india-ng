@@ -1,0 +1,51 @@
+.page-vertical1 {
+    width: 65%;
+}
+
+.page-vertical2 {
+    width: 35%;
+}
+
+.basic-div-level1 {
+    display: inline-flex;
+    margin-bottom: 10px;
+    width: 100%;
+
+    .basic-div-level2-desc {
+        width: 100%;
+        margin-left: 5px;
+    }
+
+    .basic-div-level2 {
+        width: 50%;
+        margin-left: 5px;
+
+        .form-label {
+            color: gray;
+        }
+
+        input[type="text"] {
+            height: 30px;
+        }
+
+        .project-type {
+            padding-right: 20px;
+        }
+    }
+
+    .basic-div-level2-radio {
+        width: 100%;
+
+        .radio-button-style {
+            margin-right: 5px;
+        }
+    }
+
+    .submit-button {
+        width: 100px;
+    }
+
+    .cancel-button {
+        width: 100px;
+    }
+}

@@ -1,0 +1,39 @@
+.project-detail-banner{
+    margin-top: 70px;
+    position: relative;
+    .banner-txt{
+        position: absolute;
+        z-index: 99;
+        padding: 20px 40px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        color: #fff;
+        align-items: center;
+    }
+    .banner-txt-a{
+        background-color: #4F7619;
+        padding: 10px;
+        font-size: 65px;
+        display: inline-flex;
+    }
+    .banner-txt-b{
+        margin: 20px 0;
+        font-size: 65px;
+    }
+    .banner-txt-c{
+        margin: 20px 0;
+        font-size: 35px;
+    }
+}
+
+.main-container-in {
+    padding: 30px;
+    background-color: #fff;
+}
+
+.projects-detail-h{
+    font-weight: bold;
+    color: #4F7619;
+}
+
