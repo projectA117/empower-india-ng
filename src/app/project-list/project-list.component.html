@@ -29,7 +29,12 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-1">
-                <img src="assets/images/project-1.jpg" class="img-fluid" />
+                <a
+                  [routerLink]="'/project-details'"
+                  [queryParams]="{ id: info.id }"
+                >
+                  <img src="assets/images/project-1.jpg" class="img-fluid" />
+                </a>
               </div>
               <div class="col-11">
                 <div class="row">
