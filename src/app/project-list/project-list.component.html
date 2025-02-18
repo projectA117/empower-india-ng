@@ -17,7 +17,6 @@
       <p-button label="Add New Project" (onClick)="createProject()" />
     </div>
   </div>
-
   <p-toast />
 
   <p-table #dt [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['name']"
