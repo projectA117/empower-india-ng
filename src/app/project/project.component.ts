@@ -35,19 +35,19 @@ export class ProjectComponent implements OnInit {
   districts: any = [];
   mandals: any = [];
   villages: any = [];
-  categories: any= [];
+  categories: any = [];
   projectNames: any = [];
   projectForm: FormGroup = new FormGroup({});
   allProjects: any = [];
 
   constructor(
     private commonService: CommonService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getDistricts();
     this.getCategories();
-    if(this.addNewProject) {
+    if (this.addNewProject) {
       this.createForm();
     }
   }
@@ -77,7 +77,6 @@ export class ProjectComponent implements OnInit {
         this.districts = data;
       }
     });
-    
   }
 
   getMandals(event: any) {
@@ -97,7 +96,7 @@ export class ProjectComponent implements OnInit {
   getCategories() {
     this.commonService.getProjectCategories().subscribe((data) => {
       this.categories = data;
-      this.allProjects = data.flatMap(category => 
+      this.allProjects = data.flatMap(category =>
         category.projects.map(project => ({
           ...project,
           categoryId: category.id  // Assign category ID manually
@@ -108,11 +107,11 @@ export class ProjectComponent implements OnInit {
   getProjectNames(event: any) {
     this.projectNames = this.allProjects.filter(project => project.categoryId == Number(event?.value));
   }
-  
+
   save() {
     this.submitted = true;
     if (this.projectForm.invalid) {
-      return; 
+      return;
     }
     const payload = {
       districtId: this.projectForm.get('districtId')?.value,
@@ -132,14 +131,16 @@ export class ProjectComponent implements OnInit {
     };
     this.commonService.saveProject(payload).subscribe((data) => {
       this.closeDialog();
-      console.log("Saved Success fully");
-    });
+      console.log(data);
+    },
+      err => {
+        console.log(err);
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.closeDialogEvent.emit(true);
   }
   cancel() {
-    console.log(".........cancel.....");
     this.closeDialog();
   }
 }
