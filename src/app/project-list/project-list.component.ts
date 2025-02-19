@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from 'src/models/Project';
-import { Constants } from 'src/constants';
+import { Constants } from 'src/constants/Constants';
 @Component({
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
@@ -47,6 +42,8 @@ export class ProjectListComponent implements OnInit {
   villages: any = [];
 
   showProjectDialog: boolean = false;
+  updateExistingProject: boolean = false;
+  addNewProject: boolean = false;
 
   constructor(
     private commonService: CommonService
@@ -109,7 +106,6 @@ export class ProjectListComponent implements OnInit {
       this.hideDialog();
       this.getProjects();
     }
-    console.log("........Refresh");
   }
 
   showDialog(){
@@ -118,6 +114,12 @@ export class ProjectListComponent implements OnInit {
 
   createProject() {
     this.project = {};
+    this.addNewProject =true;
+    this.showDialog();
+  }
+  editProject(project: Project) {
+    this.project = project;
+    this.updateExistingProject = true;
     this.showDialog();
   }
 

@@ -11,8 +11,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
-import { Constants } from 'src/constants/Constants';
 import { Project } from '@domain/Project';
+import { Constants } from '../../constants/Constants';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
