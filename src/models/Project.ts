@@ -18,7 +18,11 @@ export class Project {
     mandalName: string;
     districtName: string;
 
-    constructor(model) {
+    //villageId: string;
+    //mandalId: string;
+    //districtId: string;
+
+    constructor(model)  {
         this.id = model.id;
         this.projectCategory = model.projectCategory;
         this.projectType = model.projectType;

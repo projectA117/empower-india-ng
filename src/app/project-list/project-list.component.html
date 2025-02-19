@@ -89,6 +89,9 @@
                       {{ info.status }} 
                     </div>
                   </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h" (click)="editProject(info)">Edit</div>
+                  </div>
                   <div class="project-detail-set col-12">
                     <div class="project-detail-set-h">Description</div>
                     <div class="project-detail-set-v mt-2">
@@ -106,8 +109,11 @@
 
   <p-dialog [(visible)]="showProjectDialog" [style]="{ width: '60%' }" header="Add Project" [modal]="true"
     styleClass="p-fluid">
-    <ng-container>
-    <app-project (closeDialogEvent)="refresh($event)" [project]="project" [addNewProject]="true"></app-project>
+    <ng-container *ngIf="addNewProject">
+    <app-project (closeDialogEvent)="refresh($event)" [project]="project" [addNewProject]="addNewProject"></app-project>
     </ng-container>
+    <ng-container *ngIf="updateExistingProject">
+      <app-project (closeDialogEvent)="refresh($event)" [project]="project" [updateExistingProject]="updateExistingProject"></app-project>
+      </ng-container>
    </p-dialog>
 </div>

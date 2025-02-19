@@ -11,7 +11,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
-import { Constants } from 'src/constants';
+import { Constants } from 'src/constants/Constants';
+import { Project } from '@domain/Project';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -27,9 +28,11 @@ import { Constants } from 'src/constants';
 })
 export class ProjectComponent implements OnInit {
   @Input()
-  project: any;
+  project: Project;
   @Input()
   addNewProject: boolean;
+  @Input()
+  updateExistingProject: boolean;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
 
   submitted: boolean = false;
@@ -48,9 +51,7 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this.getDistricts();
     this.getCategories();
-    if (this.addNewProject) {
       this.createForm();
-    }
   }
 
   createForm() {
