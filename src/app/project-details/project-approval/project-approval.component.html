@@ -1,52 +1,48 @@
 <h1>Project Estimation Details</h1>
-<form [formGroup]="approvalForm" (ngSubmit)="SaveApproval()">
-  <div class="flex justify-content-start flex-wrap">
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="username"
-          >Project Estimation (Inc. Maintenance 3 Years)
-        </label>
-        <input
-          pInputText
-          id="ProjectEstimation"
-          formControlName="ProjectEstimation"
-          aria-describedby="ProjectEstimation"
-          [(ngModel)]="value"
-        />
-        <!-- <small id="ProjectEstimation">
+
+<div class="flex justify-content-start flex-wrap">
+  <div class="flex align-items-center justify-content-center m-2">
+    <div class="flex flex-column gap-2">
+      <label for="username"
+        >Project Estimation (Inc. Maintenance 3 Years)
+      </label>
+      <input
+        pInputText
+        id="ProjectEstimation"
+        aria-describedby="ProjectEstimation"
+        [(ngModel)]="value"
+      />
+      <!-- <small id="ProjectEstimation">
         Enter your username to reset your password.
       </small> -->
-      </div>
-    </div>
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="username">Govt. Share </label>
-        <input
-          pInputText
-          id="GovtShare"
-          formControlName="GovtShare"
-          aria-describedby="GovtShare"
-          [(ngModel)]="value"
-        />
-        <!-- <small id="GovtShare">
-        Enter your username to reset your password.
-      </small> -->
-      </div>
-    </div>
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="username">Public Share</label>
-        <input
-          pInputText
-          id="PublicShare"
-          formControlName="PublicShare"
-          aria-describedby="PublicShare"
-          [(ngModel)]="value"
-        />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
-      </div>
     </div>
   </div>
-</form>
+  <div class="flex align-items-center justify-content-center m-2">
+    <div class="flex flex-column gap-2">
+      <label for="username">Govt. Share </label>
+      <input
+        pInputText
+        id="GovtShare"
+        aria-describedby="GovtShare"
+        [(ngModel)]="value"
+      />
+      <!-- <small id="GovtShare">
+        Enter your username to reset your password.
+      </small> -->
+    </div>
+  </div>
+  <div class="flex align-items-center justify-content-center m-2">
+    <div class="flex flex-column gap-2">
+      <label for="username">Public Share</label>
+      <input
+        pInputText
+        id="PublicShare"
+        aria-describedby="PublicShare"
+        [(ngModel)]="value"
+      />
+      <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+    </div>
+  </div>
+</div>
