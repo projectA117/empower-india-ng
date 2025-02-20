@@ -9,7 +9,7 @@
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
-    [value]="products"
+    [value]="showTransaction"
     [style]="{ width: '100%', overflow: 'auto!important' }"
   >
     <ng-template pTemplate="header">
@@ -34,16 +34,17 @@
         <th pSortableColumn="Bill">Bill Proofs <p-sortIcon field="Bill" /></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-showTransaction>
       <tr>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
+        <td>{{ showTransaction.transactionDate }}</td>
+        <td>{{ showTransaction.paymentMode }}</td>
+        <td>{{ showTransaction.transactionAmount }}</td>
+        <td>{{ showTransaction.createdBy }}</td>
+        <td>{{ showTransaction.paymentMode }}</td>
+        <td>{{ showTransaction.paymentMode }}</td>
+        <td>{{ showTransaction.lastUpdatedBy }}</td>
+        <td>{{ showTransaction.lastUpdatedBy }}</td>
+        <td>{{ showTransaction.lastUpdatedBy }}</td>
       </tr>
     </ng-template>
   </p-table>

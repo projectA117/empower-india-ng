@@ -6,41 +6,34 @@
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
-    [value]="products"
+    [value]="doners"
     [style]="{ width: '100%', overflow: 'auto!important' }"
   >
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="Date">Date <p-sortIcon field="Date" /></th>
-        <th pSortableColumn="Expense">
-          Expense Type <p-sortIcon field="Expense" />
+        <th pSortableColumn="Date">
+          Donor Name<p-sortIcon field="DonorName" />
         </th>
+        <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
 
+        <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
+        <th pSortableColumn="Address">
+          Address <p-sortIcon field="Address" />
+        </th>
         <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" /></th>
-        <th pSortableColumn="Spent">Spent By <p-sortIcon field="Spent" /></th>
-        <th pSortableColumn="Paid">Paid to <p-sortIcon field="Paid" /></th>
         <th pSortableColumn="Payment">
           Mode of Payment <p-sortIcon field="Payment" />
         </th>
-        <th pSortableColumn="Approved">
-          Approved By <p-sortIcon field="Approved" />
-        </th>
-        <th pSortableColumn="Description">
-          Description <p-sortIcon field="Description" />
-        </th>
-        <th pSortableColumn="Bill">Bill Proofs <p-sortIcon field="Bill" /></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-doners>
       <tr>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
+        <td>{{ doners.firstName }}</td>
+        <td>{{ doners.phoneNumber }}</td>
+        <td>{{ doners.email }}</td>
+        <td>{{ doners.code }}</td>
+        <td>{{ doners.lastName }}</td>
+        <td>{{ doners.category }}</td>
       </tr>
     </ng-template>
   </p-table>

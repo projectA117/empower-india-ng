@@ -8,7 +8,7 @@
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
-    [value]="products"
+    [value]="VendorsDetails"
     [style]="{ width: '100%', overflow: 'auto!important' }"
   >
     <ng-template pTemplate="header">
@@ -26,12 +26,12 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-VendorsDetails>
       <tr>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
+        <td>{{ VendorsDetails.code }}</td>
+        <td>{{ VendorsDetails.name }}</td>
+        <td>{{ VendorsDetails.category }}</td>
+        <td>{{ VendorsDetails.code }}</td>
       </tr>
     </ng-template>
   </p-table>

@@ -3,6 +3,9 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '@service/productservice';
+import { ProjectDetailsService } from '@service/project-details.service';
+import { ImportsModule } from 'src/app/imports';
+import { CommonService } from '@service/common.service';
 
 export interface Product {
   id?: string;
@@ -20,17 +23,22 @@ export interface Product {
 @Component({
   selector: 'app-project-donors',
   standalone: true,
-  imports: [ButtonModule, TableModule, CommonModule],
+  imports: [ButtonModule, TableModule, CommonModule, ImportsModule],
   templateUrl: './project-donors.component.html',
   styleUrl: './project-donors.component.scss',
+  providers: [ProjectDetailsService, CommonService, ProductService],
 })
 export class ProjectDonorsComponent implements OnInit {
-  products!: Product[];
+  doners!: [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
+  ) {}
   ngOnInit() {
-    this.productService.getProductsMini().then((data) => {
-      this.products = data;
+    this.projectDetailsService.showDonars().subscribe((data) => {
+      this.doners = data;
     });
   }
 }
