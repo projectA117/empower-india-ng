@@ -34,9 +34,9 @@ export class ProjectApprovalComponent implements OnInit {
 
   SaveApproval() {
     const payload = {
-      ProjectEstimation: this.approvalForm.get('ProjectEstimation')?.value,
-      GovtShare: this.approvalForm.get('GovtShare')?.value,
-      PublicShare: this.approvalForm.get('PublicShare')?.value,
+      // ProjectEstimation: this.approvalForm.get('ProjectEstimation')?.value,
+      // GovtShare: this.approvalForm.get('GovtShare')?.value,
+      // PublicShare: this.approvalForm.get('PublicShare')?.value,
     };
     this.projectDetailsService.SaveApproval(payload).subscribe((data) => {
       console.log('...Data', data);
