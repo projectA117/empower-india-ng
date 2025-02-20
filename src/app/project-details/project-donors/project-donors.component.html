@@ -1,2 +1,40 @@
-<p>project-donors works!</p>
-<h1>Donor Details</h1>
+<div class="flex justify-content-start flex-wrap">
+  <div class="flex align-items-center justify-content-center m-2">
+    <span>Donor Details</span>
+  </div>
+</div>
+
+<div class="justify-content-start flex-wrap mt-15">
+  <p-table
+    [value]="doners"
+    [style]="{ width: '100%', overflow: 'auto!important' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="Date">
+          Donor Name<p-sortIcon field="DonorName" />
+        </th>
+        <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
+
+        <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
+        <th pSortableColumn="Address">
+          Address <p-sortIcon field="Address" />
+        </th>
+        <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" /></th>
+        <th pSortableColumn="Payment">
+          Mode of Payment <p-sortIcon field="Payment" />
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-doners>
+      <tr>
+        <td>{{ doners.firstName }}</td>
+        <td>{{ doners.phoneNumber }}</td>
+        <td>{{ doners.email }}</td>
+        <td>{{ doners.code }}</td>
+        <td>{{ doners.lastName }}</td>
+        <td>{{ doners.category }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
