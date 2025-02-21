@@ -84,7 +84,7 @@ export class ProjectCommitteeComponent implements OnInit {
   }
 
   showCommittee() {
-    this.projectDetailsService.showCommittee().subscribe(
+    this.projectDetailsService.showCommittee(this.projectData.id).subscribe(
       (data) => {
         this.Committee = data;
       },
@@ -115,12 +115,14 @@ export class ProjectCommitteeComponent implements OnInit {
       fatherName: this.updatecommitteeForm.get('fatherName')?.value,
       email: this.updatecommitteeForm.get('email')?.value,
       villageId: this.projectData.villageId,
-      Mobile: this.updatecommitteeForm.get('Mobile')?.value,
-      id: this.projectData.id,
+      phoneNumber: this.updatecommitteeForm.get('Mobile')?.value,
+      // id: ,
     };
-    this.projectDetailsService.addCommittee(payload).subscribe((data) => {
-      console.log('...Data', data);
-    });
+    this.projectDetailsService
+      .addCommittee(payload, this.projectData.id)
+      .subscribe((data) => {
+        console.log('...Data', data);
+      });
   }
 
   deleteCommittee(Committee: any) {

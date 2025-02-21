@@ -9,9 +9,9 @@ import { BehaviorSubject } from 'rxjs';
 export class ProjectDetailsService {
   constructor(private httpClient: HttpClient) {}
 
-  showCommittee(): Observable<any> {
+  showCommittee(id: any): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/committee/showCommittee`
+      `http://localhost:8080/empower_andhra/api/v1/committee/showCommittee?projectId=${id}`
     );
     // .pipe(
     //   map((getStates) => {
@@ -21,11 +21,18 @@ export class ProjectDetailsService {
     // );
   }
 
-  addCommittee(payLoad: any): Observable<any> {
-    return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/committee/addCommittee`,
-      payLoad
-    );
+  addCommittee(payLoad: any, id: any): Observable<any> {
+    return this.httpClient
+      .post<any>(
+        `http://localhost:8080/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
+        payLoad
+      )
+      .pipe(
+        map((getStates) => {
+          return getStates;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   deleteCommittee(payLoad: any): Observable<any> {
@@ -60,9 +67,7 @@ export class ProjectDetailsService {
 
   showVendorsDetails(): Observable<any> {
     return this.httpClient
-      .get<any>(
-        `http://localhost:8080/empower_andhra/api/v1/finance/showTransaction`
-      )
+      .get<any>(`http://localhost:8080/empower_andhra/api/v1/vendors`)
       .pipe(
         map((showTransaction) => {
           return showTransaction;
@@ -71,16 +76,16 @@ export class ProjectDetailsService {
       );
   }
 
-  addVendors(payLoad: any): Observable<any> {
+  addVendors(payLoad: any, id: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/vendor/addVendor`,
+      `http://localhost:8080/empower_andhra/api/v1/vendors?projectId=${id}`,
       payLoad
     );
   }
 
-  addDonars(payLoad: any): Observable<any> {
+  addDonars(payLoad: any, id: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/Vendors/add`,
+      `http://localhost:8080/empower_andhra/api/v1/donars/addDonars?projectId=${id}`,
       payLoad
     );
   }
@@ -91,10 +96,14 @@ export class ProjectDetailsService {
     );
   }
   updateApproval(payLoad: any): Observable<any> {
-    return this.httpClient.put<any>(
-      `http://localhost:8080/empower_andhra/api/v1/project`,
-      payLoad
-    );
+    return this.httpClient
+      .put<any>(`http://localhost:8080/empower_andhra/api/v1/project`, payLoad)
+      .pipe(
+        map((getStates: any) => {
+          return getStates;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   addFinanceExpence(payLoad: any): Observable<any> {
