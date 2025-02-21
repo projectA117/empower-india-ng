@@ -108,7 +108,7 @@
   </p-table>
 
   <p-dialog [(visible)]="showProjectDialog" [style]="{ width: '60%' }" header="Add Project" [modal]="true"
-    styleClass="p-fluid">
+    styleClass="p-fluid" (onHide)="onHideDialog()">
     <ng-container *ngIf="addNewProject">
     <app-project (closeDialogEvent)="refresh($event)" [project]="project" [addNewProject]="addNewProject"></app-project>
     </ng-container>

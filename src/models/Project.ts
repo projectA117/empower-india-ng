@@ -17,10 +17,11 @@ export class Project {
     villageName: string;
     mandalName: string;
     districtName: string;
+    villageId: number;
+    mandalId: number;
+    districtId: number;
+    projectCategoryId: number;
 
-    //villageId: string;
-    //mandalId: string;
-    //districtId: string;
 
     constructor(model)  {
         this.id = model.id;
@@ -40,5 +41,9 @@ export class Project {
         this.villageName = model.villageName;
         this.mandalName = model.mandalName;
         this.districtName = model.districtName;
+        this.villageId = model.villageId;
+        this.mandalId = model.mandalId;
+        this.districtId = model.districtId;
+        this.projectCategoryId = model.projectCategoryId;
     }
 }

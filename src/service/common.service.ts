@@ -93,4 +93,18 @@ export class CommonService {
         catchError((error) => of(error))
       );
   }
+
+  updateProject(payLoad: any): Observable<any> {
+    return this.httpClient
+      .put<any>(
+        `http://localhost:8080/empower_andhra/api/v1/project`,
+        payLoad
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
 }

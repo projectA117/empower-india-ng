@@ -47,7 +47,7 @@ export class ProjectListComponent implements OnInit {
 
   constructor(
     private commonService: CommonService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getProjects();
@@ -59,7 +59,7 @@ export class ProjectListComponent implements OnInit {
       if (data.length > 0) {
         this.projects = data;
       }
-    },err => {
+    }, err => {
       //Temp fix for Gopi
       this.projects = Constants.projects;
     });
@@ -70,18 +70,18 @@ export class ProjectListComponent implements OnInit {
       if (data.length > 0) {
         this.districts = data;
       }
-    },err => {
+    }, err => {
       //Temp fix for Gopi
       this.districts = Constants.districts;
     });
-    
+
   }
 
   getMandals(event: any) {
     const districtCode = event.value.id;
     this.commonService.getMandals(districtCode).subscribe((data) => {
       this.mandals = data;
-    },err => {
+    }, err => {
       //Temp fix for Gopi
       this.mandals = Constants.mandals;
     });
@@ -91,7 +91,7 @@ export class ProjectListComponent implements OnInit {
     const mandalCode = event.value.id;
     this.commonService.getVillages(mandalCode).subscribe((data) => {
       this.villages = data;
-    },err => {
+    }, err => {
       //Temp fix for Gopi
       this.villages = Constants.villages;
     });
@@ -102,19 +102,24 @@ export class ProjectListComponent implements OnInit {
   }
 
   refresh(val: boolean) {
-    if(val) {
+    if (val) {
       this.hideDialog();
       this.getProjects();
     }
   }
 
-  showDialog(){
+  showDialog() {
     this.showProjectDialog = true;
+  }
+
+  onHideDialog() {
+    this.addNewProject = false;
+    this.updateExistingProject = false;
   }
 
   createProject() {
     this.project = {};
-    this.addNewProject =true;
+    this.addNewProject = true;
     this.showDialog();
   }
   editProject(project: Project) {
