@@ -1,7 +1,10 @@
 <div class="flex justify-content-start flex-wrap">
   <div class="flex align-items-center justify-content-center m-2">
     <span>Committee Member Details</span>
-    <p-button label="Add Committee Member" (click)="sidebarVisible = true" />
+    <p-button
+      label="Add Committee Member"
+      (click)="sidebarVisible = true; updatecommitteeForm.reset()"
+    />
   </div>
 </div>
 
@@ -25,8 +28,8 @@
           <td>{{ Committee.firstName }}</td>
           <td>{{ Committee.phoneNumber }}</td>
           <td>
-            <i class="pi pi-pencil" (click)="sidebarVisible = true"></i>
-            <i class="pi pi-trash"></i>
+            <i class="pi pi-pencil" (click)="editCommittee(Committee)"></i>
+            <i class="pi pi-trash" (click)="deleteCommittee(Committee)"></i>
           </td>
         </tr>
       </ng-template>
@@ -39,32 +42,110 @@
   position="right"
   [showCloseIcon]="false"
 >
-  <div>
-    Add Committee Member
-    <i class="pi pi-times" (click)="sidebarVisible = false"></i>
-  </div>
+  <form
+    [formGroup]="updatecommitteeForm"
+    *ngIf="sidebarVisible"
+    (ngSubmit)="updatecommittee()"
+  >
+    <div>
+      Add Committee Member
+      <i class="pi pi-times" (click)="sidebarVisible = false"></i>
+    </div>
 
-  <div class="flex align-items-center justify-content-center m-2">
-    <div class="flex flex-column gap-2">
-      <label for="username">Name</label>
-      <input pInputText id="Name" aria-describedby="Name" />
-      <!-- <small id="PublicShare">
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="firstName">First Name</label>
+        <input
+          pInputText
+          id="firstName"
+          formControlName="firstName"
+          aria-describedby="firstName"
+        />
+        <!-- <small id="PublicShare">
         Enter your username to reset your password.
       </small> -->
+      </div>
     </div>
-  </div>
 
-  <div class="flex align-items-center justify-content-center m-2">
-    <div class="flex flex-column gap-2">
-      <label for="username">Mobile</label>
-      <input pInputText id="Mobile" aria-describedby="Mobile" />
-      <!-- <small id="PublicShare">
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="lastName">last Name</label>
+        <input
+          pInputText
+          id="lastName"
+          formControlName="lastName"
+          aria-describedby="lastName"
+        />
+        <!-- <small id="PublicShare">
         Enter your username to reset your password.
       </small> -->
+      </div>
     </div>
-  </div>
-  <div>
-    <p-button label="Cancel " (click)="sidebarVisible = false" />
-    <p-button label="Add " (click)="addCommittee()" />
-  </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="fatherName">Father Name</label>
+        <input
+          pInputText
+          id="fatherName"
+          formControlName="fatherName"
+          aria-describedby="fatherName"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="email">email</label>
+        <input
+          pInputText
+          id="email"
+          formControlName="email"
+          aria-describedby="email"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="villageId">villageId</label>
+        <input
+          pInputText
+          id="villageId"
+          formControlName="villageId"
+          aria-describedby="villageId"
+          readonly="true"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="Mobile">Mobile</label>
+        <input
+          pInputText
+          id="Mobile"
+          formControlName="Mobile"
+          aria-describedby="Mobile"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div>
+      <p-button label="Cancel " (click)="sidebarVisible = false" />
+      <p-button label="Add " type="submit" />
+    </div>
+  </form>
 </p-sidebar>

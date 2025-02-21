@@ -1,6 +1,7 @@
 import { Observable, catchError, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,12 @@ export class ProjectDetailsService {
     return this.httpClient.post<any>(
       `http://localhost:8080/empower_andhra/api/v1/committee/addCommittee`,
       payLoad
+    );
+  }
+
+  deleteCommittee(payLoad: any): Observable<any> {
+    return this.httpClient.delete<any>(
+      `http://localhost:8080/empower_andhra/api/v1/committee/${payLoad.id}/${payLoad.projectId}`
     );
   }
 
@@ -64,9 +71,35 @@ export class ProjectDetailsService {
       );
   }
 
-  SaveApproval(payLoad: any): Observable<any> {
+  addVendors(payLoad: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/finance/saveApproval`,
+      `http://localhost:8080/empower_andhra/api/v1/vendor/addVendor`,
+      payLoad
+    );
+  }
+
+  addDonars(payLoad: any): Observable<any> {
+    return this.httpClient.post<any>(
+      `http://localhost:8080/empower_andhra/Vendors/add`,
+      payLoad
+    );
+  }
+  updateWIP(payLoad: any): Observable<any> {
+    return this.httpClient.post<any>(
+      `http://localhost:8080/empower_andhra/api/v1/WIP/updateWIP`,
+      payLoad
+    );
+  }
+  updateApproval(payLoad: any): Observable<any> {
+    return this.httpClient.put<any>(
+      `http://localhost:8080/empower_andhra/api/v1/project`,
+      payLoad
+    );
+  }
+
+  addFinanceExpence(payLoad: any): Observable<any> {
+    return this.httpClient.post<any>(
+      `http://localhost:8080/empower_andhra/api/v1/finance/addTransaction`,
       payLoad
     );
   }
