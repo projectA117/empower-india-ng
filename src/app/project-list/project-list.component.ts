@@ -5,7 +5,8 @@ import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from 'src/models/Project';
-import { Constants } from 'src/constants/Constants';
+import { HardCodedInfo } from 'src/constants/HardCodedInfo';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
@@ -29,7 +30,6 @@ import { Constants } from 'src/constants/Constants';
   ],
 })
 export class ProjectListComponent implements OnInit {
-
   projects: any = [];
   project: any = null;
 
@@ -46,7 +46,8 @@ export class ProjectListComponent implements OnInit {
   addNewProject: boolean = false;
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -55,24 +56,28 @@ export class ProjectListComponent implements OnInit {
   }
 
   getProjects() {
-    this.commonService.getProjects().subscribe((data: Project[]) => {
-      if (data.length > 0) {
-        this.projects = data;
-      }
-    }, err => {
+    this.commonService.getProjects().subscribe(
+      (data: Project[]) => {
+        if (data.length > 0) {
+          this.projects = data;
+        }
+      },
+      err => {
       //Temp fix for Gopi
-      this.projects = Constants.projects;
+      this.projects = HardCodedInfo.projects;
     });
   }
 
   getDistricts() {
-    this.commonService.getDistricts().subscribe((data) => {
-      if (data.length > 0) {
-        this.districts = data;
-      }
-    }, err => {
+    this.commonService.getDistricts().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.districts = data;
+        }
+      },
+      err => {
       //Temp fix for Gopi
-      this.districts = Constants.districts;
+      this.districts = HardCodedInfo.districts;
     });
 
   }
@@ -83,7 +88,7 @@ export class ProjectListComponent implements OnInit {
       this.mandals = data;
     }, err => {
       //Temp fix for Gopi
-      this.mandals = Constants.mandals;
+      this.mandals = HardCodedInfo.mandals;
     });
   }
 
@@ -93,7 +98,7 @@ export class ProjectListComponent implements OnInit {
       this.villages = data;
     }, err => {
       //Temp fix for Gopi
-      this.villages = Constants.villages;
+      this.villages = HardCodedInfo.villages;
     });
   }
 
@@ -128,4 +133,11 @@ export class ProjectListComponent implements OnInit {
     this.showDialog();
   }
 
+  getProjectDetails(project: any) {
+    //this.project = project;
+    //this.productService.selectedProject.next(project);
+    this.router.navigate(['project-details'], {
+      queryParams: { project: JSON.stringify(project) },
+    });
+  }
 }

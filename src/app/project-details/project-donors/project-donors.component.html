@@ -1,2 +1,177 @@
-<p>project-donors works!</p>
-<h1>Donor Details</h1>
+<div class="flex justify-content-start flex-wrap">
+  <div class="flex align-items-center justify-content-center m-2">
+    <span>Donor Details</span>
+    <p-button label="Add Donors" (click)="donorsSidebarVisible = true" />
+  </div>
+</div>
+
+<div class="justify-content-start flex-wrap mt-15">
+  <p-table
+    [value]="doners"
+    [style]="{ width: '100%', overflow: 'auto!important' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="Date">
+          Donor Name<p-sortIcon field="DonorName" />
+        </th>
+        <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
+
+        <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
+        <th pSortableColumn="Address">
+          Address <p-sortIcon field="Address" />
+        </th>
+        <th pSortableColumn="Memoryof">
+          Memory of <p-sortIcon field="Memory of" />
+        </th>
+        <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" /></th>
+        <th pSortableColumn="Payment">
+          Mode of Payment <p-sortIcon field="Payment" />
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-doners>
+      <tr>
+        <td>{{ doners.firstName }}</td>
+        <td>{{ doners.phoneNumber }}</td>
+        <td>{{ doners.email }}</td>
+        <td>{{ doners.code }}</td>
+        <td>{{ doners.lastName }}</td>
+        <td>{{ doners.category }}</td>
+        <td>{{ doners.category }}</td>
+        <td>{{ doners.category }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-sidebar
+  [(visible)]="donorsSidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="donorForm"
+    *ngIf="donorsSidebarVisible"
+    (ngSubmit)="updatedonorForm()"
+  >
+    <div>
+      Add Donors Members
+      <i class="pi pi-times" (click)="donorsSidebarVisible = false"></i>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsName">Donor Name</label>
+        <input
+          pInputText
+          id="DonorsName"
+          formControlName="DonorsName"
+          aria-describedby="DonorsName"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsPhone">Phone</label>
+        <input
+          pInputText
+          id="DonorsPhone"
+          formControlName="DonorsPhone"
+          aria-describedby="DonorsPhone"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsEmail">email</label>
+        <input
+          pInputText
+          id="DonorsEmail"
+          formControlName="DonorsEmail"
+          aria-describedby="DonorsEmail"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsAddress">Address</label>
+
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          id="DonorsAddress"
+          aria-describedby="DonorsAddress"
+          formControlName="DonorsAddress"
+        >
+        </textarea>
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsMemoryOf">Memory of</label>
+        <input
+          pInputText
+          id="DonorsMemoryOf"
+          aria-describedby="DonorsMemoryOf"
+          formControlName="DonorsMemoryOf"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsAmount">Amount</label>
+        <input
+          pInputText
+          id="DonorsAmount"
+          aria-describedby="DonorsAmount"
+          formControlName="DonorsAmount"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="DonorsModeofPayment">Mode of Payment</label>
+        <input
+          pInputText
+          id="DonorsModeofPayment"
+          aria-describedby="DonorsModeofPayment"
+          formControlName="DonorsModeofPayment"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div>
+      <p-button label="Cancel " (click)="donorsSidebarVisible = false" />
+      <p-button label="Add " type="submit" />
+    </div>
+  </form>
+</p-sidebar>

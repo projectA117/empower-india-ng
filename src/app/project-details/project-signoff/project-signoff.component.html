@@ -1,3 +1,135 @@
-<p>project-projectsignoff works!</p>
-<h1>WIP Details</h1>
-<h1>Add WIP details</h1>
+<div class="flex justify-content-start flex-wrap">
+  <div class="flex align-items-center justify-content-center m-2">
+    <span>WIP Details</span>
+
+    <p-button
+      label="Add WIP Details"
+      (click)="ProjectSignOffsidebarVisible = true"
+    />
+  </div>
+</div>
+
+<div class="justify-content-start flex-wrap mt-15">
+  <p-table
+    [value]="products"
+    [style]="{ width: '100%', overflow: 'auto!important' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="Vendor">Date <p-sortIcon field="Vendor" /></th>
+        <th pSortableColumn="Contractor">
+          Photo <p-sortIcon field="Contractor" />
+        </th>
+
+        <th pSortableColumn="Auditor">
+          Sign off Members <p-sortIcon field="Auditor" />
+        </th>
+        <th pSortableColumn="Decription">
+          Decription <p-sortIcon field="Decription" />
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{ product.code }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.code }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-sidebar
+  [(visible)]="ProjectSignOffsidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="ProjectSignOffForm"
+    *ngIf="ProjectSignOffsidebarVisible"
+    (ngSubmit)="updateProjectSignOff()"
+  >
+    <div>
+      Add Donors Members
+      <i class="pi pi-times" (click)="ProjectSignOffsidebarVisible = false"></i>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffDate">Date</label>
+        <input
+          pInputText
+          id="ProjectSignOffDate"
+          aria-describedby="ProjectSignOffDate"
+          formControlName="ProjectSignOffDate"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffPhoto">Photo</label>
+        <input
+          pInputText
+          id="ProjectSignOffPhoto"
+          formControlName="ProjectSignOffPhoto"
+          aria-describedby="ProjectSignOffPhoto"
+        />
+
+        <!-- <p-fileUpload
+          mode="basic"
+          chooseLabel="Choose"
+          chooseIcon="pi pi-upload"
+          formControlName="ProjectSignOffPhotoFile"
+          name="demo[]"
+          url=""
+          accept="image/*"
+          maxFileSize="1000000"
+          (onUpload)="onUpload($event)"
+        /> -->
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffMembers">Sign Off Members</label>
+        <input
+          pInputText
+          id="ProjectSignOffMembers"
+          formControlName="ProjectSignOffMembers"
+          aria-describedby="ProjectSignOffMembers"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffDecription">Decription</label>
+        <input
+          pInputText
+          id="ProjectSignOffDecription"
+          formControlName="ProjectSignOffDecription"
+          aria-describedby="ProjectSignOffDecription"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div>
+      <p-button label="Cancel" (click)="ProjectSignOffsidebarVisible = false" />
+      <p-button label="Add " type="submit" />
+    </div>
+  </form>
+</p-sidebar>

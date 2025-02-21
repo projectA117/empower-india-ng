@@ -1,9 +1,6 @@
-import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImportsModule } from '../imports';
 import { ProjectApprovalComponent } from './project-approval/project-approval.component';
 import { ProjectCommitteeComponent } from './project-committee/project-committee.component';
@@ -12,6 +9,8 @@ import { ProjectFinanceComponent } from './project-finance/project-finance.compo
 import { ProjectVendorsComponent } from './project-vendors/project-vendors.component';
 import { ProjectWorkInProgressComponent } from './project-work-in-progress/project-work-in-progress.component';
 import { ProjectsignoffComponent } from './project-signoff/project-signoff.component';
+import { ProductService } from '@service/productservice';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project-details',
@@ -31,25 +30,18 @@ import { ProjectsignoffComponent } from './project-signoff/project-signoff.compo
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',
+  providers: [ProductService],
 })
-export class ProjectDetailsComponent {
-  product = {
-    id: 1,
-    villageProposalId: 1,
-    projectCategory: 'School',
-    projectName: 'Library Books',
-    status: 'Open',
-    location: 'Near Government School',
-    latitude: 16.539889,
-    longitude: 80.783239,
-    projectEstimation: 100000.0,
-    governmentShare: 40000.0,
-    publicShare: 60000.0,
-    isNew: true,
-    projectType: false,
-    description:
-      'Construction of a 10,000-liter capacity water tank near the school',
-    createdBy: 'Admin',
-    lastUpdatedBy: 'Admin',
-  };
+export class ProjectDetailsComponent implements OnInit {
+  product: any;
+  constructor(
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.product = JSON.parse(params['project']);
+    });
+  }
 }

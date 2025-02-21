@@ -12,7 +12,7 @@ import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { Project } from '@domain/Project';
-import { Constants } from '../../constants/Constants';
+import { HardCodedInfo } from '../../constants/HardCodedInfo';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -44,9 +44,7 @@ export class ProjectComponent implements OnInit {
   projectForm: FormGroup = new FormGroup({});
   allProjects: any = [];
 
-  constructor(
-    private commonService: CommonService
-  ) { }
+  constructor(private commonService: CommonService) {}
 
   ngOnInit() {
     this.getDistricts();
@@ -85,10 +83,10 @@ export class ProjectComponent implements OnInit {
           this.getMandals(this.project.districtId);
         }
       }
-    }, err => {
-      //Temp fix for Gopi
-      this.districts = Constants.districts;
-    });
+  }, err => {
+    //Temp fix for Gopi
+    this.districts = HardCodedInfo.districts;
+  });
   }
 
   getMandals(districtId: any) {
@@ -101,7 +99,7 @@ export class ProjectComponent implements OnInit {
       }
     }, err => {
       //Temp fix for Gopi
-      this.mandals = Constants.mandals;
+      this.mandals = HardCodedInfo.mandals;
     });
   }
 
@@ -110,7 +108,7 @@ export class ProjectComponent implements OnInit {
       this.villages = data;
     }, err => {
       //Temp fix for Gopi
-      this.villages = Constants.villages;
+      this.villages = HardCodedInfo.villages;
     });
   }
 
@@ -128,7 +126,7 @@ export class ProjectComponent implements OnInit {
       }
     }, err => {
       //Temp fix for Gopi
-      this.categories = Constants.categories;
+      this.categories = HardCodedInfo.categories;
       this.allProjects = this.categories.flatMap(category =>
         category.projects.map(project => ({
           ...project,
@@ -195,7 +193,7 @@ onSubmit() {
     return payload;
   }
   closeDialog() {
-    console.log(".......closeDialog.......");
+    console.log('.......closeDialog.......');
     this.closeDialogEvent.emit(true);
   }
   cancel() {

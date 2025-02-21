@@ -526,10 +526,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.p-datatable-tbody{
-  overflow: auto;
-  height: calc(100vh - 187px);
-}
+// .p-datatable-tbody{
+//   overflow: auto;
+//   height: calc(100vh - 187px);
+// }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: #ffffff;
@@ -554,4 +554,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link{
   border: 1px solid #fff;
+}
+.p-sidebar-right{
+  top: 70px;
 }

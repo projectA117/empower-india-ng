@@ -1,938 +1,938 @@
-export class Constants {
-    public static projects = [
-        {
-            "id": 10,
-            "projectCategory": "School",
-            "projectType": "21",
-            "status": "Open",
-            "location": "",
-            "latitude": null,
-            "longitude": null,
-            "projectEstimation": null,
-            "governmentShare": null,
-            "publicShare": null,
-            "isNew": true,
-            "description": "HIIIII",
-            "createdBy": "Admin",
-            "lastUpdatedBy": "Admin",
-            "villageName": "ADDATEEGALA (అడ్డతీగల(వి))",
-            "mandalName": "Addateegala (అడ్డతీగల)",
-            "districtName": "ALLURI SITARAMARAJU"
-        },
-        {
-            "id": 9,
-            "projectCategory": "School",
-            "projectType": "22",
-            "status": "Open",
-            "location": "Testing",
-            "latitude": null,
-            "longitude": null,
-            "projectEstimation": null,
-            "governmentShare": null,
-            "publicShare": null,
-            "isNew": true,
-            "description": "Test",
-            "createdBy": "Admin",
-            "lastUpdatedBy": "Admin",
-            "villageName": "ALLIKHANUDUPALEM (అల్లిఖానుడుపాలెం)",
-            "mandalName": "Anakapalli (అనకాపల్లి)",
-            "districtName": "ANAKAPALLI"
-        },
-        {
-            "id": 8,
-            "projectCategory": "School",
-            "projectType": "22",
-            "status": "Open",
-            "location": "Testing",
-            "latitude": null,
-            "longitude": null,
-            "projectEstimation": null,
-            "governmentShare": null,
-            "publicShare": null,
-            "isNew": true,
-            "description": "Test",
-            "createdBy": "Admin",
-            "lastUpdatedBy": "Admin",
-            "villageName": "ALLIKHANUDUPALEM (అల్లిఖానుడుపాలెం)",
-            "mandalName": "Anakapalli (అనకాపల్లి)",
-            "districtName": "ANAKAPALLI"
-        },
-        {
-            "id": 7,
-            "projectCategory": "School",
-            "projectType": "22",
-            "status": "Open",
-            "location": "Addateegala Loc",
-            "latitude": null,
-            "longitude": null,
-            "projectEstimation": 1000.0,
-            "governmentShare": 1000.0,
-            "publicShare": 1000.0,
-            "isNew": true,
-            "description": "desc",
-            "createdBy": "Admin",
-            "lastUpdatedBy": "Admin",
-            "villageName": "ADDATEEGALA (అడ్డతీగల(వి))",
-            "mandalName": "Addateegala (అడ్డతీగల)",
-            "districtName": "ALLURI SITARAMARAJU"
-        },
-        {
-            "id": 6,
-            "projectCategory": "School",
-            "projectType": "1",
-            "status": "Open",
-            "location": null,
-            "latitude": null,
-            "longitude": null,
-            "projectEstimation": 100.0,
-            "governmentShare": 0.0,
-            "publicShare": 0.0,
-            "isNew": false,
-            "description": "Testing Apis Update project",
-            "createdBy": "Admin",
-            "lastUpdatedBy": "Admin",
-            "villageName": "MUNDLA PADU (ముండ్లపాడు)",
-            "mandalName": "Giddaluru (గిద్దలూరు)",
-            "districtName": "PRAKASAM"
-        },
-        {
-            "id": 5,
-            "projectCategory": "School",
-            "projectType": "1",
-            "status": "Open",
-            "location": null,
-            "latitude": null,
-            "longitude": null,
-            "projectEstimation": 70.0,
-            "governmentShare": 40.0,
-            "publicShare": 60.0,
-            "isNew": false,
-            "description": "Testing Apis Update project11111",
-            "createdBy": "Admin",
-            "lastUpdatedBy": "Admin",
-            "villageName": "MUNDLA PADU (ముండ్లపాడు)",
-            "mandalName": "Giddaluru (గిద్దలూరు)",
-            "districtName": "PRAKASAM"
-        }
-    ];
-    public static districts = [
-        {
-            "id": 1,
-            "code": "745",
-            "name": "ALLURI SITARAMARAJU",
-            "stateId": 1
-        },
-        {
-            "id": 2,
-            "code": "744",
-            "name": "ANAKAPALLI",
-            "stateId": 1
-        },
-        {
-            "id": 26,
-            "code": "502",
-            "name": "ANANTAPUR",
-            "stateId": 1
-        },
-        {
-            "id": 3,
-            "code": "753",
-            "name": "ANNAMAYYA",
-            "stateId": 1
-        },
-        {
-            "id": 4,
-            "code": "750",
-            "name": "BAPATLA",
-            "stateId": 1
-        },
-        {
-            "id": 5,
-            "code": "503",
-            "name": "CHITTOOR",
-            "stateId": 1
-        },
-        {
-            "id": 6,
-            "code": "505",
-            "name": "EAST GODAVARI",
-            "stateId": 1
-        },
-        {
-            "id": 7,
-            "code": "748",
-            "name": "ELURU",
-            "stateId": 1
-        },
-        {
-            "id": 8,
-            "code": "506",
-            "name": "GUNTUR",
-            "stateId": 1
-        },
-        {
-            "id": 9,
-            "code": "746",
-            "name": "KAKINADA",
-            "stateId": 1
-        },
-        {
-            "id": 10,
-            "code": "747",
-            "name": "KONASEEMA",
-            "stateId": 1
-        },
-        {
-            "id": 11,
-            "code": "510",
-            "name": "KRISHNA",
-            "stateId": 1
-        },
-        {
-            "id": 12,
-            "code": "511",
-            "name": "KURNOOL",
-            "stateId": 1
-        },
-        {
-            "id": 13,
-            "code": "755",
-            "name": "NANDYAL",
-            "stateId": 1
-        },
-        {
-            "id": 14,
-            "code": "749",
-            "name": "NTR",
-            "stateId": 1
-        },
-        {
-            "id": 15,
-            "code": "751",
-            "name": "PALNADU",
-            "stateId": 1
-        },
-        {
-            "id": 16,
-            "code": "743",
-            "name": "PARVATHIPURAM MANYAM",
-            "stateId": 1
-        },
-        {
-            "id": 17,
-            "code": "517",
-            "name": "PRAKASAM",
-            "stateId": 1
-        },
-        {
-            "id": 18,
-            "code": "515",
-            "name": "SPR NELLORE",
-            "stateId": 1
-        },
-        {
-            "id": 20,
-            "code": "754",
-            "name": "SRI SATYA SAI",
-            "stateId": 1
-        },
-        {
-            "id": 19,
-            "code": "519",
-            "name": "SRIKAKULAM",
-            "stateId": 1
-        },
-        {
-            "id": 21,
-            "code": "752",
-            "name": "TIRUPATI",
-            "stateId": 1
-        },
-        {
-            "id": 22,
-            "code": "520",
-            "name": "VISAKHAPATNAM",
-            "stateId": 1
-        },
-        {
-            "id": 23,
-            "code": "521",
-            "name": "VIZIANAGARAM",
-            "stateId": 1
-        },
-        {
-            "id": 24,
-            "code": "523",
-            "name": "WEST GODAVARI",
-            "stateId": 1
-        },
-        {
-            "id": 25,
-            "code": "504",
-            "name": "YSR KADAPA",
-            "stateId": 1
-        }
-    ];
-    public static mandals = [
-        {
-            "id": 688,
-            "code": "5112",
-            "name": "Addanki (అద్దంకి)",
-            "districtId": 4
-        },
-        {
-            "id": 1375,
-            "code": "5112",
-            "name": "Addanki (అద్దంకి)",
-            "districtId": 4
-        },
-        {
-            "id": 689,
-            "code": "5086",
-            "name": "Amruthalur (అమర్తలూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1376,
-            "code": "5086",
-            "name": "Amruthalur (అమర్తలూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 690,
-            "code": "5105",
-            "name": "Ballikuruva (బల్లికురవ)",
-            "districtId": 4
-        },
-        {
-            "id": 1377,
-            "code": "5105",
-            "name": "Ballikuruva (బల్లికురవ)",
-            "districtId": 4
-        },
-        {
-            "id": 691,
-            "code": "5093",
-            "name": "Bapatla (బాపట్ల)",
-            "districtId": 4
-        },
-        {
-            "id": 1378,
-            "code": "5093",
-            "name": "Bapatla (బాపట్ల)",
-            "districtId": 4
-        },
-        {
-            "id": 692,
-            "code": "5089",
-            "name": "Bhattiprolu (భట్టిప్రోలు)",
-            "districtId": 4
-        },
-        {
-            "id": 1379,
-            "code": "5089",
-            "name": "Bhattiprolu (భట్టిప్రోలు)",
-            "districtId": 4
-        },
-        {
-            "id": 693,
-            "code": "5090",
-            "name": "Cherukupalle (చెరుకుపల్లి)",
-            "districtId": 4
-        },
-        {
-            "id": 1380,
-            "code": "5090",
-            "name": "Cherukupalle (చెరుకుపల్లి)",
-            "districtId": 4
-        },
-        {
-            "id": 694,
-            "code": "5125",
-            "name": "Chinaganjam (చినగంజాం)",
-            "districtId": 4
-        },
-        {
-            "id": 1381,
-            "code": "5125",
-            "name": "Chinaganjam (చినగంజాం)",
-            "districtId": 4
-        },
-        {
-            "id": 695,
-            "code": "5123",
-            "name": "Chirala (చీరాల)",
-            "districtId": 4
-        },
-        {
-            "id": 1382,
-            "code": "5123",
-            "name": "Chirala (చీరాల)",
-            "districtId": 4
-        },
-        {
-            "id": 696,
-            "code": "5110",
-            "name": "Inkollu (ఇంకొల్లు)",
-            "districtId": 4
-        },
-        {
-            "id": 1383,
-            "code": "5110",
-            "name": "Inkollu (ఇంకొల్లు)",
-            "districtId": 4
-        },
-        {
-            "id": 697,
-            "code": "5111",
-            "name": "Janakavarampanguluru (జనకవరం పంగులూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1384,
-            "code": "5111",
-            "name": "Janakavarampanguluru (జనకవరం పంగులూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 698,
-            "code": "5109",
-            "name": "Karamchedu (కారంచేడు)",
-            "districtId": 4
-        },
-        {
-            "id": 1385,
-            "code": "5109",
-            "name": "Karamchedu (కారంచేడు)",
-            "districtId": 4
-        },
-        {
-            "id": 699,
-            "code": "5092",
-            "name": "Karlapalem (కర్లపాలెం)",
-            "districtId": 4
-        },
-        {
-            "id": 1386,
-            "code": "5092",
-            "name": "Karlapalem (కర్లపాలెం)",
-            "districtId": 4
-        },
-        {
-            "id": 700,
-            "code": "5088",
-            "name": "Kollur (కోల్లూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1387,
-            "code": "5088",
-            "name": "Kollur (కోల్లూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 701,
-            "code": "5122",
-            "name": "Korisapadu (కొరిశపాడు)",
-            "districtId": 4
-        },
-        {
-            "id": 1388,
-            "code": "5122",
-            "name": "Korisapadu (కొరిశపాడు)",
-            "districtId": 4
-        },
-        {
-            "id": 702,
-            "code": "5106",
-            "name": "Martur (మార్టూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1389,
-            "code": "5106",
-            "name": "Martur (మార్టూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 703,
-            "code": "5095",
-            "name": "Nagaram (నగరం)",
-            "districtId": 4
-        },
-        {
-            "id": 1390,
-            "code": "5095",
-            "name": "Nagaram (నగరం)",
-            "districtId": 4
-        },
-        {
-            "id": 704,
-            "code": "5094",
-            "name": "Nizampatnam (నిజాంపట్నం)",
-            "districtId": 4
-        },
-        {
-            "id": 1391,
-            "code": "5094",
-            "name": "Nizampatnam (నిజాంపట్నం)",
-            "districtId": 4
-        },
-        {
-            "id": 705,
-            "code": "5108",
-            "name": "Parchur (పర్చూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1392,
-            "code": "5108",
-            "name": "Parchur (పర్చూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 706,
-            "code": "5091",
-            "name": "Pittalavanipalem (పిట్టలవారిపాలెం)",
-            "districtId": 4
-        },
-        {
-            "id": 1393,
-            "code": "5091",
-            "name": "Pittalavanipalem (పిట్టలవారిపాలెం)",
-            "districtId": 4
-        },
-        {
-            "id": 707,
-            "code": "5096",
-            "name": "Repalle (రేపల్లె)",
-            "districtId": 4
-        },
-        {
-            "id": 1394,
-            "code": "5096",
-            "name": "Repalle (రేపల్లె)",
-            "districtId": 4
-        },
-        {
-            "id": 708,
-            "code": "5104",
-            "name": "Santhamaguluru (సంతమాగులూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1395,
-            "code": "5104",
-            "name": "Santhamaguluru (సంతమాగులూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 709,
-            "code": "5085",
-            "name": "Tsundur (చుండూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1396,
-            "code": "5085",
-            "name": "Tsundur (చుండూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 710,
-            "code": "5087",
-            "name": "Vemuru (వేమూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 1397,
-            "code": "5087",
-            "name": "Vemuru (వేమూరు)",
-            "districtId": 4
-        },
-        {
-            "id": 711,
-            "code": "5124",
-            "name": "Vetapalem (వేటపాలెం)",
-            "districtId": 4
-        },
-        {
-            "id": 1398,
-            "code": "5124",
-            "name": "Vetapalem (వేటపాలెం)",
-            "districtId": 4
-        },
-        {
-            "id": 712,
-            "code": "5107",
-            "name": "Yeddanapudi (యద్దనపూడి)",
-            "districtId": 4
-        },
-        {
-            "id": 1399,
-            "code": "5107",
-            "name": "Yeddanapudi (యద్దనపూడి)",
-            "districtId": 4
-        }
-    ];
-    public static villages = [
-        {
-            "id": 1,
-            "code": "1",
-            "name": "ADDATEEGALA (అడ్డతీగల(వి))",
-            "mandalId": 1
-        },
-        {
-            "id": 2,
-            "code": "2",
-            "name": "ANIGERU (అనిగేరు)",
-            "mandalId": 1
-        },
-        {
-            "id": 3,
-            "code": "3",
-            "name": "ANNAMPALEM (అన్నంపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 4,
-            "code": "4",
-            "name": "ANUKULAPALEM (అనుకులపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 5,
-            "code": "5",
-            "name": "ATCHIYYAPETA (అచ్చియ్యపేట)",
-            "mandalId": 1
-        },
-        {
-            "id": 6,
-            "code": "6",
-            "name": "BADADAM (బడదాం)",
-            "mandalId": 1
-        },
-        {
-            "id": 7,
-            "code": "7",
-            "name": "BANDAKONDA (బందకొండ)",
-            "mandalId": 1
-        },
-        {
-            "id": 8,
-            "code": "8",
-            "name": "BANDAMAMILLU (బందమామిళ్లు)",
-            "mandalId": 1
-        },
-        {
-            "id": 9,
-            "code": "9",
-            "name": "BHIMUDUPAKALU (భీముడుపాకలు)",
-            "mandalId": 1
-        },
-        {
-            "id": 10,
-            "code": "10",
-            "name": "BODLANKA (బొడ్లంక)",
-            "mandalId": 1
-        },
-        {
-            "id": 11,
-            "code": "11",
-            "name": "CHAKIREVULA (చాకిరేవుల)",
-            "mandalId": 1
-        },
-        {
-            "id": 12,
-            "code": "12",
-            "name": "CHAPARATIPALEM (చాపరాతిపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 13,
-            "code": "13",
-            "name": "CHIKKAPUGEDDA (చిక్కపుగెడ్డ)",
-            "mandalId": 1
-        },
-        {
-            "id": 14,
-            "code": "14",
-            "name": "CHINAMUNAKANAGEDDA (చినమునకనగెడ్డ)",
-            "mandalId": 1
-        },
-        {
-            "id": 15,
-            "code": "15",
-            "name": "CHINAVADISAKARRA (చినవడిశకర్ర)",
-            "mandalId": 1
-        },
-        {
-            "id": 16,
-            "code": "16",
-            "name": "CHINNA ADDATEEGALA (చిన్నఅడ్డతీగల)",
-            "mandalId": 1
-        },
-        {
-            "id": 17,
-            "code": "17",
-            "name": "CHINNAMPADU (చిన్నంపాడు)",
-            "mandalId": 1
-        },
-        {
-            "id": 18,
-            "code": "18",
-            "name": "D. AMMAPETA (డి.అమ్మపేట)",
-            "mandalId": 1
-        },
-        {
-            "id": 19,
-            "code": "19",
-            "name": "D. KOTHURU (డి.కొత్తూరు)",
-            "mandalId": 1
-        },
-        {
-            "id": 20,
-            "code": "20",
-            "name": "D. KRISHNAVARAM (డి.క్రిష్ణవరం)",
-            "mandalId": 1
-        },
-        {
-            "id": 21,
-            "code": "21",
-            "name": "D. PINJARIKONDA (డి.పింజరకొండ)",
-            "mandalId": 1
-        },
-        {
-            "id": 22,
-            "code": "22",
-            "name": "D. RAMAVARAM (డి.రామవరం)",
-            "mandalId": 1
-        },
-        {
-            "id": 23,
-            "code": "23",
-            "name": "DABBAPALEM (దబ్బపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 24,
-            "code": "24",
-            "name": "DAKODU (దాకోడు)",
-            "mandalId": 1
-        },
-        {
-            "id": 25,
-            "code": "25",
-            "name": "DODDIVAKA (డొడ్డివాక)",
-            "mandalId": 1
-        },
-        {
-            "id": 26,
-            "code": "26",
-            "name": "DOKKAPALEM (డోక్కపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 27,
-            "code": "27",
-            "name": "DORAMAMIDI (దోరమామిడి)",
-            "mandalId": 1
-        },
-        {
-            "id": 28,
-            "code": "28",
-            "name": "DUCHERTHI (దుచ్చర్తి)",
-            "mandalId": 1
-        },
-        {
-            "id": 29,
-            "code": "29",
-            "name": "DUPPALAPALEM (దుప్పలపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 30,
-            "code": "30",
-            "name": "GADICHINNAMPALEM (గాడిచిన్నంపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 31,
-            "code": "31",
-            "name": "GANGAMPALEM (గంగంపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 32,
-            "code": "32",
-            "name": "GAVARAYYAPETA (గవరయ్యపేట)",
-            "mandalId": 1
-        },
-        {
-            "id": 33,
-            "code": "33",
-            "name": "GONDOLU (గొండోలు)",
-            "mandalId": 1
-        },
-        {
-            "id": 34,
-            "code": "34",
-            "name": "GONTUVANIPALEM (గొంటువానిపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 35,
-            "code": "35",
-            "name": "GOTTILAPADU (గొట్టిలపాడు)",
-            "mandalId": 1
-        },
-        {
-            "id": 36,
-            "code": "36",
-            "name": "JAJIPALEM (జాజిపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 37,
-            "code": "37",
-            "name": "JALLURU (జల్లూరు)",
-            "mandalId": 1
-        },
-        {
-            "id": 38,
-            "code": "38",
-            "name": "JAYACHINTALAPALEM (జయచింతలపాలెం)",
-            "mandalId": 1
-        },
-        {
-            "id": 39,
-            "code": "39",
-            "name": "KALIMAMIDI (కలిమామిడి)",
-            "mandalId": 1
-        },
-        {
-            "id": 40,
-            "code": "40",
-            "name": "KIMMURU (కిమ్మూరు)",
-            "mandalId": 1
-        },
-        {
-            "id": 41,
-            "code": "41",
-            "name": "KINAPARTI (కినపర్తి)",
-            "mandalId": 1
-        },
-        {
-            "id": 42,
-            "code": "42",
-            "name": "KONALOVA (కోనలోవ)",
-            "mandalId": 1
-        },
-        {
-            "id": 43,
-            "code": "43",
-            "name": "KOTTAMPALEM (కొఠంపాలెం)",
-            "mandalId": 1
-        }
-    ];
-    public static categories = [
-        {
-            "id": 1,
-            "name": "School",
-            "projects": [
-                {
-                    "id": 23,
-                    "description": "Preventive Health Checkup"
-                },
-                {
-                    "id": 22,
-                    "description": "Dental"
-                },
-                {
-                    "id": 21,
-                    "description": "Eye Camp"
-                },
-                {
-                    "id": 20,
-                    "description": "Health Camp"
-                },
-                {
-                    "id": 19,
-                    "description": "Compound Walls/ Gate"
-                },
-                {
-                    "id": 18,
-                    "description": "Audio System"
-                },
-                {
-                    "id": 17,
-                    "description": "Computers"
-                },
-                {
-                    "id": 16,
-                    "description": "Sanitary Pad"
-                },
-                {
-                    "id": 15,
-                    "description": "Dustbins"
-                },
-                {
-                    "id": 14,
-                    "description": "Sports Kits"
-                },
-                {
-                    "id": 13,
-                    "description": "Paints"
-                },
-                {
-                    "id": 12,
-                    "description": "Cycles"
-                },
-                {
-                    "id": 11,
-                    "description": "Library"
-                },
-                {
-                    "id": 10,
-                    "description": "Toilets"
-                },
-                {
-                    "id": 9,
-                    "description": "RO Plant"
-                },
-                {
-                    "id": 8,
-                    "description": "Benches"
-                },
-                {
-                    "id": 7,
-                    "description": "Digital Boards"
-                },
-                {
-                    "id": 6,
-                    "description": "Solar Fencing"
-                },
-                {
-                    "id": 5,
-                    "description": "CC Cameras"
-                },
-                {
-                    "id": 4,
-                    "description": "Racks"
-                },
-                {
-                    "id": 3,
-                    "description": "Ceiling Fans"
-                },
-                {
-                    "id": 2,
-                    "description": "Class Rooms"
-                },
-                {
-                    "id": 1,
-                    "description": "Library Books"
-                }
-            ]
-        }
-    ];
-    }
+export class ConstantsData {
+  public static projects = [
+    {
+      id: 10,
+      projectCategory: 'School',
+      projectType: '21',
+      status: 'Open',
+      location: '',
+      latitude: null,
+      longitude: null,
+      projectEstimation: null,
+      governmentShare: null,
+      publicShare: null,
+      isNew: true,
+      description: 'HIIIII',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'ADDATEEGALA (అడ్డతీగల(వి))',
+      mandalName: 'Addateegala (అడ్డతీగల)',
+      districtName: 'ALLURI SITARAMARAJU',
+    },
+    {
+      id: 9,
+      projectCategory: 'School',
+      projectType: '22',
+      status: 'Open',
+      location: 'Testing',
+      latitude: null,
+      longitude: null,
+      projectEstimation: null,
+      governmentShare: null,
+      publicShare: null,
+      isNew: true,
+      description: 'Test',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'ALLIKHANUDUPALEM (అల్లిఖానుడుపాలెం)',
+      mandalName: 'Anakapalli (అనకాపల్లి)',
+      districtName: 'ANAKAPALLI',
+    },
+    {
+      id: 8,
+      projectCategory: 'School',
+      projectType: '22',
+      status: 'Open',
+      location: 'Testing',
+      latitude: null,
+      longitude: null,
+      projectEstimation: null,
+      governmentShare: null,
+      publicShare: null,
+      isNew: true,
+      description: 'Test',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'ALLIKHANUDUPALEM (అల్లిఖానుడుపాలెం)',
+      mandalName: 'Anakapalli (అనకాపల్లి)',
+      districtName: 'ANAKAPALLI',
+    },
+    {
+      id: 7,
+      projectCategory: 'School',
+      projectType: '22',
+      status: 'Open',
+      location: 'Addateegala Loc',
+      latitude: null,
+      longitude: null,
+      projectEstimation: 1000.0,
+      governmentShare: 1000.0,
+      publicShare: 1000.0,
+      isNew: true,
+      description: 'desc',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'ADDATEEGALA (అడ్డతీగల(వి))',
+      mandalName: 'Addateegala (అడ్డతీగల)',
+      districtName: 'ALLURI SITARAMARAJU',
+    },
+    {
+      id: 6,
+      projectCategory: 'School',
+      projectType: '1',
+      status: 'Open',
+      location: null,
+      latitude: null,
+      longitude: null,
+      projectEstimation: 100.0,
+      governmentShare: 0.0,
+      publicShare: 0.0,
+      isNew: false,
+      description: 'Testing Apis Update project',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'MUNDLA PADU (ముండ్లపాడు)',
+      mandalName: 'Giddaluru (గిద్దలూరు)',
+      districtName: 'PRAKASAM',
+    },
+    {
+      id: 5,
+      projectCategory: 'School',
+      projectType: '1',
+      status: 'Open',
+      location: null,
+      latitude: null,
+      longitude: null,
+      projectEstimation: 70.0,
+      governmentShare: 40.0,
+      publicShare: 60.0,
+      isNew: false,
+      description: 'Testing Apis Update project11111',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'MUNDLA PADU (ముండ్లపాడు)',
+      mandalName: 'Giddaluru (గిద్దలూరు)',
+      districtName: 'PRAKASAM',
+    },
+  ];
+  public static districts = [
+    {
+      id: 1,
+      code: '745',
+      name: 'ALLURI SITARAMARAJU',
+      stateId: 1,
+    },
+    {
+      id: 2,
+      code: '744',
+      name: 'ANAKAPALLI',
+      stateId: 1,
+    },
+    {
+      id: 26,
+      code: '502',
+      name: 'ANANTAPUR',
+      stateId: 1,
+    },
+    {
+      id: 3,
+      code: '753',
+      name: 'ANNAMAYYA',
+      stateId: 1,
+    },
+    {
+      id: 4,
+      code: '750',
+      name: 'BAPATLA',
+      stateId: 1,
+    },
+    {
+      id: 5,
+      code: '503',
+      name: 'CHITTOOR',
+      stateId: 1,
+    },
+    {
+      id: 6,
+      code: '505',
+      name: 'EAST GODAVARI',
+      stateId: 1,
+    },
+    {
+      id: 7,
+      code: '748',
+      name: 'ELURU',
+      stateId: 1,
+    },
+    {
+      id: 8,
+      code: '506',
+      name: 'GUNTUR',
+      stateId: 1,
+    },
+    {
+      id: 9,
+      code: '746',
+      name: 'KAKINADA',
+      stateId: 1,
+    },
+    {
+      id: 10,
+      code: '747',
+      name: 'KONASEEMA',
+      stateId: 1,
+    },
+    {
+      id: 11,
+      code: '510',
+      name: 'KRISHNA',
+      stateId: 1,
+    },
+    {
+      id: 12,
+      code: '511',
+      name: 'KURNOOL',
+      stateId: 1,
+    },
+    {
+      id: 13,
+      code: '755',
+      name: 'NANDYAL',
+      stateId: 1,
+    },
+    {
+      id: 14,
+      code: '749',
+      name: 'NTR',
+      stateId: 1,
+    },
+    {
+      id: 15,
+      code: '751',
+      name: 'PALNADU',
+      stateId: 1,
+    },
+    {
+      id: 16,
+      code: '743',
+      name: 'PARVATHIPURAM MANYAM',
+      stateId: 1,
+    },
+    {
+      id: 17,
+      code: '517',
+      name: 'PRAKASAM',
+      stateId: 1,
+    },
+    {
+      id: 18,
+      code: '515',
+      name: 'SPR NELLORE',
+      stateId: 1,
+    },
+    {
+      id: 20,
+      code: '754',
+      name: 'SRI SATYA SAI',
+      stateId: 1,
+    },
+    {
+      id: 19,
+      code: '519',
+      name: 'SRIKAKULAM',
+      stateId: 1,
+    },
+    {
+      id: 21,
+      code: '752',
+      name: 'TIRUPATI',
+      stateId: 1,
+    },
+    {
+      id: 22,
+      code: '520',
+      name: 'VISAKHAPATNAM',
+      stateId: 1,
+    },
+    {
+      id: 23,
+      code: '521',
+      name: 'VIZIANAGARAM',
+      stateId: 1,
+    },
+    {
+      id: 24,
+      code: '523',
+      name: 'WEST GODAVARI',
+      stateId: 1,
+    },
+    {
+      id: 25,
+      code: '504',
+      name: 'YSR KADAPA',
+      stateId: 1,
+    },
+  ];
+  public static mandals = [
+    {
+      id: 688,
+      code: '5112',
+      name: 'Addanki (అద్దంకి)',
+      districtId: 4,
+    },
+    {
+      id: 1375,
+      code: '5112',
+      name: 'Addanki (అద్దంకి)',
+      districtId: 4,
+    },
+    {
+      id: 689,
+      code: '5086',
+      name: 'Amruthalur (అమర్తలూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1376,
+      code: '5086',
+      name: 'Amruthalur (అమర్తలూరు)',
+      districtId: 4,
+    },
+    {
+      id: 690,
+      code: '5105',
+      name: 'Ballikuruva (బల్లికురవ)',
+      districtId: 4,
+    },
+    {
+      id: 1377,
+      code: '5105',
+      name: 'Ballikuruva (బల్లికురవ)',
+      districtId: 4,
+    },
+    {
+      id: 691,
+      code: '5093',
+      name: 'Bapatla (బాపట్ల)',
+      districtId: 4,
+    },
+    {
+      id: 1378,
+      code: '5093',
+      name: 'Bapatla (బాపట్ల)',
+      districtId: 4,
+    },
+    {
+      id: 692,
+      code: '5089',
+      name: 'Bhattiprolu (భట్టిప్రోలు)',
+      districtId: 4,
+    },
+    {
+      id: 1379,
+      code: '5089',
+      name: 'Bhattiprolu (భట్టిప్రోలు)',
+      districtId: 4,
+    },
+    {
+      id: 693,
+      code: '5090',
+      name: 'Cherukupalle (చెరుకుపల్లి)',
+      districtId: 4,
+    },
+    {
+      id: 1380,
+      code: '5090',
+      name: 'Cherukupalle (చెరుకుపల్లి)',
+      districtId: 4,
+    },
+    {
+      id: 694,
+      code: '5125',
+      name: 'Chinaganjam (చినగంజాం)',
+      districtId: 4,
+    },
+    {
+      id: 1381,
+      code: '5125',
+      name: 'Chinaganjam (చినగంజాం)',
+      districtId: 4,
+    },
+    {
+      id: 695,
+      code: '5123',
+      name: 'Chirala (చీరాల)',
+      districtId: 4,
+    },
+    {
+      id: 1382,
+      code: '5123',
+      name: 'Chirala (చీరాల)',
+      districtId: 4,
+    },
+    {
+      id: 696,
+      code: '5110',
+      name: 'Inkollu (ఇంకొల్లు)',
+      districtId: 4,
+    },
+    {
+      id: 1383,
+      code: '5110',
+      name: 'Inkollu (ఇంకొల్లు)',
+      districtId: 4,
+    },
+    {
+      id: 697,
+      code: '5111',
+      name: 'Janakavarampanguluru (జనకవరం పంగులూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1384,
+      code: '5111',
+      name: 'Janakavarampanguluru (జనకవరం పంగులూరు)',
+      districtId: 4,
+    },
+    {
+      id: 698,
+      code: '5109',
+      name: 'Karamchedu (కారంచేడు)',
+      districtId: 4,
+    },
+    {
+      id: 1385,
+      code: '5109',
+      name: 'Karamchedu (కారంచేడు)',
+      districtId: 4,
+    },
+    {
+      id: 699,
+      code: '5092',
+      name: 'Karlapalem (కర్లపాలెం)',
+      districtId: 4,
+    },
+    {
+      id: 1386,
+      code: '5092',
+      name: 'Karlapalem (కర్లపాలెం)',
+      districtId: 4,
+    },
+    {
+      id: 700,
+      code: '5088',
+      name: 'Kollur (కోల్లూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1387,
+      code: '5088',
+      name: 'Kollur (కోల్లూరు)',
+      districtId: 4,
+    },
+    {
+      id: 701,
+      code: '5122',
+      name: 'Korisapadu (కొరిశపాడు)',
+      districtId: 4,
+    },
+    {
+      id: 1388,
+      code: '5122',
+      name: 'Korisapadu (కొరిశపాడు)',
+      districtId: 4,
+    },
+    {
+      id: 702,
+      code: '5106',
+      name: 'Martur (మార్టూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1389,
+      code: '5106',
+      name: 'Martur (మార్టూరు)',
+      districtId: 4,
+    },
+    {
+      id: 703,
+      code: '5095',
+      name: 'Nagaram (నగరం)',
+      districtId: 4,
+    },
+    {
+      id: 1390,
+      code: '5095',
+      name: 'Nagaram (నగరం)',
+      districtId: 4,
+    },
+    {
+      id: 704,
+      code: '5094',
+      name: 'Nizampatnam (నిజాంపట్నం)',
+      districtId: 4,
+    },
+    {
+      id: 1391,
+      code: '5094',
+      name: 'Nizampatnam (నిజాంపట్నం)',
+      districtId: 4,
+    },
+    {
+      id: 705,
+      code: '5108',
+      name: 'Parchur (పర్చూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1392,
+      code: '5108',
+      name: 'Parchur (పర్చూరు)',
+      districtId: 4,
+    },
+    {
+      id: 706,
+      code: '5091',
+      name: 'Pittalavanipalem (పిట్టలవారిపాలెం)',
+      districtId: 4,
+    },
+    {
+      id: 1393,
+      code: '5091',
+      name: 'Pittalavanipalem (పిట్టలవారిపాలెం)',
+      districtId: 4,
+    },
+    {
+      id: 707,
+      code: '5096',
+      name: 'Repalle (రేపల్లె)',
+      districtId: 4,
+    },
+    {
+      id: 1394,
+      code: '5096',
+      name: 'Repalle (రేపల్లె)',
+      districtId: 4,
+    },
+    {
+      id: 708,
+      code: '5104',
+      name: 'Santhamaguluru (సంతమాగులూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1395,
+      code: '5104',
+      name: 'Santhamaguluru (సంతమాగులూరు)',
+      districtId: 4,
+    },
+    {
+      id: 709,
+      code: '5085',
+      name: 'Tsundur (చుండూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1396,
+      code: '5085',
+      name: 'Tsundur (చుండూరు)',
+      districtId: 4,
+    },
+    {
+      id: 710,
+      code: '5087',
+      name: 'Vemuru (వేమూరు)',
+      districtId: 4,
+    },
+    {
+      id: 1397,
+      code: '5087',
+      name: 'Vemuru (వేమూరు)',
+      districtId: 4,
+    },
+    {
+      id: 711,
+      code: '5124',
+      name: 'Vetapalem (వేటపాలెం)',
+      districtId: 4,
+    },
+    {
+      id: 1398,
+      code: '5124',
+      name: 'Vetapalem (వేటపాలెం)',
+      districtId: 4,
+    },
+    {
+      id: 712,
+      code: '5107',
+      name: 'Yeddanapudi (యద్దనపూడి)',
+      districtId: 4,
+    },
+    {
+      id: 1399,
+      code: '5107',
+      name: 'Yeddanapudi (యద్దనపూడి)',
+      districtId: 4,
+    },
+  ];
+  public static villages = [
+    {
+      id: 1,
+      code: '1',
+      name: 'ADDATEEGALA (అడ్డతీగల(వి))',
+      mandalId: 1,
+    },
+    {
+      id: 2,
+      code: '2',
+      name: 'ANIGERU (అనిగేరు)',
+      mandalId: 1,
+    },
+    {
+      id: 3,
+      code: '3',
+      name: 'ANNAMPALEM (అన్నంపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 4,
+      code: '4',
+      name: 'ANUKULAPALEM (అనుకులపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 5,
+      code: '5',
+      name: 'ATCHIYYAPETA (అచ్చియ్యపేట)',
+      mandalId: 1,
+    },
+    {
+      id: 6,
+      code: '6',
+      name: 'BADADAM (బడదాం)',
+      mandalId: 1,
+    },
+    {
+      id: 7,
+      code: '7',
+      name: 'BANDAKONDA (బందకొండ)',
+      mandalId: 1,
+    },
+    {
+      id: 8,
+      code: '8',
+      name: 'BANDAMAMILLU (బందమామిళ్లు)',
+      mandalId: 1,
+    },
+    {
+      id: 9,
+      code: '9',
+      name: 'BHIMUDUPAKALU (భీముడుపాకలు)',
+      mandalId: 1,
+    },
+    {
+      id: 10,
+      code: '10',
+      name: 'BODLANKA (బొడ్లంక)',
+      mandalId: 1,
+    },
+    {
+      id: 11,
+      code: '11',
+      name: 'CHAKIREVULA (చాకిరేవుల)',
+      mandalId: 1,
+    },
+    {
+      id: 12,
+      code: '12',
+      name: 'CHAPARATIPALEM (చాపరాతిపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 13,
+      code: '13',
+      name: 'CHIKKAPUGEDDA (చిక్కపుగెడ్డ)',
+      mandalId: 1,
+    },
+    {
+      id: 14,
+      code: '14',
+      name: 'CHINAMUNAKANAGEDDA (చినమునకనగెడ్డ)',
+      mandalId: 1,
+    },
+    {
+      id: 15,
+      code: '15',
+      name: 'CHINAVADISAKARRA (చినవడిశకర్ర)',
+      mandalId: 1,
+    },
+    {
+      id: 16,
+      code: '16',
+      name: 'CHINNA ADDATEEGALA (చిన్నఅడ్డతీగల)',
+      mandalId: 1,
+    },
+    {
+      id: 17,
+      code: '17',
+      name: 'CHINNAMPADU (చిన్నంపాడు)',
+      mandalId: 1,
+    },
+    {
+      id: 18,
+      code: '18',
+      name: 'D. AMMAPETA (డి.అమ్మపేట)',
+      mandalId: 1,
+    },
+    {
+      id: 19,
+      code: '19',
+      name: 'D. KOTHURU (డి.కొత్తూరు)',
+      mandalId: 1,
+    },
+    {
+      id: 20,
+      code: '20',
+      name: 'D. KRISHNAVARAM (డి.క్రిష్ణవరం)',
+      mandalId: 1,
+    },
+    {
+      id: 21,
+      code: '21',
+      name: 'D. PINJARIKONDA (డి.పింజరకొండ)',
+      mandalId: 1,
+    },
+    {
+      id: 22,
+      code: '22',
+      name: 'D. RAMAVARAM (డి.రామవరం)',
+      mandalId: 1,
+    },
+    {
+      id: 23,
+      code: '23',
+      name: 'DABBAPALEM (దబ్బపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 24,
+      code: '24',
+      name: 'DAKODU (దాకోడు)',
+      mandalId: 1,
+    },
+    {
+      id: 25,
+      code: '25',
+      name: 'DODDIVAKA (డొడ్డివాక)',
+      mandalId: 1,
+    },
+    {
+      id: 26,
+      code: '26',
+      name: 'DOKKAPALEM (డోక్కపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 27,
+      code: '27',
+      name: 'DORAMAMIDI (దోరమామిడి)',
+      mandalId: 1,
+    },
+    {
+      id: 28,
+      code: '28',
+      name: 'DUCHERTHI (దుచ్చర్తి)',
+      mandalId: 1,
+    },
+    {
+      id: 29,
+      code: '29',
+      name: 'DUPPALAPALEM (దుప్పలపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 30,
+      code: '30',
+      name: 'GADICHINNAMPALEM (గాడిచిన్నంపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 31,
+      code: '31',
+      name: 'GANGAMPALEM (గంగంపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 32,
+      code: '32',
+      name: 'GAVARAYYAPETA (గవరయ్యపేట)',
+      mandalId: 1,
+    },
+    {
+      id: 33,
+      code: '33',
+      name: 'GONDOLU (గొండోలు)',
+      mandalId: 1,
+    },
+    {
+      id: 34,
+      code: '34',
+      name: 'GONTUVANIPALEM (గొంటువానిపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 35,
+      code: '35',
+      name: 'GOTTILAPADU (గొట్టిలపాడు)',
+      mandalId: 1,
+    },
+    {
+      id: 36,
+      code: '36',
+      name: 'JAJIPALEM (జాజిపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 37,
+      code: '37',
+      name: 'JALLURU (జల్లూరు)',
+      mandalId: 1,
+    },
+    {
+      id: 38,
+      code: '38',
+      name: 'JAYACHINTALAPALEM (జయచింతలపాలెం)',
+      mandalId: 1,
+    },
+    {
+      id: 39,
+      code: '39',
+      name: 'KALIMAMIDI (కలిమామిడి)',
+      mandalId: 1,
+    },
+    {
+      id: 40,
+      code: '40',
+      name: 'KIMMURU (కిమ్మూరు)',
+      mandalId: 1,
+    },
+    {
+      id: 41,
+      code: '41',
+      name: 'KINAPARTI (కినపర్తి)',
+      mandalId: 1,
+    },
+    {
+      id: 42,
+      code: '42',
+      name: 'KONALOVA (కోనలోవ)',
+      mandalId: 1,
+    },
+    {
+      id: 43,
+      code: '43',
+      name: 'KOTTAMPALEM (కొఠంపాలెం)',
+      mandalId: 1,
+    },
+  ];
+  public static categories = [
+    {
+      id: 1,
+      name: 'School',
+      projects: [
+        {
+          id: 23,
+          description: 'Preventive Health Checkup',
+        },
+        {
+          id: 22,
+          description: 'Dental',
+        },
+        {
+          id: 21,
+          description: 'Eye Camp',
+        },
+        {
+          id: 20,
+          description: 'Health Camp',
+        },
+        {
+          id: 19,
+          description: 'Compound Walls/ Gate',
+        },
+        {
+          id: 18,
+          description: 'Audio System',
+        },
+        {
+          id: 17,
+          description: 'Computers',
+        },
+        {
+          id: 16,
+          description: 'Sanitary Pad',
+        },
+        {
+          id: 15,
+          description: 'Dustbins',
+        },
+        {
+          id: 14,
+          description: 'Sports Kits',
+        },
+        {
+          id: 13,
+          description: 'Paints',
+        },
+        {
+          id: 12,
+          description: 'Cycles',
+        },
+        {
+          id: 11,
+          description: 'Library',
+        },
+        {
+          id: 10,
+          description: 'Toilets',
+        },
+        {
+          id: 9,
+          description: 'RO Plant',
+        },
+        {
+          id: 8,
+          description: 'Benches',
+        },
+        {
+          id: 7,
+          description: 'Digital Boards',
+        },
+        {
+          id: 6,
+          description: 'Solar Fencing',
+        },
+        {
+          id: 5,
+          description: 'CC Cameras',
+        },
+        {
+          id: 4,
+          description: 'Racks',
+        },
+        {
+          id: 3,
+          description: 'Ceiling Fans',
+        },
+        {
+          id: 2,
+          description: 'Class Rooms',
+        },
+        {
+          id: 1,
+          description: 'Library Books',
+        },
+      ],
+    },
+  ];
+}
