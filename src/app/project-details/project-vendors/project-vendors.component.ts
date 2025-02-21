@@ -74,18 +74,20 @@ export class ProjectVendorsComponent implements OnInit {
 
   updateVendor() {
     const payload = {
-      VendorName: this.VendorForm.get('VendorName')?.value,
-      VendorContractorName: this.VendorForm.get('VendorContractorName')?.value,
-      VendorMobile: this.VendorForm.get('VendorMobile')?.value,
-      VendorAddress: this.VendorForm.get('VendorAddress')?.value,
-      villageId: this.projectData.villageId,
-      id: this.projectData.id,
+      name: this.VendorForm.get('VendorName')?.value,
+      contractorName: this.VendorForm.get('VendorContractorName')?.value,
+      phone: this.VendorForm.get('VendorMobile')?.value,
+      address: this.VendorForm.get('VendorAddress')?.value,
+      //villageId: this.projectData.villageId,
+      //id: this.projectData.id,
     };
-    this.projectDetailsService.addVendors(payload).subscribe((data) => {
-      console.log('...Data', data);
-      if (data) {
-        this.showVendorsDetails();
-      }
-    });
+    this.projectDetailsService
+      .addVendors(payload, this.projectData.id)
+      .subscribe((data) => {
+        console.log('...Data', data);
+        if (data) {
+          this.showVendorsDetails();
+        }
+      });
   }
 }
