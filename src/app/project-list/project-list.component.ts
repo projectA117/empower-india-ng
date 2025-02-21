@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
@@ -10,7 +7,9 @@ import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from 'src/models/Project';
-import { Constants } from 'src/constants';
+import { ConstantsData } from 'src/Constants';
+
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
@@ -34,7 +33,6 @@ import { Constants } from 'src/constants';
   ],
 })
 export class ProjectListComponent implements OnInit {
-
   projects: any = [];
   project: any = null;
 
@@ -49,7 +47,9 @@ export class ProjectListComponent implements OnInit {
   showProjectDialog: boolean = false;
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router: Router,
+    private productService: ProductService
   ) {}
 
   ngOnInit() {
@@ -58,46 +58,57 @@ export class ProjectListComponent implements OnInit {
   }
 
   getProjects() {
-    this.commonService.getProjects().subscribe((data: Project[]) => {
-      if (data.length > 0) {
-        this.projects = data;
+    this.commonService.getProjects().subscribe(
+      (data: Project[]) => {
+        if (data.length > 0) {
+          this.projects = data;
+        }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.projects = ConstantsData.projects;
       }
-    },err => {
-      //Temp fix for Gopi
-      this.projects = Constants.projects;
-    });
+    );
   }
 
   getDistricts() {
-    this.commonService.getDistricts().subscribe((data) => {
-      if (data.length > 0) {
-        this.districts = data;
+    this.commonService.getDistricts().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.districts = data;
+        }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.districts = ConstantsData.districts;
       }
-    },err => {
-      //Temp fix for Gopi
-      this.districts = Constants.districts;
-    });
-    
+    );
   }
 
   getMandals(event: any) {
     const districtCode = event.value.id;
-    this.commonService.getMandals(districtCode).subscribe((data) => {
-      this.mandals = data;
-    },err => {
-      //Temp fix for Gopi
-      this.mandals = Constants.mandals;
-    });
+    this.commonService.getMandals(districtCode).subscribe(
+      (data) => {
+        this.mandals = data;
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.mandals = ConstantsData.mandals;
+      }
+    );
   }
 
   getvilages(event: any) {
     const mandalCode = event.value.id;
-    this.commonService.getVillages(mandalCode).subscribe((data) => {
-      this.villages = data;
-    },err => {
-      //Temp fix for Gopi
-      this.villages = Constants.villages;
-    });
+    this.commonService.getVillages(mandalCode).subscribe(
+      (data) => {
+        this.villages = data;
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.villages = ConstantsData.villages;
+      }
+    );
   }
 
   hideDialog() {
@@ -105,14 +116,14 @@ export class ProjectListComponent implements OnInit {
   }
 
   refresh(val: boolean) {
-    if(val) {
+    if (val) {
       this.hideDialog();
       this.getProjects();
     }
-    console.log("........Refresh");
+    console.log('........Refresh');
   }
 
-  showDialog(){
+  showDialog() {
     this.showProjectDialog = true;
   }
 
@@ -121,4 +132,11 @@ export class ProjectListComponent implements OnInit {
     this.showDialog();
   }
 
+  getProjectDetails(project: any) {
+    //this.project = project;
+    //this.productService.selectedProject.next(project);
+    this.router.navigate(['project-details'], {
+      queryParams: { project: JSON.stringify(project) },
+    });
+  }
 }

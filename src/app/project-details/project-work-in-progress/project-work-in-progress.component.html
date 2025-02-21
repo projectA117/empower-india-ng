@@ -2,13 +2,13 @@
   <div class="flex align-items-center justify-content-center m-2">
     <span>WIP Details</span>
 
-    <p-button label="Add WIP Details" />
+    <p-button label="Add WIP Details" (click)="WIPSidebarVisible = true" />
   </div>
 </div>
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
-    [value]="products"
+    [value]="WIPDetails"
     [style]="{ width: '100%', overflow: 'auto!important' }"
   >
     <ng-template pTemplate="header">
@@ -36,3 +36,96 @@
     </ng-template>
   </p-table>
 </div>
+
+<p-sidebar
+  [(visible)]="WIPSidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="WIPForm"
+    *ngIf="WIPSidebarVisible"
+    (ngSubmit)="updateWIPForm()"
+  >
+    <div>
+      Add WIP Details
+      <i class="pi pi-times" (click)="WIPSidebarVisible = false"></i>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="WIPDate">Date</label>
+        <input
+          pInputText
+          id="WIPDate"
+          formControlName="WIPDate"
+          aria-describedby="WIPDate"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="WIPDescription">Description </label>
+        <input
+          pInputText
+          id="WIPDescription"
+          formControlName="WIPDescription"
+          aria-describedby="WIPDescription"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="WIPAuditor">Auditor</label>
+        <input
+          pInputText
+          id="WIPAuditor"
+          formControlName="WIPAuditor"
+          aria-describedby="WIPAuditor"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="WIPPhotosVideos"> Photos/Videos </label>
+        <input
+          pInputText
+          id="WIPPhotosVideos"
+          formControlName="WIPPhotosVideos"
+          aria-describedby="WIPPhotosVideos"
+        />
+
+        <p-fileUpload
+          mode="basic"
+          chooseLabel="Choose"
+          chooseIcon="pi pi-upload"
+          name="demo[]"
+          url=""
+          accept="image/*"
+          maxFileSize="1000000"
+          (onUpload)="onUpload($event)"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div>
+      <p-button label="Cancel " (click)="WIPSidebarVisible = false" />
+      <p-button label="Add " (click)="updateWIP()" />
+    </div>
+  </form>
+</p-sidebar>

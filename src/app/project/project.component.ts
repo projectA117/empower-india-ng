@@ -11,7 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
-import { Constants } from 'src/constants';
+import { ConstantsData } from 'src/Constants';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -41,9 +41,7 @@ export class ProjectComponent implements OnInit {
   projectForm: FormGroup = new FormGroup({});
   allProjects: any = [];
 
-  constructor(
-    private commonService: CommonService
-  ) { }
+  constructor(private commonService: CommonService) {}
 
   ngOnInit() {
     this.getDistricts();
@@ -68,63 +66,77 @@ export class ProjectComponent implements OnInit {
       governmentShare: new FormControl(null),
       publicShare: new FormControl(null),
       description: new FormControl(null, [Validators.required]),
-      statusCode: new FormControl('')
+      statusCode: new FormControl(''),
     });
   }
 
   getDistricts() {
-    this.commonService.getDistricts().subscribe((data) => {
-      if (data.length > 0) {
-        this.districts = data;
+    this.commonService.getDistricts().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.districts = data;
+        }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.districts = ConstantsData.districts;
       }
-    }, err => {
-      //Temp fix for Gopi
-      this.districts = Constants.districts;
-    });
+    );
   }
 
   getMandals(event: any) {
     const districtCode = event.value;
-    this.commonService.getMandals(districtCode).subscribe((data) => {
-      this.mandals = data;
-    },err => {
-      //Temp fix for Gopi
-      this.mandals = Constants.mandals;
-    });
+    this.commonService.getMandals(districtCode).subscribe(
+      (data) => {
+        this.mandals = data;
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.mandals = ConstantsData.mandals;
+      }
+    );
   }
 
   getvillages(event: any) {
     const mandalCode = event.value;
-    this.commonService.getVillages(mandalCode).subscribe((data) => {
-      this.villages = data;
-    },err => {
-      //Temp fix for Gopi
-      this.villages = Constants.villages;
-    });
+    this.commonService.getVillages(mandalCode).subscribe(
+      (data) => {
+        this.villages = data;
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.villages = ConstantsData.villages;
+      }
+    );
   }
 
   getCategories() {
-    this.commonService.getProjectCategories().subscribe((data) => {
-      this.categories = data;
-      this.allProjects = data.flatMap(category =>
-        category.projects.map(project => ({
-          ...project,
-          categoryId: category.id  // Assign category ID manually
-        }))
-      );
-    },err => {
-      //Temp fix for Gopi
-      this.categories = Constants.categories;
-      this.allProjects = this.categories.flatMap(category =>
-        category.projects.map(project => ({
-          ...project,
-          categoryId: category.id  // Assign category ID manually
-        }))
-      );
-    });
+    this.commonService.getProjectCategories().subscribe(
+      (data) => {
+        this.categories = data;
+        this.allProjects = data.flatMap((category) =>
+          category.projects.map((project) => ({
+            ...project,
+            categoryId: category.id, // Assign category ID manually
+          }))
+        );
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.categories = ConstantsData.categories;
+        this.allProjects = this.categories.flatMap((category) =>
+          category.projects.map((project) => ({
+            ...project,
+            categoryId: category.id, // Assign category ID manually
+          }))
+        );
+      }
+    );
   }
   getProjectNames(event: any) {
-    this.projectNames = this.allProjects.filter(project => project.categoryId == Number(event?.value));
+    this.projectNames = this.allProjects.filter(
+      (project) => project.categoryId == Number(event?.value)
+    );
   }
 
   save() {
@@ -146,18 +158,20 @@ export class ProjectComponent implements OnInit {
       governmentShare: this.projectForm.get('governmentShare')?.value,
       publicShare: this.projectForm.get('publicShare')?.value,
       description: this.projectForm.get('description')?.value,
-      statusCode: this.projectForm.get('statusCode')?.value
+      statusCode: this.projectForm.get('statusCode')?.value,
     };
-    this.commonService.saveProject(payload).subscribe((data) => {
-      console.log("...Data", data);
-      this.closeDialog();
-    },
-      err => {
+    this.commonService.saveProject(payload).subscribe(
+      (data) => {
+        console.log('...Data', data);
+        this.closeDialog();
+      },
+      (err) => {
         console.log(err);
-      });
+      }
+    );
   }
   closeDialog() {
-    console.log(".......closeDialog.......");
+    console.log('.......closeDialog.......');
     this.closeDialogEvent.emit(true);
   }
   cancel() {

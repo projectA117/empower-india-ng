@@ -2,7 +2,10 @@
   <div class="flex align-items-center justify-content-center m-2">
     <span>WIP Details</span>
 
-    <p-button label="Add WIP Details" />
+    <p-button
+      label="Add WIP Details"
+      (click)="ProjectSignOffsidebarVisible = true"
+    />
   </div>
 </div>
 
@@ -36,3 +39,97 @@
     </ng-template>
   </p-table>
 </div>
+
+<p-sidebar
+  [(visible)]="ProjectSignOffsidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="ProjectSignOffForm"
+    *ngIf="ProjectSignOffsidebarVisible"
+    (ngSubmit)="updateProjectSignOff()"
+  >
+    <div>
+      Add Donors Members
+      <i class="pi pi-times" (click)="ProjectSignOffsidebarVisible = false"></i>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffDate">Date</label>
+        <input
+          pInputText
+          id="ProjectSignOffDate"
+          aria-describedby="ProjectSignOffDate"
+          formControlName="ProjectSignOffDate"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffPhoto">Photo</label>
+        <input
+          pInputText
+          id="ProjectSignOffPhoto"
+          formControlName="ProjectSignOffPhoto"
+          aria-describedby="ProjectSignOffPhoto"
+        />
+
+        <!-- <p-fileUpload
+          mode="basic"
+          chooseLabel="Choose"
+          chooseIcon="pi pi-upload"
+          formControlName="ProjectSignOffPhotoFile"
+          name="demo[]"
+          url=""
+          accept="image/*"
+          maxFileSize="1000000"
+          (onUpload)="onUpload($event)"
+        /> -->
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffMembers">Sign Off Members</label>
+        <input
+          pInputText
+          id="ProjectSignOffMembers"
+          formControlName="ProjectSignOffMembers"
+          aria-describedby="ProjectSignOffMembers"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="ProjectSignOffDecription">Decription</label>
+        <input
+          pInputText
+          id="ProjectSignOffDecription"
+          formControlName="ProjectSignOffDecription"
+          aria-describedby="ProjectSignOffDecription"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div>
+      <p-button label="Cancel" (click)="ProjectSignOffsidebarVisible = false" />
+      <p-button label="Add " type="submit" />
+    </div>
+  </form>
+</p-sidebar>

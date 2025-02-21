@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import {
   FormsModule,
@@ -10,6 +10,7 @@ import {
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-project-approval',
@@ -17,6 +18,7 @@ import { DropdownModule } from 'primeng/dropdown';
   imports: [
     ImportsModule,
     InputTextModule,
+    InputNumberModule,
     FormsModule,
     DropdownModule,
     ReactiveFormsModule,
@@ -26,19 +28,31 @@ import { DropdownModule } from 'primeng/dropdown';
   providers: [ProjectDetailsService],
 })
 export class ProjectApprovalComponent implements OnInit {
+  @Input() projectData: any;
   value: string | undefined;
   approvalForm: FormGroup = new FormGroup({});
-
+  value1: number;
   constructor(private projectDetailsService: ProjectDetailsService) {}
-  ngOnInit() {}
-
-  SaveApproval() {
+  ngOnInit() {
+    if (this.approvalForm) {
+      this.createapprovalForm();
+    }
+  }
+  createapprovalForm() {
+    this.approvalForm = new FormGroup({
+      ProjectEstimation: new FormControl(this.projectData?.projectEstimation),
+      GovtShare: new FormControl(this.projectData?.governmentShare),
+      PublicShare: new FormControl(this.projectData?.publicShare),
+    });
+  }
+  updateApproval() {
     const payload = {
-      // ProjectEstimation: this.approvalForm.get('ProjectEstimation')?.value,
-      // GovtShare: this.approvalForm.get('GovtShare')?.value,
-      // PublicShare: this.approvalForm.get('PublicShare')?.value,
+      ...this.projectData,
+      projectEstimation: this.approvalForm.get('ProjectEstimation')?.value,
+      governmentShare: this.approvalForm.get('GovtShare')?.value,
+      publicShare: this.approvalForm.get('PublicShare')?.value,
     };
-    this.projectDetailsService.SaveApproval(payload).subscribe((data) => {
+    this.projectDetailsService.updateApproval(payload).subscribe((data) => {
       console.log('...Data', data);
     });
   }

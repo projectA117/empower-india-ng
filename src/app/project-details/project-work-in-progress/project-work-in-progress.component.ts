@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '@service/productservice';
 import { ProjectDetailsService } from '@service/project-details.service';
+import { ImportsModule } from 'src/app/imports';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 export interface Product {
   id?: string;
@@ -21,21 +29,45 @@ export interface Product {
 @Component({
   selector: 'app-project-work-in-progress',
   standalone: true,
-  imports: [ButtonModule, TableModule, CommonModule],
+  imports: [
+    ButtonModule,
+    TableModule,
+    CommonModule,
+    ImportsModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './project-work-in-progress.component.html',
   styleUrl: './project-work-in-progress.component.scss',
   providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectWorkInProgressComponent implements OnInit {
-  products!: Product[];
-
+  @Input() projectData: any;
+  WIPDetails: any;
+  WIPSidebarVisible: boolean = false;
+  WIPForm: FormGroup = new FormGroup({});
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
   ) {}
   ngOnInit() {
-    this.productService.getProductsMini().then((data) => {
-      this.products = data;
+    this.shoiwWIPDetails();
+    this.createWIPFormForm();
+  }
+
+  createWIPFormForm() {
+    this.WIPForm = new FormGroup({
+      WIPDate: new FormControl(''),
+      WIPDescription: new FormControl(''),
+      WIPAuditor: new FormControl(''),
+      WIPPhotosVideos: new FormControl(''),
     });
   }
+
+  shoiwWIPDetails() {
+    this.productService.getProductsMini().then((data) => {
+      this.WIPDetails = data;
+    });
+  }
+  updateWIPForm() {}
 }

@@ -3,7 +3,7 @@
     <span>Total Expenses 2,16,050/-</span>
     <span>Total Fund 9,00,000/-</span>
     <span>Remaining Balance 6,87,737/-</span>
-    <p-button label="Add Expense" />
+    <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
   </div>
 </div>
 
@@ -49,3 +49,160 @@
     </ng-template>
   </p-table>
 </div>
+
+<p-sidebar
+  [(visible)]="financeSidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="FinanceForm"
+    *ngIf="financeSidebarVisible"
+    (ngSubmit)="updateFinanceDetails()"
+  >
+    <div>
+      Add Expence
+      <i class="pi pi-times" (click)="financeSidebarVisible = false"></i>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="firstName">finance Date</label>
+        <input
+          pInputText
+          id="financeDate"
+          formControlName="financeDate"
+          aria-describedby="financeDate"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="lastName"> Expense Type </label>
+        <input
+          pInputText
+          id="ExpenseType"
+          formControlName="financeExpenseType"
+          aria-describedby="ExpenseType"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="financeAmount">Amount</label>
+        <input
+          pInputText
+          id="financeAmount"
+          formControlName="financeAmount"
+          aria-describedby="financeExpenseType"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="SpentBy ">Spent By </label>
+        <input
+          pInputText
+          id="SpentBy"
+          formControlName="financeSpentBy"
+          aria-describedby="SpentBy"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="villageId">Paid to</label>
+        <input
+          pInputText
+          id="financePaidto"
+          formControlName="financePaidto"
+          aria-describedby="financePaidto"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="financeModeofPayment"> Mode of Payment </label>
+        <input
+          pInputText
+          id="financeModeofPayment"
+          formControlName="financeModeofPayment"
+          aria-describedby="financeModeofPayment"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="financeApprovedBy"> Approved By </label>
+        <input
+          pInputText
+          id="financeApprovedBy"
+          formControlName="financeApprovedBy"
+          aria-describedby="financeApprovedBy"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="financeDescription"> Description </label>
+        <input
+          pInputText
+          id="financeDescription"
+          formControlName="financeDescription"
+          aria-describedby="financeDescription"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center m-2">
+      <div class="flex flex-column gap-2">
+        <label for="financeBillProofs"> Bill Proofs </label>
+        <input
+          pInputText
+          id="financeBillProofs"
+          formControlName="financeBillProofs"
+          aria-describedby="financeBillProofs"
+        />
+        <!-- <small id="PublicShare">
+        Enter your username to reset your password.
+      </small> -->
+      </div>
+    </div>
+
+    <div>
+      <p-button label="Cancel " (click)="financeSidebarVisible = false" />
+      <p-button label="Add " (click)="addExpence()" />
+    </div>
+  </form>
+</p-sidebar>
