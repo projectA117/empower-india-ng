@@ -8,6 +8,7 @@ import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from 'src/models/Project';
 import { ConstantsData } from 'src/Constants';
+import { HttpParams } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 @Component({
@@ -71,11 +72,42 @@ export class ProjectListComponent implements OnInit {
     );
   }
 
+  projectDMVSearch() {
+    //districtId=17&mandalId=77&villageId=9418
+    let params;
+
+    if (this.selectedDistrict && this.selectedDistrict.id) {
+      params = 'districtId=' + this.selectedDistrict.id;
+    }
+    if (this.selectedMandal && this.selectedMandal.id) {
+      params += '&mandalId=' + this.selectedMandal.id;
+    }
+    if (this.selectedVilage && this.selectedVilage.id) {
+      params += '&villageId=' + this.selectedVilage.id;
+    }
+
+    console.log(params);
+    this.commonService.getProjectDMVSearch(params).subscribe(
+      (data) => {
+        // if (data.length > 0) {
+        this.projects = data;
+        // }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.projects = ConstantsData.projects;
+      }
+    );
+  }
+
   getDistricts() {
     this.commonService.getDistricts().subscribe(
       (data) => {
         if (data.length > 0) {
           this.districts = data;
+          if (this.selectedDistrict && this.selectedDistrict.id) {
+            this.projectDMVSearch();
+          }
         }
       },
       (err) => {
@@ -87,9 +119,14 @@ export class ProjectListComponent implements OnInit {
 
   getMandals(event: any) {
     const districtCode = event.value.id;
+    this.mandals = [];
+    this.villages = [];
+    this.selectedMandal = null;
+    this.selectedVilage = null;
     this.commonService.getMandals(districtCode).subscribe(
       (data) => {
         this.mandals = data;
+        this.projectDMVSearch();
       },
       (err) => {
         //Temp fix for Gopi
@@ -100,15 +137,22 @@ export class ProjectListComponent implements OnInit {
 
   getvilages(event: any) {
     const mandalCode = event.value.id;
+    this.villages = [];
+    this.selectedVilage = null;
     this.commonService.getVillages(mandalCode).subscribe(
       (data) => {
         this.villages = data;
+        this.projectDMVSearch();
       },
       (err) => {
         //Temp fix for Gopi
         this.villages = ConstantsData.villages;
       }
     );
+  }
+
+  vilageChange(event: any) {
+    this.projectDMVSearch();
   }
 
   hideDialog() {
