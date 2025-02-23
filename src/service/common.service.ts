@@ -78,6 +78,19 @@ export class CommonService {
     // );
   }
 
+  getProjectDMVSearch(payLoad: any): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        `http://localhost:8080/empower_andhra/api/v1/project/search?${payLoad}`
+      )
+      .pipe(
+        map((projects) => {
+          return projects;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
   saveProject(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`http://localhost:8080/empower_andhra/api/v1/project`, payLoad)
