@@ -505,10 +505,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .project-detail-set{
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  padding: 0;
   
   .project-detail-set-h{
-
+    color: #5c5c5c;
   }
   .project-detail-set-v{
     font-weight: bold;
@@ -558,3 +559,4 @@ h1, h2, h3, h4, h5, h6 {
 .p-sidebar-right{
   top: 70px;
 }
+
