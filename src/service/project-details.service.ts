@@ -11,7 +11,7 @@ export class ProjectDetailsService {
 
   showCommittee(id: any): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/committee/showCommittee?projectId=${id}`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/showCommittee?projectId=${id}`
     );
     // .pipe(
     //   map((getStates) => {
@@ -24,7 +24,7 @@ export class ProjectDetailsService {
   addCommittee(payLoad: any, id: any): Observable<any> {
     return this.httpClient
       .post<any>(
-        `http://localhost:8080/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
+        `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
         payLoad
       )
       .pipe(
@@ -38,7 +38,7 @@ export class ProjectDetailsService {
   editCommittee(payLoad: any, id: any): Observable<any> {
     return this.httpClient
       .put<any>(
-        `http://localhost:8080/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
+        `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
         payLoad
       )
       .pipe(
@@ -51,13 +51,13 @@ export class ProjectDetailsService {
 
   deleteCommittee(payLoad: any): Observable<any> {
     return this.httpClient.delete<any>(
-      `http://localhost:8080/empower_andhra/api/v1/committee/${payLoad.id}/${payLoad.projectId}`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/${payLoad.id}/${payLoad.projectId}`
     );
   }
 
   showDonars(): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:8080/empower_andhra/api/v1/donars/showDonars`)
+      .get<any>(`https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/donars/showDonars`)
       .pipe(
         map((getStates) => {
           return getStates;
@@ -69,7 +69,7 @@ export class ProjectDetailsService {
   showTransaction(): Observable<any> {
     return this.httpClient
       .get<any>(
-        `http://localhost:8080/empower_andhra/api/v1/finance/showTransaction`
+        `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/finance/showTransaction`
       )
       .pipe(
         map((showTransaction) => {
@@ -81,7 +81,7 @@ export class ProjectDetailsService {
 
   showVendorsDetails(): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:8080/empower_andhra/api/v1/vendors`)
+      .get<any>(`https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/vendors`)
       .pipe(
         map((showTransaction) => {
           return showTransaction;
@@ -92,26 +92,26 @@ export class ProjectDetailsService {
 
   addVendors(payLoad: any, id: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/vendors?projectId=${id}`,
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/vendors?projectId=${id}`,
       payLoad
     );
   }
 
   addDonars(payLoad: any, id: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/donars/addDonars?projectId=${id}`,
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/donars/addDonars?projectId=${id}`,
       payLoad
     );
   }
   updateWIP(payLoad: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/WIP/updateWIP`,
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/WIP/updateWIP`,
       payLoad
     );
   }
   updateApproval(payLoad: any): Observable<any> {
     return this.httpClient
-      .put<any>(`http://localhost:8080/empower_andhra/api/v1/project`, payLoad)
+      .put<any>(`https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/project`, payLoad)
       .pipe(
         map((getStates: any) => {
           return getStates;
@@ -122,7 +122,7 @@ export class ProjectDetailsService {
 
   addFinanceExpence(payLoad: any): Observable<any> {
     return this.httpClient.post<any>(
-      `http://localhost:8080/empower_andhra/api/v1/finance/addTransaction`,
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/finance/addTransaction`,
       payLoad
     );
   }
