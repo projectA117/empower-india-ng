@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -11,6 +11,7 @@ import { ConstantsData } from 'src/Constants';
 import { HttpParams } from '@angular/common/http';
 
 import { Router } from '@angular/router';
+import { LoaderService } from '@service/loader.service';
 @Component({
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
@@ -50,7 +51,8 @@ export class ProjectListComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
