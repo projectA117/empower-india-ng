@@ -1,44 +1,46 @@
-<div class="main-container">
-  <div class="header-set">
-    <h3>Projects List</h3>
-    <div class="header-set-filter">
-      <p-dropdown
-        [filter]="true"
-        [options]="districts"
-        [(ngModel)]="selectedDistrict"
-        optionLabel="name"
-        placeholder="Select a District"
-        (onChange)="getMandals($event)"
-      />
-      <p-dropdown
-        [filter]="true"
-        [options]="mandals"
-        [(ngModel)]="selectedMandal"
-        optionLabel="name"
-        placeholder="Select a Mandal"
-        (onChange)="getvilages($event)"
-      />
-      <p-dropdown
-        [filter]="true"
-        [options]="villages"
-        [(ngModel)]="selectedVilage"
-        optionLabel="name"
-        placeholder="Select a Vilage"
-        (onChange)="vilageChange($event)"
-      />
+<div class="header-set">
+  <h3>Projects List <span>55</span></h3>
+  <div class="header-set-filter">
+    <p-dropdown
+      [filter]="true"
+      [options]="districts"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="name"
+      placeholder="Select a District"
+      (onChange)="getMandals($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="mandals"
+      [(ngModel)]="selectedMandal"
+      optionLabel="name"
+      placeholder="Select a Mandal"
+      (onChange)="getvilages($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="villages"
+      [(ngModel)]="selectedVilage"
+      optionLabel="name"
+      placeholder="Select a Vilage"
+      (onChange)="vilageChange($event)"
+    />
 
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filterGlobal($event.target.value, 'contains')"
-          placeholder="Search..."
-        />
-      </span>
-      <p-button label="Add New Project" (onClick)="createProject()" />
-    </div>
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input
+        pInputText
+        type="text"
+        (input)="dt.filterGlobal($event.target.value, 'contains')"
+        placeholder="Search..."
+      />
+    </span>
+    <p-button label="Add New Project" (onClick)="createProject()" />
   </div>
+</div>
+
+<div class="main-container">
+  
 
   <p-toast />
 

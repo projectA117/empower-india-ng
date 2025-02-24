@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url(https://use.typekit.net/emv3zbo.css);
 @import "primeng/resources/themes/bootstrap4-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
@@ -14,8 +15,7 @@ html, body {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-  font-family: Raleway, sans-serif!important;
-  color: red;
+  font-family: proxima-nova, sans-serif!important;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -51,10 +51,10 @@ html {
     font-size: 14px;
 }
 .p-component, .p-inputtext{
-  font-family: Raleway, sans-serif!important;
+  font-family: proxima-nova, sans-serif!important;
 }
 body {
-  font-family: Raleway, sans-serif!important;
+  font-family: proxima-nova, sans-serif!important;
     font-weight: normal;
     background: var(--surface-ground);
     color: var(--text-color);
@@ -438,7 +438,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-container{
   padding: 30px;
-  margin-top: 75px;
   background-color: #fff;
 }
 
