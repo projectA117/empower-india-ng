@@ -3,9 +3,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { VisionComponent } from './vision/vision.component';
 import { VendordsComponent } from './vendords/vendords.component';
-import { ProjectListComponent } from './project-list/project-list.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

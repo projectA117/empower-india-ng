@@ -1,10 +1,10 @@
 <div class="page-vertical1">
-  <form [formGroup]="projectForm" (ngSubmit)="save()">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
     <div class="basic-div-level1">
       <div class="basic-div-level2">
         <label for="district" class="formbuilder-select-label form-label">District</label>
         <p-dropdown id="district" [filter]="true" [options]="districts" formControlName="districtId"
-          optionLabel="name" optionValue="id" placeholder="Select a District" (onChange)="getMandals($event)" />
+          optionLabel="name" optionValue="id" placeholder="Select a District" (onChange)="getMandals($event.value)" />
           <small class="p-error" *ngIf="submitted && projectForm.controls['districtId'].errors?.required">
             District is required.
           </small>
@@ -12,7 +12,7 @@
       <div class="basic-div-level2">
         <label for="mandal" class="formbuilder-select-label form-label">Mandal</label>
         <p-dropdown id="mandal" [filter]="true" [options]="mandals" formControlName="mandalId"
-          optionLabel="name" optionValue="id" placeholder="Select a Mandal" (onChange)="getvillages($event)" />
+          optionLabel="name" optionValue="id" placeholder="Select a Mandal" (onChange)="getvillages($event.value)" />
           <small class="p-error" *ngIf="submitted && projectForm.controls['mandalId'].errors?.required">
             Mandal is required.
           </small>
@@ -50,14 +50,14 @@
         <label for="category" class="formbuilder-select-label form-label">Project Category</label>
         <p-dropdown id="projectCategory" [filter]="true" [options]="categories"
           formControlName="projectCategoryId" optionLabel="name" optionValue="id" placeholder="Select Projects Category"
-          (onChange)="getProjectNames($event)" />
+          (onChange)="getProjectTypes($event.value)" />
           <small class="p-error" *ngIf="submitted && projectForm.controls['projectCategoryId'].errors?.required">
             Category is required.
           </small>
       </div>
       <div class="basic-div-level2">
         <label for="projectName" class="form-label">Project Type</label>
-        <p-dropdown id="projectName" [filter]="true" [options]="projectNames"
+        <p-dropdown id="projectName" [filter]="true" [options]="projectTypes"
           formControlName="projectType" optionLabel="description" optionValue="id" placeholder="Select Project Type" />
           <small class="p-error" *ngIf="submitted && projectForm.controls['projectType'].errors?.required">
             Project Type is required.
@@ -77,11 +77,8 @@
     <div class="basic-div-level1">
       <div class="basic-div-level2-desc">
         <label class="form-label">Project Description</label>
-        <textarea pInputTextarea formControlName="description" required rows="3" cols="20">
+        <textarea pInputTextarea formControlName="description" rows="3" cols="20">
         </textarea>
-        <small class="p-error" *ngIf="submitted && projectForm.controls['description'].errors?.required">
-          Description is required.
-        </small>
       </div>
     </div>
     <div class="basic-div-level1">
@@ -104,7 +101,8 @@
     </div>
     <div class="basic-div-level1 gap-3">
       <button pButton (click)="cancel()" type="button" label="Cancel" class="p-button-success p-button-sm p-button-outlined"></button>
-        <button pButton type="submit" label="Submit" class="p-button-success p-button-sm p-button-raised"></button>
+        <button *ngIf="addNewProject" pButton type="submit" label="Save" class="p-button-success p-button-sm p-button-raised"></button>
+        <button *ngIf="updateExistingProject" pButton type="submit" label="Update" class="p-button-success p-button-sm p-button-raised"></button>
    </div>  
   </form>
 </div>

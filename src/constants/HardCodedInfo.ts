@@ -1,4 +1,4 @@
-export class ConstantsData {
+export class HardCodedInfo {
   public static projects = [
     {
       id: 10,
