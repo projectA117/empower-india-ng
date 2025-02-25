@@ -1,0 +1,24 @@
+.home-banner{
+    margin-top: 75px;
+    position: relative;
+    .banner-stats{
+        background-color: #4F7619;
+        padding: 20px 60px;
+        position: absolute;
+        border-radius: 100px;
+        bottom: -25px;
+        left: 0;
+        right: 0;
+        display: inline-table;
+        margin: auto;
+        color: #fff;
+        &-txt{
+            display: flex;
+            gap: 30px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+    }
+}
+
+
