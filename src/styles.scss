@@ -494,6 +494,13 @@ h1, h2, h3, h4, h5, h6 {
   
 }
 
+.projects-list-detail{
+  padding: 0;
+  margin-bottom: 20px;
+  transition:.3s ease;
+ 
+}
+
 .projects-list-tab{
   background-color: #fff;
   padding:  0;
@@ -548,7 +555,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #4F7619;
     text-decoration: none;
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
 }
@@ -560,3 +567,84 @@ h1, h2, h3, h4, h5, h6 {
   top: 70px;
 }
 
+
+
+.project-detail-h-set{
+  margin: 0;
+  padding: 0;
+  h4{
+      color: #4F7619;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+  }
+  
+}
+
+.tab-h-txt{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.project-detail-h-set{
+  margin-bottom: 30px;
+  h4{
+      margin-bottom: 0;
+  }
+}
+
+.tab-data-table{
+  tr {
+      td:last-child{
+          display: flex;
+          gap: 15px;
+      }
+      th {
+          text-align: left;
+          padding: 0.75rem 1rem;
+          border: 1px solid #e2e8f0;
+          border-width: 0 0 1px 0;
+          font-weight: 600;
+          color: #334155;
+          background: #ffffff;
+          transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, outline-color 0.2s;
+      }
+      
+  }
+}
+
+.tab-data-table tr:nth-child(odd) {
+  background-color:#F7FAFC;
+}
+
+
+
+.pop-data-set{
+  height: calc(100vh - 190px);
+  overflow: auto;
+  
+  
+}
+
+.cancel-btn {
+  button{
+    background-color: #FFFFFF;
+    border:1px solid #4F7619;
+    color: #4F7619;
+    &:hover{
+      background-color: #f1f1f1;
+      border:1px solid #4F7619;
+      color: #4F7619;
+    }
+  }
+}
+
+.submit-btn{
+  button{
+    background-color: #4F7619;
+    border:1px solid #4F7619;
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+  }
+}

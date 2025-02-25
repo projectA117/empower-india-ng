@@ -9,100 +9,95 @@
   <img src="assets/images/ro-plant.jpg" class="img-fluid" />
 </div>
 <div class="main-container-in">
-  <div class="projects-list">
+  <div class="projects-list-detail">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <h4 class="projects-detail-h">Location Details</h4>
+
+      <div class="row mb-4">
+        <div class="project-detail-h-set">
+          <h4>Location Details</h4>
         </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">District</div>
+          <div class="project-detail-set-v mt-2">
+            Krishna
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Mandal</div>
+          <div class="project-detail-set-v mt-2">
+            Tiruvuru
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Village</div>
+          <div class="project-detail-set-v mt-2">
+            Kakarla
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Pin Code</div>
+          <div class="project-detail-set-v mt-2">
+            521227
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Colony</div>
+          <div class="project-detail-set-v mt-2">
+            BC Colony
+          </div>
+        </div>
+
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Latitude</div>
+          <div class="project-detail-set-v mt-2">
+            17°03'20.0"N
+          </div>
+        </div>
+
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Longitude</div>
+          <div class="project-detail-set-v mt-2">
+            80°38'06.1"E
+          </div>
+        </div>
+
       </div>
 
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">District</div>
-              <div class="project-detail-set-v mt-2">Krishna</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Mandal</div>
-              <div class="project-detail-set-v mt-2">Tiruvuru</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Village</div>
-              <div class="project-detail-set-v mt-2">Kakarla</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Pin Code</div>
-              <div class="project-detail-set-v mt-2">521227</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Colony</div>
-              <div class="project-detail-set-v mt-2">BC Colony</div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Latitude</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.latitude }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Longitude</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.longitude }}
-              </div>
-            </div>
+  
+      <div class="row mb-4">
+        <div class="project-detail-h-set">
+          <h4>Project Details</h4>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Project ID</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.id }}
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Project Type</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.projectType ? "New" : "Existing" }}
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Status</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.status }}
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12">
-          <h4 class="projects-detail-h">Project Details</h4>
+      <div class="row mb-4">
+        <div class="project-detail-h-set">
+          <h4>Project Description</h4>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project ID</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.id }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.projectType ? "New" : "Existing" }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.status }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-6">
-              <div class="project-detail-set-h">Description</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.description }}
-              </div>
-            </div>
-          </div>
+        
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">{{ product.description }}</div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12">
-          <h4 class="projects-detail-h">Project Description</h4>
-        </div>
-
-        <div class="col-12">
-          <p>{{ product.description }}</p>
-        </div>
-      </div>
     </div>
   </div>
 

@@ -49,3 +49,23 @@
         width: 100px;
     }
 }
+
+.upload-picture-set{
+    position: relative;
+    .upload-picture{
+        position: absolute;
+        background-color: #444444;
+        border-radius: 100px;
+        color: #fff;
+        padding: 7px 10px;
+        bottom: -12px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: inline-table;
+    }
+}
+
+.project-detail-set{
+    padding: 0.5rem;
+}

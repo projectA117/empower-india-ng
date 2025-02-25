@@ -1,0 +1,27 @@
+.tab-input-data{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    .p-element{
+        width: 100%;
+        
+    }
+    
+    input{
+        width: 100%;
+    }
+}
+
+span.p-inputnumber{
+    display: block;
+    border: 1px solid red;
+    width: 100%;
+}   
+
+
+.project-detail-set-h{
+    span{
+        color: #888;
+        font-size: 11px;
+    }
+}
