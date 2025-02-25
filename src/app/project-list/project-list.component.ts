@@ -7,9 +7,8 @@ import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from 'src/models/Project';
-import { ConstantsData } from 'src/Constants';
-import { HttpParams } from '@angular/common/http';
 
+import { HardCodedInfo } from 'src/constants/HardCodedInfo';
 import { Router } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
 @Component({
@@ -47,6 +46,8 @@ export class ProjectListComponent implements OnInit {
   villages: any = [];
 
   showProjectDialog: boolean = false;
+  updateExistingProject: boolean = false;
+  addNewProject: boolean = false;
 
   constructor(
     private commonService: CommonService,
@@ -67,17 +68,16 @@ export class ProjectListComponent implements OnInit {
           this.projects = data;
         }
       },
-      (err) => {
-        //Temp fix for Gopi
-        this.projects = ConstantsData.projects;
-      }
-    );
+      err => {
+      //Temp fix for Gopi
+      this.projects = HardCodedInfo.projects;
+    });
   }
 
   projectDMVSearch() {
     //districtId=17&mandalId=77&villageId=9418
     let params;
-
+ 
     if (this.selectedDistrict && this.selectedDistrict.id) {
       params = 'districtId=' + this.selectedDistrict.id;
     }
@@ -87,7 +87,7 @@ export class ProjectListComponent implements OnInit {
     if (this.selectedVilage && this.selectedVilage.id) {
       params += '&villageId=' + this.selectedVilage.id;
     }
-
+ 
     console.log(params);
     this.commonService.getProjectDMVSearch(params).subscribe(
       (data) => {
@@ -97,11 +97,11 @@ export class ProjectListComponent implements OnInit {
       },
       (err) => {
         //Temp fix for Gopi
-        this.projects = ConstantsData.projects;
+        this.projects = HardCodedInfo.projects;
       }
     );
   }
-
+  
   getDistricts() {
     this.commonService.getDistricts().subscribe(
       (data) => {
@@ -112,11 +112,11 @@ export class ProjectListComponent implements OnInit {
           }
         }
       },
-      (err) => {
-        //Temp fix for Gopi
-        this.districts = ConstantsData.districts;
-      }
-    );
+      err => {
+      //Temp fix for Gopi
+      this.districts = HardCodedInfo.districts;
+    });
+
   }
 
   getMandals(event: any) {
@@ -125,32 +125,26 @@ export class ProjectListComponent implements OnInit {
     this.villages = [];
     this.selectedMandal = null;
     this.selectedVilage = null;
-    this.commonService.getMandals(districtCode).subscribe(
-      (data) => {
-        this.mandals = data;
+    this.commonService.getMandals(districtCode).subscribe((data) => {
+      this.mandals = data;
         this.projectDMVSearch();
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.mandals = ConstantsData.mandals;
-      }
-    );
+    }, err => {
+      //Temp fix for Gopi
+      this.mandals = HardCodedInfo.mandals;
+    });
   }
 
   getvilages(event: any) {
     const mandalCode = event.value.id;
     this.villages = [];
     this.selectedVilage = null;
-    this.commonService.getVillages(mandalCode).subscribe(
-      (data) => {
-        this.villages = data;
+    this.commonService.getVillages(mandalCode).subscribe((data) => {
+      this.villages = data;
         this.projectDMVSearch();
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.villages = ConstantsData.villages;
-      }
-    );
+    }, err => {
+      //Temp fix for Gopi
+      this.villages = HardCodedInfo.villages;
+    });
   }
 
   vilageChange(event: any) {
@@ -166,15 +160,25 @@ export class ProjectListComponent implements OnInit {
       this.hideDialog();
       this.getProjects();
     }
-    console.log('........Refresh');
   }
 
   showDialog() {
     this.showProjectDialog = true;
   }
 
+  onHideDialog() {
+    this.addNewProject = false;
+    this.updateExistingProject = false;
+  }
+
   createProject() {
     this.project = {};
+    this.addNewProject = true;
+    this.showDialog();
+  }
+  editProject(project: Project) {
+    this.project = project;
+    this.updateExistingProject = true;
     this.showDialog();
   }
 

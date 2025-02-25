@@ -8,210 +8,181 @@
   </div>
   <img src="assets/images/ro-plant.jpg" />
 </div>
-<div class="main-container-in">
-  <div class="projects-list">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <h4 class="projects-detail-h">Location Details</h4>
-        </div>
+
+<div class="main-container-in-h">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="projects-detail-h">Location Details</h4>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">District</div>
+            <div class="project-detail-set-v mt-2">Krishna</div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Mandal</div>
+            <div class="project-detail-set-v mt-2">Tiruvuru</div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Village</div>
+            <div class="project-detail-set-v mt-2">Kakarla</div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Pin Code</div>
+            <div class="project-detail-set-v mt-2">521227</div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Colony</div>
+            <div class="project-detail-set-v mt-2">BC Colony</div>
+          </div>
 
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">District</div>
-              <div class="project-detail-set-v mt-2">Krishna</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Mandal</div>
-              <div class="project-detail-set-v mt-2">Tiruvuru</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Village</div>
-              <div class="project-detail-set-v mt-2">Kakarla</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Pin Code</div>
-              <div class="project-detail-set-v mt-2">521227</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Colony</div>
-              <div class="project-detail-set-v mt-2">BC Colony</div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Latitude</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.latitude }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Longitude</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.longitude }}
-              </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Latitude</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.latitude }}
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <h4 class="projects-detail-h">Project Details</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project ID</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.id }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.projectType ? "New" : "Existing" }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.status }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-6">
-              <div class="project-detail-set-h">Description</div>
-              <div class="project-detail-set-v mt-2">
-                {{ product.description }}
-              </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Longitude</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.longitude }}
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <h4 class="projects-detail-h">Project Description</h4>
-        </div>
-
-        <div class="col-12">
-          <p>{{ product.description }}</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="projects-list-tab mt-3">
-    <div class="container-fluid">
-      <div class="row">
-        <p-tabView styleClass="tabview-custom">
-          <p-tabPanel>
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0"> Approval </span>
-              </div>
-            </ng-template>
-            <app-project-approval
-              [projectData]="product"
-            ></app-project-approval>
-          </p-tabPanel>
-          <p-tabPanel header="Header II">
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0">
-                  Committee
-                </span>
-              </div>
-            </ng-template>
-            <app-project-committee
-              [projectData]="product"
-            ></app-project-committee>
-          </p-tabPanel>
-          <p-tabPanel header="Header III">
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0"> Finance </span>
-              </div>
-            </ng-template>
-            <app-project-finance [projectData]="product"></app-project-finance>
-          </p-tabPanel>
-
-          <p-tabPanel header="Header IV">
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0"> Vendors </span>
-              </div>
-            </ng-template>
-            <app-project-vendors [projectData]="product"></app-project-vendors>
-          </p-tabPanel>
-
-          <p-tabPanel header="Header V">
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0"> Donors </span>
-              </div>
-            </ng-template>
-            <app-project-donors [projectData]="product"></app-project-donors>
-          </p-tabPanel>
-
-          <p-tabPanel header="Header III">
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0">
-                  Work In Progress
-                </span>
-              </div>
-            </ng-template>
-            <app-project-work-in-progress
-              [projectData]="product"
-            ></app-project-work-in-progress>
-          </p-tabPanel>
-
-          <p-tabPanel header="Header vII">
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                <p-avatar
-                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png"
-                  shape="circle"
-                />
-                <span class="font-bold white-space-nowrap m-0">
-                  Project Sign off
-                </span>
-              </div>
-            </ng-template>
-            <app-project-signoff [projectData]="product"></app-project-signoff>
-          </p-tabPanel>
-        </p-tabView>
+    <div class="row">
+      <div class="col-12">
+        <h4 class="projects-detail-h">Project Details</h4>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Project ID</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.id }}
+            </div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Project Type</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.projectType ? "New" : "Existing" }}
+            </div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Status</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.status }}
+            </div>
+          </div>
+
+          <div class="project-detail-set col-6">
+            <div class="project-detail-set-h">Description</div>
+            <div class="project-detail-set-v mt-2">
+              {{ product.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h4 class="projects-detail-h">Project Description</h4>
+      </div>
+
+      <div class="col-12">
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="projects-list-tab mt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0"> Approval </span>
+            </div>
+          </ng-template>
+          <app-project-approval [projectData]="product"></app-project-approval>
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0">
+                Committee
+              </span>
+            </div>
+          </ng-template>
+          <app-project-committee [projectData]="product"></app-project-committee>
+        </p-tabPanel>
+        <p-tabPanel header="Header III">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0"> Finance </span>
+            </div>
+          </ng-template>
+          <app-project-finance [projectData]="product"></app-project-finance>
+        </p-tabPanel>
+
+        <p-tabPanel header="Header IV">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0"> Vendors </span>
+            </div>
+          </ng-template>
+          <app-project-vendors [projectData]="product"></app-project-vendors>
+        </p-tabPanel>
+
+        <p-tabPanel header="Header V">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0"> Donors </span>
+            </div>
+          </ng-template>
+          <app-project-donors [projectData]="product"></app-project-donors>
+        </p-tabPanel>
+
+        <p-tabPanel header="Header III">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0">
+                Work In Progress
+              </span>
+            </div>
+          </ng-template>
+          <app-project-work-in-progress [projectData]="product"></app-project-work-in-progress>
+        </p-tabPanel>
+
+        <p-tabPanel header="Header vII">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0">
+                Project Sign off
+              </span>
+            </div>
+          </ng-template>
+          <app-project-signoff [projectData]="product"></app-project-signoff>
+        </p-tabPanel>
+      </p-tabView>
     </div>
   </div>
 </div>

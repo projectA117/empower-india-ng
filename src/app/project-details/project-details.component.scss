@@ -35,5 +35,41 @@
 .projects-detail-h{
     font-weight: bold;
     color: #4F7619;
+    margin: 0;
+    padding: 0;
 }
 
+
+.projects-list-in{
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition:.3s ease;
+    .col-1{
+      img{
+        margin-top: -15px;
+      }
+    }
+    &:hover{
+      border: 1px solid #4F7619;
+      transition:.3s ease;
+      box-shadow:rgb(204, 204, 204) 0px 0px 10px
+    }
+    
+  }
+
+  .main-container-in-h{
+    padding: 0 30px;
+    background-color: #fff;
+    h4{
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+    color: #4F7619;
+    }
+    .col-12, .col-6{
+        padding: 15px 0 0 5px;
+    }
+  }
