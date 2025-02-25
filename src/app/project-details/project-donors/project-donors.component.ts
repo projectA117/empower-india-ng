@@ -75,19 +75,22 @@ export class ProjectDonorsComponent implements OnInit {
   }
   updatedonorForm() {
     const payload = {
-      DonorsName: this.donorForm.get('DonorsName')?.value,
-      DonorsPhone: this.donorForm.get('DonorsPhone')?.value,
-      DonorsEmail: this.donorForm.get('DonorsEmail')?.value,
-      DonorsAddress: this.donorForm.get('DonorsAddress')?.value,
-      DonorsMemoryOf: this.donorForm.get('DonorsMemoryOf')?.value,
-      DonorsAmount: this.donorForm.get('DonorsAmount')?.value,
-      DonorsModeofPayment: this.donorForm.get('DonorsModeofPayment')?.value,
+      firstName: this.donorForm.get('DonorsName')?.value,
+      lastName: this.donorForm.get('DonorsName')?.value,
+      phoneNumber: this.donorForm.get('DonorsPhone')?.value,
+      email: this.donorForm.get('DonorsEmail')?.value,
+      address: this.donorForm.get('DonorsAddress')?.value,
+      memoryOf: this.donorForm.get('DonorsMemoryOf')?.value,
+      amount: this.donorForm.get('DonorsAmount')?.value,
+      modeOfPayment: this.donorForm.get('DonorsModeofPayment')?.value,
     };
 
-    this.projectDetailsService.addDonars(payload).subscribe((data) => {
-      if (data) {
-        this.showdonor();
-      }
-    });
+    this.projectDetailsService
+      .addDonars(payload, this.projectData.id)
+      .subscribe((data) => {
+        if (data) {
+          this.showdonor();
+        }
+      });
   }
 }

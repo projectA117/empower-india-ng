@@ -1,25 +1,22 @@
-<div class="main-container">
-  <div class="header-set">
-    <h3>Projects List</h3>
-    <div class="header-set-filter">
-      <p-dropdown [filter]="true" [options]="districts" [(ngModel)]="selectedDistrict" optionLabel="name"
-        placeholder="Select a District" (onChange)="getMandals($event)" />
-      <p-dropdown [filter]="true" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
-        placeholder="Select a Mandal" (onChange)="getvilages($event)" />
-      <p-dropdown [filter]="true" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
-        placeholder="Select a Vilage" />
-
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-          placeholder="Search..." />
-      </span>
-      <p-button label="Add New Project" (onClick)="createProject()" />
-    </div>
+<div class="header-set">
+  <h3>Projects List <span>55</span></h3>
+  <div class="header-set-filter">
+    <p-dropdown [filter]="true" [options]="districts" [(ngModel)]="selectedDistrict" optionLabel="name"
+      placeholder="Select a District" (onChange)="getMandals($event)" />
+    <p-dropdown [filter]="true" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
+      placeholder="Select a Mandal" (onChange)="getvilages($event)" />
+    <p-dropdown [filter]="true" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
+      placeholder="Select a Vilage" (onChange)="vilageChange($event)" />
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+        placeholder="Search..." />
+    </span>
+    <p-button label="Add New Project" (onClick)="createProject()" />
   </div>
-
+</div>
+<div class="main-container projects-set-list">
   <p-toast />
-
   <p-table #dt [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['name']"
     [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="project" [rowHover]="true" dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
@@ -34,11 +31,11 @@
                 </a>
               </div>
               <div class="col-11">
-                <div class="row">
-                  <div class="project-detail-set col-12">
-                    <h1>Location Details</h1>
-                  </div>
 
+                <div class="row mb-4">
+                  <div class="project-detail-h-set">
+                    <h4>Location Details</h4>
+                  </div>
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">District</div>
                     <div class="project-detail-set-v mt-2">
@@ -75,9 +72,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="project-detail-set col-12">
-                    <h1>Project Details</h1>
+
+                <div class="row mb-4">
+                  <div class="project-detail-h-set col-12">
+                    <h4>Project Details</h4>
                   </div>
 
                   <div class="project-detail-set col-2">
@@ -110,8 +108,8 @@
                 </div>
 
                 <div class="row">
-                  <div class="project-detail-set col-12">
-                    <h1>Project Estimation Details</h1>
+                  <div class="project-detail-h-set col-12">
+                    <h4>Project Estimation Details</h4>
                   </div>
 
                   <div class="project-detail-set col-2">
@@ -135,6 +133,7 @@
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>

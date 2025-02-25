@@ -63,6 +63,7 @@ export class ProjectCommitteeComponent implements OnInit {
       lastUpdatedDate: '2025-02-17T09:30:00',
     },
   ];
+  editCommitee: boolean = false;
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
@@ -84,7 +85,7 @@ export class ProjectCommitteeComponent implements OnInit {
   }
 
   showCommittee() {
-    this.projectDetailsService.showCommittee().subscribe(
+    this.projectDetailsService.showCommittee(this.projectData.id).subscribe(
       (data) => {
         this.Committee = data;
       },
@@ -96,6 +97,7 @@ export class ProjectCommitteeComponent implements OnInit {
   }
   editCommittee(Committee: any) {
     this.sidebarVisible = true;
+    this.editCommitee = true;
     console.log('...Committee', Committee);
 
     this.updatecommitteeForm.setValue({
@@ -115,12 +117,30 @@ export class ProjectCommitteeComponent implements OnInit {
       fatherName: this.updatecommitteeForm.get('fatherName')?.value,
       email: this.updatecommitteeForm.get('email')?.value,
       villageId: this.projectData.villageId,
-      Mobile: this.updatecommitteeForm.get('Mobile')?.value,
-      id: this.projectData.id,
+      phoneNumber: this.updatecommitteeForm.get('Mobile')?.value,
+      // id: ,
     };
-    this.projectDetailsService.addCommittee(payload).subscribe((data) => {
-      console.log('...Data', data);
-    });
+    if (this.editCommitee) {
+      this.projectDetailsService
+        .editCommittee(payload, this.projectData.id)
+        .subscribe((data) => {
+          console.log('...Data', data);
+          this.refreshData();
+        });
+    } else {
+      this.projectDetailsService
+        .addCommittee(payload, this.projectData.id)
+        .subscribe((data) => {
+          console.log('...Data', data);
+          this.refreshData();
+        });
+    }
+  }
+
+  refreshData() {
+    this.sidebarVisible = false;
+    this.editCommitee = false;
+    this.showCommittee();
   }
 
   deleteCommittee(Committee: any) {

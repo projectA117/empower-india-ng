@@ -1,22 +1,22 @@
 <header id="header" class="header d-flex align-items-center sticky-top">
   <div class="container position-relative d-flex align-items-center">
     <a href="/" class="logo d-flex align-items-center me-auto">
-      <img src="assets/images/empower-logo.svg"/>
+      <img src="assets/images/empower-logo.svg" />
     </a>
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="/home">Home</a></li>
+        <li><a routerLink="/home">Home</a></li>
         <li class="dropdown">
-          <a href="about-us"> Aboutus</a>
+          <a routerLink="/about-us"> Aboutus</a>
         </li>
-        <li><a href="vision">Vision</a></li>
+        <li><a routerLink="/vision">Vision</a></li>
         <li class="dropdown">
-          <a href="/projects">Project</a>
+          <a routerLink="/projects">Project</a>
         </li>
-        <li><a href="/sponsors">Sponsors</a></li>
-        <li><a href="/vendors">Vendors</a></li>
-        <li><a href="/contact" class="active">Contact</a></li>
+        <li><a routerLink="/sponsors">Sponsors</a></li>
+        <li><a routerLink="/vendors">Vendors</a></li>
+        <li><a routerLink="/contact" class="active">Contact</a></li>
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
@@ -54,4 +54,15 @@
     ></iframe>
   </div>
 </div> -->
+<div *ngIf="isLoading()" class="overlay">
+  <div class="card flex justify-content-center">
+    <p-progressSpinner
+      styleClass="w-4rem h-4rem"
+      strokeWidth="8"
+      fill="var(--surface-ground)"
+      animationDuration=".5s"
+    />
+  </div>
+</div>
+
 <router-outlet></router-outlet>
