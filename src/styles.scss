@@ -650,3 +650,29 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.5rem 0.75rem;
   }
 }
+
+.p-carousel-prev{
+  position: absolute;
+  z-index: 99;
+  color: #fff;
+}
+
+.p-carousel-next{
+  position: absolute;
+  z-index: 99;
+  color: #fff;
+  right: 0;
+  button{
+    .carousel-prev-icon{
+      width: 50px;
+    }
+  }
+}
+
+.p-carousel-indicators{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+}
