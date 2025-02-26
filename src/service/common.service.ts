@@ -10,7 +10,8 @@ export class CommonService {
 
   getStates(): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/v1/api/lookup/states`
+      //`http://localhost:8080/empower_andhra/v1/api/lookup/states`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/v1/api/lookup/states`
     );
     // .pipe(
     //   map((getStates) => {
@@ -22,7 +23,8 @@ export class CommonService {
 
   getDistricts(): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/lookup/districts?stateId=1`
+      // `http://localhost:8080/empower_andhra/api/v1/lookup/districts?stateId=1`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/api/v1/lookup/districts?stateId=1`
     );
     // .pipe(
     //   map((Districts) => {
@@ -33,7 +35,8 @@ export class CommonService {
   }
   getMandals(districtCode: any): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/lookup/mandals?districtId=${districtCode}`
+      // `http://localhost:8080/empower_andhra/api/v1/lookup/mandals?districtId=${districtCode}`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/v1/api/lookup/mandals?districtId=${districtCode}`
     );
     // .pipe(
     //   map((Mandals) => {
@@ -44,7 +47,8 @@ export class CommonService {
   }
   getVillages(mandalCode: string): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/lookup/villages?mandalId=${mandalCode}`
+      // `http://localhost:8080/empower_andhra/api/v1/lookup/villages?mandalId=${mandalCode}`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/v1/api/villages?mandalId=${mandalCode}`
     );
     // .pipe(
     //   map((Villages) => {
@@ -56,7 +60,8 @@ export class CommonService {
 
   getProjectCategories(): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/lookup/project-categories`
+      // `http://localhost:8080/empower_andhra/api/v1/lookup/project-categories`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/v1/api/lookup/project-categories`
     );
     // .pipe(
     //   map((projects) => {
@@ -68,7 +73,8 @@ export class CommonService {
 
   getProjects(): Observable<any> {
     return this.httpClient.get<any>(
-      `http://localhost:8080/empower_andhra/api/v1/project`
+      //`http://localhost:8080/empower_andhra/api/v1/project`
+      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/v1/api/project`
     );
     // .pipe(
     //   map((projects) => {
@@ -104,10 +110,7 @@ export class CommonService {
 
   updateProject(payLoad: any): Observable<any> {
     return this.httpClient
-      .put<any>(
-        `http://localhost:8080/empower_andhra/api/v1/project`,
-        payLoad
-      )
+      .put<any>(`http://localhost:8080/empower_andhra/api/v1/project`, payLoad)
       .pipe(
         map((response) => {
           return response;
