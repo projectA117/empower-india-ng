@@ -1,16 +1,17 @@
-<div class="flex justify-content-start flex-wrap">
-  <div class="flex align-items-center justify-content-center m-2">
-    <span>Total Expenses 2,16,050/-</span>
-    <span>Total Fund 9,00,000/-</span>
-    <span>Remaining Balance 6,87,737/-</span>
-    <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
+<div class="finance-values-set">
+  <div class="project-detail-h-set tab-h-txt">
+    <h4>Finance Details</h4>
   </div>
+    <div>Total Expenses <span class="t-expenses">₹ 2,16,050/-</span></div>
+    <div>Total Fund <span class="t-fund">₹ 9,00,000/-</span></div>
+    <div>Remaining Balance <span class="t-balance">₹ 6,87,737/-</span></div>
+    <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
 </div>
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
     [value]="showTransaction"
-    [style]="{ width: '100%', overflow: 'auto!important' }"
+    [style]="{ width: '100%', overflow: 'auto!important' }" class="tab-data-table"
   >
     <ng-template pTemplate="header">
       <tr>
