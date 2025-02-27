@@ -6,7 +6,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build" 
+    "build": "ng build",
+    "test": "ng test",
+    "dev:serve": "ng serve --configuration=development",
+    "prod:serve": "ng serve --configuration=production"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^18.0.2",

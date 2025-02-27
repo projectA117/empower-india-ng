@@ -22,16 +22,19 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
     <ng-template pTemplate="body" let-info>
       <div class="projects-list-set">
-        <div class="projects-list">
+        <div class="projects-list" >
           <div class="container-fluid">
             <div class="row">
               <div class="col-1">
-                <a (click)="getProjectDetails(info)">
                   <img src="assets/images/project-1.jpg" class="img-fluid" />
-                </a>
               </div>
               <div class="col-11">
 
+                <div class="projects-actions">
+                  <img src="assets/images/icon-view.svg" (click)="getProjectDetails(info)"/>
+                  <img src="assets/images/icon-edit.svg"/>
+                  <img src="assets/images/icon-delete.svg"/>
+                </div>
                 <div class="row mb-4">
                   <div class="project-detail-h-set">
                     <h4>Location Details</h4>
@@ -112,7 +115,7 @@
                     <h4>Project Estimation Details</h4>
                   </div>
 
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-4">
                     <div class="project-detail-set-h">
                       Project Estimation (Inc. Maintenance 3 Years)
                     </div>

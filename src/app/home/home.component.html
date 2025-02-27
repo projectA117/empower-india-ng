@@ -1,1 +1,88 @@
-<p>home works!</p>
+
+
+
+<div class="home-banner">
+    <div class="banner-stats">
+        <div class="banner-stats-txt">
+            <div>50+ <span>Villages Empowered</span></div>
+            <div>10 Cr+ <span>Fundraised</span></div>
+            <div>100+ <span>Colonies Covered</span></div>
+            <div>50+ <span>Volunteers Working</span></div>
+        </div>
+    </div>
+    <div class="pos-rel">
+        <p-carousel [value]="products" [numVisible]="1" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+            <ng-template let-product pTemplate="item">
+                <img src="assets/images/banner-1.jpg"  class="w-full" />
+            </ng-template>
+            <!-- <ng-template let-product pTemplate="item">
+                <img src="assets/images/banner-2.jpg"  class="w-full" />
+            </ng-template> -->
+        </p-carousel>
+    </div> 
+</div>
+
+
+
+
+<div class="vision-mission">
+    <div class="vm-content-set">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="assets/images/vision-mission-img.png" class="img-fluid"/>
+                </div>
+                <div class="col-7">
+                    <div class="vision-mission-txt">
+                        <h3>OUR <span>VISION</span></h3>
+                        <p>Empower Andhra Development is a mission to create a cleaner, greener, and more sustainable Andhra Pradesh</p>
+                        <h3 class="mt-6">OUR <span>MISSION</span></h3>
+                        <p>Empower Andhra Development is a mission to create a cleaner, greener, and more sustainable Andhra Pradesh by fostering collaboration between public and private sectors. By identifying community needs and encouraging government bodies and private sponsors to fund impactful initiatives, we bridge the gap to drive meaningful and lasting change.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="assets/images/vision-mission.jpg" class="img-fluid"/>
+</div>
+
+
+
+<div class="building-starter">
+    <div class="container">
+        <h3>Building a Stronger Community with Your Support</h3>
+    </div>
+</div>
+
+<div class="ep-footer">
+    <div class="container">
+        <div class="d-flex jusify-space-between">
+            <div class="d-flex flex-column">
+                <h3>Help</h3>
+                <div>
+                    <div>+91 9288227228</div>
+                    <div><a href="mailto:info&#64;empowerandhra.com">info&#64;empowerandhra.com</a></div>
+                </div>
+            </div>
+            <div class="d-flex flex-column follow-us-img">
+                <h3>Follow us</h3>
+                <div class="d-flex gap-3 ">
+                    <img src="assets/images/icon-whatsapp.png"/>
+                    <img src="assets/images/icon-facebook.png"/>
+                    <img src="assets/images/icon-instagram.png"/>
+                    <img src="assets/images/icon-twitter.png"/>
+                    <img src="assets/images/icon-youtube.png"/>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="d-flex jusify-space-between">
+            <div class="d-flex footer-copyrights">
+                <div>2025 © Empower Andhra</div>
+                <div><a href="#">Terms of Service</a></div>
+                <div><a href="#">Privacy Policy</a></div>
+            </div>
+            <div>Site last updated on: 07-JAN-2025</div>
+        </div>
+    </div>
+</div>

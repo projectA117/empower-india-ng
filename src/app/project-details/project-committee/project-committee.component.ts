@@ -85,15 +85,16 @@ export class ProjectCommitteeComponent implements OnInit {
   }
 
   showCommittee() {
-    this.projectDetailsService.showCommittee(this.projectData.id).subscribe(
-      (data) => {
-        this.Committee = data;
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.Committee = this.Committee;
-      }
-    );
+    this.Committee = this.Committee;
+    // this.projectDetailsService.showCommittee(this.projectData.id).subscribe(
+    //   (data) => {
+    //     this.Committee = data;
+    //   }
+    // (err) => {
+    //   //Temp fix for Gopi
+    //   this.Committee = this.Committee;
+    // }
+    // );
   }
   editCommittee(Committee: any) {
     this.sidebarVisible = true;
