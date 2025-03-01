@@ -70,4 +70,5 @@ export class ProjectWorkInProgressComponent implements OnInit {
     });
   }
   updateWIPForm() {}
+  
 }

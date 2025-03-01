@@ -2,6 +2,7 @@ import { Observable, catchError, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,21 +11,20 @@ export class ProjectDetailsService {
   constructor(private httpClient: HttpClient) {}
 
   showCommittee(id: any): Observable<any> {
-    return this.httpClient.get<any>(
-      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/showCommittee?projectId=${id}`
-    );
-    // .pipe(
-    //   map((getStates) => {
-    //     return getStates;
-    //   }),
-    //   catchError((error) => of(error))
-    // );
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/committee/showCommittee?projectId=${id}`)
+      .pipe(
+        map((getStates) => {
+          return getStates;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   addCommittee(payLoad: any, id: any): Observable<any> {
     return this.httpClient
       .post<any>(
-        `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
+        `${environment.apiUrl}/committee/addCommittee?projectId=${id}`,
         payLoad
       )
       .pipe(
@@ -38,7 +38,7 @@ export class ProjectDetailsService {
   editCommittee(payLoad: any, id: any): Observable<any> {
     return this.httpClient
       .put<any>(
-        `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/addCommittee?projectId=${id}`,
+        `${environment.apiUrl}/committee/addCommittee?projectId=${id}`,
         payLoad
       )
       .pipe(
@@ -50,14 +50,21 @@ export class ProjectDetailsService {
   }
 
   deleteCommittee(payLoad: any): Observable<any> {
-    return this.httpClient.delete<any>(
-      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/committee/${payLoad.id}/${payLoad.projectId}`
-    );
+    return this.httpClient
+      .delete<any>(
+        `${environment.apiUrl}/committee/${payLoad.id}/${payLoad.projectId}`
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   showDonars(): Observable<any> {
     return this.httpClient
-      .get<any>(`https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/donars/showDonars`)
+      .get<any>(`${environment.apiUrl}/donars/showDonars`)
       .pipe(
         map((getStates) => {
           return getStates;
@@ -66,11 +73,9 @@ export class ProjectDetailsService {
       );
   }
 
-  showTransaction(): Observable<any> {
+  showTransaction(id: any): Observable<any> {
     return this.httpClient
-      .get<any>(
-        `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/finance/showTransaction`
-      )
+      .get<any>(`${environment.apiUrl}/finance/showTransaction?projectId=${id}`)
       .pipe(
         map((showTransaction) => {
           return showTransaction;
@@ -80,50 +85,67 @@ export class ProjectDetailsService {
   }
 
   showVendorsDetails(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/vendors`).pipe(
+      map((showTransaction) => {
+        return showTransaction;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  addVendors(payLoad: any, id: any): Observable<any> {
     return this.httpClient
-      .get<any>(`https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/vendors`)
+      .post<any>(`${environment.apiUrl}/vendors?projectId=${id}`, payLoad)
       .pipe(
-        map((showTransaction) => {
-          return showTransaction;
+        map((res) => {
+          return res;
         }),
         catchError((error) => of(error))
       );
   }
 
-  addVendors(payLoad: any, id: any): Observable<any> {
-    return this.httpClient.post<any>(
-      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/vendors?projectId=${id}`,
-      payLoad
-    );
-  }
-
   addDonars(payLoad: any, id: any): Observable<any> {
-    return this.httpClient.post<any>(
-      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/donars/addDonars?projectId=${id}`,
-      payLoad
-    );
+    return this.httpClient
+      .post<any>(
+        `${environment.apiUrl}/donars/addDonars?projectId=${id}`,
+        payLoad
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
   updateWIP(payLoad: any): Observable<any> {
-    return this.httpClient.post<any>(
-      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/WIP/updateWIP`,
-      payLoad
-    );
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/WIP/updateWIP`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
   updateApproval(payLoad: any): Observable<any> {
     return this.httpClient
-      .put<any>(`https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/project`, payLoad)
+      .put<any>(`${environment.apiUrl}/project`, payLoad)
       .pipe(
-        map((getStates: any) => {
-          return getStates;
+        map((res: any) => {
+          return res;
         }),
         catchError((error) => of(error))
       );
   }
 
   addFinanceExpence(payLoad: any): Observable<any> {
-    return this.httpClient.post<any>(
-      `https://empowerindia-api-dyckeafkc0ebhxft.southeastasia-01.azurewebsites.net/empower_andhra/api/v1/finance/addTransaction`,
-      payLoad
-    );
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/finance/addTransaction`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 }
