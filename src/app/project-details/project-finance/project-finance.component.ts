@@ -70,9 +70,11 @@ export class ProjectFinanceComponent implements OnInit {
     this.createFinanceForm();
   }
   showTransactionData() {
-    // this.projectDetailsService.showTransaction().subscribe((data) => {
-    //   this.showTransaction = data;
-    // });
+    this.projectDetailsService
+      .showTransaction(this.projectData.id)
+      .subscribe((data) => {
+        this.showTransaction = data.transactions;
+      });
   }
   createFinanceForm() {
     this.FinanceForm = new FormGroup({

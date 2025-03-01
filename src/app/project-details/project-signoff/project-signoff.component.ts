@@ -78,4 +78,8 @@ export class ProjectsignoffComponent implements OnInit {
       }
     });
   }
+
+  updateProjectSignOff() {
+    this.ProjectSignOffsidebarVisible = true;
+  }
 }
