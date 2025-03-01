@@ -20,19 +20,24 @@ export class HomeComponent {
   ngOnInit() {
     this.products = [
       {
-        id: '1000',
+        id: '1',
         name: 'Vijayawada',
         image: 'vijayawada.jpg',
       },
       {
-        id: '1001',
+        id: '2',
         name: 'Nellore',
         image: 'nellore.jpg',
       },
       {
-        id: '1002',
+        id: '3',
         name: 'Guntur',
         image: 'guntur.jpg',
+      },
+      {
+        id: '4',
+        name: 'Machilipatnam',
+        image: 'machilipatnam.jpg',
       },
       
     ];
