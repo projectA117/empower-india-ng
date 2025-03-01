@@ -1,39 +1,73 @@
 <div class="header-set">
   <h3>Projects List <span>55</span></h3>
   <div class="header-set-filter">
-    <p-dropdown [filter]="true" [options]="districts" [(ngModel)]="selectedDistrict" optionLabel="name"
-      placeholder="Select a District" (onChange)="getMandals($event)" />
-    <p-dropdown [filter]="true" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
-      placeholder="Select a Mandal" (onChange)="getvilages($event)" />
-    <p-dropdown [filter]="true" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
-      placeholder="Select a Vilage" (onChange)="vilageChange($event)" />
+    <p-dropdown
+      [filter]="true"
+      [options]="districts"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="name"
+      placeholder="Select a District"
+      (onChange)="getMandals($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="mandals"
+      [(ngModel)]="selectedMandal"
+      optionLabel="name"
+      placeholder="Select a Mandal"
+      (onChange)="getvilages($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="villages"
+      [(ngModel)]="selectedVilage"
+      optionLabel="name"
+      placeholder="Select a Vilage"
+      (onChange)="vilageChange($event)"
+    />
     <span class="p-input-icon-left">
       <i class="pi pi-search"></i>
-      <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-        placeholder="Search..." />
+      <input
+        pInputText
+        type="text"
+        (input)="dt.filterGlobal($event.target.value, 'contains')"
+        placeholder="Search..."
+      />
     </span>
     <p-button label="Add New Project" (onClick)="createProject()" />
   </div>
 </div>
 <div class="main-container projects-set-list">
   <p-toast />
-  <p-table #dt [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['name']"
-    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="project" [rowHover]="true" dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+  <p-table
+    #dt
+    [value]="projects"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="project"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
     <ng-template pTemplate="body" let-info>
       <div class="projects-list-set">
-        <div class="projects-list" >
+        <div class="projects-list">
           <div class="container-fluid">
             <div class="row">
               <div class="col-1">
-                  <img src="assets/images/project-1.jpg" class="img-fluid" />
+                <img src="assets/images/project-1.jpg" class="img-fluid" />
               </div>
-              <div class="col-11 relative" >
-
+              <div class="col-11 relative">
                 <div class="projects-actions">
-                  <img src="assets/images/icon-view.svg" (click)="getProjectDetails(info)"/>
-                  <img src="assets/images/icon-edit.svg"/>
-                  <img src="assets/images/icon-delete.svg"/>
+                  <img
+                    src="assets/images/icon-view.svg"
+                    (click)="getProjectDetails(info)"
+                  />
+                  <img src="assets/images/icon-edit.svg" />
+                  <img src="assets/images/icon-delete.svg" />
                 </div>
                 <div class="row mb-4">
                   <div class="project-detail-h-set">
@@ -59,7 +93,9 @@
                   </div>
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Pin Code</div>
-                    <div class="project-detail-set-v mt-2"></div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ info.pinCode }}
+                    </div>
                   </div>
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Colony</div>
@@ -71,7 +107,7 @@
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Latitude, Longitude</div>
                     <div class="project-detail-set-v mt-2">
-                      {{ info.latitude }}
+                      {{ info.latitude }} , {{ info.longitude }}
                     </div>
                   </div>
                 </div>
@@ -100,7 +136,12 @@
                     </div>
                   </div>
                   <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h" (click)="editProject(info)">Edit</div>
+                    <div
+                      class="project-detail-set-h"
+                      (click)="editProject(info)"
+                    >
+                      Edit
+                    </div>
                   </div>
                   <div class="project-detail-set col-12">
                     <div class="project-detail-set-h">Description</div>
@@ -136,7 +177,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -145,15 +185,27 @@
     </ng-template>
   </p-table>
 
-  <p-dialog [(visible)]="showProjectDialog" [style]="{ width: '60%' }" header="Add Project" [modal]="true"
-    styleClass="p-fluid" (onHide)="onHideDialog()">
+  <p-dialog
+    [(visible)]="showProjectDialog"
+    [style]="{ width: '60%' }"
+    header="Add Project"
+    [modal]="true"
+    styleClass="p-fluid"
+    (onHide)="onHideDialog()"
+  >
     <ng-container *ngIf="addNewProject">
-      <app-project (closeDialogEvent)="refresh($event)" [project]="project"
-        [addNewProject]="addNewProject"></app-project>
+      <app-project
+        (closeDialogEvent)="refresh($event)"
+        [project]="project"
+        [addNewProject]="addNewProject"
+      ></app-project>
     </ng-container>
     <ng-container *ngIf="updateExistingProject">
-      <app-project (closeDialogEvent)="refresh($event)" [project]="project"
-        [updateExistingProject]="updateExistingProject"></app-project>
+      <app-project
+        (closeDialogEvent)="refresh($event)"
+        [project]="project"
+        [updateExistingProject]="updateExistingProject"
+      ></app-project>
     </ng-container>
   </p-dialog>
 </div>

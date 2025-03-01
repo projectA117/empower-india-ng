@@ -17,28 +17,32 @@
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">District</div>
-          <div class="project-detail-set-v mt-2">Krishna</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.districtName }}
+          </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Mandal</div>
-          <div class="project-detail-set-v mt-2">Tiruvuru</div>
+          <div class="project-detail-set-v mt-2">{{ product.mandalName }}</div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Village</div>
-          <div class="project-detail-set-v mt-2">Kakarla</div>
+          <div class="project-detail-set-v mt-2">{{ product.villageName }}</div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Pin Code</div>
-          <div class="project-detail-set-v mt-2">521227</div>
+          <div class="project-detail-set-v mt-2">{{ product.pinCode }}</div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Colony</div>
-          <div class="project-detail-set-v mt-2">BC Colony</div>
+          <div class="project-detail-set-v mt-2">{{ product.location }}</div>
         </div>
 
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Latitude, Longitude</div>
-          <div class="project-detail-set-v mt-2">17°03'20.0"N, 80°38'06.1"E</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.latitude }} , {{ product.longitude }}
+          </div>
         </div>
       </div>
 
