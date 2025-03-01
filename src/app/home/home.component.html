@@ -13,11 +13,11 @@
     <div class="pos-rel">
         <p-carousel [value]="products" [numVisible]="1" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
             <ng-template let-product pTemplate="item">
-                <img src="assets/images/banner-1.jpg"  class="w-full" />
+                <img src="assets/images/banner/{{product.image}}"
+              [alt]="product.name"
+              class="w-full border-round"
+            />
             </ng-template>
-            <!-- <ng-template let-product pTemplate="item">
-                <img src="assets/images/banner-2.jpg"  class="w-full" />
-            </ng-template> -->
         </p-carousel>
     </div> 
 </div>

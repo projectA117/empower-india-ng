@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '@service/productservice';
 import { CarouselModule } from 'primeng/carousel';
 
@@ -10,17 +10,32 @@ import { CarouselModule } from 'primeng/carousel';
   styleUrl: './home.component.scss',
   providers: [ProductService],
 })
-export class HomeComponent implements OnInit {
-  products: any | undefined;
+export class HomeComponent {
+  products: any;
 
   responsiveOptions: any[] | undefined;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.productService.getProductsSmall().then((products) => {
-      this.products = products;
-    });
+    this.products = [
+      {
+        id: '1000',
+        name: 'Vijayawada',
+        image: 'vijayawada.jpg',
+      },
+      {
+        id: '1001',
+        name: 'Nellore',
+        image: 'nellore.jpg',
+      },
+      {
+        id: '1002',
+        name: 'Guntur',
+        image: 'guntur.jpg',
+      },
+      
+    ];
 
     this.responsiveOptions = [
       {
@@ -30,7 +45,7 @@ export class HomeComponent implements OnInit {
       },
       {
         breakpoint: '991px',
-        numVisible: 1,
+        numVisible: 2,
         numScroll: 1,
       },
       {

@@ -28,7 +28,7 @@
               <div class="col-1">
                   <img src="assets/images/project-1.jpg" class="img-fluid" />
               </div>
-              <div class="col-11">
+              <div class="col-11 relative" >
 
                 <div class="projects-actions">
                   <img src="assets/images/icon-view.svg" (click)="getProjectDetails(info)"/>
@@ -69,7 +69,7 @@
                   </div>
 
                   <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h">Latitude</div>
+                    <div class="project-detail-set-h">Latitude, Longitude</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.latitude }}
                     </div>
