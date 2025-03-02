@@ -1,11 +1,23 @@
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>Committee Member Details</h4>
-    <p-button label="Add Committee Member"
-      (click)="sidebarVisible = true; updatecommitteeForm.reset(); editCommitee = false" />
+    <p-button
+      label="Add Committee Member"
+      (click)="
+        sidebarVisible = true;
+        updatecommitteeForm.reset();
+        editCommitee = false;
+        updatecommitteeForm.get('villageId')?.setValue(projectData.villageName)
+      "
+    />
   </div>
   <div class="row tab-input-data">
-    <p-table [value]="Committee" [tableStyle]="{ 'min-width': '60rem' }" stripedRows class="tab-data-table">
+    <p-table
+      [value]="Committee"
+      [tableStyle]="{ 'min-width': '60rem' }"
+      stripedRows
+      class="tab-data-table"
+    >
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="code" style="width: 20%">
@@ -32,70 +44,100 @@
   </div>
 </div>
 
-
-<p-sidebar [(visible)]="sidebarVisible" position="right" [showCloseIcon]="false">
-  <form [formGroup]="updatecommitteeForm" *ngIf="sidebarVisible" (ngSubmit)="updatecommittee()">
+<p-sidebar
+  [(visible)]="sidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="updatecommitteeForm"
+    *ngIf="sidebarVisible"
+    (ngSubmit)="updatecommittee()"
+  >
     <div class="tab-pop-txt">
       <h4>Add Committee Member</h4>
       <i class="pi pi-times" (click)="sidebarVisible = false"></i>
     </div>
     <div class="pop-data-set">
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">
-          First Name
-        </div>
+        <div class="project-detail-set-h">First Name</div>
         <div class="project-detail-set-v mt-2">
-          <input pInputText id="firstName" formControlName="firstName" aria-describedby="firstName" />
+          <input
+            pInputText
+            id="firstName"
+            formControlName="firstName"
+            aria-describedby="firstName"
+          />
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">
-          Last Name
-        </div>
+        <div class="project-detail-set-h">Last Name</div>
         <div class="project-detail-set-v mt-2">
-          <input pInputText id="lastName" formControlName="lastName" aria-describedby="lastName" />
+          <input
+            pInputText
+            id="lastName"
+            formControlName="lastName"
+            aria-describedby="lastName"
+          />
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">
-          Father Name
-        </div>
+        <div class="project-detail-set-h">Father Name</div>
         <div class="project-detail-set-v mt-2">
-          <input pInputText id="fatherName" formControlName="fatherName" aria-describedby="fatherName" />
+          <input
+            pInputText
+            id="fatherName"
+            formControlName="fatherName"
+            aria-describedby="fatherName"
+          />
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">
-          e-mail
-        </div>
+        <div class="project-detail-set-h">e-mail</div>
         <div class="project-detail-set-v mt-2">
-          <input pInputText id="email" formControlName="email" aria-describedby="email" />
+          <input
+            pInputText
+            id="email"
+            formControlName="email"
+            aria-describedby="email"
+          />
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">
-          Village
-        </div>
+        <div class="project-detail-set-h">Village</div>
         <div class="project-detail-set-v mt-2">
-          <input pInputText id="villageId" formControlName="villageId" aria-describedby="villageId" readonly="true" />
+          <input
+            pInputText
+            id="villageId"
+            formControlName="villageId"
+            aria-describedby="villageId"
+            readonly="true"
+          />
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">
-          Mobile
-        </div>
+        <div class="project-detail-set-h">Mobile</div>
         <div class="project-detail-set-v mt-2">
-          <input pInputText id="Mobile" formControlName="Mobile" aria-describedby="Mobile" />
+          <input
+            pInputText
+            id="Mobile"
+            formControlName="Mobile"
+            aria-describedby="Mobile"
+          />
         </div>
       </div>
     </div>
     <div class="tab-footer-btns">
-      <p-button label="Cancel " (click)="sidebarVisible = false; editCommitee = false" class="cancel-btn" />
+      <p-button
+        label="Cancel "
+        (click)="sidebarVisible = false; editCommitee = false"
+        class="cancel-btn"
+      />
       <p-button label="Add " type="submit" class="submit-btn" />
     </div>
   </form>

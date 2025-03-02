@@ -65,7 +65,7 @@ export class ProjectComponent implements OnInit {
       latitude: new FormControl(this.project.latitude ? this.project.latitude : null),
       longitude: new FormControl(this.project.longitude ? this.project.longitude : null),
       projectCategoryId: new FormControl(this.project.projectCategoryId ? this.project.projectCategoryId : null, [Validators.required]),
-      projectType: new FormControl(this.project.projectType ? Number(this.project.projectType) : null, [Validators.required]),
+      projectType: new FormControl(this.project.projectType ? this.project.projectType : null, [Validators.required]),
       projectNeed: new FormControl(this.project.isNew ? 'New' : 'Existing', [Validators.required]),
       projectEstimation: new FormControl(this.project.projectEstimation ? this.project.projectEstimation : null),
       governmentShare: new FormControl(this.project.governmentShare ? this.project.governmentShare : null),
