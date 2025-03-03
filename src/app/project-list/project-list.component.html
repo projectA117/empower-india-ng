@@ -2,6 +2,10 @@
   <h3>Projects List <span>55</span></h3>
   <div class="header-set-filter">
     <p-dropdown
+
+    filterBy="name" 
+    [showClear]="true"
+
       [filter]="true"
       [options]="districts"
       [(ngModel)]="selectedDistrict"
@@ -25,7 +29,7 @@
       placeholder="Select a Vilage"
       (onChange)="vilageChange($event)"
     />
-    <span class="p-input-icon-left">
+    <!-- <span class="p-input-icon-left">
       <i class="pi pi-search"></i>
       <input
         pInputText
@@ -33,7 +37,7 @@
         (input)="dt.filterGlobal($event.target.value, 'contains')"
         placeholder="Search..."
       />
-    </span>
+    </span> -->
     <p-button label="Add New Project" (onClick)="createProject()" />
   </div>
 </div>
