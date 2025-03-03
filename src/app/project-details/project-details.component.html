@@ -3,13 +3,19 @@
     <div class="banner-txt-set">
       <div class="banner-txt-a">RO</div>
       <div class="banner-txt-b">Plant</div>
-      <div class="banner-txt-c">Main Road | Kakarla</div>
+      <div class="banner-txt-c">{{ product.villageName }} | {{ product.location }}</div>
     </div>
   </div>
   <img src="assets/images/ro-plant.jpg" class="img-fluid" />
 </div>
 <div class="main-container-in">
   <div class="projects-list-detail">
+    <div class="row project-detail-name-h">
+        <div class="d-flex justify-content-between">
+          <h4>{{ product.villageName }}</h4>
+          <div class="all-projects-arrow-set" onclick="history.back()"><img src="assets/images/back-arrow.svg"/><div>All Projects</div></div>
+        </div>
+    </div>
     <div class="container-fluid">
       <div class="row mb-4">
         <div class="project-detail-h-set">

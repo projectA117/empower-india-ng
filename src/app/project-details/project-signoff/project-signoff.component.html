@@ -1,18 +1,16 @@
-<div class="flex justify-content-start flex-wrap">
-  <div class="flex align-items-center justify-content-center m-2">
-    <span>WIP Details</span>
-
+<div class="row mb-4">
+  <div class="project-detail-h-set tab-h-txt">
+    <h4>Project Sign Off Details</h4>
     <p-button
-      label="Add WIP Details"
-      (click)="ProjectSignOffsidebarVisible = true"
-    />
+    label="Add Sign Off Details"
+    (click)="ProjectSignOffsidebarVisible = true"
+  />
   </div>
-</div>
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
     [value]="products"
-    [style]="{ width: '100%', overflow: 'auto!important' }"
+    class="tab-data-table"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -40,6 +38,8 @@
   </p-table>
 </div>
 
+</div>
+
 <p-sidebar
   [(visible)]="ProjectSignOffsidebarVisible"
   position="right"
@@ -50,86 +50,74 @@
     *ngIf="ProjectSignOffsidebarVisible"
     (ngSubmit)="updateProjectSignOff()"
   >
-    <div>
-      Add Donors Members
-      <i class="pi pi-times" (click)="ProjectSignOffsidebarVisible = false"></i>
-    </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="ProjectSignOffDate">Date</label>
+  <div class="tab-pop-txt">
+    <h4>Add Donors Members</h4>
+    <i class="pi pi-times" (click)="ProjectSignOffsidebarVisible = false"></i>
+  </div>
+
+  <div class="pop-data-set">
+
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Date</div>
+      <div class="project-detail-set-v mt-2">
         <input
           pInputText
           id="ProjectSignOffDate"
           aria-describedby="ProjectSignOffDate"
           formControlName="ProjectSignOffDate"
         />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
       </div>
     </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="ProjectSignOffPhoto">Photo</label>
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Photo</div>
+      <div class="project-detail-set-v mt-2">
         <input
           pInputText
           id="ProjectSignOffPhoto"
           formControlName="ProjectSignOffPhoto"
           aria-describedby="ProjectSignOffPhoto"
         />
-
-        <!-- <p-fileUpload
-          mode="basic"
-          chooseLabel="Choose"
-          chooseIcon="pi pi-upload"
-          formControlName="ProjectSignOffPhotoFile"
-          name="demo[]"
-          url=""
-          accept="image/*"
-          maxFileSize="1000000"
-          (onUpload)="onUpload($event)"
-        /> -->
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
       </div>
     </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="ProjectSignOffMembers">Sign Off Members</label>
+
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Sign Off Members</div>
+      <div class="project-detail-set-v mt-2">
         <input
           pInputText
           id="ProjectSignOffMembers"
           formControlName="ProjectSignOffMembers"
           aria-describedby="ProjectSignOffMembers"
         />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
       </div>
     </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="ProjectSignOffDecription">Decription</label>
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Decription</div>
+      <div class="project-detail-set-v mt-2">
         <input
           pInputText
           id="ProjectSignOffDecription"
           formControlName="ProjectSignOffDecription"
           aria-describedby="ProjectSignOffDecription"
         />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
       </div>
     </div>
 
-    <div>
-      <p-button label="Cancel" (click)="ProjectSignOffsidebarVisible = false" />
-      <p-button label="Add " type="submit" />
+  </div>
+
+    <div class="tab-footer-btns">
+      <p-button
+        label="Cancel "
+        (click)="ProjectSignOffsidebarVisible = false"
+        class="cancel-btn"
+      />
+      <p-button label="Add " type="submit" class="submit-btn" />
     </div>
+
+   
   </form>
 </p-sidebar>

@@ -1,23 +1,25 @@
 .home-banner{
-    margin-top: 75px;
+    margin-top: 135px;
     position: relative;
     .banner-stats{
-        background-color: #4F7619;
-        padding: 20px 60px;
+        padding: 20px 30px;
         position: absolute;
         z-index: 99;
         border-radius: 100px;
-        bottom: -25px;
-        left: 0;
+        bottom:0;
         right: 0;
+        top: -20px;
         display: inline-table;
         margin: auto;
         color: #fff;
+        text-align: right;
         &-txt{
             display: flex;
-            gap: 60px;
+            flex-direction: column;
+            gap: 20px;
             font-size: 30px;
             font-weight: bold;
+            text-shadow: 0 0 5px #000;
         }
         .banner-stats-txt{
             span{

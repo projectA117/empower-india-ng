@@ -1,15 +1,18 @@
-<div class="flex justify-content-start flex-wrap">
-  <div class="flex align-items-center justify-content-center m-2">
-    <span>Vendor Details</span>
 
-    <p-button label="Add Vendor" (click)="vendorSidebarVisible = true" />
-  </div>
+<div class="row mb-4">
+<div class="project-detail-h-set tab-h-txt">
+  <h4>Vendor Details</h4>
+  <p-button label="Add Vendor" (click)="vendorSidebarVisible = true" />
 </div>
+
+
+
+
 
 <div class="justify-content-start flex-wrap mt-15">
   <p-table
     [value]="VendorsDetails"
-    [style]="{ width: '100%', overflow: 'auto!important' }"
+    class="tab-data-table"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -36,6 +39,8 @@
     </ng-template>
   </p-table>
 </div>
+</div>
+
 
 <p-sidebar
   [(visible)]="vendorSidebarVisible"
@@ -47,59 +52,53 @@
     *ngIf="vendorSidebarVisible"
     (ngSubmit)="updateVendor()"
   >
-    <div class="pop-header">
-      <h3>Add Committee Member</h3>
-      <i class="pi pi-times" (click)="vendorSidebarVisible = false"></i>
-    </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="firstName"> Vendor Name </label>
+  <div class="tab-pop-txt">
+    <h4>Add Vendor</h4>
+    <i class="pi pi-times" (click)="vendorSidebarVisible = false"></i>
+  </div>
+
+  <div class="pop-data-set">
+
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Vendor Name</div>
+      <div class="project-detail-set-v mt-2">
         <input
-          pInputText
-          id="VendorName"
-          formControlName="VendorName"
-          aria-describedby="VendorName"
-        />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
+        pInputText
+        id="VendorName"
+        formControlName="VendorName"
+        aria-describedby="VendorName"
+      />
       </div>
     </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="VendorContractorName"> Contractor Name </label>
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Contractor Name</div>
+      <div class="project-detail-set-v mt-2">
         <input
-          pInputText
-          id="VendorContractorName"
-          aria-describedby="VendorContractorName"
-          formControlName="VendorContractorName"
-        />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
+        pInputText
+        id="VendorContractorName"
+        aria-describedby="VendorContractorName"
+        formControlName="VendorContractorName"
+      />
+      </div>
+    </div>
+   
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Mobile</div>
+      <div class="project-detail-set-v mt-2">
+        <input
+        pInputText
+        id="VendorMobile"
+        aria-describedby="VendorMobile"
+        formControlName="VendorMobile"
+      />
       </div>
     </div>
 
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="VendorMobile">Mobile</label>
-        <input
-          pInputText
-          id="VendorMobile"
-          aria-describedby="VendorMobile"
-          formControlName="VendorMobile"
-        />
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
-      </div>
-    </div>
-
-    <div class="flex align-items-center justify-content-center m-2">
-      <div class="flex flex-column gap-2">
-        <label for="VendorAddress">Address</label>
+    <div class="project-detail-set mt-4">
+      <div class="project-detail-set-h">Address</div>
+      <div class="project-detail-set-v mt-2">
         <textarea
           pInputTextarea
           id="VendorAddress"
@@ -109,16 +108,20 @@
           cols="30"
           id="Address"
         ></textarea>
-
-        <!-- <small id="PublicShare">
-        Enter your username to reset your password.
-      </small> -->
       </div>
     </div>
 
-    <div>
-      <p-button label="Cancel " (click)="vendorSidebarVisible = false" />
-      <p-button label="Add " type="submit" />
+  </div>
+
+    <div class="tab-footer-btns">
+      <p-button
+        label="Cancel "
+        (click)="vendorSidebarVisible = false"
+        class="cancel-btn"
+      />
+      <p-button label="Add " type="submit" class="submit-btn" />
     </div>
+
+    
   </form>
 </p-sidebar>
