@@ -139,7 +139,7 @@
           id="projectName"
           [filter]="true"
           [options]="projectTypes"
-          formControlName="projectType"
+          formControlName="projectTypeId"
           optionLabel="description"
           optionValue="id"
           placeholder="Select Project Type"
@@ -147,7 +147,7 @@
         <small
           class="p-error"
           *ngIf="
-            submitted && projectForm.controls['projectType'].errors?.required
+            submitted && projectForm.controls['projectTypeId'].errors?.required
           "
         >
           Project Type is required.

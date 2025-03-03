@@ -21,6 +21,7 @@ export class Project {
     mandalId: number;
     districtId: number;
     projectCategoryId: number;
+    projectTypeId: number;
 
 
     constructor(model)  {
@@ -45,5 +46,6 @@ export class Project {
         this.mandalId = model.mandalId;
         this.districtId = model.districtId;
         this.projectCategoryId = model.projectCategoryId;
+        this.projectTypeId = model.projectTypeId;
     }
 }
