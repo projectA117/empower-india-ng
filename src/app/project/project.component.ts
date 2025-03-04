@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RadioButtonModule } from 'primeng/radiobutton';
+
 import {
   FormsModule,
   FormControl,

@@ -431,8 +431,8 @@ h1, h2, h3, h4, h5, h6 {
 .p-dialog {
   right: 0;
   position: absolute;
-  top: 73px;
-  height: calc(100% - 73px);
+  top: 135px;
+  height: calc(100% - 135px);
   max-height: inherit;
 }
 
@@ -757,3 +757,25 @@ h1, h2, h3, h4, h5, h6 {
   gap: 15px;
 }
 
+
+
+.p-dialog {
+  .p-dialog-header-icons {
+    button{
+      background-color: #ececec;
+      border-radius: 20px;
+      padding: 5px;
+      color: #868686;
+      border: 1px solid #e1e1e1;
+      font-size: 11px;
+      cursor: pointer;
+    }
+  }
+}
+
+.p-dialog .p-dialog-header .p-dialog-title {
+  color: #4F7619;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 0;
+}

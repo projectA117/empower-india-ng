@@ -54,8 +54,8 @@ export class AppComponent {
         routerLink: 'sponsors',
       },
       {
-        label: 'VENDORS',
-        routerLink: 'vendors',
+        label: 'GALLERY',
+        routerLink: 'gallery',
       },
       {
         label: 'Contact',
