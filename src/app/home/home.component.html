@@ -6,12 +6,11 @@
         <div class="banner-stats-txt">
             <div>50+ <span>Villages Empowered</span></div>
             <div>10 Cr+ <span>Fundraised</span></div>
-            <div>100+ <span>Colonies Covered</span></div>
-            <div>50+ <span>Volunteers Working</span></div>
+            <div>100+ <span>Sponsors</span></div>
         </div>
     </div>
     <div class="pos-rel">
-        <p-carousel [value]="products" [numVisible]="1" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+        <p-carousel [value]="products" [numVisible]="1"  [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
             <ng-template let-product pTemplate="item">
                 <img src="assets/images/banner/{{product.image}}"
               [alt]="product.name"
