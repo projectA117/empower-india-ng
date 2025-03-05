@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RadioButtonModule } from 'primeng/radiobutton';
-
 import {
   FormsModule,
   FormControl,
@@ -49,8 +47,8 @@ export class ProjectComponent implements OnInit {
   constructor(private commonService: CommonService) {}
 
   ngOnInit() {
-    this.getDistricts();
-    this.getCategories();
+    this.getDistricts(this.updateExistingProject);
+    this.getCategories(this.updateExistingProject);
     if (this.addNewProject) {
       this.project.isNew = true;
     }
@@ -77,12 +75,12 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  getDistricts() {
+  getDistricts(isDefaultLoad?:boolean) {
     this.commonService.getDistricts().subscribe((data) => {
       if (data.length > 0) {
         this.districts = data;
-        if (this.updateExistingProject) {
-          this.getMandals(this.project.districtId);
+        if (isDefaultLoad) {
+          this.getMandals(this.project.districtId, isDefaultLoad);
         }
       }
   }, err => {
@@ -91,12 +89,16 @@ export class ProjectComponent implements OnInit {
   });
   }
 
-  getMandals(districtId: any) {
+  getMandals(districtId: any, isDefaultLoad?:boolean) {
     this.commonService.getMandals(districtId).subscribe((data) => {
       if (data.length > 0) {
         this.mandals = data;
-        if (this.updateExistingProject) {
-          this.getvillages(this.project.mandalId);
+        if (isDefaultLoad) {
+          this.getvillages(this.project.mandalId, isDefaultLoad);
+        }
+        if(!isDefaultLoad && (this.addNewProject || this.updateExistingProject)) {
+            this.projectForm.get('mandalId')?.setValue(null);
+            this.projectForm.get('villageId')?.setValue(null);
         }
       }
     }, err => {
@@ -105,16 +107,19 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  getvillages(mandalId: any) {
+  getvillages(mandalId: any, isDefaultLoad?:boolean) {
     this.commonService.getVillages(mandalId).subscribe((data) => {
       this.villages = data;
+      if(!isDefaultLoad && (this.addNewProject || this.updateExistingProject)) {
+        this.projectForm.get('villageId')?.setValue(null);
+        }
     }, err => {
       //Temp fix for Gopi
       this.villages = HardCodedInfo.villages;
     });
   }
 
-  getCategories() {
+  getCategories(isDefaultLoad?:boolean) {
     this.commonService.getProjectCategories().subscribe((data) => {
       this.categories = data;
       this.allProjects = data.flatMap(category =>
@@ -123,9 +128,9 @@ export class ProjectComponent implements OnInit {
           categoryId: category.id  // Assign category ID manually
         }))
       );
-      if (this.updateExistingProject) {
-        this.getProjectTypes(this.project.projectCategoryId);
-      }
+      if (isDefaultLoad) {
+        this.getProjectTypes(this.project.projectCategoryId, isDefaultLoad);
+      } 
     }, err => {
       //Temp fix for Gopi
       this.categories = HardCodedInfo.categories;
@@ -137,8 +142,11 @@ export class ProjectComponent implements OnInit {
       );
     });
   }
-  getProjectTypes(categoryId: any) {
+  getProjectTypes(categoryId: any, isDefaultLoad?:boolean) {
     this.projectTypes = this.allProjects.filter(project => project.categoryId == Number(categoryId));
+    if(!isDefaultLoad && (this.addNewProject || this.updateExistingProject)) {
+      this.projectForm.get('projectTypeId')?.setValue(null);
+    }
   }
 onSubmit() {
   if(this.addNewProject) {
