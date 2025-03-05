@@ -19,13 +19,14 @@
     <div class="project-detail-set col-2">
       <div class="project-detail-set-h">Public Share</div>
       <div class="project-detail-set-v mt-2">
-        <p-inputNumber inputId="integeronly" formControlName="PublicShare" />
+        <input pInputText id="PublicShare" formControlName="PublicShare" aria-describedby="PublicShare" />
+        <!-- <p-inputNumber inputId="integeronly" formControlName="PublicShare" /> -->
       </div>
     </div>
     <div class="project-detail-set col-2">
-      <div class="project-detail-set-h"></div>
+      <div class="project-detail-set-h" style="color: #fff;">.</div>
       <div class="project-detail-set-v mt-2">
-        <p-button label="Update " type="submit" />
+        <button class="submit-btn-m">Update</button>
       </div>
     </div>
   </div>
