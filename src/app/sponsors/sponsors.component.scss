@@ -1,0 +1,35 @@
+.sponsor-card{
+    border-radius: 5px;
+    background-color: #F6F6F6;
+    border: 1px solid #EEEEEE;
+    display: inline-block;
+    height: fit-content;
+    width: 11.11%;
+    .sponspor-details{
+        padding: 7px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        .sponspor-details-name{
+            font-weight: 800;
+            color: #BF3700;
+            font-size: 18px;
+        }
+        .sponspor-details-v{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sponspor-details-money{
+            font-weight: 800;
+        }
+    }
+}
+
+
+.sponsors-list{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
