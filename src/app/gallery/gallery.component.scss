@@ -1,0 +1,22 @@
+.header-set{
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f8f8;
+    padding: 10px 30px;
+    margin-top:140px;
+    margin-bottom: 0;
+    
+    h3{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        color: #507619;
+        span{
+            background-color: #4F7619;
+            border-radius: 100px;
+            padding: 6px;
+            font-size: 14px;
+            color: #fff;
+        }
+    }
+}
