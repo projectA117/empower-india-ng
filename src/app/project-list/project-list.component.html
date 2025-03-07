@@ -2,10 +2,8 @@
   <h3>Projects List <span>55</span></h3>
   <div class="header-set-filter">
     <p-dropdown
-
-    filterBy="name" 
-    [showClear]="true"
-
+      filterBy="name"
+      [showClear]="true"
       [filter]="true"
       [options]="districts"
       [(ngModel)]="selectedDistrict"
@@ -63,7 +61,7 @@
             <div class="row">
               <div class="col-2 pos-rel project-list-img">
                 <div class="open-status">{{ info.status }}</div>
-                <img src="assets/images/project-1.jpg" class="img-fluid " />
+                <img src="assets/images/project-1.jpg" class="img-fluid" />
               </div>
               <div class="col-10 relative">
                 <div class="projects-actions">
@@ -71,7 +69,10 @@
                     src="assets/images/icon-view.svg"
                     (click)="getProjectDetails(info)"
                   />
-                  <img src="assets/images/icon-edit.svg" (click)="editProject(info)" />
+                  <img
+                    src="assets/images/icon-edit.svg"
+                    (click)="editProject(info)"
+                  />
                   <img src="assets/images/icon-delete.svg" />
                 </div>
                 <div class="row mb-4">
@@ -174,7 +175,12 @@
                     </div>
                   </div>
                   <div class="project-detail-set col-2">
-                    <button class="submit-btn-m">Sponsor</button>
+                    <button
+                      class="submit-btn-m"
+                      (click)="getProjectSponsorDetails(info)"
+                    >
+                      Sponsor
+                    </button>
                   </div>
                 </div>
               </div>
@@ -187,7 +193,7 @@
 
   <div class="tab-pop-txt">
     <h4>Add Vendor</h4>
-    <i class="pi pi-times" ></i>
+    <i class="pi pi-times"></i>
   </div>
 
   <p-dialog
