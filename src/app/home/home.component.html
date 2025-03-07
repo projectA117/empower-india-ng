@@ -54,19 +54,19 @@
     <div class="container">
         <p-carousel
         [value]="category"
-        [numVisible]="3"
+        [numVisible]="5"
         [numScroll]="3"
         [circular]="false"
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template let-categoryItem pTemplate="item">
-          <div class="border-1 surface-border border-round m-2 p-3">
+          <div class="border-round m-2 project-card">
             <div class="mb-3">
               <div class="relative mx-auto">
                 <img
-                  src="assets/images/{{ categoryItem.image }}"
+                  src="assets/images/projects/{{ categoryItem.image }}"
                   [alt]="categoryItem.description"
-                  class="w-full border-round"
+                  
                 />
                 <p-tag
                   [value]="categoryItem.id"
@@ -76,22 +76,10 @@
                 />
               </div>
             </div>
-            <div class="mb-3 font-medium">
+            <h4>
               {{ categoryItem.description }}
-            </div>
-            <div class="flex justify-content-between align-items-center">
-              <div class="mt-0 font-semibold text-xl">
-                {{ "$" + categoryItem.id }}
-              </div>
-              <span>
-                <p-button
-                  icon="pi pi-heart"
-                  severity="secondary"
-                  [outlined]="true"
-                />
-                <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
-              </span>
-            </div>
+            </h4>
+            <button>Sponsor</button>
           </div>
         </ng-template>
       </p-carousel>
@@ -104,44 +92,44 @@
     </div>
     <div class="container">
         <div class="top-five-sponsors">
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/srini.png" class="img-fluid" width="100%"/>
+            <div class="sponsor-card" (click)="showSponsorDetails()">
+                <img src="assets/images/sponsors/01.png" class="img-fluid" width="100%"/>
                 <div class="sponspor-details">
                     <div class="sponspor-details-name">Srini Nannapaneni</div>
                     <div class="sponspor-details-v">Kakarla | Tiruvuru | NTR District</div>
                     <div class="sponspor-details-money">15,00,000/-</div>
                 </div>
             </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/srini.png" class="img-fluid" width="100%"/>
+            <div class="sponsor-card" (click)="showSponsorDetails()">
+                <img src="assets/images/sponsors/05.png" class="img-fluid" width="100%"/>
                 <div class="sponspor-details">
-                    <div class="sponspor-details-name">Srini Nannapaneni</div>
-                    <div class="sponspor-details-v">Kakarla | Tiruvuru | NTR District</div>
-                    <div class="sponspor-details-money">15,00,000/-</div>
+                    <div class="sponspor-details-name">Madhusudhan </div>
+                    <div class="sponspor-details-v">Kavali | Nellore </div>
+                    <div class="sponspor-details-money">12,00,000/-</div>
                 </div>
             </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/srini.png" class="img-fluid" width="100%"/>
+            <div class="sponsor-card" (click)="showSponsorDetails()">
+                <img src="assets/images/sponsors/09.png" class="img-fluid" width="100%"/>
                 <div class="sponspor-details">
-                    <div class="sponspor-details-name">Srini Nannapaneni</div>
-                    <div class="sponspor-details-v">Kakarla | Tiruvuru | NTR District</div>
-                    <div class="sponspor-details-money">15,00,000/-</div>
+                    <div class="sponspor-details-name">Suhasini </div>
+                    <div class="sponspor-details-v">Samalkota |  East Godavari</div>
+                    <div class="sponspor-details-money">9,00,000/-</div>
                 </div>
             </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/srini.png" class="img-fluid" width="100%"/>
+            <div class="sponsor-card" (click)="showSponsorDetails()">
+                <img src="assets/images/sponsors/16.png" class="img-fluid" width="100%"/>
                 <div class="sponspor-details">
-                    <div class="sponspor-details-name">Srini Nannapaneni</div>
-                    <div class="sponspor-details-v">Kakarla | Tiruvuru | NTR District</div>
-                    <div class="sponspor-details-money">15,00,000/-</div>
+                    <div class="sponspor-details-name">Rajani Gandham</div>
+                    <div class="sponspor-details-v">Amalapuram | East Godavari</div>
+                    <div class="sponspor-details-money">9,00,000/-</div>
                 </div>
             </div>
-            <div class="sponsor-card">
-                <img src="assets/images/sponsors/srini.png" class="img-fluid" width="100%"/>
+            <div class="sponsor-card" (click)="showSponsorDetails()">
+                <img src="assets/images/sponsors/04.png" class="img-fluid" width="100%"/>
                 <div class="sponspor-details">
-                    <div class="sponspor-details-name">Srini Nannapaneni</div>
-                    <div class="sponspor-details-v">Kakarla | Tiruvuru | NTR District</div>
-                    <div class="sponspor-details-money">15,00,000/-</div>
+                    <div class="sponspor-details-name">Somesh Veera</div>
+                    <div class="sponspor-details-v">Avulanatham | Kuppam | Chittore District</div>
+                    <div class="sponspor-details-money">8,50,000/-</div>
                 </div>
             </div>
         </div>

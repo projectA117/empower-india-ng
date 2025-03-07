@@ -85,9 +85,7 @@
     .top-five-sponsors{
         display: flex;
         gap: 30px;
-        .sponsor-card{
-            width:20%;
-        }
+       
     }
 }
 
@@ -95,15 +93,23 @@
     border-radius: 5px;
     background-color: #F6F6F6;
     border: 1px solid #EEEEEE;
-    display: inline-block;
-    height: fit-content;
-    width: 11.11%;
+    width: calc(20% - 24px);
+    transition: all 0.2s ease-out;
+    box-shadow: 0 14px 26px rgba(0,0,0,0.04);
+    cursor: pointer;
+    
+    &:hover{
+    transform: translateY(-2px) scale(1.015) translateZ(0);
+    box-shadow: 0 14px 26px rgba(0,0,0,0.14);
+    transition: all 0.2s ease-out;
+    border: 1px solid #4F7619;
+    }
     .sponspor-details{
-        padding: 7px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
+        padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
         .sponspor-details-name{
             font-weight: 800;
             color: #BF3700;
@@ -117,5 +123,49 @@
         .sponspor-details-money{
             font-weight: 800;
         }
+    }
+}
+
+.project-card{
+    background-color: #fff;
+    border-radius: 19px;
+    padding: 50px 10px 30px 10px;
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    transition: 0.3s ease;
+    position: relative;
+    margin: 13px .5rem!important;
+    
+    &:hover{
+        border: 1px solid #4F7619;
+        transition: .3s ease;
+        button{
+            display: block;
+            transition: 0.3sease;
+        }
+    }
+    img{
+        width: auto;
+
+    }
+    
+    h4{
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 22px;    
+    }
+    button{
+        border-radius: 100px;
+        padding: 6px 20px;
+        font-size: 16px;
+        background-color: #4F7619;
+        color: #fff;
+        border: 1px solid #4F7619;
+        position: absolute;
+        bottom: -27px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        transition: 0.3sease;
     }
 }
