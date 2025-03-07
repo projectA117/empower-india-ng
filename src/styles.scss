@@ -882,7 +882,66 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-detail-banner-gray{
   background: rgb(0,0,0);
-background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 35%, rgb(255, 255, 255) 0%);
+background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0 0 0 / 0%) 35%, rgb(0 0 0 / 0%) 0%);
+width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
+.projects-set-list{
+  height: calc(100vh - 160px);
+  overflow: auto;
+}
+
+.header-set{
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f8f8;
+  padding: 10px 30px;
+  margin-top:140px;
+  margin-bottom: 0;
+  
+  h3{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      color: #507619;
+      span{
+          background-color: #4F7619;
+          border-radius: 100px;
+          padding: 6px;
+          font-size: 14px;
+          color: #fff;
+      }
+  }
+}
+
+
+
+
+
+.projects-list{
+  .col-11{
+      padding: 0 0 0 25px;
+  }
+}
+
+.projects-actions{
+  position: absolute;
+  right: 0;
+  top: -15px;
+  display: flex;
+  gap: 20px;
+  padding: 10px 15px;
+  background-color: #f2f2f2;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  img{
+     &:hover{
+      cursor: pointer;
+     } 
+  }
 }
 
 .p-galleria-close{
