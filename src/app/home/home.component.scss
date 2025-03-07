@@ -119,3 +119,46 @@
         }
     }
 }
+
+.project-card{
+    background-color: #fff;
+    border-radius: 19px;
+    padding: 50px 10px 30px 10px;
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    transition: 0.3sease;
+    position: relative;
+    margin: 13px .5rem!important;
+    &:hover{
+        border: 1px solid #4F7619;
+        transition: .3s ease;
+        button{
+            display: block;
+            transition: 0.3sease;
+        }
+    }
+    img{
+        width: auto;
+
+    }
+    
+    h4{
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 22px;    
+    }
+    button{
+        border-radius: 100px;
+        padding: 6px 20px;
+        font-size: 16px;
+        background-color: #4F7619;
+        color: #fff;
+        border: 1px solid #4F7619;
+        position: absolute;
+        bottom: -27px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        transition: 0.3sease;
+    }
+}

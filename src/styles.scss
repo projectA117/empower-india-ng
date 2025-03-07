@@ -944,7 +944,8 @@ width: 100%;
   }
 }
 
-.p-galleria-close{
-  top: 150px;
-}
 
+.p-galleria-mask{
+  top: 137px;
+  height: calc(100% - 137px);
+}

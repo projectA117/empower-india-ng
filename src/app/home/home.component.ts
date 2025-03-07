@@ -45,28 +45,28 @@ export class HomeComponent {
     this.category = [
       {
         id: 23,
-        description: 'Preventive Health Checkup',
-        image: 'project-1.jpg',
+        description: 'Bus helter',
+        image: 'bus_shelter.png',
       },
       {
         id: 22,
-        description: 'Dental',
-        image: 'project-1.jpg',
+        description: 'Library',
+        image: 'library.png',
       },
       {
         id: 21,
-        description: 'Eye Camp',
-        image: 'project-1.jpg',
+        description: 'Public Toilets',
+        image: 'public_toilets.png',
       },
       {
         id: 20,
-        description: 'Health Camp',
-        image: 'project-1.jpg',
+        description: 'RO Plants',
+        image: 'ro_plants.png',
       },
       {
         id: 19,
-        description: 'Compound Walls/ Gate',
-        image: 'project-1.jpg',
+        description: 'Schools',
+        image: 'schools.png',
       },
       {
         id: 18,
