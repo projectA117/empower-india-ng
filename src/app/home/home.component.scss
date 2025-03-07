@@ -40,7 +40,6 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        padding-top: 80px;
         display: flex;
     align-items: center;
     }
@@ -56,6 +55,67 @@
         p{
             font-size: 18px;
             line-height: 29px;
+        }
+    }
+}
+
+
+.building-starter{
+    padding: 50px 0;
+    h3{
+        color: #444;
+        font-size: 22px;
+        div{
+            color: #4F7619;
+            font-size: 35px;
+            font-weight: bold;
+        }
+    }
+}
+
+.top-sponsors{
+    background-color: #fff;
+    padding: 50px 0;
+    h3{
+        color: #4F7619;
+        font-size: 35px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .top-five-sponsors{
+        display: flex;
+        gap: 30px;
+        .sponsor-card{
+            width:20%;
+        }
+    }
+}
+
+.sponsor-card{
+    border-radius: 5px;
+    background-color: #F6F6F6;
+    border: 1px solid #EEEEEE;
+    display: inline-block;
+    height: fit-content;
+    width: 11.11%;
+    .sponspor-details{
+        padding: 7px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        .sponspor-details-name{
+            font-weight: 800;
+            color: #BF3700;
+            font-size: 18px;
+        }
+        .sponspor-details-v{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sponspor-details-money{
+            font-weight: 800;
         }
     }
 }
