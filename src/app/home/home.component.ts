@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@service/productservice';
 import { CarouselModule } from 'primeng/carousel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent {
 
   responsiveOptions: any[] | undefined;
 
-  constructor(private productService: ProductService) {}
+  // constructor(private productService: ProductService) {}
+  constructor(private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
     this.products = [
@@ -189,4 +191,8 @@ export class HomeComponent {
         return 'danger';
     }
   }
+  showSponsorDetails() {
+    this.router.navigate(['sponsors-details'], {});
+  }
+ 
 }

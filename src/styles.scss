@@ -949,3 +949,32 @@ width: 100%;
   top: 137px;
   height: calc(100% - 137px);
 }
+
+.p-carousel-content {
+  overflow: inherit;
+}
+
+.p-carousel-container{
+  position: relative;
+  .p-carousel-prev, .p-carousel-next{
+    color: #333;
+    background-color: #ffffff;
+    border-radius: 100px;
+    border: 1px solid #e6e6e6;
+    transition: 0.3s ease;
+    &:hover{
+      border: 1px solid #4F7619;
+      transition: 0.3s ease;
+    }
+    svg{
+      width: 70px;
+    height: 15px;
+    }
+  }
+  .p-carousel-next{
+    right: -5px;
+  }
+  .p-carousel-prev{
+    left: -5px;
+  }
+}
