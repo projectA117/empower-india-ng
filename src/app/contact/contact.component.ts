@@ -22,7 +22,7 @@ import { CommonService } from '@service/common.service';
   providers: [ProjectDetailsService, CommonService, ProductService],
 })
 export class ContactComponent implements OnInit {
-  donorForm: FormGroup = new FormGroup({});
+  contactForm: FormGroup = new FormGroup({});
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -31,11 +31,11 @@ export class ContactComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.createdonorForm();
+    this.createcontactForm();
   }
 
-  createdonorForm() {
-    this.donorForm = new FormGroup({
+  createcontactForm() {
+    this.contactForm = new FormGroup({
       Name: new FormControl('', [Validators.required]),
       Subject: new FormControl('', [Validators.required]),
       Message: new FormControl('', [Validators.required]),
@@ -49,17 +49,17 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  updatedonorForm() {
+  updateContactForm() {
     const payload = {
-      Name: this.donorForm.get('Name')?.value,
-      Subject: this.donorForm.get('Subject')?.value,
-      Message: this.donorForm.get('Message')?.value,
-      DonorsEmail: this.donorForm.get('DonorsEmail')?.value,
+      Name: this.contactForm.get('Name')?.value,
+      Subject: this.contactForm.get('Subject')?.value,
+      Message: this.contactForm.get('Message')?.value,
+      DonorsEmail: this.contactForm.get('DonorsEmail')?.value,
     };
 
     this.projectDetailsService.addDonars(payload, '').subscribe((data) => {
       if (data) {
-        this.donorForm.reset();
+        this.contactForm.reset();
       }
     });
   }

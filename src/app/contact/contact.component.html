@@ -33,9 +33,9 @@
       </div>
       <div class="col-6">
         <form
-          [formGroup]="donorForm"
+          [formGroup]="contactForm"
           style="width: 600px; margin: auto"
-          (ngSubmit)="updatedonorForm()"
+          (ngSubmit)="updateContactForm()"
         >
           <div class="row">
             <h3 class="page-heading">Reach Us</h3>
@@ -93,7 +93,7 @@
               label="Submit"
               type="submit"
               class="submit-btn"
-              [disabled]="!donorForm.valid"
+              [disabled]="!contactForm.valid"
             />
           </div>
         </form>
