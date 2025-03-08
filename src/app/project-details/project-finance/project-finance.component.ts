@@ -78,15 +78,15 @@ export class ProjectFinanceComponent implements OnInit {
   }
   createFinanceForm() {
     this.FinanceForm = new FormGroup({
-      financeDate: new FormControl(''),
-      financeExpenseType: new FormControl(''),
-      financeAmount: new FormControl(''),
-      financeSpentBy: new FormControl(''),
-      financePaidto: new FormControl(''),
-      financeModeofPayment: new FormControl(''),
-      financeApprovedBy: new FormControl(''),
-      financeDescription: new FormControl(''),
-      financeBillProofs: new FormControl(''),
+      financeDate: new FormControl('', [Validators.required]),
+      financeExpenseType: new FormControl('', [Validators.required]),
+      financeAmount: new FormControl('', [Validators.required]),
+      financeSpentBy: new FormControl('', [Validators.required]),
+      financePaidto: new FormControl('', [Validators.required]),
+      financeModeofPayment: new FormControl('', [Validators.required]),
+      financeApprovedBy: new FormControl('', [Validators.required]),
+      financeDescription: new FormControl('', [Validators.required]),
+      financeBillProofs: new FormControl('', [Validators.required]),
     });
   }
 
@@ -109,6 +109,8 @@ export class ProjectFinanceComponent implements OnInit {
       console.log('...Data', data);
       if (data) {
         this.showTransactionData();
+        this.FinanceForm.reset();
+        this.financeSidebarVisible = false;
       }
     });
   }

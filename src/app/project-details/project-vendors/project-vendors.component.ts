@@ -63,12 +63,10 @@ export class ProjectVendorsComponent implements OnInit {
 
   createVendorForm() {
     this.VendorForm = new FormGroup({
-      VendorName: new FormControl(''),
-      VendorContractorName: new FormControl(''),
-      VendorMobile: new FormControl(''),
-      VendorAddress: new FormControl(''),
-      villageId: new FormControl(this.projectData.villageName),
-      Mobile: new FormControl(''),
+      VendorName: new FormControl('', [Validators.required]),
+      VendorContractorName: new FormControl('', [Validators.required]),
+      VendorMobile: new FormControl('', [Validators.required]),
+      VendorAddress: new FormControl('', [Validators.required]),
     });
   }
 

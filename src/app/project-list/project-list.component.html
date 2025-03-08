@@ -1,6 +1,16 @@
 <div class="header-set">
   <h3>Projects List <span>55</span></h3>
+  <button class="submit-btn-m" (click)="reset()">Reset</button>
   <div class="header-set-filter">
+    <p-dropdown
+      [filter]="true"
+      [options]="categories"
+      [(ngModel)]="selectedcategory"
+      optionLabel="description"
+      optionValue="id"
+      placeholder="Select a Category"
+      (onChange)="categoryChange($event)"
+    />
     <p-dropdown
       filterBy="name"
       [showClear]="true"
@@ -45,14 +55,12 @@
     #dt
     [value]="projects"
     [rows]="10"
-    [paginator]="true"
+    [paginator]="false"
     [globalFilterFields]="['name']"
     [tableStyle]="{ 'min-width': '75rem' }"
     [(selection)]="project"
     [rowHover]="true"
     dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="body" let-info>
       <div class="projects-list-set">
@@ -190,6 +198,16 @@
       </div>
     </ng-template>
   </p-table>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="true"
+    [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+  />
 
   <div class="tab-pop-txt">
     <h4>Add Vendor</h4>

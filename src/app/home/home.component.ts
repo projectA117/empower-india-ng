@@ -194,5 +194,10 @@ export class HomeComponent {
   showSponsorDetails() {
     this.router.navigate(['sponsors-details'], {});
   }
- 
+
+  showprojectcategoryDetails(selectedCategory: any) {
+    this.router.navigate(['projects'], {
+      queryParams: { category: selectedCategory.id },
+    });
+  }
 }

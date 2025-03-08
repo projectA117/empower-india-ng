@@ -5,7 +5,13 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '@service/productservice';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 export interface Product {
   id?: string;
@@ -44,11 +50,11 @@ export class ProjectsignoffComponent implements OnInit {
 
   createProjectSignOffForm() {
     this.ProjectSignOffForm = new FormGroup({
-      ProjectSignOffDate: new FormControl(''),
+      ProjectSignOffDate: new FormControl('', [Validators.required]),
       ProjectSignOffPhoto: new FormControl(''),
-      // ProjectSignOffPhotoFile: new FormControl(''),
-      ProjectSignOffMembers: new FormControl(''),
-      ProjectSignOffDecription: new FormControl(''),
+      // ProjectSignOffPhotoFile: new FormControl('', [Validators.required]),
+      ProjectSignOffMembers: new FormControl('', [Validators.required]),
+      ProjectSignOffDecription: new FormControl('', [Validators.required]),
     });
   }
   showProjectSignOffDetails() {

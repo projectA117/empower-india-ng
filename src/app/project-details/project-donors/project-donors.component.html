@@ -1,50 +1,45 @@
-
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>Sponsor Details</h4>
     <p-button label="Add Sponsor" (click)="donorsSidebarVisible = true" />
   </div>
 
+  <div class="justify-content-start flex-wrap mt-15">
+    <p-table [value]="doners" class="tab-data-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="Date">
+            Donor Name<p-sortIcon field="DonorName" />
+          </th>
+          <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
 
-<div class="justify-content-start flex-wrap mt-15">
-  <p-table
-    [value]="doners"
-    class="tab-data-table"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="Date">
-          Donor Name<p-sortIcon field="DonorName" />
-        </th>
-        <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
-
-        <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
-        <th pSortableColumn="Address">
-          Address <p-sortIcon field="Address" />
-        </th>
-        <th pSortableColumn="Memoryof">
-          Memory of <p-sortIcon field="Memory of" />
-        </th>
-        <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" /></th>
-        <th pSortableColumn="Payment">
-          Mode of Payment <p-sortIcon field="Payment" />
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-doners>
-      <tr>
-        <td>{{ doners.firstName }}</td>
-        <td>{{ doners.phoneNumber }}</td>
-        <td>{{ doners.email }}</td>
-        <td>{{ doners.code }}</td>
-        <td>{{ doners.lastName }}</td>
-        <td>{{ doners.category }}</td>
-        <td>{{ doners.category }}</td>
-        <td>{{ doners.category }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
+          <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
+          <th pSortableColumn="Address">
+            Address <p-sortIcon field="Address" />
+          </th>
+          <th pSortableColumn="Memoryof">
+            Memory of <p-sortIcon field="Memory of" />
+          </th>
+          <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" /></th>
+          <th pSortableColumn="Payment">
+            Mode of Payment <p-sortIcon field="Payment" />
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-doners>
+        <tr>
+          <td>{{ doners.firstName }}</td>
+          <td>{{ doners.phoneNumber }}</td>
+          <td>{{ doners.email }}</td>
+          <td>{{ doners.code }}</td>
+          <td>{{ doners.lastName }}</td>
+          <td>{{ doners.category }}</td>
+          <td>{{ doners.category }}</td>
+          <td>{{ doners.category }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
 
 <p-sidebar
@@ -57,103 +52,98 @@
     *ngIf="donorsSidebarVisible"
     (ngSubmit)="updatedonorForm()"
   >
-
-  <div class="tab-pop-txt">
-    <h4>Add Sponsor</h4>
-    <i class="pi pi-times" (click)="donorsSidebarVisible = false"></i>
-  </div>
-
-  <div class="pop-data-set">
-
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">Donor Name</div>
-    <div class="project-detail-set-v mt-2">
-      <input
-      pInputText
-      id="DonorsName"
-      formControlName="DonorsName"
-      aria-describedby="DonorsName"
-    />
+    <div class="tab-pop-txt">
+      <h4>Add Sponsor</h4>
+      <i class="pi pi-times" (click)="donorsSidebarVisible = false"></i>
     </div>
-  </div>
 
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">Phone</div>
-    <div class="project-detail-set-v mt-2">
-      <input
-          pInputText
-          id="DonorsPhone"
-          formControlName="DonorsPhone"
-          aria-describedby="DonorsPhone"
-        />
-    </div>
-  </div>
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Donor Name</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="DonorsName"
+            formControlName="DonorsName"
+            aria-describedby="DonorsName"
+          />
+        </div>
+      </div>
 
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">e-mail</div>
-    <div class="project-detail-set-v mt-2">
-      <input
-          pInputText
-          id="DonorsEmail"
-          formControlName="DonorsEmail"
-          aria-describedby="DonorsEmail"
-        />
-    </div>
-  </div>
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Phone</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="DonorsPhone"
+            formControlName="DonorsPhone"
+            aria-describedby="DonorsPhone"
+          />
+        </div>
+      </div>
 
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">Address</div>
-    <div class="project-detail-set-v mt-2">
-      <textarea
-      rows="5"
-      cols="30"
-      pInputTextarea
-      id="DonorsAddress"
-      aria-describedby="DonorsAddress"
-      formControlName="DonorsAddress"
-    >
-    </textarea>
-    </div>
-  </div>
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">e-mail</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="DonorsEmail"
+            formControlName="DonorsEmail"
+            aria-describedby="DonorsEmail"
+          />
+        </div>
+      </div>
 
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">Memory of</div>
-    <div class="project-detail-set-v mt-2">
-      <input
-          pInputText
-          id="DonorsMemoryOf"
-          aria-describedby="DonorsMemoryOf"
-          formControlName="DonorsMemoryOf"
-        />
-    </div>
-  </div>
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Address</div>
+        <div class="project-detail-set-v mt-2">
+          <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            id="DonorsAddress"
+            aria-describedby="DonorsAddress"
+            formControlName="DonorsAddress"
+          >
+          </textarea>
+        </div>
+      </div>
 
-   
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">Amount</div>
-    <div class="project-detail-set-v mt-2">
-      <input
-          type="number"
-          id="DonorsAmount"
-          aria-describedby="DonorsAmount"
-          formControlName="DonorsAmount"
-        />
-    </div>
-  </div>
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Memory of</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="DonorsMemoryOf"
+            aria-describedby="DonorsMemoryOf"
+            formControlName="DonorsMemoryOf"
+          />
+        </div>
+      </div>
 
-  <div class="project-detail-set mt-4">
-    <div class="project-detail-set-h">Mode of Payment</div>
-    <div class="project-detail-set-v mt-2">
-      <input
-      pInputText
-      id="DonorsModeofPayment"
-      aria-describedby="DonorsModeofPayment"
-      formControlName="DonorsModeofPayment"
-    />
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Amount</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            id="DonorsAmount"
+            mode="decimal"
+            formControlName="DonorsAmount"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Mode of Payment</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="DonorsModeofPayment"
+            aria-describedby="DonorsModeofPayment"
+            formControlName="DonorsModeofPayment"
+          />
+        </div>
+      </div>
     </div>
-  </div>
-   
-</div>
 
     <div class="tab-footer-btns">
       <p-button
@@ -161,8 +151,12 @@
         (click)="donorsSidebarVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!donorForm.valid"
+      />
     </div>
-
   </form>
 </p-sidebar>

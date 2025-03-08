@@ -2,17 +2,14 @@
   <div class="project-detail-h-set tab-h-txt">
     <h4>Finance Details</h4>
   </div>
-    <div>Total Expenses <span class="t-expenses">₹ 2,16,050/-</span></div>
-    <div>Total Fund <span class="t-fund">₹ 9,00,000/-</span></div>
-    <div>Remaining Balance <span class="t-balance">₹ 6,87,737/-</span></div>
-    <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
+  <div>Total Expenses <span class="t-expenses">₹ 2,16,050/-</span></div>
+  <div>Total Fund <span class="t-fund">₹ 9,00,000/-</span></div>
+  <div>Remaining Balance <span class="t-balance">₹ 6,87,737/-</span></div>
+  <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
 </div>
 
 <div class="justify-content-start flex-wrap mt-15">
-  <p-table
-    [value]="showTransaction"
-    class="tab-data-table"
-  >
+  <p-table [value]="showTransaction" class="tab-data-table">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="Date">Date <p-sortIcon field="Date" /></th>
@@ -61,123 +58,120 @@
     *ngIf="financeSidebarVisible"
     (ngSubmit)="updateFinanceDetails()"
   >
-  <div class="tab-pop-txt">
-    <h4>Add Expence</h4>
-    <i class="pi pi-times" (click)="financeSidebarVisible = false"></i>
-  </div>
-  <div class="pop-data-set">
+    <div class="tab-pop-txt">
+      <h4>Add Expence</h4>
+      <i class="pi pi-times" (click)="financeSidebarVisible = false"></i>
+    </div>
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Date</div>
+        <div class="project-detail-set-v mt-2">
+          <p-calendar formControlName="financeDate" id="financeDate" />
 
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Date</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="financeDate"
-          formControlName="financeDate"
-          aria-describedby="financeDate"
-        />
+          <!-- <input
+            pInputText
+            id="financeDate"
+            formControlName="financeDate"
+            aria-describedby="financeDate"
+          /> -->
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Expense Type</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="ExpenseType"
+            formControlName="financeExpenseType"
+            aria-describedby="ExpenseType"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Amount</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            id="financeAmount"
+            mode="decimal"
+            formControlName="financeAmount"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Spent By</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="SpentBy"
+            formControlName="financeSpentBy"
+            aria-describedby="SpentBy"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Paid to</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="financePaidto"
+            formControlName="financePaidto"
+            aria-describedby="financePaidto"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Mode of Payment</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="financeModeofPayment"
+            formControlName="financeModeofPayment"
+            aria-describedby="financeModeofPayment"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Approved By</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="financeApprovedBy"
+            formControlName="financeApprovedBy"
+            aria-describedby="financeApprovedBy"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Description</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="financeDescription"
+            formControlName="financeDescription"
+            aria-describedby="financeDescription"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Bill Proofs</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="financeBillProofs"
+            formControlName="financeBillProofs"
+            aria-describedby="financeBillProofs"
+          />
+        </div>
       </div>
     </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Expense Type</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="ExpenseType"
-          formControlName="financeExpenseType"
-          aria-describedby="ExpenseType"
-        />
-      </div>
-    </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Amount</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="financeAmount"
-          formControlName="financeAmount"
-          aria-describedby="financeExpenseType"
-        />
-      </div>
-    </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Spent By</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="SpentBy"
-          formControlName="financeSpentBy"
-          aria-describedby="SpentBy"
-        />
-      </div>
-    </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Paid to</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="financePaidto"
-          formControlName="financePaidto"
-          aria-describedby="financePaidto"
-        />
-      </div>
-    </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h"> Mode of Payment</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="financeModeofPayment"
-          formControlName="financeModeofPayment"
-          aria-describedby="financeModeofPayment"
-        />
-      </div>
-    </div>
-
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h"> Approved By</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="financeApprovedBy"
-          formControlName="financeApprovedBy"
-          aria-describedby="financeApprovedBy"
-        />
-      </div>
-    </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h"> Description</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-        pInputText
-        id="financeDescription"
-        formControlName="financeDescription"
-        aria-describedby="financeDescription"
-      />
-      </div>
-    </div>
-
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h"> Bill Proofs</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="financeBillProofs"
-          formControlName="financeBillProofs"
-          aria-describedby="financeBillProofs"
-        />
-      </div>
-    </div>
-
-</div>
 
     <div class="tab-footer-btns">
       <p-button
@@ -185,8 +179,13 @@
         (click)="financeSidebarVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" (click)="addExpence()"/>
+      <p-button
+        label="Add "
+        [disabled]="!FinanceForm.valid"
+        type="submit"
+        class="submit-btn"
+        (click)="addExpence()"
+      />
     </div>
-    
   </form>
 </p-sidebar>
