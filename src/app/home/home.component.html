@@ -75,7 +75,7 @@
         <div class="border-round m-2 project-card">
           <div class="mb-3">
             <div
-              class="relative mx-auto"
+              class="relative mx-auto cur-pointer"
               (click)="showprojectcategoryDetails(categoryItem)"
             >
               <img
@@ -93,7 +93,7 @@
           <h4>
             {{ categoryItem.description }}
           </h4>
-          <button>Sponsor</button>
+          <button (click)="showprojectcategoryDetails(categoryItem)">Sponsor</button>
         </div>
       </ng-template>
     </p-carousel>
