@@ -42,121 +42,121 @@ export class GalleryComponent implements OnInit {
     this.images = [
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',
+          'assets/images/gallery/01.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria1s.jpg',
+          'assets/images/gallery/01.jpg',
         alt: 'Description for Image 1',
         title: 'Title 1',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria2.jpg',
+          'assets/images/gallery/02.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',
+          'assets/images/gallery/02.jpg',
         alt: 'Description for Image 2',
         title: 'Title 2',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria3.jpg',
+          'assets/images/gallery/03.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',
+          'assets/images/gallery/03.jpg',
         alt: 'Description for Image 3',
         title: 'Title 3',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria4.jpg',
+          'assets/images/gallery/04.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria4s.jpg',
+          'assets/images/gallery/04.jpg',
         alt: 'Description for Image 4',
         title: 'Title 4',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria5.jpg',
+          'assets/images/gallery/05.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria5s.jpg',
+          'assets/images/gallery/05.jpg',
         alt: 'Description for Image 5',
         title: 'Title 5',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria6.jpg',
+          'assets/images/gallery/06.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria6s.jpg',
+          'assets/images/gallery/06.jpg',
         alt: 'Description for Image 6',
         title: 'Title 6',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria7.jpg',
+          'assets/images/gallery/07.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria7s.jpg',
+          'assets/images/gallery/07.jpg',
         alt: 'Description for Image 7',
         title: 'Title 7',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria8.jpg',
+          'assets/images/gallery/08.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria8s.jpg',
+          'assets/images/gallery/08.jpg',
         alt: 'Description for Image 8',
         title: 'Title 8',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria9.jpg',
+          'assets/images/gallery/09.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria9s.jpg',
+          'assets/images/gallery/09.jpg',
         alt: 'Description for Image 9',
         title: 'Title 9',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg',
+          'assets/images/gallery/10.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria10s.jpg',
+          'assets/images/gallery/10.jpg',
         alt: 'Description for Image 10',
         title: 'Title 10',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria11.jpg',
+          'assets/images/gallery/11.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria11s.jpg',
+          'assets/images/gallery/11.jpg',
         alt: 'Description for Image 11',
         title: 'Title 11',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria12.jpg',
+          'assets/images/gallery/12.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria12s.jpg',
+          'assets/images/gallery/12.jpg',
         alt: 'Description for Image 12',
         title: 'Title 12',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria13.jpg',
+          'assets/images/gallery/13.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria13s.jpg',
+          'assets/images/gallery/13.jpg',
         alt: 'Description for Image 13',
         title: 'Title 13',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria14.jpg',
+          'assets/images/gallery/14.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria14s.jpg',
+          'assets/images/gallery/14.jpg',
         alt: 'Description for Image 14',
         title: 'Title 14',
       },
       {
         itemImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria15.jpg',
+          'assets/images/gallery/15.jpg',
         thumbnailImageSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria15s.jpg',
+          'assets/images/gallery/15.jpg',
         alt: 'Description for Image 15',
         title: 'Title 15',
       },
