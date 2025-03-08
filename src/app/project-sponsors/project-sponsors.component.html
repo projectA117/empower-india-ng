@@ -122,9 +122,10 @@
         <div class="project-detail-set mt-4">
           <div class="project-detail-set-h">Phone</div>
           <div class="project-detail-set-v mt-2">
-            <input
-              pInputText
+            <p-inputNumber
               id="DonorsPhone"
+              mode="decimal"
+              [useGrouping]="false"
               formControlName="DonorsPhone"
               aria-describedby="DonorsPhone"
             />
@@ -173,10 +174,9 @@
         <div class="project-detail-set mt-4">
           <div class="project-detail-set-h">Amount</div>
           <div class="project-detail-set-v mt-2">
-            <input
-              type="number"
+            <p-inputNumber
               id="DonorsAmount"
-              aria-describedby="DonorsAmount"
+              mode="decimal"
               formControlName="DonorsAmount"
             />
           </div>
@@ -201,7 +201,12 @@
           (click)="ProjectSponsorSidebarVisible = false"
           class="cancel-btn"
         />
-        <p-button label="Add " type="submit" class="submit-btn" />
+        <p-button
+          label="Add "
+          type="submit"
+          class="submit-btn"
+          [disabled]="!donorForm.valid"
+        />
       </div>
     </form>
   </div>
