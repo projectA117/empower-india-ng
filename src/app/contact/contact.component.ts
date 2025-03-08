@@ -1,12 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '@service/productservice';
+import { DropdownModule } from 'primeng/dropdown';
+import { ImportsModule } from '../imports';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ProjectDetailsService } from '@service/project-details.service';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [],
+  imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  styleUrl: './contact.component.scss',
+  providers: [ProjectDetailsService, CommonService, ProductService],
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+  contactForm: FormGroup = new FormGroup({});
+  constructor(
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
+  ) {}
 
+  ngOnInit() {
+    this.createcontactForm();
+  }
+
+  createcontactForm() {
+    this.contactForm = new FormGroup({
+      Name: new FormControl('', [Validators.required]),
+      Subject: new FormControl('', [Validators.required]),
+      Message: new FormControl('', [Validators.required]),
+
+      DonorsEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
+        ),
+      ]),
+    });
+  }
+
+  updateContactForm() {
+    const payload = {
+      Name: this.contactForm.get('Name')?.value,
+      Subject: this.contactForm.get('Subject')?.value,
+      Message: this.contactForm.get('Message')?.value,
+      DonorsEmail: this.contactForm.get('DonorsEmail')?.value,
+    };
+
+    this.projectDetailsService.addDonars(payload, '').subscribe((data) => {
+      if (data) {
+        this.contactForm.reset();
+      }
+    });
+  }
 }
