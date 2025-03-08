@@ -92,124 +92,117 @@
         </div>
       </div>
     </div>
-    <p-button
+    <!-- <p-button
       label="Add Sponsor"
       (click)="ProjectSponsorSidebarVisible = true"
-    />
+    /> -->
+
+    <form
+      [formGroup]="donorForm"
+      style="width: 600px; margin: auto"
+      (ngSubmit)="updatedonorForm()"
+    >
+      <div class="tab-pop-txt">
+        <h4>Add Sponsor</h4>
+      </div>
+
+      <div class="">
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">Donor Name</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              pInputText
+              id="DonorsName"
+              formControlName="DonorsName"
+              aria-describedby="DonorsName"
+            />
+          </div>
+        </div>
+
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">Phone</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              pInputText
+              id="DonorsPhone"
+              formControlName="DonorsPhone"
+              aria-describedby="DonorsPhone"
+            />
+          </div>
+        </div>
+
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">e-mail</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              pInputText
+              id="DonorsEmail"
+              formControlName="DonorsEmail"
+              aria-describedby="DonorsEmail"
+            />
+          </div>
+        </div>
+
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">Address</div>
+          <div class="project-detail-set-v mt-2">
+            <textarea
+              rows="5"
+              cols="30"
+              pInputTextarea
+              id="DonorsAddress"
+              aria-describedby="DonorsAddress"
+              formControlName="DonorsAddress"
+            >
+            </textarea>
+          </div>
+        </div>
+
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">Memory of</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              pInputText
+              id="DonorsMemoryOf"
+              aria-describedby="DonorsMemoryOf"
+              formControlName="DonorsMemoryOf"
+            />
+          </div>
+        </div>
+
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">Amount</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              type="number"
+              id="DonorsAmount"
+              aria-describedby="DonorsAmount"
+              formControlName="DonorsAmount"
+            />
+          </div>
+        </div>
+
+        <div class="project-detail-set mt-4">
+          <div class="project-detail-set-h">Mode of Payment</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              pInputText
+              id="DonorsModeofPayment"
+              aria-describedby="DonorsModeofPayment"
+              formControlName="DonorsModeofPayment"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-footer-btns">
+        <p-button
+          label="Cancel "
+          (click)="ProjectSponsorSidebarVisible = false"
+          class="cancel-btn"
+        />
+        <p-button label="Add " type="submit" class="submit-btn" />
+      </div>
+    </form>
   </div>
 </div>
-
-<p-sidebar
-  [(visible)]="ProjectSponsorSidebarVisible"
-  position="right"
-  [showCloseIcon]="false"
->
-  <form
-    [formGroup]="donorForm"
-    *ngIf="ProjectSponsorSidebarVisible"
-    (ngSubmit)="updatedonorForm()"
-  >
-    <div class="tab-pop-txt">
-      <h4>Add Sponsor</h4>
-      <i class="pi pi-times" (click)="ProjectSponsorSidebarVisible = false"></i>
-    </div>
-
-    <div class="pop-data-set">
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Donor Name</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
-            id="DonorsName"
-            formControlName="DonorsName"
-            aria-describedby="DonorsName"
-          />
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Phone</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
-            id="DonorsPhone"
-            formControlName="DonorsPhone"
-            aria-describedby="DonorsPhone"
-          />
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">e-mail</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
-            id="DonorsEmail"
-            formControlName="DonorsEmail"
-            aria-describedby="DonorsEmail"
-          />
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Address</div>
-        <div class="project-detail-set-v mt-2">
-          <textarea
-            rows="5"
-            cols="30"
-            pInputTextarea
-            id="DonorsAddress"
-            aria-describedby="DonorsAddress"
-            formControlName="DonorsAddress"
-          >
-          </textarea>
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Memory of</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
-            id="DonorsMemoryOf"
-            aria-describedby="DonorsMemoryOf"
-            formControlName="DonorsMemoryOf"
-          />
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Amount</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            type="number"
-            id="DonorsAmount"
-            aria-describedby="DonorsAmount"
-            formControlName="DonorsAmount"
-          />
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Mode of Payment</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
-            id="DonorsModeofPayment"
-            aria-describedby="DonorsModeofPayment"
-            formControlName="DonorsModeofPayment"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-footer-btns">
-      <p-button
-        label="Cancel "
-        (click)="ProjectSponsorSidebarVisible = false"
-        class="cancel-btn"
-      />
-      <p-button label="Add " type="submit" class="submit-btn" />
-    </div>
-  </form>
-</p-sidebar>

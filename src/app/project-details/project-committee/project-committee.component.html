@@ -123,11 +123,14 @@
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Mobile</div>
         <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
+          <p-inputNumber
             id="Mobile"
+            mode="decimal"
             formControlName="Mobile"
-            aria-describedby="Mobile"
+            inputId="withoutgrouping"
+            [useGrouping]="false"
+            maxlength="10"
+            minlength="10"
           />
         </div>
       </div>
@@ -138,7 +141,12 @@
         (click)="sidebarVisible = false; editCommitee = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add"
+        type="submit"
+        class="submit-btn"
+        [disabled]="!updatecommitteeForm.valid"
+      />
     </div>
   </form>
 </p-sidebar>

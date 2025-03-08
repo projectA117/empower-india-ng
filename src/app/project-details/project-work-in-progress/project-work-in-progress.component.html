@@ -1,45 +1,36 @@
-
-
-
-
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>WIP Details</h4>
     <p-button label="Add WIP Details" (click)="WIPSidebarVisible = true" />
   </div>
 
+  <div class="justify-content-start flex-wrap mt-15">
+    <p-table [value]="WIPDetails" class="tab-data-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="Vendor">Date <p-sortIcon field="Vendor" /></th>
+          <th pSortableColumn="Contractor">
+            Description <p-sortIcon field="Contractor" />
+          </th>
 
-<div class="justify-content-start flex-wrap mt-15">
-  <p-table
-    [value]="WIPDetails"
-    class="tab-data-table"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="Vendor">Date <p-sortIcon field="Vendor" /></th>
-        <th pSortableColumn="Contractor">
-          Description <p-sortIcon field="Contractor" />
-        </th>
-
-        <th pSortableColumn="Auditor">
-          Auditor <p-sortIcon field="Auditor" />
-        </th>
-        <th pSortableColumn="Photos">
-          Photos/Videos <p-sortIcon field="Photos" />
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-      <tr>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-
+          <th pSortableColumn="Auditor">
+            Auditor <p-sortIcon field="Auditor" />
+          </th>
+          <th pSortableColumn="Photos">
+            Photos/Videos <p-sortIcon field="Photos" />
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.code }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.code }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
 
 <p-sidebar
@@ -52,74 +43,65 @@
     *ngIf="WIPSidebarVisible"
     (ngSubmit)="updateWIPForm()"
   >
-
-  <div class="tab-pop-txt">
-    <h4> Add WIP Details</h4>
-    <i class="pi pi-times" (click)="WIPSidebarVisible = false"></i>
-  </div>
-
-  <div class="pop-data-set">
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Date</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="WIPDate"
-          formControlName="WIPDate"
-          aria-describedby="WIPDate"
-        />
-      </div>
+    <div class="tab-pop-txt">
+      <h4>Add WIP Details</h4>
+      <i class="pi pi-times" (click)="WIPSidebarVisible = false"></i>
     </div>
 
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Description</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="WIPDescription"
-          formControlName="WIPDescription"
-          aria-describedby="WIPDescription"
-        />
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Date</div>
+        <div class="project-detail-set-v mt-2">
+          <p-calendar formControlName="WIPDate" id="WIPDate" />
+        </div>
       </div>
-    </div>
 
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Auditor</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="WIPAuditor"
-          formControlName="WIPAuditor"
-          aria-describedby="WIPAuditor"
-        />
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Description</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="WIPDescription"
+            formControlName="WIPDescription"
+            aria-describedby="WIPDescription"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Photos / Videos</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="WIPPhotosVideos"
-          formControlName="WIPPhotosVideos"
-          aria-describedby="WIPPhotosVideos"
-        />
-
-        <p-fileUpload
-          mode="basic"
-          chooseLabel="Choose"
-          chooseIcon="pi pi-upload"
-          name="demo[]"
-          url=""
-          accept="image/*"
-          maxFileSize="1000000"
-          (onUpload)="onUpload($event)"
-        />
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Auditor</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="WIPAuditor"
+            formControlName="WIPAuditor"
+            aria-describedby="WIPAuditor"
+          />
+        </div>
       </div>
-    </div>
 
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Photos / Videos</div>
+        <div class="project-detail-set-v mt-2">
+          <!-- <input
+            pInputText
+            id="WIPPhotosVideos"
+            formControlName="WIPPhotosVideos"
+            aria-describedby="WIPPhotosVideos"
+          /> -->
 
+          <p-fileUpload
+            mode="basic"
+            chooseLabel="Choose"
+            chooseIcon="pi pi-upload"
+            name="demo[]"
+            url=""
+            accept="image/*"
+            maxFileSize="1000000"
+            (onUpload)="onUpload($event)"
+          />
+        </div>
+      </div>
     </div>
     <div class="tab-footer-btns">
       <p-button
@@ -127,10 +109,13 @@
         (click)="WIPSidebarVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" (click)="updateWIPForm()"/>
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        (click)="updateWIPForm()"
+        [disabled]="!WIPForm.valid"
+      />
     </div>
-
-
- 
   </form>
 </p-sidebar>
