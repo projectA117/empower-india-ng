@@ -50,9 +50,10 @@
     }
 }
 
-.upload-picture-set{
+.upload-picture-set {
     position: relative;
-    .upload-picture{
+
+    .upload-picture {
         position: absolute;
         background-color: #444444;
         border-radius: 100px;
@@ -66,6 +67,50 @@
     }
 }
 
-.project-detail-set{
+.project-detail-set {
     padding: 0.5rem;
+}
+
+.cancel-btn {
+    background-color: #FFFFFF;
+    border: 1px solid #4F7619;
+    color: #4F7619;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    transition: 0.3sease;
+
+    &:hover {
+        background-color: #f1f1f1;
+        border: 1px solid #4F7619;
+        color: #4F7619;
+        transition: 0.3sease;
+    }
+}
+
+
+.submit-btn {
+    background-color: #4F7619;
+    border: 1px solid #4F7619;
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    transition: 0.3sease;
+}
+
+.add-project{
+    h4{
+        color: #4F7619;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 0 3px 7.5px;
+    }
+}
+
+.pad-sep{
+    padding: 0 7.5px;
+}
+.project-radio{
+    .form-label{
+        margin: 0;
+    }
 }

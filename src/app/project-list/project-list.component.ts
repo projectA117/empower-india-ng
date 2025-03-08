@@ -68,16 +68,17 @@ export class ProjectListComponent implements OnInit {
           this.projects = data;
         }
       },
-      err => {
-      //Temp fix for Gopi
-      this.projects = HardCodedInfo.projects;
-    });
+      (err) => {
+        //Temp fix for Gopi
+        this.projects = HardCodedInfo.projects;
+      }
+    );
   }
 
   projectDMVSearch() {
     //districtId=17&mandalId=77&villageId=9418
     let params;
- 
+
     if (this.selectedDistrict && this.selectedDistrict.id) {
       params = 'districtId=' + this.selectedDistrict.id;
     }
@@ -87,7 +88,7 @@ export class ProjectListComponent implements OnInit {
     if (this.selectedVilage && this.selectedVilage.id) {
       params += '&villageId=' + this.selectedVilage.id;
     }
- 
+
     console.log(params);
     this.commonService.getProjectDMVSearch(params).subscribe(
       (data) => {
@@ -101,7 +102,7 @@ export class ProjectListComponent implements OnInit {
       }
     );
   }
-  
+
   getDistricts() {
     this.commonService.getDistricts().subscribe(
       (data) => {
@@ -112,11 +113,11 @@ export class ProjectListComponent implements OnInit {
           }
         }
       },
-      err => {
-      //Temp fix for Gopi
-      this.districts = HardCodedInfo.districts;
-    });
-
+      (err) => {
+        //Temp fix for Gopi
+        this.districts = HardCodedInfo.districts;
+      }
+    );
   }
 
   getMandals(event: any) {
@@ -125,26 +126,32 @@ export class ProjectListComponent implements OnInit {
     this.villages = [];
     this.selectedMandal = null;
     this.selectedVilage = null;
-    this.commonService.getMandals(districtCode).subscribe((data) => {
-      this.mandals = data;
+    this.commonService.getMandals(districtCode).subscribe(
+      (data) => {
+        this.mandals = data;
         this.projectDMVSearch();
-    }, err => {
-      //Temp fix for Gopi
-      this.mandals = HardCodedInfo.mandals;
-    });
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.mandals = HardCodedInfo.mandals;
+      }
+    );
   }
 
   getvilages(event: any) {
     const mandalCode = event.value.id;
     this.villages = [];
     this.selectedVilage = null;
-    this.commonService.getVillages(mandalCode).subscribe((data) => {
-      this.villages = data;
+    this.commonService.getVillages(mandalCode).subscribe(
+      (data) => {
+        this.villages = data;
         this.projectDMVSearch();
-    }, err => {
-      //Temp fix for Gopi
-      this.villages = HardCodedInfo.villages;
-    });
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.villages = HardCodedInfo.villages;
+      }
+    );
   }
 
   vilageChange(event: any) {
@@ -186,6 +193,14 @@ export class ProjectListComponent implements OnInit {
     //this.project = project;
     //this.productService.selectedProject.next(project);
     this.router.navigate(['project-details'], {
+      queryParams: { project: JSON.stringify(project) },
+    });
+  }
+
+  getProjectSponsorDetails(project: any) {
+    //this.project = project;
+    //this.productService.selectedProject.next(project);
+    this.router.navigate(['project-sponsors'], {
       queryParams: { project: JSON.stringify(project) },
     });
   }
