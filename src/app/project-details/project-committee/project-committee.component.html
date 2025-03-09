@@ -32,7 +32,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-Committee>
         <tr>
-          <td>{{ Committee.firstName }}</td>
+          <td>{{ Committee.firstName }} {{ Committee.lastName }}</td>
           <td>{{ Committee.phoneNumber }}</td>
           <td>
             <i class="pi pi-pencil" (click)="editCommittee(Committee)"></i>
@@ -129,8 +129,6 @@
             formControlName="Mobile"
             inputId="withoutgrouping"
             [useGrouping]="false"
-            maxlength="10"
-            minlength="10"
           />
         </div>
       </div>

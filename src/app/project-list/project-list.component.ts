@@ -51,6 +51,8 @@ export class ProjectListComponent implements OnInit {
   mandals: any = [];
   villages: any = [];
   categories: any = [];
+  status: any = [];
+  selectedStatus: any = '';
   selectedcategory: any = '';
 
   showProjectDialog: boolean = false;
@@ -70,12 +72,42 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit() {
     // this.getProjects(this.first, this.rows);
+    this.getCategories();
     this.getDistricts();
-
+    this.status = [
+      {
+        id: 1,
+        name: 'NEW',
+      },
+      {
+        id: 2,
+        name: 'APPROVED',
+      },
+      {
+        id: 3,
+        name: 'REJECTED',
+      },
+      {
+        id: 4,
+        name: 'WIP',
+      },
+      {
+        id: 5,
+        name: 'WFD',
+      },
+      {
+        id: 6,
+        name: 'COMPLETED',
+      },
+      {
+        id: 7,
+        name: 'OPEN',
+      },
+    ];
     this.categories = [
       {
         id: 23,
-        description: 'Bus helter',
+        description: 'Bus shelter',
         image: 'bus_shelter.png',
       },
       {
@@ -191,7 +223,7 @@ export class ProjectListComponent implements OnInit {
     ];
 
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.selectedcategory = params['category'];
+      this.selectedcategory = parseInt(params['category']);
       if (this.selectedcategory) {
         this.projectDMVSearch();
       } else {
@@ -235,12 +267,18 @@ export class ProjectListComponent implements OnInit {
       params += 'category=' + this.selectedcategory;
     }
 
+    if (this.selectedStatus && params.length > 0 && this.selectedStatus) {
+      params += '&status=' + this.selectedStatus;
+    } else if (this.selectedStatus && params.length == 0) {
+      params += 'status=' + this.selectedStatus;
+    }
+
     console.log(params);
     this.commonService.getProjectDMVSearch(params).subscribe(
       (data) => {
-        // if (data.length > 0) {
-        this.projects = data;
-        // }
+        if (!data.error) {
+          this.projects = data.content;
+        }
       },
       (err) => {
         //Temp fix for Gopi
@@ -262,6 +300,24 @@ export class ProjectListComponent implements OnInit {
       (err) => {
         //Temp fix for Gopi
         this.districts = HardCodedInfo.districts;
+      }
+    );
+  }
+  getCategories(isDefaultLoad?: boolean) {
+    this.commonService.getProjectCategories().subscribe(
+      (data) => {
+        // this.categories = data.projects;
+
+        for (var i = 0; i < data.length; i += 1) {
+          if (data[i].projects.length > 0) {
+            this.categories.push(data[i].projects);
+          }
+        }
+      },
+
+      (err) => {
+        //Temp fix for Gopi
+        this.categories = HardCodedInfo.categories;
       }
     );
   }
@@ -305,6 +361,10 @@ export class ProjectListComponent implements OnInit {
   }
 
   categoryChange(event: any) {
+    this.projectDMVSearch();
+  }
+
+  StatusChange(event: any) {
     this.projectDMVSearch();
   }
 

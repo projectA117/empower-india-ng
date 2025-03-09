@@ -23,10 +23,10 @@
       </ng-template>
       <ng-template pTemplate="body" let-VendorsDetails>
         <tr>
-          <td>{{ VendorsDetails.code }}</td>
+          <td>{{ VendorsDetails.contractorName }}</td>
           <td>{{ VendorsDetails.name }}</td>
-          <td>{{ VendorsDetails.category }}</td>
-          <td>{{ VendorsDetails.code }}</td>
+          <td>{{ VendorsDetails.phone }}</td>
+          <td>{{ VendorsDetails.address }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -44,7 +44,7 @@
     (ngSubmit)="updateVendor()"
   >
     <div class="tab-pop-txt">
-      <h4>Add Vendor 1234</h4>
+      <h4>Add Vendor</h4>
       <i class="pi pi-times" (click)="vendorSidebarVisible = false"></i>
     </div>
 
@@ -76,11 +76,14 @@
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Mobile</div>
         <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
+          <p-inputNumber
+            id="Mobile"
+            mode="decimal"
             id="VendorMobile"
             aria-describedby="VendorMobile"
             formControlName="VendorMobile"
+            inputId="VendorMobile"
+            [useGrouping]="false"
           />
         </div>
       </div>

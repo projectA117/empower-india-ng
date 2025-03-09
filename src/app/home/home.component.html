@@ -93,7 +93,9 @@
           <h4>
             {{ categoryItem.description }}
           </h4>
-          <button (click)="showprojectcategoryDetails(categoryItem)">Sponsor</button>
+          <button (click)="showprojectcategoryDetails(categoryItem)">
+            Sponsor
+          </button>
         </div>
       </ng-template>
     </p-carousel>
@@ -106,68 +108,25 @@
   </div>
   <div class="container">
     <div class="top-five-sponsors">
-      <div class="sponsor-card" (click)="showSponsorDetails()">
+      <div
+        class="sponsor-card"
+        *ngFor="let sponsor of topSponsers"
+        (click)="showSponsorDetails()"
+      >
         <img
-          src="assets/images/sponsors/01.png"
+          src="assets/images/sponsors/{{ sponsor.image }}"
           class="img-fluid"
           width="100%"
         />
         <div class="sponspor-details">
-          <div class="sponspor-details-name">Srini Nannapaneni</div>
-          <div class="sponspor-details-v">
-            Kakarla | Tiruvuru | NTR District
+          <div class="sponspor-details-name">
+            {{ sponsor.firstName }} {{ sponsor.lastName }}
           </div>
-          <div class="sponspor-details-money">15,00,000/-</div>
-        </div>
-      </div>
-      <div class="sponsor-card" (click)="showSponsorDetails()">
-        <img
-          src="assets/images/sponsors/05.png"
-          class="img-fluid"
-          width="100%"
-        />
-        <div class="sponspor-details">
-          <div class="sponspor-details-name">Madhusudhan</div>
-          <div class="sponspor-details-v">Kavali | Nellore</div>
-          <div class="sponspor-details-money">12,00,000/-</div>
-        </div>
-      </div>
-      <div class="sponsor-card" (click)="showSponsorDetails()">
-        <img
-          src="assets/images/sponsors/09.png"
-          class="img-fluid"
-          width="100%"
-        />
-        <div class="sponspor-details">
-          <div class="sponspor-details-name">Suhasini</div>
-          <div class="sponspor-details-v">Samalkota | East Godavari</div>
-          <div class="sponspor-details-money">9,00,000/-</div>
-        </div>
-      </div>
-      <div class="sponsor-card" (click)="showSponsorDetails()">
-        <img
-          src="assets/images/sponsors/16.png"
-          class="img-fluid"
-          width="100%"
-        />
-        <div class="sponspor-details">
-          <div class="sponspor-details-name">Rajani Gandham</div>
-          <div class="sponspor-details-v">Amalapuram | East Godavari</div>
-          <div class="sponspor-details-money">9,00,000/-</div>
-        </div>
-      </div>
-      <div class="sponsor-card" (click)="showSponsorDetails()">
-        <img
-          src="assets/images/sponsors/04.png"
-          class="img-fluid"
-          width="100%"
-        />
-        <div class="sponspor-details">
-          <div class="sponspor-details-name">Somesh Veera</div>
           <div class="sponspor-details-v">
-            Avulanatham | Kuppam | Chittore District
+            {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
+            {{ sponsor.districtName }} District
           </div>
-          <div class="sponspor-details-money">8,50,000/-</div>
+          <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
         </div>
       </div>
     </div>

@@ -60,9 +60,9 @@ export class ProjectDonorsComponent implements OnInit {
   createdonorForm() {
     this.donorForm = new FormGroup({
       DonorsName: new FormControl('', [Validators.required]),
-      DonorsPhone: new FormControl('', [
+      DonorsPhone: new FormControl(null, [
         Validators.required,
-        Validators.pattern(`^[0-9]*`),
+        Validators.pattern(`^[0-9]{10}$`),
         Validators.minLength(10),
         Validators.maxLength(10),
       ]),
