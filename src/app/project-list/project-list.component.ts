@@ -61,6 +61,7 @@ export class ProjectListComponent implements OnInit {
   totalRecords: number = 0;
   first: number = 0;
   rows: number = 10;
+  projectSponsorDetails: any = {};
 
   constructor(
     private commonService: CommonService,
@@ -219,6 +220,44 @@ export class ProjectListComponent implements OnInit {
         id: 1,
         description: 'Library Books',
         image: 'project-1.jpg',
+      },
+    ];
+
+    this.projectSponsorDetails = [
+      {
+        id: 1,
+        name: 'ABC Construction',
+        contractorName: 'Swetha R',
+        phone: '1234567890',
+        address: '123 Main St, Anytown, USA',
+      },
+      {
+        id: 2,
+        name: 'czc',
+        contractorName: 'dsfdsf',
+        phone: 'sdfsdf',
+        address: 'sdfdsf',
+      },
+      {
+        id: 3,
+        name: 'czc',
+        contractorName: 'dsfdsf',
+        phone: 'sdfsdf',
+        address: 'sdfdsf',
+      },
+      {
+        id: 4,
+        name: 'zxczxc',
+        contractorName: 'zxcxzc',
+        phone: '996337888',
+        address: 'zxcxzc',
+      },
+      {
+        id: 5,
+        name: 'zxczxc',
+        contractorName: 'zxcxzc',
+        phone: '996337888',
+        address: 'zxcxzc',
       },
     ];
 
