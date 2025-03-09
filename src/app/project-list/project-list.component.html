@@ -1,7 +1,17 @@
 <div class="header-set">
   <h3>Projects List <span>55</span></h3>
-  
+
   <div class="header-set-filter">
+    <p-dropdown
+      [filter]="true"
+      [options]="status"
+      [(ngModel)]="selectedStatus"
+      optionLabel="name"
+      optionValue="name"
+      placeholder="Select a Status"
+      (onChange)="StatusChange($event)"
+    />
+
     <p-dropdown
       [filter]="true"
       [options]="categories"
@@ -13,7 +23,6 @@
     />
     <p-dropdown
       filterBy="name"
-      [showClear]="true"
       [filter]="true"
       [options]="districts"
       [(ngModel)]="selectedDistrict"
@@ -150,25 +159,10 @@
                       <div class="open-status">{{ info.status }}</div>
                     </div>
                   </div>
-                  <div class="project-detail-set col-12">
-                    <div class="project-detail-set-h">Description</div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Estimation</div>
                     <div class="project-detail-set-v mt-2">
-                      {{ info.description }}
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="project-detail-h-set col-12">
-                    <h4>Project Estimation Details</h4>
-                  </div>
-
-                  <div class="project-detail-set col-4">
-                    <div class="project-detail-set-h">
-                      Project Estimation (Inc. Maintenance 3 Years)
-                    </div>
-                    <div class="project-detail-set-v mt-2">
-                      {{ info.projectEstimation }}
+                      ₹ {{ info.projectEstimation }}/-
                     </div>
                   </div>
                   <div class="project-detail-set col-2">
@@ -183,6 +177,18 @@
                       {{ info.publicShare }}
                     </div>
                   </div>
+                  <div class="project-detail-set col-12">
+                    <div class="project-detail-set-h">Description</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ info.description }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="project-detail-h-set col-10">
+                    <h4>Project sponsors Details</h4>
+                  </div>
                   <div class="project-detail-set col-2">
                     <button
                       class="submit-btn-m"
@@ -191,6 +197,27 @@
                       Sponsor
                     </button>
                   </div>
+
+                  <!-- <div class="project-detail-set col-4">
+                    <div class="project-detail-set-h">
+                      Project Estimation (Inc. Maintenance 3 Years)
+                    </div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ info.projectEstimation }}
+                    </div>
+                  </div> 
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Govt. Share</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ info.governmentShare }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Public Share</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ info.publicShare }}
+                    </div>
+                  </div> -->
                 </div>
               </div>
             </div>

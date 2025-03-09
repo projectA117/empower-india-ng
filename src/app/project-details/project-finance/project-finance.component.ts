@@ -86,7 +86,7 @@ export class ProjectFinanceComponent implements OnInit {
       financeModeofPayment: new FormControl('', [Validators.required]),
       financeApprovedBy: new FormControl('', [Validators.required]),
       financeDescription: new FormControl('', [Validators.required]),
-      financeBillProofs: new FormControl('', [Validators.required]),
+      financeBillProofs: new FormControl(''),
     });
   }
 

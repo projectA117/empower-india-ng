@@ -51,13 +51,13 @@ export class ContactComponent implements OnInit {
 
   updateContactForm() {
     const payload = {
-      Name: this.contactForm.get('Name')?.value,
-      Subject: this.contactForm.get('Subject')?.value,
-      Message: this.contactForm.get('Message')?.value,
-      DonorsEmail: this.contactForm.get('DonorsEmail')?.value,
+      name: this.contactForm.get('Name')?.value,
+      subject: this.contactForm.get('Subject')?.value,
+      message: this.contactForm.get('Message')?.value,
+      email: this.contactForm.get('DonorsEmail')?.value,
     };
 
-    this.projectDetailsService.addDonars(payload, '').subscribe((data) => {
+    this.commonService.contactSubmit(payload).subscribe((data) => {
       if (data) {
         this.contactForm.reset();
       }

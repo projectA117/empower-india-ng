@@ -169,6 +169,16 @@
             formControlName="financeBillProofs"
             aria-describedby="financeBillProofs"
           />
+          <p-fileUpload
+            mode="basic"
+            chooseLabel="Choose"
+            chooseIcon="pi pi-upload"
+            name="demo[]"
+            url=""
+            accept="image/*"
+            maxFileSize="1000000"
+            (onUpload)="onUpload($event)"
+          />
         </div>
       </div>
     </div>
