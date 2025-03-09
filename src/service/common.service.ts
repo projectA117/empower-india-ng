@@ -64,13 +64,17 @@ export class CommonService {
       );
   }
 
-  getProjects(): Observable<any> {
-    return this.httpClient.get<any>(`${environment.apiUrl}/project`).pipe(
-      map((projects) => {
-        return projects;
-      }),
-      catchError((error) => of(error))
-    );
+  getProjects(pagenumber: 0, pagesize: 10): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        `${environment.apiUrl}/project?page=${pagenumber}&size=${pagesize}`
+      )
+      .pipe(
+        map((projects) => {
+          return projects;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   getProjectDMVSearch(payLoad: any): Observable<any> {

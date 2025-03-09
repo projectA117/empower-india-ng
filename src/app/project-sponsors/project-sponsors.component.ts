@@ -42,13 +42,23 @@ export class ProjectSponsorsComponent implements OnInit {
 
   createdonorForm() {
     this.donorForm = new FormGroup({
-      DonorsName: new FormControl(''),
-      DonorsPhone: new FormControl(''),
-      DonorsEmail: new FormControl(''),
-      DonorsAddress: new FormControl(''),
-      DonorsMemoryOf: new FormControl(''),
-      DonorsAmount: new FormControl(''),
-      DonorsModeofPayment: new FormControl(''),
+      DonorsName: new FormControl('', [Validators.required]),
+      DonorsPhone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(`^[0-9]*`),
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]),
+      DonorsEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
+        ),
+      ]),
+      DonorsAddress: new FormControl('', [Validators.required]),
+      DonorsMemoryOf: new FormControl('', [Validators.required]),
+      DonorsAmount: new FormControl('', [Validators.required]),
+      DonorsModeofPayment: new FormControl('', [Validators.required]),
     });
   }
   updatedonorForm() {
@@ -69,6 +79,7 @@ export class ProjectSponsorsComponent implements OnInit {
         if (data) {
           // this.showdonor();
           this.ProjectSponsorSidebarVisible = false;
+          this.donorForm.reset();
         }
       });
   }

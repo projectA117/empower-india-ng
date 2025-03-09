@@ -73,93 +73,29 @@ export class HomeComponent {
       {
         id: 18,
         description: 'Audio System',
-        image: 'project-1.jpg',
+        image: 'music.png',
       },
       {
         id: 17,
         description: 'Computers',
-        image: 'project-1.jpg',
+        image: 'computer.png',
       },
       {
         id: 16,
-        description: 'Sanitary Pad',
-        image: 'project-1.jpg',
+        description: 'Sanitary Pads',
+        image: 'sanitary.png',
       },
       {
         id: 15,
         description: 'Dustbins',
-        image: 'project-1.jpg',
+        image: 'dustbin.png',
       },
       {
         id: 14,
         description: 'Sports Kits',
-        image: 'project-1.jpg',
+        image: 'sports.png',
       },
-      {
-        id: 13,
-        description: 'Paints',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 12,
-        description: 'Cycles',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 11,
-        description: 'Library',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 10,
-        description: 'Toilets',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 9,
-        description: 'RO Plant',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 8,
-        description: 'Benches',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 7,
-        description: 'Digital Boards',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 6,
-        description: 'Solar Fencing',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 5,
-        description: 'CC Cameras',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 4,
-        description: 'Racks',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 3,
-        description: 'Ceiling Fans',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 2,
-        description: 'Class Rooms',
-        image: 'project-1.jpg',
-      },
-      {
-        id: 1,
-        description: 'Library Books',
-        image: 'project-1.jpg',
-      },
+      
     ];
 
     this.responsiveOptions = [
@@ -194,5 +130,10 @@ export class HomeComponent {
   showSponsorDetails() {
     this.router.navigate(['sponsors-details'], {});
   }
- 
+
+  showprojectcategoryDetails(selectedCategory: any) {
+    this.router.navigate(['projects'], {
+      queryParams: { category: selectedCategory.id },
+    });
+  }
 }

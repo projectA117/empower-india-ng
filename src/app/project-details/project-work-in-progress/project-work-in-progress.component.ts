@@ -57,10 +57,10 @@ export class ProjectWorkInProgressComponent implements OnInit {
 
   createWIPFormForm() {
     this.WIPForm = new FormGroup({
-      WIPDate: new FormControl(''),
-      WIPDescription: new FormControl(''),
-      WIPAuditor: new FormControl(''),
-      WIPPhotosVideos: new FormControl(''),
+      WIPDate: new FormControl('', [Validators.required]),
+      WIPDescription: new FormControl('', [Validators.required]),
+      WIPAuditor: new FormControl('', [Validators.required]),
+      // WIPPhotosVideos: new FormControl('', [Validators.required]),
     });
   }
 
@@ -70,5 +70,4 @@ export class ProjectWorkInProgressComponent implements OnInit {
     });
   }
   updateWIPForm() {}
-  
 }

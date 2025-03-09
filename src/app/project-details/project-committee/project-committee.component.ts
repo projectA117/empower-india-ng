@@ -78,9 +78,21 @@ export class ProjectCommitteeComponent implements OnInit {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       fatherName: new FormControl('', [Validators.required]),
-      email: new FormControl(''),
-      villageId: new FormControl(this.projectData.villageName),
-      Mobile: new FormControl(''),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
+        ),
+      ]),
+      villageId: new FormControl(this.projectData.villageName, [
+        Validators.required,
+      ]),
+      Mobile: new FormControl('', [
+        Validators.required,
+        Validators.pattern(`^[0-9]*`),
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]),
     });
   }
 

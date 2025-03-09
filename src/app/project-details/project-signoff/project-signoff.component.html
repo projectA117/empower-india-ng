@@ -2,42 +2,38 @@
   <div class="project-detail-h-set tab-h-txt">
     <h4>Project Sign Off Details</h4>
     <p-button
-    label="Add Sign Off Details"
-    (click)="ProjectSignOffsidebarVisible = true"
-  />
+      label="Add Sign Off Details"
+      (click)="ProjectSignOffsidebarVisible = true"
+    />
   </div>
 
-<div class="justify-content-start flex-wrap mt-15">
-  <p-table
-    [value]="products"
-    class="tab-data-table"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="Vendor">Date <p-sortIcon field="Vendor" /></th>
-        <th pSortableColumn="Contractor">
-          Photo <p-sortIcon field="Contractor" />
-        </th>
+  <div class="justify-content-start flex-wrap mt-15">
+    <p-table [value]="products" class="tab-data-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="Vendor">Date <p-sortIcon field="Vendor" /></th>
+          <th pSortableColumn="Contractor">
+            Photo <p-sortIcon field="Contractor" />
+          </th>
 
-        <th pSortableColumn="Auditor">
-          Sign off Members <p-sortIcon field="Auditor" />
-        </th>
-        <th pSortableColumn="Decription">
-          Decription <p-sortIcon field="Decription" />
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-      <tr>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.code }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-
+          <th pSortableColumn="Auditor">
+            Sign off Members <p-sortIcon field="Auditor" />
+          </th>
+          <th pSortableColumn="Decription">
+            Decription <p-sortIcon field="Decription" />
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.code }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.code }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
 
 <p-sidebar
@@ -50,64 +46,58 @@
     *ngIf="ProjectSignOffsidebarVisible"
     (ngSubmit)="updateProjectSignOff()"
   >
-
-  <div class="tab-pop-txt">
-    <h4>Add Donors Members</h4>
-    <i class="pi pi-times" (click)="ProjectSignOffsidebarVisible = false"></i>
-  </div>
-
-  <div class="pop-data-set">
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Date</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="ProjectSignOffDate"
-          aria-describedby="ProjectSignOffDate"
-          formControlName="ProjectSignOffDate"
-        />
-      </div>
+    <div class="tab-pop-txt">
+      <h4>Add Donors Members</h4>
+      <i class="pi pi-times" (click)="ProjectSignOffsidebarVisible = false"></i>
     </div>
 
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Photo</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="ProjectSignOffPhoto"
-          formControlName="ProjectSignOffPhoto"
-          aria-describedby="ProjectSignOffPhoto"
-        />
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Date</div>
+        <div class="project-detail-set-v mt-2">
+          <p-calendar
+            formControlName="ProjectSignOffDate"
+            id="ProjectSignOffDate"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Photo</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="ProjectSignOffPhoto"
+            formControlName="ProjectSignOffPhoto"
+            aria-describedby="ProjectSignOffPhoto"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Sign Off Members</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="ProjectSignOffMembers"
+            formControlName="ProjectSignOffMembers"
+            aria-describedby="ProjectSignOffMembers"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Decription</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="ProjectSignOffDecription"
+            formControlName="ProjectSignOffDecription"
+            aria-describedby="ProjectSignOffDecription"
+          />
+        </div>
       </div>
     </div>
-
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Sign Off Members</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="ProjectSignOffMembers"
-          formControlName="ProjectSignOffMembers"
-          aria-describedby="ProjectSignOffMembers"
-        />
-      </div>
-    </div>
-
-    <div class="project-detail-set mt-4">
-      <div class="project-detail-set-h">Decription</div>
-      <div class="project-detail-set-v mt-2">
-        <input
-          pInputText
-          id="ProjectSignOffDecription"
-          formControlName="ProjectSignOffDecription"
-          aria-describedby="ProjectSignOffDecription"
-        />
-      </div>
-    </div>
-
-  </div>
 
     <div class="tab-footer-btns">
       <p-button
@@ -115,9 +105,12 @@
         (click)="ProjectSignOffsidebarVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!ProjectSignOffForm.valid"
+      />
     </div>
-
-   
   </form>
 </p-sidebar>
