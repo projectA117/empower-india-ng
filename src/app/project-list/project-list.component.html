@@ -205,40 +205,46 @@
                       >
                         <ng-template pTemplate="header">
                           <tr>
-                            <th pSortableColumn="Date">
-                              Donor Name<p-sortIcon field="DonorName" />
+                            <th pSortableColumn="firstName" class="text-center">
+                              Sponsor Name<p-sortIcon field="firstName" />
                             </th>
-                            <th pSortableColumn="Phone">
-                              Phone <p-sortIcon field="Phone" />
+                            <th
+                              pSortableColumn="phoneNumber"
+                              class="text-center"
+                            >
+                              Phone <p-sortIcon field="phoneNumber" />
                             </th>
 
-                            <th pSortableColumn="Email">
-                              Email <p-sortIcon field="Email" />
+                            <th pSortableColumn="email" class="text-center">
+                              Email <p-sortIcon field="email" />
                             </th>
-                            <th pSortableColumn="Address">
-                              Address <p-sortIcon field="Address" />
+                            <th pSortableColumn="address" class="text-center">
+                              Address <p-sortIcon field="address" />
                             </th>
-                            <th pSortableColumn="Memoryof">
-                              Memory of <p-sortIcon field="Memory of" />
+                            <th pSortableColumn="memoryOf" class="text-center">
+                              Memory of <p-sortIcon field="memoryOf" />
                             </th>
-                            <th pSortableColumn="Amount">
+                            <th pSortableColumn="Amount" class="text-right">
                               Amount <p-sortIcon field="Amount" />
                             </th>
-                            <th pSortableColumn="Payment">
+                            <th pSortableColumn="Payment" class="text-center">
                               Mode of Payment <p-sortIcon field="Payment" />
                             </th>
                           </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-doners>
                           <tr>
-                            <td>{{ doners.firstName }}</td>
-                            <td>{{ doners.phoneNumber }}</td>
-                            <td>{{ doners.email }}</td>
-                            <td>{{ doners.code }}</td>
-                            <td>{{ doners.lastName }}</td>
-                            <td>{{ doners.category }}</td>
-                            <td>{{ doners.category }}</td>
-                            <td>{{ doners.category }}</td>
+                            <td class="text-center">{{ doners.firstName }}</td>
+                            <td class="text-center">
+                              {{ doners.phoneNumber }}
+                            </td>
+                            <td class="text-center">{{ doners.email }}</td>
+                            <td class="text-center">{{ doners.address }}</td>
+                            <td class="text-center">{{ doners.memoryOf }}</td>
+                            <td class="text-right">₹ {{ doners.amount }} /-</td>
+                            <td class="text-center block">
+                              {{ doners.ModeofPayment }}
+                            </td>
                           </tr>
                         </ng-template>
                       </p-table>
