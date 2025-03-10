@@ -10,6 +10,8 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProjectSponsorsComponent } from './project-sponsors/project-sponsors.component';
 import { SponsorsDetailsComponent } from './sponsors-details/sponsors-details.component';
+import { SigninComponent } from './signin/signin.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,4 +26,6 @@ export const routes: Routes = [
   { path: 'project-details', component: ProjectDetailsComponent },
   { path: 'project-sponsors', component: ProjectSponsorsComponent },
   { path: 'sponsors-details', component: SponsorsDetailsComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'register', component: RegisterComponent },
 ];
