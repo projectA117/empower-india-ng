@@ -41,10 +41,10 @@ export class AppComponent {
         label: 'ABOUT US',
         routerLink: 'about-us',
       },
-      {
-        label: 'VISION',
-        routerLink: 'vision',
-      },
+      // {
+      //   label: 'VISION',
+      //   routerLink: 'vision',
+      // },
       {
         label: 'PROJECTS',
         routerLink: 'projects',

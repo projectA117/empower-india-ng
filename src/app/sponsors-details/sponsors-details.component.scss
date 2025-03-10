@@ -122,3 +122,53 @@
         padding: 5px 10px;
     }
   }
+
+  @media screen and (max-width: 960px) {
+    .sponsor-name{
+        padding: 10px 10px 10px 40px;
+        font-size: 18px;
+        position: absolute;
+        bottom: -18px;
+    }
+    .sponsor-badge{
+        right: 10px;
+        height: 180px;
+        margin: unset;
+        left: unset;
+    }
+    .badge-icon{
+        height: 210px;
+    }
+    .sponsor-img-set{
+        transform: translate(30px, -50%);
+        gap: 20px;
+        .sponsor-img-set {
+            img{
+                width: 110px;
+                height: 110px;
+            }
+        }
+        .sponsor-amount {
+            .sponsor-amount-txt {
+                font-weight: 100;
+                font-size: 20px;
+            }
+            .sponsor-amount-price{
+                font-size: 35px;
+            }
+            .sponsor-amount-words{
+                font-size: 25px;
+            }
+        }
+    }
+    .donated{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        span{
+            width: fit-content;
+        }
+    }
+}
+
+
