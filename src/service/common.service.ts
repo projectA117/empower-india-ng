@@ -112,7 +112,7 @@ export class CommonService {
 
   getTopSponsers(): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/project/top-donars/5`)
+      .get<any>(`${environment.apiUrl}/donars/all-donars?topN=5`)
       .pipe(
         map((sponsors) => {
           return sponsors;
@@ -123,7 +123,7 @@ export class CommonService {
 
   getAllSponsers(): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/project/all-donars`)
+      .get<any>(`${environment.apiUrl}/donars/all-donars`)
       .pipe(
         map((allSponsors) => {
           return allSponsors;
@@ -135,6 +135,28 @@ export class CommonService {
   contactSubmit(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`${environment.apiUrl}/contact/submit`, payLoad)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  signin(payLoad: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/login`, payLoad)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  register(payLoad: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/users/create`, payLoad)
       .pipe(
         map((response) => {
           return response;

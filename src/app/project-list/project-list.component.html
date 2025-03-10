@@ -205,27 +205,40 @@
                       >
                         <ng-template pTemplate="header">
                           <tr>
-                            <th pSortableColumn="Vendor">
-                              Vendor Name <p-sortIcon field="Vendor" />
+                            <th pSortableColumn="Date">
+                              Donor Name<p-sortIcon field="DonorName" />
                             </th>
-                            <th pSortableColumn="Contractor">
-                              Contractor Name <p-sortIcon field="Contractor" />
-                            </th>
-
                             <th pSortableColumn="Phone">
                               Phone <p-sortIcon field="Phone" />
+                            </th>
+
+                            <th pSortableColumn="Email">
+                              Email <p-sortIcon field="Email" />
                             </th>
                             <th pSortableColumn="Address">
                               Address <p-sortIcon field="Address" />
                             </th>
+                            <th pSortableColumn="Memoryof">
+                              Memory of <p-sortIcon field="Memory of" />
+                            </th>
+                            <th pSortableColumn="Amount">
+                              Amount <p-sortIcon field="Amount" />
+                            </th>
+                            <th pSortableColumn="Payment">
+                              Mode of Payment <p-sortIcon field="Payment" />
+                            </th>
                           </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-sponsorDetails>
+                        <ng-template pTemplate="body" let-doners>
                           <tr>
-                            <td>{{ sponsorDetails.contractorName }}</td>
-                            <td>{{ sponsorDetails.name }}</td>
-                            <td>{{ sponsorDetails.phone }}</td>
-                            <td>{{ sponsorDetails.address }}</td>
+                            <td>{{ doners.firstName }}</td>
+                            <td>{{ doners.phoneNumber }}</td>
+                            <td>{{ doners.email }}</td>
+                            <td>{{ doners.code }}</td>
+                            <td>{{ doners.lastName }}</td>
+                            <td>{{ doners.category }}</td>
+                            <td>{{ doners.category }}</td>
+                            <td>{{ doners.category }}</td>
                           </tr>
                         </ng-template>
                       </p-table>
