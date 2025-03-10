@@ -109,4 +109,37 @@ export class CommonService {
         catchError((error) => of(error))
       );
   }
+
+  getTopSponsers(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/donars/project/top-donars/5`)
+      .pipe(
+        map((sponsors) => {
+          return sponsors;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  getAllSponsers(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/donars/project/all-donars`)
+      .pipe(
+        map((allSponsors) => {
+          return allSponsors;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  contactSubmit(payLoad: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/contact/submit`, payLoad)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
 }

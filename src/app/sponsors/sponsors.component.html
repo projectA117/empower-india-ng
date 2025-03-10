@@ -2,245 +2,188 @@
   <h3>Sponsors <span>55</span></h3>
 </div>
 
+<div
+  class="main-container projects-set-list sponsors-list"
+  style="display: none"
+>
+  <div
+    class="sponsor-card cursor-pointer"
+    *ngFor="let sponsor of allSponsers"
+    (click)="showSponsorDetails()"
+  >
+    <img src="assets/images/sponsors/01.png" class="img-fluid" width="100%" />
+    <div class="sponspor-details">
+      <div class="sponspor-details-name">
+        {{ sponsor.firstName }} {{ sponsor.lastName }}
+      </div>
+      <div class="sponspor-details-v">
+        {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
+        {{ sponsor.districtName }} District
+      </div>
+      <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
+    </div>
+  </div>
+</div>
+
 <div class="main-container projects-set-list sponsors-list">
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/01.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/01.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Srini Nannapaneni</div>
       <div class="sponspor-details-v">Kakarla | Tiruvuru | NTR District</div>
-      <div class="sponspor-details-money">15,00,000/-</div>
+      <div class="sponspor-details-money">₹ 15,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/02.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/02.png" class="img-fluid" width="100%" />
     <div class="sponspor-details cursor-pointer">
-      <div class="sponspor-details-name">Rajesh </div>
+      <div class="sponspor-details-name">Rajesh</div>
       <div class="sponspor-details-v">Tiruvuru | NTR District</div>
-      <div class="sponspor-details-money">11,00,000/-</div>
+      <div class="sponspor-details-money">₹ 11,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/03.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/03.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
-      <div class="sponspor-details-name">Ramesh Naidu </div>
+      <div class="sponspor-details-name">Ramesh Naidu</div>
       <div class="sponspor-details-v">Nellore</div>
-      <div class="sponspor-details-money">11,50,000/-</div>
+      <div class="sponspor-details-money">₹ 11,50,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/04.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/04.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Mahesh Pocham</div>
-      <div class="sponspor-details-v">Amalapuram | East Godavari </div>
-      <div class="sponspor-details-money">14,00,000/-</div>
+      <div class="sponspor-details-v">Amalapuram | East Godavari</div>
+      <div class="sponspor-details-money">₹ 14,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/05.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/05.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Srinivas</div>
       <div class="sponspor-details-v">Kuppam | Chittore</div>
-      <div class="sponspor-details-money">13,40,000/-</div>
+      <div class="sponspor-details-money">₹ 13,40,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/06.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/06.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Raghu Ram Prasad</div>
       <div class="sponspor-details-v">Kavali | Nellore</div>
-      <div class="sponspor-details-money">15,00,000/-</div>
+      <div class="sponspor-details-money">₹ 15,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/07.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/07.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Rajesh Kumar</div>
       <div class="sponspor-details-v">Vijayawada</div>
-      <div class="sponspor-details-money">13,00,000/-</div>
+      <div class="sponspor-details-money">₹ 13,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/08.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/08.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Mani Kumar</div>
       <div class="sponspor-details-v">Nakkapalle</div>
-      <div class="sponspor-details-money">11,10,000/-</div>
+      <div class="sponspor-details-money">₹ 11,10,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/09.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/09.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Syamala</div>
-      <div class="sponspor-details-v">Tanuku | W Godavari </div>
-      <div class="sponspor-details-money">10,30,000/-</div>
+      <div class="sponspor-details-v">Tanuku | W Godavari</div>
+      <div class="sponspor-details-money">₹ 10,30,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/10.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/10.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Suchitra</div>
       <div class="sponspor-details-v">Vizag</div>
-      <div class="sponspor-details-money">9,50,000/-</div>
+      <div class="sponspor-details-money">₹ 9,50,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/11.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/11.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Ramesh Naidu</div>
       <div class="sponspor-details-v">Golugonda</div>
-      <div class="sponspor-details-money">12,90,000/-</div>
+      <div class="sponspor-details-money">₹ 12,90,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/12.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/12.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Harish Kumar</div>
-      <div class="sponspor-details-v">Devarapalli </div>
-      <div class="sponspor-details-money">11,00,000/-</div>
+      <div class="sponspor-details-v">Devarapalli</div>
+      <div class="sponspor-details-money">₹ 11,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/13.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/13.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
-      <div class="sponspor-details-name">Rajesh </div>
+      <div class="sponspor-details-name">Rajesh</div>
       <div class="sponspor-details-v">Paderu</div>
-      <div class="sponspor-details-money">4,00,000/-</div>
+      <div class="sponspor-details-money">₹ 4,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/14.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/14.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
-      <div class="sponspor-details-name">Ramu </div>
+      <div class="sponspor-details-name">Ramu</div>
       <div class="sponspor-details-v">Dumbriguda</div>
-      <div class="sponspor-details-money">2,00,000/-</div>
+      <div class="sponspor-details-money">₹ 2,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/15.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/15.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Suraj</div>
       <div class="sponspor-details-v">Gudem Kotha Veedhi</div>
-      <div class="sponspor-details-money">3,50,000/-</div>
+      <div class="sponspor-details-money">₹ 3,50,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/16.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/16.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Prashanthi</div>
       <div class="sponspor-details-v">Ananthagiri</div>
-      <div class="sponspor-details-money">1,00,000/-</div>
+      <div class="sponspor-details-money">₹ 1,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/17.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/17.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Manoj</div>
       <div class="sponspor-details-v">Muthukuru | Nellore</div>
-      <div class="sponspor-details-money">8,50,000/-</div>
+      <div class="sponspor-details-money">₹ 8,50,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/18.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/18.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Surekha</div>
       <div class="sponspor-details-v">Annavaram</div>
-      <div class="sponspor-details-money">7,00,000/-</div>
+      <div class="sponspor-details-money">₹ 7,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/19.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/19.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Harish</div>
       <div class="sponspor-details-v">Srikakulam</div>
-      <div class="sponspor-details-money">3,00,000/-</div>
+      <div class="sponspor-details-money">₹ 3,00,000/-</div>
     </div>
   </div>
   <div class="sponsor-card cursor-pointer" (click)="showSponsorDetails()">
-    <img
-      src="assets/images/sponsors/20.png"
-      class="img-fluid"
-      width="100%"
-    />
+    <img src="assets/images/sponsors/20.png" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">Supraja</div>
       <div class="sponspor-details-v">Rajamundry</div>
-      <div class="sponspor-details-money">5,00,000/-</div>
+      <div class="sponspor-details-money">₹ 5,00,000/-</div>
     </div>
   </div>
 </div>

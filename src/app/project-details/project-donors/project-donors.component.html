@@ -73,11 +73,13 @@
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Phone</div>
         <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
+          <p-inputNumber
+            mode="decimal"
             id="DonorsPhone"
             formControlName="DonorsPhone"
             aria-describedby="DonorsPhone"
+            inputId="DonorsPhone"
+            [useGrouping]="false"
           />
         </div>
       </div>
