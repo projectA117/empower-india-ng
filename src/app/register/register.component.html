@@ -101,6 +101,40 @@
             </div>
           </div>
         </div>
+
+        <div class="form-group">
+          <div for="AboutYourSelf">About your self</div>
+
+          <textarea
+            id="w3review"
+            formControlName="AboutYourSelf"
+            name="w3review"
+            rows="4"
+            cols="50"
+            style="width: 100"
+          >
+            At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+            </textarea
+          >
+
+          <!-- <input
+            type="text"
+           
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.userName.touched && f.userName.errors
+            }"
+          /> -->
+          <div
+            *ngIf="f.userName.touched && f.userName.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.userName.touched && f.userName.errors.required">
+              User name is required
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="password">Password</label>
           <input
