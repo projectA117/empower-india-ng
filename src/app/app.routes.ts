@@ -12,6 +12,8 @@ import { ProjectSponsorsComponent } from './project-sponsors/project-sponsors.co
 import { SponsorsDetailsComponent } from './sponsors-details/sponsors-details.component';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
+import { VillagesDemographyComponent } from './villages-demography/villages-demography.component';
+import { VillagesDemographyEditComponent } from './villages-demography-edit/villages-demography-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,4 +30,9 @@ export const routes: Routes = [
   { path: 'sponsors-details', component: SponsorsDetailsComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'villages', component: VillagesDemographyComponent },
+  {
+    path: 'villages-demography-edit',
+    component: VillagesDemographyEditComponent,
+  },
 ];

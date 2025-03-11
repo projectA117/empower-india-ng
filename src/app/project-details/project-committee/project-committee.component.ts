@@ -163,9 +163,9 @@ export class ProjectCommitteeComponent implements OnInit {
       id: Committee.id,
     };
     this.projectDetailsService.deleteCommittee(payload).subscribe((data) => {
-      if (data) {
-        this.showCommittee();
-      }
+      //if (data) {
+      this.showCommittee();
+      // }
     });
   }
 }
