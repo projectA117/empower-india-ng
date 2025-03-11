@@ -64,6 +64,9 @@ export class VillagesDemographyComponent implements OnInit {
   first: number = 0;
   rows: number = 10;
   projectSponsorDetails: any = {};
+  SelectedVillages: any = {};
+  CommunitywisePopulationTableData: any = [];
+  unemployedTableData: any = [];
 
   constructor(
     private commonService: CommonService,
@@ -75,6 +78,72 @@ export class VillagesDemographyComponent implements OnInit {
 
   ngOnInit() {
     // this.getProjects(this.first, this.rows);
+    this.CommunitywisePopulationTableData = [
+      {
+        id: 1,
+        Community: 'SC',
+        Female: 447,
+        Male: 428,
+        TotalPopulation: 875,
+      },
+      {
+        id: 2,
+        Community: 'ST',
+        Female: 95,
+        Male: 100,
+        TotalPopulation: 195,
+      },
+      {
+        id: 3,
+        Community: 'BC',
+        Female: 528,
+        Male: 518,
+        TotalPopulation: 1046,
+      },
+      {
+        id: 4,
+        Community: 'OC',
+        Female: 157,
+        Male: 142,
+        TotalPopulation: 299,
+      },
+    ];
+    this.unemployedTableData = [
+      {
+        id: 1,
+        Community: 'SC',
+        Female: 447,
+        Male: 428,
+        TotalPopulation: 875,
+      },
+    ];
+    this.SelectedVillages = {
+      id: 23,
+      projectCategory: 'School',
+      projectCategoryId: 1,
+      projectType: 'Cycles',
+      projectTypeId: 12,
+      status: 'Waiting for Donars',
+      location: 'BC Colony',
+      latitude: null,
+      longitude: null,
+      projectEstimation: 10000,
+      governmentShare: 20,
+      publicShare: 80,
+      isNew: true,
+      description: 'Need 100 Cycles',
+      createdBy: 'Admin',
+      lastUpdatedBy: 'Admin',
+      villageName: 'Annavaram (అన్నవరం)',
+      villageId: 2349,
+      mandalName: 'Chodavaram (చోడవరం)',
+      mandalId: 27,
+      districtName: 'ANAKAPALLI',
+      districtId: 2,
+      pinCode: null,
+      remainingRequiredAmount: 10000,
+    };
+
     this.getCategories();
     this.getDistricts();
     this.status = [
