@@ -1,0 +1,36 @@
+<div class="header-set">
+  <h3 style="visibility: hidden">Projects List <span>55</span></h3>
+
+  <div class="header-set-filter">
+    <p-dropdown
+      filterBy="name"
+      [filter]="true"
+      [options]="districts"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="name"
+      placeholder="Select a District"
+      (onChange)="getMandals($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="mandals"
+      [(ngModel)]="selectedMandal"
+      optionLabel="name"
+      placeholder="Select a Mandal"
+      (onChange)="getvilages($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="villages"
+      [(ngModel)]="selectedVilage"
+      optionLabel="name"
+      placeholder="Select a Vilage"
+      (onChange)="vilageChange($event)"
+    />
+    <button class="submit-btn-m" (click)="reset()">Reset</button>
+  </div>
+</div>
+
+<div class="">
+  <h3>villages Demography view</h3>
+</div>
