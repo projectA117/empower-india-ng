@@ -681,8 +681,12 @@ h6 {
       gap: 15px;
     }
 
+    td {
+      text-align: left !important;
+    }
+
     th {
-      text-align: left;
+      text-align: left !important;
       padding: 0.75rem 1rem;
       border: 1px solid #e2e8f0;
       border-width: 0 0 1px 0;
@@ -1132,9 +1136,19 @@ h6 {
 
 
 @media screen and (max-width: 960px) {
-  .p-menubar{
+  .p-galleria-mask {
+    top: 120px;
+    height: calc(100% - 120px);
+  }
+
+  .inner-margin-top {
+    margin-top: 120px;
+  }
+
+  .p-menubar {
     height: 54px;
   }
+
   .p-menubar .p-menubar-button {
     border-radius: 0;
     padding: 12px;
@@ -1147,6 +1161,7 @@ h6 {
       height: 25px;
     }
   }
+
   .p-menubar .p-menubar-button:focus {
     box-shadow: none;
   }
@@ -1181,10 +1196,12 @@ h6 {
     z-index: 999;
     align-items: center;
   }
-  .ep-footer .footer-copyrights{
+
+  .ep-footer .footer-copyrights {
     flex-direction: column-reverse;
   }
+
   .follow-us-img img {
     height: 20px;
-}
+  }
 }

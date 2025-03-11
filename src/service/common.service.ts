@@ -134,7 +134,7 @@ export class CommonService {
 
   contactSubmit(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(`${environment.apiUrl}/contact/submit`, payLoad)
+      .post<any>(`${environment.apiUrl}/contact-us/submit`, payLoad)
       .pipe(
         map((response) => {
           return response;
