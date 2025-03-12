@@ -7,19 +7,10 @@
     </div>
   </div>
   <div class="pos-rel">
-    <p-carousel
-      [value]="products"
-      [numVisible]="1"
-      [circular]="true"
-      [responsiveOptions]="responsiveOptions"
-      autoplayInterval="3000"
-    >
+    <p-carousel [value]="products" [numVisible]="1" [circular]="true" [responsiveOptions]="responsiveOptionss"
+      autoplayInterval="3000">
       <ng-template let-product pTemplate="item">
-        <img
-          src="assets/images/banner/{{ product.image }}"
-          [alt]="product.name"
-          class="w-full border-round"
-        />
+        <img src="assets/images/banner/{{ product.image }}" [alt]="product.name" class="w-full" />
       </ng-template>
     </p-carousel>
   </div>
@@ -64,30 +55,15 @@
     </h3>
   </div>
   <div class="container">
-    <p-carousel
-      [value]="category"
-      [numVisible]="5"
-      [numScroll]="3"
-      [circular]="false"
-      [responsiveOptions]="responsiveOptions"
-    >
+    <p-carousel [value]="category" [numVisible]="5" [numScroll]="3" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
       <ng-template let-categoryItem pTemplate="item">
         <div class="border-round m-2 project-card">
           <div class="mb-3">
-            <div
-              class="relative mx-auto cur-pointer"
-              (click)="showprojectcategoryDetails(categoryItem)"
-            >
-              <img
-                src="assets/images/projects/{{ categoryItem.image }}"
-                [alt]="categoryItem.description"
-              />
-              <p-tag
-                [value]="categoryItem.id"
-                [severity]="getSeverity('INSTOCK')"
-                class="absolute"
-                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
-              />
+            <div class="relative mx-auto cur-pointer" (click)="showprojectcategoryDetails(categoryItem)">
+              <img src="assets/images/projects/{{ categoryItem.image }}" [alt]="categoryItem.description" />
+              <p-tag [value]="categoryItem.id" [severity]="getSeverity('INSTOCK')" class="absolute"
+                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
             </div>
           </div>
           <h4>
@@ -108,7 +84,24 @@
   </div>
   <div class="container">
     <div class="top-five-sponsors">
-      <div
+
+      <p-carousel [value]="topSponsers" [numVisible]="5" [circular]="false" [responsiveOptions]="responsiveOptionss" autoplayInterval="3000" (click)="showSponsorDetails()">
+        <ng-template let-sponsor pTemplate="item" class="sponsor-card" >
+            <img src="assets/images/sponsors/{{ sponsor.image }}" [alt]="sponsor.name" class="img-fluid" />
+            <div class="sponspor-details">
+              <div class="sponspor-details-name">
+                {{ sponsor.firstName }} {{ sponsor.lastName }}
+              </div>
+              <div class="sponspor-details-v">
+                {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
+                {{ sponsor.districtName }} District
+              </div>
+              <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
+            </div>
+        </ng-template>
+      </p-carousel>
+
+      <!-- <div
         class="sponsor-card"
         *ngFor="let sponsor of topSponsers"
         (click)="showSponsorDetails()"
@@ -128,7 +121,7 @@
           </div>
           <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -141,9 +134,7 @@
         <div style="line-height: 20px">
           <div>+91 9288227228</div>
           <div>
-            <a href="mailto:info&#64;empowerandhra.com"
-              >info&#64;empowerandhra.com</a
-            >
+            <a href="mailto:info&#64;empowerandhra.com">info&#64;empowerandhra.com</a>
           </div>
         </div>
       </div>
