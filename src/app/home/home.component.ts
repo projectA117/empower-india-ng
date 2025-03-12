@@ -17,6 +17,7 @@ export class HomeComponent {
   category: any;
   topSponsers: any[] = [];
   responsiveOptions: any[] | undefined;
+  responsiveOptionss: any[] | undefined;
 
   // constructor(private productService: ProductService) {}
   constructor(
@@ -122,7 +123,7 @@ export class HomeComponent {
         districtName: 'Chittore',
         memoryOf: null,
         modeOfPayment: null,
-        image: '16.png',
+        image: '18.png',
       },
     ];
 
@@ -146,6 +147,24 @@ export class HomeComponent {
         id: '4',
         name: 'Machilipatnam',
         image: 'machilipatnam.jpg',
+      },
+      
+    ];
+    this.responsiveOptionss = [
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1,
       },
     ];
 
@@ -219,6 +238,7 @@ export class HomeComponent {
         numScroll: 1,
       },
     ];
+    
   }
 
   getSeverity(status: string) {
