@@ -171,4 +171,22 @@
     }
 }
 
+@media screen and (max-width: 400px) {
+    .sponsor-badge {
+        height: 120px;
+    }
 
+    .sponsor-img-set img{
+            width: 100px;
+            height: 100px;
+    }
+    .sponsor-img-set .sponsor-amount .sponsor-amount-price {
+        font-size: 30px;
+    }
+    .sponsor-img-set .sponsor-amount .sponsor-amount-words {
+        font-size: 20px;
+    }
+    .sponsor-img-set{
+        transform: translate(30px, -20%);
+    }
+}
