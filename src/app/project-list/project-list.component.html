@@ -168,13 +168,21 @@
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Govt. Share</div>
                     <div class="project-detail-set-v mt-2">
-                      {{ info.governmentShare }} %
+                      {{ info.governmentShare }} % (₹
+                      {{
+                        info.projectEstimation * (info.governmentShare / 100)
+                      }}
+                      /-)
                     </div>
                   </div>
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Public Share</div>
                     <div class="project-detail-set-v mt-2">
-                      {{ info.publicShare }} %
+                      {{ info.publicShare }} % (₹
+                      {{
+                        info.projectEstimation * (info.publicShare / 100)
+                      }}
+                      /-)
                     </div>
                   </div>
                   <div class="project-detail-set col-12">
@@ -226,10 +234,11 @@
                             </th> -->
                             <th pSortableColumn="Amount" class="text-right">
                               Amount <p-sortIcon field="Amount" />
-                            <!-- </th>
+                              <!-- </th>
                             <th pSortableColumn="Payment" class="text-center">
                               Mode of Payment <p-sortIcon field="Payment" />
                             </th> -->
+                            </th>
                           </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-doners>
@@ -258,7 +267,7 @@
                     <div class="project-detail-set-v mt-2">
                       {{ info.projectEstimation }}
                     </div>
-                  </div> 
+                  </div>
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Govt. Share</div>
                     <div class="project-detail-set-v mt-2">
