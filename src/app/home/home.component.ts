@@ -188,54 +188,99 @@ export class HomeComponent {
 
     this.category = [
       {
-        id: 23,
+        id: 1,
         description: 'Bus shelter',
         image: 'bus_shelter.png',
       },
       {
-        id: 22,
+        id: 2,
         description: 'Library',
         image: 'library.png',
       },
       {
-        id: 21,
+        id: 3,
         description: 'Public Toilets',
         image: 'public_toilets.png',
       },
       {
-        id: 20,
+        id: 4,
         description: 'RO Plants',
         image: 'ro_plants.png',
       },
       {
-        id: 19,
+        id: 5,
         description: 'Schools',
         image: 'schools.png',
       },
       {
-        id: 18,
+        id: 6,
         description: 'Audio System',
         image: 'music.png',
       },
       {
-        id: 17,
+        id: 7,
         description: 'Computers',
         image: 'computer.png',
       },
       {
-        id: 16,
+        id: 8,
         description: 'Sanitary Pads',
         image: 'sanitary.png',
       },
       {
-        id: 15,
+        id: 9,
         description: 'Dustbins',
         image: 'dustbin.png',
       },
       {
-        id: 14,
+        id: 10,
         description: 'Sports Kits',
         image: 'sports.png',
+      },
+      {
+        id: 11,
+        description: 'Paints',
+        image: 'paints.png',
+      },
+      {
+        id: 12,
+        description: 'Cycles',
+        image: 'cycle.png',
+      },
+      {
+        id: 13,
+        description: 'Benches',
+        image: 'scool-benches.png',
+      },
+      {
+        id: 14,
+        description: 'Digital Boards',
+        image: 'digital-board.png',
+      },
+      {
+        id: 15,
+        description: 'Solar Fencing',
+        image: 'solar-fencing.png',
+      },
+      {
+        id: 16,
+        description: 'CC Cameras',
+        image: 'cctv.png',
+      },
+      {
+        id: 17,
+        description: 'Racks',
+        image: 'racks.png',
+      },
+      {
+        id: 18,
+        description: 'Ceiling Fans',
+        image: 'fan.png',
+      },
+      {
+        id: 19,
+        description: 'Ceiling Fans',
+        image: 'fan.png',
       },
     ];
 
