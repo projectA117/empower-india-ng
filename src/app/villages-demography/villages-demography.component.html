@@ -44,74 +44,87 @@
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">District</div>
             <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.districtName }}
+              {{ selectedDistrict.name }}
             </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Mandal</div>
             <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.mandalName }}
+              {{ selectedMandal.name }}
             </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Village</div>
             <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.villageName }}
+              {{ selectedVilage.name }}
             </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Pin Code</div>
             <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.pinCode }}
+              {{
+                getVillagesDemographyData?.pinCode
+                  ? getVillagesDemographyData.pinCode
+                  : ""
+              }}
             </div>
           </div>
           <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Colony</div>
-            <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.location }}
-            </div>
+            <div class="project-detail-set-h">Climatic condition</div>
+            <div class="project-detail-set-v mt-2">---</div>
           </div>
 
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Latitude, Longitude</div>
             <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.latitude }} , {{ SelectedVillages.longitude }}
+              {{
+                getVillagesDemographyData?.latitude
+                  ? getVillagesDemographyData.latitude
+                  : ""
+              }}
+              ,
+              {{
+                getVillagesDemographyData?.longitude
+                  ? getVillagesDemographyData.longitude
+                  : ""
+              }}
             </div>
           </div>
         </div>
 
         <div class="row mb-4">
-          <div class="project-detail-h-set">
-            <h4>Project Details</h4>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Boundaries of the village</div>
+            <div class="project-detail-set-v mt-2">---</div>
           </div>
           <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Project ID</div>
-            <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.id }}
-            </div>
+            <div class="project-detail-set-h">Geographical Area</div>
+            <div class="project-detail-set-v mt-2">---</div>
           </div>
           <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Project Type</div>
+            <div class="project-detail-set-h">Total House Holds</div>
             <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.projectType ? "New" : "Existing" }}
+              {{ this.getVillagesDemographyData.noOfHouses }}
             </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Status</div>
-            <div class="project-detail-set-v mt-2">
-              {{ SelectedVillages.status }}
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-4">
-          <div class="project-detail-h-set">
-            <h4>Project Description</h4>
           </div>
 
           <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">
-              {{ SelectedVillages.description }}
+            <div class="project-detail-set-h">Population</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData.totalPopulation }}
+            </div>
+          </div>
+
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Male</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData.adultMalePopulation }}
+            </div>
+          </div>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">Female</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData.adultFemalePopulation }}
             </div>
           </div>
         </div>
@@ -132,7 +145,7 @@
               </ng-template>
               <div>
                 <p-table
-                  [value]="CommunitywisePopulationTableData"
+                  [value]="CommunityPopulationData"
                   class="tab-data-table"
                 >
                   <ng-template pTemplate="header">
@@ -151,24 +164,33 @@
                       <th pSortableColumn="Amount" class="text-right">
                         Male <p-sortIcon field="Amount" />
                       </th>
-
                       <th pSortableColumn="Amount" class="text-right">
-                        Total Population <p-sortIcon field="Amount" />
+                        Total <p-sortIcon field="Amount" />
                       </th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-community>
+                  <ng-template pTemplate="body" let-CommunityPopulation>
                     <tr>
-                      <td class="text-center">{{ community.id }}</td>
-
-                      <td class="text-center">{{ community.Community }}</td>
-
-                      <td class="text-right">{{ community.Female }}</td>
-
-                      <td class="text-right">{{ community.Male }}</td>
+                      <td class="text-center">{{ CommunityPopulation.id }}</td>
 
                       <td class="text-right">
-                        ₹ {{ community.TotalPopulation }}
+                        {{
+                          villagelookupsData.community[
+                            CommunityPopulation.communityId
+                          ].name
+                        }}
+                      </td>
+
+                      <td class="text-right">
+                        {{ CommunityPopulation.female }}
+                      </td>
+
+                      <td class="text-right">
+                        {{ CommunityPopulation.male }}
+                      </td>
+
+                      <td class="text-right">
+                        {{ CommunityPopulation.total }}
                       </td>
                     </tr>
                   </ng-template>
@@ -184,7 +206,47 @@
                   </span>
                 </div>
               </ng-template>
-              <h1>UNEMPLOYED YOUTH</h1>
+              <p-table [value]="unEmployedYouthVillage" class="tab-data-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Sc No <p-sortIcon field="firstName" />
+                    </th>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Community<p-sortIcon field="firstName" />
+                    </th>
+
+                    <th pSortableColumn="address" class="text-center">
+                      18-30 <p-sortIcon field="address" />
+                    </th>
+
+                    <th pSortableColumn="Amount" class="text-right">
+                      31-45 <p-sortIcon field="Amount" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      45-60 <p-sortIcon field="Amount" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      Total <p-sortIcon field="Amount" />
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-unEmployeeData>
+                  <tr>
+                    <td class="text-center">{{ unEmployeeData.id }}</td>
+
+                    <td class="text-right">{{ unEmployeeData.communityId }}</td>
+
+                    <td class="text-right">{{ unEmployeeData.age1830 }}</td>
+
+                    <td class="text-right">{{ unEmployeeData.age3145 }}</td>
+
+                    <td class="text-right">{{ unEmployeeData.age4660 }}</td>
+
+                    <td class="text-right">₹ {{ unEmployeeData.total }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </p-tabPanel>
 
             <p-tabPanel>
@@ -195,7 +257,60 @@
                   </span>
                 </div>
               </ng-template>
-              <h1>EMPLOYED YOUTH</h1>
+
+              <p-table [value]="employedYouthVillage" class="tab-data-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Sc No <p-sortIcon field="firstName" />
+                    </th>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Community<p-sortIcon field="firstName" />
+                    </th>
+
+                    <th pSortableColumn="address" class="text-center">
+                      GOVERNMENT <p-sortIcon field="address" />
+                    </th>
+
+                    <th pSortableColumn="Amount" class="text-right">
+                      PRIVATE <p-sortIcon field="Amount" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      SELF EMPOLYMENT <p-sortIcon field="Amount" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      Total <p-sortIcon field="Amount" />
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-employedYouthVillageData>
+                  <tr>
+                    <td class="text-center">
+                      {{ employedYouthVillageData.id }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ employedYouthVillageData.communityId }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ employedYouthVillageData.government }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ employedYouthVillageData.privateJob }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ employedYouthVillageData.selfEmployee }}
+                    </td>
+
+                    <td class="text-right">
+                      ₹ {{ employedYouthVillageData.total }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </p-tabPanel>
             <p-tabPanel>
               <ng-template pTemplate="header">
@@ -205,7 +320,41 @@
                   </span>
                 </div>
               </ng-template>
-              <h1>Main Occupation</h1>
+              <p-table [value]="occupationsData" class="tab-data-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Sc No <p-sortIcon field="firstName" />
+                    </th>
+
+                    <th pSortableColumn="address" class="text-center">
+                      Occupation <p-sortIcon field="address" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      Number of Families <p-sortIcon field="Amount" />
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-occupationsData>
+                  <tr>
+                    <td class="text-center">
+                      {{ occupationsData.id }}
+                    </td>
+
+                    <td class="text-right">
+                      {{
+                        villagelookupsData.community[
+                          occupationsData.occupationId
+                        ].name
+                      }}
+                    </td>
+
+                    <td class="text-right">
+                      ₹ {{ occupationsData.noOfFamilies }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </p-tabPanel>
             <p-tabPanel>
               <ng-template pTemplate="header">
@@ -215,7 +364,39 @@
                   </span>
                 </div>
               </ng-template>
-              <h1>Land Utilization</h1>
+              <p-table [value]="landUtilizationData" class="tab-data-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Sc No <p-sortIcon field="firstName" />
+                    </th>
+
+                    <th pSortableColumn="address" class="text-center">
+                      Purpose of Land utilized <p-sortIcon field="address" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      Area in Acrs <p-sortIcon field="Amount" />
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-utilizationData>
+                  <tr>
+                    <td class="text-center">
+                      {{ utilizationData.id }}
+                    </td>
+
+                    <td class="text-right">
+                      {{
+                        villagelookupsData.occupation[utilizationData.id].name
+                      }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ utilizationData.totalArea }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </p-tabPanel>
 
             <p-tabPanel>
@@ -226,7 +407,47 @@
                   </span>
                 </div>
               </ng-template>
-              <h1>Cultivation crops</h1>
+              <p-table [value]="cultivationCropsData" class="tab-data-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Sc No <p-sortIcon field="firstName" />
+                    </th>
+
+                    <th pSortableColumn="address" class="text-center">
+                      Cultivatable Products <p-sortIcon field="address" />
+                    </th>
+                    <th pSortableColumn="address" class="text-center">
+                      Rabi/Karif <p-sortIcon field="address" />
+                    </th>
+                    <th pSortableColumn="Amount" class="text-right">
+                      Area in Acrs <p-sortIcon field="Amount" />
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-cultivationData>
+                  <tr>
+                    <td class="text-center">
+                      {{ cultivationData.id }}
+                    </td>
+
+                    <td class="text-right">
+                      {{
+                        villagelookupsData.cultivationCrops[cultivationData.id]
+                          .name
+                      }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ cultivationData.seasonName }}
+                    </td>
+
+                    <td class="text-right">
+                      {{ cultivationData.totalAcrs }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </p-tabPanel>
 
             <p-tabPanel>
@@ -237,7 +458,34 @@
                   </span>
                 </div>
               </ng-template>
-              <h1>Institutions</h1>
+
+              <p-table [value]="institutionsData" class="tab-data-table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="firstName" class="text-center">
+                      Sc No <p-sortIcon field="firstName" />
+                    </th>
+
+                    <th pSortableColumn="address" class="text-center">
+                      Institutions <p-sortIcon field="address" />
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-institution>
+                  <tr>
+                    <td class="text-center">
+                      {{ institution.id }}
+                    </td>
+
+                    <td class="text-right">
+                      {{
+                        villagelookupsData.institutions[institution.instituteId]
+                          .name
+                      }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </p-tabPanel>
           </p-tabView>
           <!-- <p-tabView styleClass="tabview-custom">
