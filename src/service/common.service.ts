@@ -164,4 +164,29 @@ export class CommonService {
         catchError((error) => of(error))
       );
   }
+
+  getVillagesDemography(payLoad: any): Observable<any> {
+    return (
+      this.httpClient
+        // .get<any>(`${environment.apiUrl}/villages/demography?${payLoad}`)
+        .get<any>(`${environment.apiUrl}/village?villageId=1`)
+        .pipe(
+          map((response) => {
+            return response;
+          }),
+          catchError((error) => of(error))
+        )
+    );
+  }
+
+  villagelookups(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/lookup/village-lookups`)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
 }

@@ -42,6 +42,7 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
+      aboutYourSelf: ['', Validators.required],
       lastName: ['', Validators.required],
       phoneNumber: new FormControl(null, [
         Validators.required,
@@ -67,6 +68,7 @@ export class RegisterComponent {
   onSubmit() {
     const payload = {
       firstName: this.registerForm.get('firstName')?.value,
+      aboutYourSelf: this.registerForm.get('aboutYourSelf')?.value,
       lastName: this.registerForm.get('lastName')?.value,
       phoneNumber: this.registerForm.get('phoneNumber')?.value,
       email: this.registerForm.get('email')?.value,
@@ -82,4 +84,5 @@ export class RegisterComponent {
       }
     });
   }
+  onProfileUpload(event: any) {}
 }
