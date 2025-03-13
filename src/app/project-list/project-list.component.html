@@ -77,11 +77,11 @@
         <div class="projects-list">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-2 pos-rel project-list-img">
+              <div class="col-lg-2 col-md-2 col-sm-2 pos-rel project-list-img">
                 <div class="open-status">{{ info.status }}</div>
-                <img src="assets/images/project-1.jpg" class="img-fluid" />
+                <img src="assets/images/projects/bus_shelter.png" class="img-fluid" />
               </div>
-              <div class="col-10 relative">
+              <div class="col-lg-10 col-md-10 col-sm-10 relative">
                 <div class="projects-actions">
                   <img
                     src="assets/images/icon-view.svg"
@@ -97,38 +97,38 @@
                   <div class="project-detail-h-set">
                     <h4>Location Details</h4>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2 col-sm-4">
                     <div class="project-detail-set-h">District</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.districtName }}
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2 col-sm-4">
                     <div class="project-detail-set-h">Mandal</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.mandalName }}
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2 col-sm-4">
                     <div class="project-detail-set-h">Village</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.villageName }}
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2 col-sm-4">
                     <div class="project-detail-set-h">Pin Code</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.pinCode }}
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2 col-sm-4">
                     <div class="project-detail-set-h">Colony</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.location }}
                     </div>
                   </div>
 
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2 col-sm-4">
                     <div class="project-detail-set-h">Latitude, Longitude</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.latitude }} , {{ info.longitude }}
@@ -141,43 +141,43 @@
                     <h4>Project Details</h4>
                   </div>
 
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Project Category</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.projectCategory }}
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Project Type</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.projectType }}
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Status</div>
                     <div class="project-detail-set-v mt-2">
                       <div class="open-status">{{ info.status }}</div>
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Estimation</div>
                     <div class="project-detail-set-v mt-2">
                       ₹ {{ info.projectEstimation }}/-
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Govt. Share</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.governmentShare }} %
                     </div>
                   </div>
-                  <div class="project-detail-set col-2">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Public Share</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.publicShare }} %
                     </div>
                   </div>
-                  <div class="project-detail-set col-12">
+                  <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Description</div>
                     <div class="project-detail-set-v mt-2">
                       {{ info.description }}
@@ -185,94 +185,100 @@
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="project-detail-h-set col-10">
-                    <h4>Project sponsors Details</h4>
-                  </div>
-                  <div class="project-detail-set col-2">
-                    <button
-                      class="submit-btn-m"
-                      (click)="getProjectSponsorDetails(info)"
-                    >
-                      Sponsor
-                    </button>
-                  </div>
-                  <div class="project-detail-h-set col-12 pr-2">
-                    <div class="justify-content-start flex-wrap mt-15">
-                      <p-table
-                        [value]="projectSponsorDetails"
-                        class="tab-data-table"
-                      >
-                        <ng-template pTemplate="header">
-                          <tr>
-                            <th pSortableColumn="firstName" class="text-center">
-                              Sponsor Name<p-sortIcon field="firstName" />
-                            </th>
-                            <!-- <th
-                              pSortableColumn="phoneNumber"
-                              class="text-center"
-                            >
-                              Phone <p-sortIcon field="phoneNumber" />
-                            </th>
+               
+              </div>
+            </div>
+            <div class="">
+              <div class="row">
 
-                            <th pSortableColumn="email" class="text-center">
-                              Email <p-sortIcon field="email" />
-                            </th> -->
-                            <th pSortableColumn="address" class="text-center">
-                              Address <p-sortIcon field="address" />
-                            </th>
-                            <!-- <th pSortableColumn="memoryOf" class="text-center">
-                              Memory of <p-sortIcon field="memoryOf" />
-                            </th> -->
-                            <th pSortableColumn="Amount" class="text-right">
-                              Amount <p-sortIcon field="Amount" />
-                            <!-- </th>
-                            <th pSortableColumn="Payment" class="text-center">
-                              Mode of Payment <p-sortIcon field="Payment" />
-                            </th> -->
-                          </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-doners>
-                          <tr>
-                            <td class="text-center">{{ doners.firstName }}</td>
-                            <!-- <td class="text-center">
-                              {{ doners.phoneNumber }}
-                            </td> -->
-                            <!-- <td class="text-center">{{ doners.email }}</td> -->
-                            <td class="text-center">{{ doners.address }}</td>
-                            <!-- <td class="text-center">{{ doners.memoryOf }}</td> -->
-                            <td class="text-right">₹ {{ doners.amount }} /-</td>
-                            <!-- <td class="text-center block">
-                              {{ doners.ModeofPayment }}
-                            </td> -->
-                          </tr>
-                        </ng-template>
-                      </p-table>
-                    </div>
-                  </div>
+              <div class="project-detail-h-set col-10">
+                <h4>Project sponsors Details</h4>
+              </div>
+              <div class="project-detail-set col-2">
+                <button
+                  class="submit-btn-m"
+                  (click)="getProjectSponsorDetails(info)"
+                >
+                  Add Sponsor
+                </button>
+              </div>
+            </div>
 
-                  <!-- <div class="project-detail-set col-4">
-                    <div class="project-detail-set-h">
-                      Project Estimation (Inc. Maintenance 3 Years)
-                    </div>
-                    <div class="project-detail-set-v mt-2">
-                      {{ info.projectEstimation }}
-                    </div>
-                  </div> 
-                  <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h">Govt. Share</div>
-                    <div class="project-detail-set-v mt-2">
-                      {{ info.governmentShare }}
-                    </div>
-                  </div>
-                  <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h">Public Share</div>
-                    <div class="project-detail-set-v mt-2">
-                      {{ info.publicShare }}
-                    </div>
-                  </div> -->
+
+              <div class="project-detail-h-set col-12 pr-2">
+                <div class="justify-content-start flex-wrap mt-15">
+                  <p-table
+                    [value]="projectSponsorDetails"
+                    class="tab-data-table"
+                  >
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th pSortableColumn="firstName" class="text-center">
+                          Sponsor Name<p-sortIcon field="firstName" />
+                        </th>
+                        <!-- <th
+                          pSortableColumn="phoneNumber"
+                          class="text-center"
+                        >
+                          Phone <p-sortIcon field="phoneNumber" />
+                        </th>
+
+                        <th pSortableColumn="email" class="text-center">
+                          Email <p-sortIcon field="email" />
+                        </th> -->
+                        <th pSortableColumn="address" class="text-center">
+                          Address <p-sortIcon field="address" />
+                        </th>
+                        <!-- <th pSortableColumn="memoryOf" class="text-center">
+                          Memory of <p-sortIcon field="memoryOf" />
+                        </th> -->
+                        <th pSortableColumn="Amount" class="text-right">
+                          Amount <p-sortIcon field="Amount" />
+                        <!-- </th>
+                        <th pSortableColumn="Payment" class="text-center">
+                          Mode of Payment <p-sortIcon field="Payment" />
+                        </th> -->
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-doners>
+                      <tr>
+                        <td class="text-center">{{ doners.firstName }}</td>
+                        <!-- <td class="text-center">
+                          {{ doners.phoneNumber }}
+                        </td> -->
+                        <!-- <td class="text-center">{{ doners.email }}</td> -->
+                        <td class="text-center">{{ doners.address }}</td>
+                        <!-- <td class="text-center">{{ doners.memoryOf }}</td> -->
+                        <td class="text-right">₹ {{ doners.amount }} /-</td>
+                        <!-- <td class="text-center block">
+                          {{ doners.ModeofPayment }}
+                        </td> -->
+                      </tr>
+                    </ng-template>
+                  </p-table>
                 </div>
               </div>
+
+              <!-- <div class="project-detail-set col-4">
+                <div class="project-detail-set-h">
+                  Project Estimation (Inc. Maintenance 3 Years)
+                </div>
+                <div class="project-detail-set-v mt-2">
+                  {{ info.projectEstimation }}
+                </div>
+              </div> 
+              <div class="project-detail-set col-2">
+                <div class="project-detail-set-h">Govt. Share</div>
+                <div class="project-detail-set-v mt-2">
+                  {{ info.governmentShare }}
+                </div>
+              </div>
+              <div class="project-detail-set col-2">
+                <div class="project-detail-set-h">Public Share</div>
+                <div class="project-detail-set-v mt-2">
+                  {{ info.publicShare }}
+                </div>
+              </div> -->
             </div>
           </div>
         </div>

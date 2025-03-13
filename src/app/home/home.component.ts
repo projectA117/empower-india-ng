@@ -18,6 +18,7 @@ export class HomeComponent {
   topSponsers: any[] = [];
   responsiveOptions: any[] | undefined;
   responsiveOptionss: any[] | undefined;
+  responsiveSponsors: any[] | undefined;
 
   // constructor(private productService: ProductService) {}
   constructor(
@@ -124,6 +125,23 @@ export class HomeComponent {
         memoryOf: null,
         modeOfPayment: null,
         image: '18.png',
+      },
+    ];
+    this.responsiveSponsors = [
+      {
+        breakpoint: '1199px',
+        numVisible: 4,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 2,
+        numScroll: 1,
       },
     ];
 
