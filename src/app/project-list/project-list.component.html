@@ -111,15 +111,18 @@
                   <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Govt. Share</div>
                     <div class="project-detail-set-v mt-2">
-                      {{ info.governmentShare }} %
+                      {{ info.governmentShare }} % (₹
+                      {{
+                        info.projectEstimation * (info.governmentShare / 100)
+                      }}
+                      /-)
                     </div>
                   </div>
                   <div class="project-detail-set col-md-2">
                     <div class="project-detail-set-h">Public Share</div>
                     <div class="project-detail-set-v mt-2">
-                      {{ info.publicShare }} % (₹
-                      {{ info.projectEstimation * (info.publicShare / 100) }}
-                      /-)
+                      {{ info.publicShare }} % ( ₹
+                      {{ info.projectEstimation * (info.publicShare / 100) }}/- )
                     </div>
                   </div>
                   <div class="project-detail-set col-md-2">

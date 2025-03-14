@@ -277,11 +277,7 @@ export class HomeComponent {
         description: 'Ceiling Fans',
         image: 'fan.png',
       },
-      {
-        id: 19,
-        description: 'Ceiling Fans',
-        image: 'fan.png',
-      },
+      
     ];
 
     this.responsiveOptions = [

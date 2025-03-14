@@ -208,7 +208,7 @@
 
         <div class="col-6">
           <label for="govtShare" class="form-label"
-            >Government Share % (₹ {{ governmentShareAmount }}/-)</label
+            >Government Share % (₹ {{governmentShareAmount}}/-)</label
           >
           <p-inputNumber id="govtShare" formControlName="governmentShare" />
         </div>
@@ -220,8 +220,7 @@
               projectForm.get("governmentShare").value
                 ? (projectForm.get("projectEstimation").value || 0) -
                   governmentShareAmount
-                : 0
-            }}/-)</label
+                : 0}}/-)</label
           >
           <p-inputNumber id="publicShare" formControlName="publicShare" />
         </div>
