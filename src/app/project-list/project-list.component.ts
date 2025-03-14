@@ -337,6 +337,12 @@ export class ProjectListComponent implements OnInit {
       (data: any) => {
         if (data.content.length > 0) {
           this.projects = data.content;
+          this.projects.forEach((project: any) => {
+            const sponsorAmount = project.sponsersList.reduce((total, sponsor) =>  total + Number(sponsor.amount), 0);
+            const publicEstimate = project.projectEstimation * (project.publicShare / 100);
+            project.disableAddSponsor = publicEstimate <= sponsorAmount;
+
+          });
           this.totalRecords = data.totalElements;
         }
       },
