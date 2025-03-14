@@ -43,6 +43,7 @@ export class ProjectComponent implements OnInit {
   projectTypes: any = [];
   projectForm: FormGroup = new FormGroup({});
   allProjects: any = [];
+  governmentShareAmount: number = 0;
 
   constructor(private commonService: CommonService) {}
 
@@ -93,7 +94,7 @@ export class ProjectComponent implements OnInit {
         this.project.projectEstimation ? this.project.projectEstimation : null
       ),
       governmentShare: new FormControl(
-        this.project.governmentShare ? this.project.governmentShare : null
+        this.project.governmentShare ? this.project.governmentShare : null, [Validators.max(100), Validators.min(0)]
       ),
       publicShare: new FormControl(
         this.project.publicShare ? this.project.publicShare : null
@@ -104,6 +105,14 @@ export class ProjectComponent implements OnInit {
       statusCode: new FormControl(
         this.project.status ? this.project.status : null
       ),
+    });
+    this.projectForm.get('publicShare')?.disable();
+    this.projectForm.get('projectEstimation')?.valueChanges.subscribe((value) => {
+      this.governmentShareAmount = value * ((this.projectForm.get('governmentShare')?.value || 0) / 100);
+    });
+    this.projectForm.get('governmentShare')?.valueChanges.subscribe((value) => {
+      this.governmentShareAmount = (this.projectForm.get('projectEstimation')?.value || 0) * (value / 100);
+      this.projectForm.get('publicShare')?.setValue(100 - value);
     });
   }
 
