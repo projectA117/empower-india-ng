@@ -957,6 +957,10 @@ h6 {
   color: #fff;
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .form-set {

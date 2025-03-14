@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, computed, effect } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
@@ -27,11 +27,23 @@ export class AppComponent {
   loading: boolean = false;
   loading$: Observable<boolean>;
   isLoading = computed(() => this.loaderService.loading());
+  isSigninOrRegister = false;
   constructor(
     private loaderService: LoaderService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
+
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('signin') || event.url.includes('register')) {
+          this.isSigninOrRegister = true;
+        } else {
+          this.isSigninOrRegister = false;
+        }
+      }
+    })
     this.items = [
       {
         label: 'HOME',
