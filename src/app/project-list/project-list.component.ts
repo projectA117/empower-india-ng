@@ -340,6 +340,7 @@ export class ProjectListComponent implements OnInit {
           this.projects.forEach((project: any) => {
             const sponsorAmount = project.sponsersList.reduce((total, sponsor) =>  total + Number(sponsor.amount), 0);
             const publicEstimate = project.projectEstimation * (project.publicShare / 100);
+            project.sponsorAmount = sponsorAmount;
             project.disableAddSponsor = publicEstimate <= sponsorAmount;
 
           });
