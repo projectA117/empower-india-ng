@@ -26,7 +26,7 @@ export class ProjectSponsorsComponent implements OnInit {
   doners!: [];
   ProjectSponsorSidebarVisible: boolean = false;
   donorForm: FormGroup = new FormGroup({});
-  product: any;
+  @Input() product: any;
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
