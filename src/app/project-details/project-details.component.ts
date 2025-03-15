@@ -11,7 +11,12 @@ import { ProjectWorkInProgressComponent } from './project-work-in-progress/proje
 import { ProjectsignoffComponent } from './project-signoff/project-signoff.component';
 import { ProductService } from '@service/productservice';
 import { ActivatedRoute } from '@angular/router';
-
+export interface Tab {
+  label: string;
+  icon?: string;
+  component?: any;
+  isDisabled?: boolean;
+}
 @Component({
   selector: 'app-project-details',
   standalone: true,
@@ -32,6 +37,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './project-details.component.scss',
   providers: [ProductService],
 })
+
 export class ProjectDetailsComponent implements OnInit {
   product: any;
   constructor(
@@ -39,9 +45,39 @@ export class ProjectDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  activeTab: string = 'Estimation'; // Set default active tab
+
+  tabs = [
+    { label: 'Estimation', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png' },
+    { label: 'Committee', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png' },
+    { label: 'Sponsors', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png' },
+    { label: 'Vendors', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png' },
+    { label: 'Bank Details', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png' },
+    { label: 'Project Publish', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png' },
+    { label: 'Finance', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png' },
+    { label: 'Work In Progress', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png' },
+    { label: 'Project Sign off', icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png', isDisabled: true }
+  ];
+
+  onTabChange(label: string) {
+    this.activeTab = label;
+  }
+
+
+  isTabDisabled(index: number): boolean {
+    if (this.product.status === 'New' || this.product.status === 'Waiting FOR DONOR') {
+      // Disable last 4 tabs when status is 'New' or 'Waiting FOR DONOR'
+      return index >= this.tabs.length - 4;
+    }
+    return false;
+  }
+
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.product = JSON.parse(params['project']);
+      this.tabs.forEach((tab, index) => {
+        tab.isDisabled = this.isTabDisabled(index);
+      });
     });
   }
 }

@@ -11,6 +11,7 @@ import { Project } from 'src/models/Project';
 import { HardCodedInfo } from 'src/constants/HardCodedInfo';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
+import { ProjectSponsorsComponent } from '../project-sponsors/project-sponsors.component';
 interface PageEvent {
   first: number;
   rows: number;
@@ -21,7 +22,7 @@ interface PageEvent {
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
   standalone: true,
-  imports: [ImportsModule, ProjectComponent],
+  imports: [ImportsModule, ProjectComponent, ProjectSponsorsComponent],
   providers: [
     MessageService,
     ConfirmationService,
@@ -62,6 +63,24 @@ export class ProjectListComponent implements OnInit {
   first: number = 0;
   rows: number = 10;
   projectSponsorDetails: any = {};
+
+  projectImages = {
+    "Computers": "computer.png",
+    "Dustbins": "dustbin.png",
+    "Library Books": "library.png",
+    "Audio System": "music.png",
+    "Toilets": "public_toilets.png",
+    "RO Plant": "ro_plants.png",
+    "Sanitary Pad": "sanitary.png",
+    "Sports Kits": "sports.png",
+    "Bus Shelter": "bus_shelter.png",
+    "School": "schools.png"
+  };
+
+  showSponsorDialog: boolean = false;
+
+  // Store the project that will be passed to the dialog
+  selectedProject: any;
 
   constructor(
     private commonService: CommonService,
@@ -500,6 +519,7 @@ export class ProjectListComponent implements OnInit {
   onHideDialog() {
     this.addNewProject = false;
     this.updateExistingProject = false;
+    this.showSponsorDialog = false;
   }
 
   createProject() {
@@ -512,6 +532,7 @@ export class ProjectListComponent implements OnInit {
     this.updateExistingProject = true;
     this.showDialog();
   }
+
 
   getProjectDetails(project: any) {
     //this.project = project;
@@ -534,5 +555,12 @@ export class ProjectListComponent implements OnInit {
     this.selectedMandal = null;
     this.selectedVilage = null;
     this.getProjects(this.first, this.rows);
+  }
+
+   // Method to open the sponsor dialog
+   openSponsorDialog(project: any) {
+    this.project = project; // Set the selected project
+    this.showSponsorDialog = true;
+    this.showDialog()
   }
 }
