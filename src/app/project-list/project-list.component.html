@@ -365,7 +365,10 @@
     </ng-container>
     <ng-container *ngIf="showSponsorDialog">
       <!-- Content for the Sponsor Dialog goes here -->
-      <app-project-sponsors [product]="project"></app-project-sponsors>
+      <app-project-sponsors
+        (closeDialogEvent)="refresh($event)"
+        [product]="project"
+      ></app-project-sponsors>
     </ng-container>
   </p-dialog>
 </div>

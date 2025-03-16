@@ -43,21 +43,10 @@ export interface Product {
 })
 export class ProjectFinanceComponent implements OnInit {
   @Input() projectData: any;
-  showTransaction!: [
-    {
-      id: 2;
-      villageProjectId: 5;
-      expenseCategoryId: 1;
-      transactionAmount: 1500.75;
-      paymentMode: 'Credit Card';
-      transactionDate: '2025-02-17T10:00:00';
-      committeeId: 1;
-      createdDate: '2025-02-17T10:00:00';
-      createdBy: 'admin';
-      lastUpdatedDate: '2025-02-17T10:00:00';
-      lastUpdatedBy: 'admin';
-    }
-  ];
+  showTransaction!: [];
+  remainingBalance: number = 0;
+  totalExpenses: number = 0;
+  totalFunds: number = 0;
   financeSidebarVisible: boolean = false;
   FinanceForm: FormGroup = new FormGroup({});
   constructor(
@@ -73,6 +62,9 @@ export class ProjectFinanceComponent implements OnInit {
     this.projectDetailsService
       .showTransaction(this.projectData.id)
       .subscribe((data) => {
+        this.totalFunds = data.totalFunds;
+        this.totalExpenses = data.totalExpenses;
+        this.remainingBalance = data.remainingBalance;
         this.showTransaction = data.transactions;
       });
   }
@@ -115,3 +107,4 @@ export class ProjectFinanceComponent implements OnInit {
     });
   }
 }
+ 
