@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@service/productservice';
 import { DropdownModule } from 'primeng/dropdown';
@@ -27,6 +27,7 @@ export class ProjectSponsorsComponent implements OnInit {
   ProjectSponsorSidebarVisible: boolean = false;
   donorForm: FormGroup = new FormGroup({});
   @Input() product: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -61,6 +62,7 @@ export class ProjectSponsorsComponent implements OnInit {
       DonorsModeofPayment: new FormControl('', [Validators.required]),
     });
   }
+
   updatedonorForm() {
     const payload = {
       firstName: this.donorForm.get('DonorsName')?.value,
@@ -78,9 +80,14 @@ export class ProjectSponsorsComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           // this.showdonor();
-          this.ProjectSponsorSidebarVisible = false;
-          this.donorForm.reset();
+          this.onClose()
         }
       });
+  }
+
+  onClose() {
+    this.ProjectSponsorSidebarVisible = false;
+    this.donorForm.reset();
+    this.closeDialogEvent.emit(true);
   }
 }
