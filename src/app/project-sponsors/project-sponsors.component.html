@@ -1,4 +1,4 @@
-<div class="project-detail-banner">
+<!-- <div class="project-detail-banner">
   <div class="project-detail-banner-gray"></div>
   <div class="banner-txt">
     <div class="banner-txt-set">
@@ -10,10 +10,10 @@
     </div>
   </div>
   <img src="assets/images/ro-plant.jpg" class="img-fluid" />
-</div>
+</div> -->
 <div class="main-container-in">
   <div class="projects-list-detail">
-    <div class="row project-detail-name-h">
+    <!-- <div class="row project-detail-name-h">
       <div class="d-flex justify-content-between">
         <h4>{{ product.villageName }}</h4>
         <div class="all-projects-arrow-set" onclick="history.back()">
@@ -97,11 +97,9 @@
     </div>
   </div>
 
-  </div>
-
+  </div> -->
 
     <form [formGroup]="donorForm" (ngSubmit)="updatedonorForm()">
-
       <div class="container">
         <div class="row">
           <div class="tab-pop-txt">
@@ -112,69 +110,103 @@
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">Donor Name</div>
             <div class="project-detail-set-v mt-2">
-              <input pInputText id="DonorsName" formControlName="DonorsName" aria-describedby="DonorsName" />
+              <input
+                pInputText
+                id="DonorsName"
+                formControlName="DonorsName"
+                aria-describedby="DonorsName"
+              />
             </div>
           </div>
 
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">Phone</div>
             <div class="project-detail-set-v mt-2">
-              <p-inputNumber id="DonorsPhone" mode="decimal" [useGrouping]="false" formControlName="DonorsPhone"
-                aria-describedby="DonorsPhone" />
+              <p-inputNumber
+                id="DonorsPhone"
+                mode="decimal"
+                [useGrouping]="false"
+                formControlName="DonorsPhone"
+                aria-describedby="DonorsPhone"
+              />
             </div>
           </div>
 
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">e-mail</div>
             <div class="project-detail-set-v mt-2">
-              <input pInputText id="DonorsEmail" formControlName="DonorsEmail" aria-describedby="DonorsEmail" />
+              <input
+                pInputText
+                id="DonorsEmail"
+                formControlName="DonorsEmail"
+                aria-describedby="DonorsEmail"
+              />
             </div>
           </div>
 
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">Address</div>
             <div class="project-detail-set-v mt-2">
-              <textarea rows="5" cols="30" pInputTextarea id="DonorsAddress" aria-describedby="DonorsAddress"
-                formControlName="DonorsAddress">
-            </textarea>
+              <textarea
+                rows="5"
+                cols="30"
+                pInputTextarea
+                id="DonorsAddress"
+                aria-describedby="DonorsAddress"
+                formControlName="DonorsAddress"
+              >
+              </textarea>
             </div>
           </div>
 
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">Memory of</div>
             <div class="project-detail-set-v mt-2">
-              <input pInputText id="DonorsMemoryOf" aria-describedby="DonorsMemoryOf"
-                formControlName="DonorsMemoryOf" />
+              <input
+                pInputText
+                id="DonorsMemoryOf"
+                aria-describedby="DonorsMemoryOf"
+                formControlName="DonorsMemoryOf"
+              />
             </div>
           </div>
 
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">Amount</div>
             <div class="project-detail-set-v mt-2">
-              <p-inputNumber id="DonorsAmount" mode="decimal" formControlName="DonorsAmount" />
+              <p-inputNumber
+                id="DonorsAmount"
+                mode="decimal"
+                formControlName="DonorsAmount"
+              />
             </div>
           </div>
 
           <div class="mt-4 col-3">
             <div class="project-detail-set-h">Mode of Payment</div>
             <div class="project-detail-set-v mt-2">
-              <input pInputText id="DonorsModeofPayment" aria-describedby="DonorsModeofPayment"
-                formControlName="DonorsModeofPayment" />
+              <input
+                pInputText
+                id="DonorsModeofPayment"
+                aria-describedby="DonorsModeofPayment"
+                formControlName="DonorsModeofPayment"
+              />
             </div>
           </div>
-
-          
         </div>
 
         <div class="row">
           <div class="tab-footer-btns mt-4">
-            <p-button label="Cancel " (click)="ProjectSponsorSidebarVisible = false" class="cancel-btn" />
-            <p-button label="Add " type="submit" class="submit-btn" [disabled]="!donorForm.valid" />
+            <p-button label="Cancel " (click)="onClose()" class="cancel-btn" />
+            <p-button
+              label="Add "
+              type="submit"
+              class="submit-btn"
+              [disabled]="!donorForm.valid"
+            />
           </div>
-
         </div>
       </div>
-
     </form>
   </div>
 </div>

@@ -79,7 +79,16 @@
             <div class="row">
               <div class="col-2 pos-rel project-list-img">
                 <div class="open-status">{{ info.status }}</div>
-                <img src="assets/images/project-1.jpg" class="img-fluid" />
+                <img
+                  [src]="
+                    'assets/images/projects/' +
+                    (projectImages[info.projectType] ||
+                      projectImages[info.projectCategory] ||
+                      'default.png')
+                  "
+                  class="img-fluid"
+                  [alt]="info.projectType"
+                />
               </div>
               <div class="col-10 relative">
                 <div class="projects-actions">
@@ -194,12 +203,25 @@
                 <div class="row">
                   <div class="project-detail-h-set col-10">
                     <h4>Project sponsors Details</h4>
+                    <div>
+                      Public Share:
+                      {{ info.projectEstimation * (info.publicShare / 100) }} /-
+                    </div>
+                    <div>Collected Amount: {{ info.sponsorAmount }} /-</div>
+                    <div>
+                      Remaining Amount:
+                      {{
+                        info.projectEstimation * (info.publicShare / 100) -
+                          info.sponsorAmount
+                      }}
+                      /-
+                    </div>
                   </div>
                   <div class="project-detail-set col-2">
                     <button
                       class="submit-btn-m"
                       [disabled]="info.disableAddSponsor"
-                      (click)="getProjectSponsorDetails(info)"
+                      (click)="openSponsorDialog(info)"
                     >
                       Sponsor
                     </button>
@@ -315,7 +337,13 @@
   <p-dialog
     [(visible)]="showProjectDialog"
     [style]="{ width: '60%' }"
-    header="Add Project"
+    [header]="
+      addNewProject
+        ? 'Add Project'
+        : updateExistingProject
+        ? 'Update Project'
+        : 'sponsor'
+    "
     [modal]="true"
     styleClass="p-fluid"
     (onHide)="onHideDialog()"
@@ -333,6 +361,13 @@
         [project]="project"
         [updateExistingProject]="updateExistingProject"
       ></app-project>
+    </ng-container>
+    <ng-container *ngIf="showSponsorDialog">
+      <!-- Content for the Sponsor Dialog goes here -->
+      <app-project-sponsors
+        (closeDialogEvent)="refresh($event)"
+        [product]="project"
+      ></app-project-sponsors>
     </ng-container>
   </p-dialog>
 </div>
