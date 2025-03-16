@@ -2,9 +2,15 @@
   <div class="project-detail-h-set tab-h-txt">
     <h4>Finance Details</h4>
   </div>
-  <div>Total Fund <span class="t-fund">₹ 9,00,000/-</span></div>
-  <div>Total Expenses <span class="t-expenses">₹ 2,16,050/-</span></div>
-  <div>Remaining Balance <span class="t-balance">₹ 6,87,737/-</span></div>
+  <div>
+    Total Fund <span class="t-fund">₹ {{ totalFunds }}/-</span>
+  </div>
+  <div>
+    Total Expenses <span class="t-expenses">₹ {{ totalExpenses }}/-</span>
+  </div>
+  <div>
+    Remaining Balance <span class="t-balance">₹ {{ remainingBalance }}/-</span>
+  </div>
   <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
 </div>
 
@@ -35,14 +41,14 @@
     <ng-template pTemplate="body" let-showTransaction>
       <tr>
         <td>{{ showTransaction.transactionDate }}</td>
-        <td>{{ showTransaction.paymentMode }}</td>
+        <td>{{ showTransaction.expenseType }}</td>
         <td>{{ showTransaction.transactionAmount }}</td>
-        <td>{{ showTransaction.createdBy }}</td>
+        <td>{{ showTransaction.spentBy }}</td>
+        <td>{{ showTransaction.paidTo }}</td>
         <td>{{ showTransaction.paymentMode }}</td>
-        <td>{{ showTransaction.paymentMode }}</td>
-        <td>{{ showTransaction.lastUpdatedBy }}</td>
-        <td>{{ showTransaction.lastUpdatedBy }}</td>
-        <td>{{ showTransaction.lastUpdatedBy }}</td>
+        <td>{{ showTransaction.approvedBy }}</td>
+        <td>{{ showTransaction.description }}</td>
+        <td>{{ showTransaction.billProofs }}</td>
       </tr>
     </ng-template>
   </p-table>
@@ -199,3 +205,4 @@
     </div>
   </form>
 </p-sidebar>
+ 
