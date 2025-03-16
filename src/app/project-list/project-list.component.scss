@@ -128,3 +128,33 @@
         align-items: flex-start;
     }
 }
+
+.private-share{
+    background-color: #d15e00;
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    span{
+        font-weight: bold;
+    }
+}
+
+.collected-amount{
+    background-color: #507619;
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    span{
+        font-weight: bold;
+    }
+}
+
+.remaining-amount{
+    background-color: #0836c1;
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    span{
+        font-weight: bold;
+    }
+}

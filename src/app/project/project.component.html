@@ -198,7 +198,7 @@
 
         <div class="col-6">
           <label for="projectEstimation" class="form-label"
-            >Project Estimation</label
+            >Project Estimation (In INR)</label
           >
           <p-inputNumber
             id="projectEstimation"
@@ -215,7 +215,7 @@
 
         <div class="col-6">
           <label for="publicShare" class="form-label"
-            >Public Share (₹
+            >Private Share (₹
             {{
               projectForm.get("governmentShare").value
                 ? (projectForm.get("projectEstimation").value || 0) -
@@ -225,6 +225,23 @@
           >
           <p-inputNumber id="publicShare" formControlName="publicShare" />
         </div>
+
+        <div class="col-6">
+          <label for="publicShare" class="form-label"
+            >Project Start Date
+            </label
+          >
+          <p-inputNumber id="publicShare" formControlName="publicShare" />
+        </div>
+
+        <div class="col-6">
+          <label for="publicShare" class="form-label"
+            >Project expected End Date
+            </label
+          >
+          <p-inputNumber id="publicShare" formControlName="publicShare" />
+        </div>
+
       </div>
 
       <div class="tab-footer-btns">

@@ -1228,3 +1228,56 @@ h6 {
     height: 120px;
 }
 }
+
+.sponsor-card {
+  border-radius: 5px;
+  background-color: #F6F6F6;
+  border: 1px solid #EEEEEE;
+  width: calc(100% - 10px);
+  transition: all 0.2s ease-out;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+
+  &:hover {
+      transform: translateY(-2px) scale(1.015) translateZ(0);
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.14);
+      transition: all 0.2s ease-out;
+      border: 1px solid #4F7619;
+  }
+
+  .sponspor-details {
+      padding: 10px;
+      display: table;
+    table-layout: fixed;
+    width: 100%;
+
+      .sponspor-details-name {
+          font-weight: 800;
+          color: #BF3700;
+          font-size: 18px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+
+      .sponspor-details-v {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding: 10px 0;
+      }
+
+      .sponspor-details-money {
+          font-weight: 800;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+}
+
+.logo{
+  img{
+    height: 50px;
+  }
+}

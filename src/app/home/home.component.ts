@@ -153,17 +153,17 @@ export class HomeComponent {
     this.responsiveOptionss = [
       {
         breakpoint: '1199px',
-        numVisible: 1,
+        numVisible: 4,
         numScroll: 1,
       },
       {
         breakpoint: '991px',
-        numVisible: 1,
+        numVisible: 3,
         numScroll: 1,
       },
       {
         breakpoint: '767px',
-        numVisible: 1,
+        numVisible: 2,
         numScroll: 1,
       },
     ];

@@ -1,19 +1,21 @@
-.home-banner{
+.home-banner {
     margin-top: 135px;
     position: relative;
-    .banner-stats{
+
+    .banner-stats {
         padding: 20px 30px;
         position: absolute;
         z-index: 99;
         border-radius: 100px;
-        bottom:0;
+        bottom: 0;
         right: 0;
         top: -20px;
         display: inline-table;
         margin: auto;
         color: #fff;
         text-align: right;
-        &-txt{
+
+        &-txt {
             display: flex;
             flex-direction: row;
             gap: 20px;
@@ -21,8 +23,9 @@
             font-weight: bold;
             text-shadow: 0 0 5px #000;
         }
-        .banner-stats-txt{
-            span{
+
+        .banner-stats-txt {
+            span {
                 display: block;
                 font-weight: 300;
                 font-size: 20px;
@@ -33,31 +36,35 @@
 
 
 
-.vision-mission{
+.vision-mission {
     position: relative;
     background-image: url(../../assets/images/vision-mission.jpg);
-background-color: #fff;
+    background-color: #fff;
     background-position: bottom right;
     background-repeat: no-repeat;
     padding: 50px 0;
-    
-    .vm-content-set{
+
+    .vm-content-set {
         // position: absolute;
         width: 100%;
         // height: 100%;
         display: flex;
-    align-items: center;
+        align-items: center;
     }
-    .vision-mission-txt{
+
+    .vision-mission-txt {
         padding: 0 30px;
-        h3{
+
+        h3 {
             font-size: 40px;
             font-weight: bold;
-            span{
+
+            span {
                 color: #4F7619;
             }
         }
-        p{
+
+        p {
             font-size: 18px;
             line-height: 29px;
         }
@@ -65,12 +72,14 @@ background-color: #fff;
 }
 
 
-.building-starter{
+.building-starter {
     padding: 50px 0;
-    h3{
+
+    h3 {
         color: #444;
         font-size: 22px;
-        div{
+
+        div {
             color: #4F7619;
             font-size: 35px;
             font-weight: bold;
@@ -78,61 +87,27 @@ background-color: #fff;
     }
 }
 
-.top-sponsors{
+.top-sponsors {
     background-color: #fff;
     padding: 50px 0;
-    h3{
+
+    h3 {
         color: #4F7619;
         font-size: 35px;
         font-weight: bold;
         margin-bottom: 10px;
     }
-    .top-five-sponsors{
+
+    .top-five-sponsors {
         display: flex;
         gap: 30px;
-       
+
     }
 }
 
-.sponsor-card{
-    border-radius: 5px;
-    background-color: #F6F6F6;
-    border: 1px solid #EEEEEE;
-    width: calc(20% - 24px);
-    transition: all 0.2s ease-out;
-    box-shadow: 0 14px 26px rgba(0,0,0,0.04);
-    cursor: pointer;
-    border: 1px solid red;
-    
-    &:hover{
-    transform: translateY(-2px) scale(1.015) translateZ(0);
-    box-shadow: 0 14px 26px rgba(0,0,0,0.14);
-    transition: all 0.2s ease-out;
-    border: 1px solid #4F7619;
-    }
-    .sponspor-details{
-        padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-        .sponspor-details-name{
-            font-weight: 800;
-            color: #BF3700;
-            font-size: 18px;
-        }
-        .sponspor-details-v{
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .sponspor-details-money{
-            font-weight: 800;
-        }
-    }
-}
 
-.project-card{
+
+.project-card {
     background-color: #fff;
     border-radius: 19px;
     padding: 50px 10px 30px 10px;
@@ -140,27 +115,30 @@ background-color: #fff;
     border: 1px solid #e6e6e6;
     transition: 0.3s ease;
     position: relative;
-    margin: 13px .5rem!important;
-    
-    &:hover{
+    margin: 13px .5rem !important;
+
+    &:hover {
         border: 1px solid #4F7619;
         transition: .3s ease;
-        button{
+
+        button {
             display: block;
             transition: 0.3sease;
         }
     }
-    img{
+
+    img {
         width: auto;
 
     }
-    
-    h4{
+
+    h4 {
         text-align: center;
         text-transform: uppercase;
-        font-size: 22px;    
+        font-size: 22px;
     }
-    button{
+
+    button {
         border-radius: 100px;
         padding: 6px 20px;
         font-size: 16px;
@@ -177,22 +155,31 @@ background-color: #fff;
 }
 
 @media screen and (max-width: 960px) {
-.home-banner{
-    margin-top: 120px;
-    position: relative;
-}
+    .home-banner {
+        margin-top: 120px;
+        position: relative;
+    }
 }
 
 @media screen and (max-width: 400px) {
     .home-banner .banner-stats .banner-stats-txt span {
         font-size: 13px;
     }
+
     .home-banner .banner-stats-txt {
         gap: 15px;
         font-size: 20px;
     }
-    .home-banner .banner-stats{
+
+    .home-banner .banner-stats {
         display: none;
     }
+    .project-card {
+        h4{
+            font-size: 18px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 }
-
