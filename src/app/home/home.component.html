@@ -84,9 +84,10 @@
   </div>
   <div class="container">
     <div class="top-five-sponsors">
-
-      <p-carousel [value]="topSponsers" [numVisible]="5" [circular]="false" [responsiveOptions]="responsiveOptionss" autoplayInterval="3000" (click)="showSponsorDetails()">
-        <ng-template let-sponsor pTemplate="item" class="sponsor-card" >
+      <p-carousel [value]="topSponsers" [numVisible]="5" [circular]="false" [responsiveOptions]="responsiveOptionss"
+       (click)="showSponsorDetails()">
+        <ng-template let-sponsor pTemplate="item">
+          <div class="sponsor-card">
             <img src="assets/images/sponsors/{{ sponsor.image }}" [alt]="sponsor.name" class="img-fluid" />
             <div class="sponspor-details">
               <div class="sponspor-details-name">
@@ -98,6 +99,7 @@
               </div>
               <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
             </div>
+          </div>
         </ng-template>
       </p-carousel>
 
