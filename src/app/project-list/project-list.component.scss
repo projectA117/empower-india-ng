@@ -97,20 +97,21 @@
 }
 
 .open-status{
-    background-color: #D71010;
-    color: #fff;
+    background-color: #ffcdd3;
+    color: #000000;
     display: inline-block;
     padding: 5px 10px;
-    border-radius: 100px;
+    border-radius: 5px;
 }
 
 .project-list-img{
     img{
         margin-top: -22px;
         margin-left: -7px;
-        width: 100%;
+        width: 95%;
         padding-right: 10px;
-        border-top-left-radius: 4px;
+    padding: 20px;
+    margin: 0 auto;
     }
     .open-status{
         position: absolute;
@@ -129,32 +130,27 @@
     }
 }
 
-.private-share{
-    background-color: #d15e00;
-    border-radius: 5px;
-    padding: 5px;
-    color: #fff;
-    span{
-        font-weight: bold;
+
+.project-amount-info{
+    gap: 10px;
+    display: flex;
+    padding-right: 15px;
+    div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
     }
 }
 
-.collected-amount{
-    background-color: #507619;
-    border-radius: 5px;
-    padding: 5px;
-    color: #fff;
-    span{
-        font-weight: bold;
-    }
+.project-details-bottom{
+    border-top: 1px dashed #ccc;
+    background-color: #fff;
+    margin-top: -15px;
+    margin-left: -10px;
+    padding: 15px 15px 5px 15px;
+    margin-right: -10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
-.remaining-amount{
-    background-color: #0836c1;
-    border-radius: 5px;
-    padding: 5px;
-    color: #fff;
-    span{
-        font-weight: bold;
-    }
-}

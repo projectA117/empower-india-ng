@@ -1,11 +1,24 @@
 <div class="grid">
-  <!-- Right form -->
   <div class="col-12">
-    <div class="form-card p-4">
-      <h2>Project Cost of Private Share: {{ projectCost }} /-</h2>
 
-      <div class="table-container">
-        <p-table [value]="donors" styleClass="p-datatable-sm">
+    <div class="project-amount-info-pop">
+      <div class="private-share">
+        Project Cost of Private Share
+        <span>{{ projectCost }}/-</span>
+      </div>
+      <div class="collected-amount">
+        Collected Amount
+        <span>{{ totalCollected}} /-</span>
+      </div>
+      <div class="remaining-amount">
+        Remaining Amount
+        <span>{{ remainingAmount }} /-</span>
+      </div>
+    </div>
+
+
+      <div class="table-container sponsor-table">
+        <p-table [value]="donors" class="tab-data-table">
           <ng-template pTemplate="header">
             <tr>
               <th>Name</th>
@@ -20,7 +33,7 @@
           </ng-template>
           <ng-template pTemplate="footer">
             <tr>
-              <td>Total</td>
+              <td>Collected Amount</td>
               <td>{{ totalCollected }}</td>
             </tr>
           </ng-template>
@@ -32,17 +45,19 @@
         </p-table>
       </div>
 
-      <div class="remaining-container mt-3">
+      <!-- <div class="remaining-container mt-3">
         <div class="flex justify-content-between">
           <span class="font-bold"
             >Remaining Amount: {{ remainingAmount }} /-</span
           >
         </div>
-      </div>
+      </div> -->
 
       <form [formGroup]="donorForm" (ngSubmit)="updateDonorForm()">
-        <div class="sponsor-type mt-3">
+        <div class="sponsor-type">
           <span>Are you a</span>
+          <div class="d-flex">
+
           <div class="field-radiobutton ml-2">
             <p-radioButton
               name="sponsorTypeRight"
@@ -65,6 +80,8 @@
             ></p-radioButton>
             <label for="existingRight" class="ml-2">Existing Sponsor</label>
           </div>
+        </div>
+
         </div>
         <!-- User search for existing sponsors -->
         <div class="row" *ngIf="sponsorType === 'existing'">
@@ -302,6 +319,5 @@
           </div>
         </div>
       </form>
-    </div>
   </div>
 </div>
