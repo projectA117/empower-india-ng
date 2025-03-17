@@ -104,7 +104,7 @@ export class ProjectDetailsService {
       );
   }
 
-  addDonars(payLoad: any, id: any): Observable<any> {
+  addDonors(payLoad: any, id: any): Observable<any> {
     return this.httpClient
       .post<any>(
         `${environment.apiUrl}/donars/addDonars?projectId=${id}`,
@@ -117,6 +117,20 @@ export class ProjectDetailsService {
         catchError((error) => of(error))
       );
   }
+
+  searchDonors(searchTerm: string): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        `${environment.apiUrl}/donars/search?searchTerm=${searchTerm}`
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
   updateWIP(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`${environment.apiUrl}/WIP/updateWIP`, payLoad)
