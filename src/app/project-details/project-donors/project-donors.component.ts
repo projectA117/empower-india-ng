@@ -96,7 +96,7 @@ export class ProjectDonorsComponent implements OnInit {
     };
 
     this.projectDetailsService
-      .addDonars(payload, this.projectData.id)
+      .addDonors(payload, this.projectData.id)
       .subscribe((data) => {
         if (data) {
           this.showdonor();
