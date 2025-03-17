@@ -783,6 +783,9 @@ h6 {
   padding: 0 30px 0 30px;
   background-color: #fff;
   box-shadow: 0px 5px 10px #0000004a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .top-head {
@@ -1184,7 +1187,7 @@ h6 {
 
   .logo {
     img {
-      height: 35px;
+      height: 35px!important;
 
     }
   }
@@ -1279,5 +1282,25 @@ h6 {
 .logo{
   img{
     height: 50px;
+  }
+}
+
+.login-section{
+  button{
+    color: #000;
+  background-color: #ffd687;
+  border-color: #ffd687;
+  }
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  color: #000;
+  background-color: #ffd687;
+  border-color: #ffd687;
+}
+
+.invalid-feedback{
+  div{
+    color: #ffd687;
   }
 }
