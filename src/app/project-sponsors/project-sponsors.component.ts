@@ -82,6 +82,7 @@ export class ProjectSponsorsComponent implements OnInit {
     }
     this.apiCall = true;
     const payload = {
+      id: this.donorForm.get('ID')?.value,
       firstName: this.donorForm.get('DonorsFirstName')?.value,
       lastName: this.donorForm.get('DonorsLastName')?.value,
       phoneNumber: this.donorForm.get('DonorsPhone')?.value,
@@ -128,6 +129,7 @@ export class ProjectSponsorsComponent implements OnInit {
 
     // Populate form with donor data
     this.donorForm.patchValue({
+      ID: donor.value.id,
       DonorsFirstName: donor.value.firstName,
       DonorsLastName: donor.value.lastName,
       DonorsPhone: donor.value.phoneNumber,
@@ -143,6 +145,7 @@ export class ProjectSponsorsComponent implements OnInit {
 
   onSponsorTypeChange(event: any) {
     this.donorForm.reset();
+    this.selectedDonor = null;
     if (event === 'new') {
       this.donorForm.get('DonorsFirstName')?.enable();
       this.donorForm.get('DonorsLastName')?.enable();
