@@ -1,187 +1,157 @@
-<div class="container-fluid w-page header-set">
-  <div class="container">
-    <div class="row">
-      <h2>Register</h2>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input
-            type="text"
-            formControlName="firstName"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': f.firstName.touched && f.firstName.errors
-            }"
-          />
-          <div
-            *ngIf="f.firstName.touched && f.firstName.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.firstName.touched && f.firstName.errors.required">
-              firstName is required
+<div class="container-fluid login-set">
+  <div class="row login-row">
+    <div class="col-md-6 login-l">
+      <div class="login-logo">
+        <a href="/">
+          <img src="assets/images/empower-logo.svg" />
+        </a>
+      </div>
+      <div class="login-cm">
+        <img src="assets/images/login-cm.png" />
+      </div>
+    </div>
+    <div class="col-md-6 login-r">
+      <div class="login-logo">
+        <a href="/">
+          <img src="assets/images/empower-logo.svg" />
+        </a>
+      </div>
+      <div class="login-section">
+        <div class="row">
+          <h2>Register</h2>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-login">
+              <div class="login-scroll">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" formControlName="firstName" class="form-control" [ngClass]="{
+                  'is-invalid': f.firstName.touched && f.firstName.errors
+                }" />
+                  <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.touched && f.firstName.errors.required">
+                      firstName is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" formControlName="lastName" class="form-control" [ngClass]="{
+                  'is-invalid': f.lastName.touched && f.lastName.errors
+                }" />
+                  <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.touched && f.lastName.errors.required">
+                      last Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phoneNumber">Phone Number</label>
+                  <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{
+                  'is-invalid': f.phoneNumber.touched && f.phoneNumber.errors
+                }" />
+                  <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.required">
+                      Phone Number is required
+                    </div>
+                    <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.pattern">
+                      Phone Number length should be 10
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">e-mail </label>
+                  <input type="text" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" />
+                  <div *ngIf="f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.touched && f.email.errors.required">
+                      e-mail is required
+                    </div>
+
+                    <div *ngIf="f.email.touched && f.email.errors.pattern">
+                      valied e-mail pattern is required
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                <label for="username">Upload profile image</label>
+                <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]" url=""
+                  accept="image/*" maxFileSize="1000000" (onUpload)="onProfileUpload($event)" />
+              </div> -->
+
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" formControlName="userName" class="form-control" [ngClass]="{
+                  'is-invalid': f.userName.touched && f.userName.errors
+                }" />
+                  <div *ngIf="f.userName.touched && f.userName.errors" class="invalid-feedback">
+                    <div *ngIf="f.userName.touched && f.userName.errors.required">
+                      User Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="AboutYourSelf">About your self</label>
+
+                  <textarea id="aboutYourSelf" formControlName="aboutYourSelf" name="aboutYourSelf" rows="4" cols="50"
+                    style="width: 100%">
+                At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+                </textarea>
+
+                  <!-- <input
+                type="text"
+               
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': f.userName.touched && f.userName.errors
+                }"
+              /> -->
+                  <div *ngIf="f.userName.touched && f.userName.errors" class="invalid-feedback">
+                    <div *ngIf="f.userName.touched && f.userName.errors.required">
+                      User name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" formControlName="password" class="form-control" [ngClass]="{
+                  'is-invalid': f.password.touched && f.password.errors
+                }" />
+                  <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.touched && f.password.errors.required">
+                      Password is required
+                    </div>
+                    <div *ngIf="f.password.touched && f.password.errors.minlength">
+                      Password must be at least 6 characters
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <div  class="d-flex gap-2 jusify-space-between">
+                <div class="d-flex gap-1 align-items-center have-font">Have an account? <a [routerLink]="['/signin']" class="btn btn-link">Login In</a></div>
+                <button [disabled]="registerForm.invalid" class="btn btn-primary">
+                  Register
+                </button>
+                </div>
+                <img *ngIf="loading"
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                
+              </div>
             </div>
-          </div>
+
+          </form>
         </div>
-
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input
-            type="text"
-            formControlName="lastName"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': f.lastName.touched && f.lastName.errors
-            }"
-          />
-          <div
-            *ngIf="f.lastName.touched && f.lastName.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.lastName.touched && f.lastName.errors.required">
-              last Name is required
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="phoneNumber">phone Number</label>
-          <input
-            type="text"
-            formControlName="phoneNumber"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': f.phoneNumber.touched && f.phoneNumber.errors
-            }"
-          />
-          <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
-            <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.required">
-              phone Number is required
-            </div>
-            <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.pattern">
-              phone Number length should be 10
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">email </label>
-          <input
-            type="text"
-            formControlName="email"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }"
-          />
-          <div *ngIf="f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.touched && f.email.errors.required">
-              email is required
-            </div>
-
-            <div *ngIf="f.email.touched && f.email.errors.pattern">
-              valied email pattern is required
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="username">Upload profile image</label>
-          <p-fileUpload
-            mode="basic"
-            chooseLabel="Choose"
-            chooseIcon="pi pi-upload"
-            name="demo[]"
-            url=""
-            accept="image/*"
-            maxFileSize="1000000"
-            (onUpload)="onProfileUpload($event)"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="username">User name</label>
-          <input
-            type="text"
-            formControlName="userName"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': f.userName.touched && f.userName.errors
-            }"
-          />
-          <div
-            *ngIf="f.userName.touched && f.userName.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.userName.touched && f.userName.errors.required">
-              User name is required
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div for="AboutYourSelf">About your self</div>
-
-          <textarea
-            id="aboutYourSelf"
-            formControlName="aboutYourSelf"
-            name="aboutYourSelf"
-            rows="4"
-            cols="50"
-            style="width: 100%"
-          >
-            At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-            </textarea
-          >
-
-          <!-- <input
-            type="text"
-           
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': f.userName.touched && f.userName.errors
-            }"
-          /> -->
-          <div
-            *ngIf="f.userName.touched && f.userName.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.userName.touched && f.userName.errors.required">
-              User name is required
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            formControlName="password"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': f.password.touched && f.password.errors
-            }"
-          />
-          <div
-            *ngIf="f.password.touched && f.password.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.password.touched && f.password.errors.required">
-              Password is required
-            </div>
-            <div *ngIf="f.password.touched && f.password.errors.minlength">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button [disabled]="registerForm.invalid" class="btn btn-primary">
-            Register
-          </button>
-          <img
-            *ngIf="loading"
-            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-          />
-          <a [routerLink]="['/signin']" class="btn btn-link">Cancel</a>
-        </div>
-      </form>
+      </div>
+      <img src="assets/images/ap-bg.png" class="img-fluid login-bg-img" />
     </div>
   </div>
+
+
+
 </div>
