@@ -1,0 +1,154 @@
+:host ::ng-deep {
+  .form-card {
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .p-datatable-sm .p-datatable-thead > tr > th {
+    padding: 0.5rem;
+    font-weight: 600;
+  }
+
+  .p-datatable-sm .p-datatable-tbody > tr > td {
+    padding: 0.5rem;
+  }
+
+  .input-container {
+    margin-bottom: 1rem;
+  }
+
+  .p-inputtext {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 0.5rem;
+  }
+
+  .field-radiobutton {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+
+  .total-container, .remaining-container {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .memory-amount-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .sponsor-type {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .field-radiobutton {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+
+  .tab-pop-txt {
+    width: 100%;
+    h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .project-detail-set-h {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .project-detail-set-v {
+    width: 100%;
+
+    input, .p-inputnumber, textarea {
+      width: 100%;
+    }
+
+    .p-inputtextarea {
+      resize: vertical;
+    }
+  }
+
+  .p-error {
+    color: #f44336;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  .tab-footer-btns {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 1rem;
+
+    .cancel-btn {
+      .p-button {
+        background-color: #e0e0e0;
+        color: #333;
+        border: none;
+
+        &:hover {
+          background-color: #d0d0d0;
+        }
+      }
+    }
+
+    .submit-btn {
+      .p-button {
+        background-color: #3f51b5;
+        border: none;
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+.sponsor-remaining-amount{
+  background-color: #BBDEFB;
+    border-radius: 3px;
+    padding: 10px 20px;
+    display: inline-flex;
+    gap: 10px;
+  span{
+      font-weight: bold;
+      display: block;
+  }
+}
+
+.sponsor-type{
+  margin: 15px 0;
+    font-weight: bold;
+    gap: 15px;
+  .field-radiobutton{
+    margin-bottom: 0;
+  }
+  .d-flex{
+    font-weight: 500;
+  }
+}
+
+.project-amount-info{
+  display: flex;
+  gap: 10px;
+}

@@ -1,0 +1,78 @@
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, computed, effect } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { LoaderService } from '@service/loader.service';
+import { MenuItem } from 'primeng/api';
+import { MenubarModule } from 'primeng/menubar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { Observable } from 'rxjs';
+import { ProjectListComponent } from './project-list/project-list.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    MenubarModule,
+    ProgressSpinnerModule,
+    CommonModule,
+    ProjectListComponent,
+  ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+})
+export class AppComponent {
+  title = 'empower';
+  items: MenuItem[] | undefined;
+  loading: boolean = false;
+  loading$: Observable<boolean>;
+  isLoading = computed(() => this.loaderService.loading());
+  isSigninOrRegister = false;
+  constructor(
+    private loaderService: LoaderService,
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('signin') || event.url.includes('register')) {
+          this.isSigninOrRegister = true;
+        } else {
+          this.isSigninOrRegister = false;
+        }
+      }
+    })
+    this.items = [
+      {
+        label: 'HOME',
+        routerLink: 'home',
+      },
+      {
+        label: 'ABOUT US',
+        routerLink: 'about-us',
+      },
+      // {
+      //   label: 'VISION',
+      //   routerLink: 'vision',
+      // },
+      {
+        label: 'PROJECTS',
+        routerLink: 'projects',
+      },
+      {
+        label: 'SPONSORS',
+        routerLink: 'sponsors',
+      },
+      {
+        label: 'GALLERY',
+        routerLink: 'gallery',
+      },
+      {
+        label: 'Contact',
+        routerLink: 'contact',
+      },
+    ];
+  }
+}

@@ -1,0 +1,148 @@
+.login-logo {
+    img {
+        height: 50px;
+    }
+}
+
+.login-set {
+    background-color: #FFF9F1;
+    height: 100vh;
+}
+
+.login-l {
+    box-shadow: 10px 0px 10px #ccc;
+    padding: 50px;
+    position: relative;
+}
+
+.login-r {
+    padding: 50px;
+    position: relative;
+}
+
+.login-bg-img {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 100px);
+    ;
+    height: calc(100vh - 100px);
+    right: 0;
+}
+
+.login-set {
+    .login-row {
+        height: 100vh;
+    }
+}
+
+.login-cm {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+
+    img {
+        height: 60vh;
+    }
+}
+
+.login-section {
+    background-color: #BF3700;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    display: table;
+    padding: 30px;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    gap: 10px;
+
+    h2 {
+        color: #fff;
+        font-size: 19px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .form-login {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.login-scroll {
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+a {
+    color: #ffd687;
+
+    &:hover {
+        color: #ffd687;
+        text-decoration: none;
+    }
+}
+
+
+@media screen and (max-width: 830px) {
+    .login-l {
+        display: none
+    }
+
+    .login-bg-img {
+        height: inherit;
+        width: inherit;
+    }
+
+    .login-r {
+        .login-logo {
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    .login-section {
+        width: 85%;
+    }
+
+    .login-scroll {
+        max-height: calc(100vh - 400px);
+    }
+
+    .have-font {
+        font-size: 13px;
+    }
+
+    .login-r {
+        width: 100%;
+    }
+}
+
+
+@media screen and (min-width: 831px) {
+    .login-r {
+        .login-logo {
+            display: none;
+        }
+    }
+}
+
+@media screen and (min-width: 831px) and (max-width: 1180px) {
+    .login-section {
+        width: 60%;
+    }
+}

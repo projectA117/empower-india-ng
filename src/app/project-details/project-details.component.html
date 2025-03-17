@@ -1,0 +1,199 @@
+<div class="project-detail-banner">
+  <div class="project-detail-banner-gray"></div>
+  <div class="banner-txt">
+    <div class="banner-txt-set">
+      <div class="banner-txt-a">RO</div>
+      <div class="banner-txt-b">Plant</div>
+      <div class="banner-txt-c">
+        {{ product.villageName }} | {{ product.location }}
+      </div>
+    </div>
+  </div>
+  <img src="assets/images/ro-plant.jpg" class="img-fluid" />
+</div>
+<div class="main-container-in">
+  <div class="projects-list-detail">
+    <div class="row project-detail-name-h">
+      <div class="d-flex justify-content-between">
+        <h4>{{ product.villageName }}</h4>
+        <div class="all-projects-arrow-set" onclick="history.back()">
+          <img src="assets/images/back-arrow.svg" />
+          <div>All Projects</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mb-4">
+        <div class="project-detail-h-set">
+          <h4>Location Details</h4>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">District</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.districtName }}
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Mandal</div>
+          <div class="project-detail-set-v mt-2">{{ product.mandalName }}</div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Village</div>
+          <div class="project-detail-set-v mt-2">{{ product.villageName }}</div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Pin Code</div>
+          <div class="project-detail-set-v mt-2">{{ product.pinCode }}</div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Colony</div>
+          <div class="project-detail-set-v mt-2">{{ product.location }}</div>
+        </div>
+
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Latitude, Longitude</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.latitude }} , {{ product.longitude }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="project-detail-h-set">
+          <h4>Project Details</h4>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Project ID</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.id }}
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Project Type</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.projectType ? "New" : "Existing" }}
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Status</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.status }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="project-detail-h-set">
+          <h4>Project Description</h4>
+        </div>
+
+        <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">{{ product.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="projects-list-tab mt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <p-tabView
+          styleClass="tabview-custom"
+          (onChange)="onTabChange(tabs[$event.index].label)"
+        >
+          <p-tabPanel *ngFor="let tab of tabs" [disabled]="tab.isDisabled">
+            <ng-template pTemplate="header">
+              <div class="flex align-items-center gap-2">
+                <p-avatar [image]="tab.icon" shape="circle" />
+                <span class="font-bold white-space-nowrap m-0">
+                  {{ tab.label }}
+                </span>
+              </div>
+            </ng-template>
+
+            <!-- Handle dynamic content using activeTab -->
+            <ng-container *ngIf="activeTab === tab.label">
+              <!-- Estimation -->
+              <div *ngIf="activeTab === 'Estimation'">
+                <app-project-approval
+                  [projectData]="product"
+                ></app-project-approval>
+              </div>
+
+              <!-- Committee -->
+              <div *ngIf="activeTab === 'Committee'">
+                <app-project-committee
+                  [projectData]="product"
+                ></app-project-committee>
+              </div>
+
+              <!-- Sponsors -->
+              <div *ngIf="activeTab === 'Sponsors'">
+                <app-project-donors
+                  [projectData]="product"
+                ></app-project-donors>
+              </div>
+
+              <!-- Vendors -->
+              <div *ngIf="activeTab === 'Vendors'">
+                <app-project-vendors
+                  [projectData]="product"
+                ></app-project-vendors>
+              </div>
+
+              <!-- Bank Details -->
+              <div *ngIf="activeTab === 'Bank Details'">
+                <h1>Private Account details</h1>
+                Bank: ICICI BANK IFSC: ICIC0001114 MICR Code: 500229034
+                <h1>Trust Account details</h1>
+                Bank: SBI BANK IFSC: ICIC0001114 MICR Code: 500229034
+                <p-button label="Add bank account details"></p-button>
+              </div>
+
+              <!-- Project Publish -->
+              <div *ngIf="activeTab === 'Project Publish'">
+                <h1>Project publish form</h1>
+                <p>
+                  Is Estimation
+                  <input type="checkbox" id="Estimation" name="Estimation" />
+                </p>
+                <p>
+                  Is Bank Account
+                  <input type="checkbox" id="account" name="account" />
+                </p>
+                <p>
+                  Is Committee
+                  <input type="checkbox" id="committee" name="committee" />
+                </p>
+                <p-button label="Save"></p-button>
+                &nbsp;
+                <p-button label="Publish"></p-button>
+              </div>
+
+              <!-- Finance -->
+              <div *ngIf="activeTab === 'Finance'">
+                <app-project-finance
+                  [projectData]="product"
+                ></app-project-finance>
+              </div>
+
+              <!-- Work In Progress -->
+              <div *ngIf="activeTab === 'Work In Progress'">
+                <app-project-work-in-progress
+                  [projectData]="product"
+                ></app-project-work-in-progress>
+              </div>
+
+              <!-- Project Sign Off -->
+              <div *ngIf="activeTab === 'Project Sign off'">
+                <app-project-signoff
+                  [projectData]="product"
+                ></app-project-signoff>
+              </div>
+            </ng-container>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

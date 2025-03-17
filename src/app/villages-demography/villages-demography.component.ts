@@ -1,0 +1,149 @@
+import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ProductService } from '@service/productservice';
+import { ImportsModule } from '../imports';
+import { CommonService } from '../../service/common.service';
+import { ProjectComponent } from '../project/project.component';
+import { Project } from 'src/models/Project';
+
+import { HardCodedInfo } from 'src/constants/HardCodedInfo';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoaderService } from '@service/loader.service';
+
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
+
+@Component({
+  selector: 'app-villages-demography',
+  standalone: true,
+  imports: [ImportsModule, ProjectComponent],
+  providers: [
+    MessageService,
+    ConfirmationService,
+    ProductService,
+    CommonService,
+  ],
+  templateUrl: './villages-demography.component.html',
+  styleUrl: './villages-demography.component.scss',
+  styles: [
+    `
+      :host ::ng-deep .p-dialog .product-image {
+        width: 150px;
+        margin: 0 auto 2rem auto;
+        display: block;
+      }
+    `,
+  ],
+})
+export class VillagesDemographyComponent implements OnInit {
+  getVillagesDemographyData: any = [];
+  unEmployedYouthVillage: any = [];
+  employedYouthVillage: any = [];
+  villagelookupsData: any = [];
+  occupationsData: any = [];
+  landUtilizationData: any = [];
+  cultivationCropsData: any = [];
+  institutionsData: any = [];
+  CommunityPopulationData: any = [];
+
+  selectedDistrict: any = {};
+  selectedMandal: any = {};
+  selectedVilage: any = {};
+
+  districts: any = [];
+  mandals: any = [];
+  villages: any = [];
+
+  constructor(
+    private commonService: CommonService,
+    private router: Router,
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.getDistricts();
+    this.villagelookups();
+    this.commonService.getVillagesDemography(1).subscribe((data: any) => {
+      this.getVillagesDemographyData = data;
+      this.unEmployedYouthVillage =
+        this.getVillagesDemographyData.unEmployedYouthVillage;
+
+      this.employedYouthVillage =
+        this.getVillagesDemographyData.employedYouthVillage;
+      this.occupationsData = this.getVillagesDemographyData.occupations;
+      this.landUtilizationData =
+        this.getVillagesDemographyData.landUtilizationVillage;
+      this.cultivationCropsData =
+        this.getVillagesDemographyData.cultivationCropsVillage;
+      this.institutionsData =
+        this.getVillagesDemographyData.institutionsVillages;
+      this.CommunityPopulationData = this.getVillagesDemographyData.populations;
+    });
+  }
+  getDistricts() {
+    this.commonService.getDistricts().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.districts = data;
+        }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.districts = HardCodedInfo.districts;
+      }
+    );
+  }
+
+  getMandals(event: any) {
+    const districtCode = event.value.id;
+    this.mandals = [];
+    this.villages = [];
+    this.selectedMandal = null;
+    this.selectedVilage = null;
+    this.commonService.getMandals(districtCode).subscribe(
+      (data) => {
+        this.mandals = data;
+        this.projectDMVSearch();
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.mandals = HardCodedInfo.mandals;
+      }
+    );
+  }
+
+  getvilages(event: any) {
+    const mandalCode = event.value.id;
+    this.villages = [];
+    this.selectedVilage = null;
+    this.commonService.getVillages(mandalCode).subscribe(
+      (data) => {
+        this.villages = data;
+        this.projectDMVSearch();
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.villages = HardCodedInfo.villages;
+      }
+    );
+  }
+
+  vilageChange(event: any) {
+    this.projectDMVSearch();
+  }
+  villagelookups() {
+    this.commonService.villagelookups().subscribe((data: any) => {
+      this.villagelookupsData = data;
+    });
+  }
+  projectDMVSearch() {}
+  reset() {}
+}
