@@ -544,7 +544,7 @@ h6 {
 
 .projects-list {
   background-color: #FAFAFA;
-  padding: 15px 0;
+  padding: 15px 0 0 0;
   border: 1px solid #CACACA;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -667,7 +667,8 @@ h6 {
 }
 
 .project-detail-h-set {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  width: 100%;
 
   h4 {
     margin-bottom: 0;
@@ -1303,4 +1304,51 @@ h6 {
   div{
     color: #ffd687;
   }
+}
+
+.projects-list{
+  table{
+      border: 1px solid #ccc!important;
+  }
+}
+
+
+.sponsor-table{
+  table{
+    border: 1px solid #ccc!important;
+}
+}
+
+.private-share{
+  background-color: #FFCDD3;
+  border-radius: 3px;
+  padding: 10px 20px;
+  span{
+      font-weight: bold;
+  }
+}
+
+.collected-amount{
+  background-color: #A5D6A7;
+  border-radius: 3px;
+  padding: 10px 20px;
+  span{
+      font-weight: bold;
+  }
+}
+
+.remaining-amount{
+  background-color: #BBDEFB;
+  border-radius: 3px;
+  padding: 10px 20px;
+  span{
+      font-weight: bold;
+  }
+}
+
+
+.project-amount-info-pop{
+  display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
 }

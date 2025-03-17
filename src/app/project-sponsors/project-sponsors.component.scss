@@ -123,3 +123,32 @@
     }
   }
 }
+
+.sponsor-remaining-amount{
+  background-color: #BBDEFB;
+    border-radius: 3px;
+    padding: 10px 20px;
+    display: inline-flex;
+    gap: 10px;
+  span{
+      font-weight: bold;
+      display: block;
+  }
+}
+
+.sponsor-type{
+  margin: 15px 0;
+    font-weight: bold;
+    gap: 15px;
+  .field-radiobutton{
+    margin-bottom: 0;
+  }
+  .d-flex{
+    font-weight: 500;
+  }
+}
+
+.project-amount-info{
+  display: flex;
+  gap: 10px;
+}
