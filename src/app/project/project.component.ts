@@ -21,8 +21,7 @@ import { HardCodedInfo } from '../../constants/HardCodedInfo';
   providers: [
     MessageService,
     ConfirmationService,
-    ProductService,
-    CommonService,
+    ProductService
   ],
   styleUrl: './project.component.scss',
 })

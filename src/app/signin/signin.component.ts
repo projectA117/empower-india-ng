@@ -24,7 +24,7 @@ import { ProductService } from '@service/productservice';
     MessageService,
     ConfirmationService,
     ProductService,
-    CommonService,
+
   ],
 })
 export class SigninComponent implements OnInit {
@@ -32,6 +32,8 @@ export class SigninComponent implements OnInit {
   submitted: boolean = false;
   loading = false;
   returnUrl: string;
+  invalidUserNameOrPassword: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -43,6 +45,10 @@ export class SigninComponent implements OnInit {
     this.signinForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+    });
+
+    this.signinForm.valueChanges.subscribe(() => {
+      this.invalidUserNameOrPassword = false;
     });
   }
 
@@ -56,8 +62,10 @@ export class SigninComponent implements OnInit {
         this.signinForm.reset();
         if (data.id) {
           this.router.navigate(['/home']);
+        } else {
+          this.invalidUserNameOrPassword = true;
         }
-      }
+        }
     });
   }
 }

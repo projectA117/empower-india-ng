@@ -19,9 +19,17 @@
   </div>
   <div class="f-menu">
     <p-menubar [model]="items" />
+    @if (isLoggedIn()) {
+
+    <button class="logout-button" (click)="logout()">Logout</button>
+    } @else {
     <div class="signin-signup" window.location.href="/signin">
       <a href="/signin">Login</a>
     </div>
+    <div class="signin-signup" window.location.href="/register">
+      <a href="/register">Register</a>
+    </div>
+    }
 
     <!-- <nav id="navmenu" class="navmenu">
       <ul>

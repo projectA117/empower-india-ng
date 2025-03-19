@@ -27,7 +27,7 @@ interface PageEvent {
     MessageService,
     ConfirmationService,
     ProductService,
-    CommonService,
+
   ],
   templateUrl: './villages-demography.component.html',
   styleUrl: './villages-demography.component.scss',

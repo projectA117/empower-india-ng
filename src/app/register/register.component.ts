@@ -24,7 +24,7 @@ import { ProductService } from '@service/productservice';
     MessageService,
     ConfirmationService,
     ProductService,
-    CommonService,
+
   ],
 })
 export class RegisterComponent {

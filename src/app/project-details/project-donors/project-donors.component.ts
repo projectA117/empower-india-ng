@@ -40,7 +40,7 @@ export interface Product {
   ],
   templateUrl: './project-donors.component.html',
   styleUrl: './project-donors.component.scss',
-  providers: [ProjectDetailsService, CommonService, ProductService],
+  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectDonorsComponent implements OnInit {
   @Input() projectData: any;
