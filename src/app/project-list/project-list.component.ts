@@ -23,11 +23,7 @@ interface PageEvent {
   templateUrl: './project-list.component.html',
   standalone: true,
   imports: [ImportsModule, ProjectComponent, ProjectSponsorsComponent],
-  providers: [
-    MessageService,
-    ConfirmationService,
-    ProductService,
-  ],
+  providers: [MessageService, ConfirmationService, ProductService],
   styleUrl: './project-list.component.scss',
   styles: [
     `
@@ -61,19 +57,20 @@ export class ProjectListComponent implements OnInit {
   totalRecords: number = 0;
   first: number = 0;
   rows: number = 10;
+  pageNumber: number = 0;
   projectSponsorDetails: any = {};
 
   projectImages = {
-    "Computers": "computer.png",
-    "Dustbins": "dustbin.png",
-    "Library Books": "library.png",
-    "Audio System": "music.png",
-    "Toilets": "public_toilets.png",
-    "RO Plant": "ro_plants.png",
-    "Sanitary Pad": "sanitary.png",
-    "Sports Kits": "sports.png",
-    "Bus Shelter": "bus_shelter.png",
-    "School": "schools.png"
+    Computers: 'computer.png',
+    Dustbins: 'dustbin.png',
+    'Library Books': 'library.png',
+    'Audio System': 'music.png',
+    Toilets: 'public_toilets.png',
+    'RO Plant': 'ro_plants.png',
+    'Sanitary Pad': 'sanitary.png',
+    'Sports Kits': 'sports.png',
+    'Bus Shelter': 'bus_shelter.png',
+    School: 'schools.png',
   };
 
   showSponsorDialog: boolean = false;
@@ -342,28 +339,57 @@ export class ProjectListComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params) => {
       this.selectedcategory = parseInt(params['category']);
-      if (this.selectedcategory) {
-        this.projectDMVSearch();
-      } else {
-        this.getProjects(this.first, this.rows);
-      }
+      // if (this.selectedcategory) {
+      //   this.projectDMVSearch();
+      // } else {
+      //   this.getProjects(this.first, this.rows);
+      // }
+      this.getProjects();
+      // this.getProjects(this.first, this.rows);
     });
   }
 
-  getProjects(pagenumber, pagesize) {
-    this.commonService.getProjects(pagenumber, pagesize).subscribe(
-      (data: any) => {
-        if (data.content.length > 0) {
-          this.projects = data.content;
-          this.projects.forEach((project: any) => {
-            const sponsorAmount = project.sponsersList.reduce((total, sponsor) =>  total + Number(sponsor.amount), 0);
-            const publicEstimate = project.projectEstimation * (project.publicShare / 100);
-            project.sponsorAmount = sponsorAmount;
-            project.disableAddSponsor = publicEstimate <= sponsorAmount;
+  getProjects() {
+    let params = '';
 
-          });
-          this.totalRecords = data.totalElements;
-        }
+    if (this.selectedDistrict && this.selectedDistrict.id) {
+      params = 'districtId=' + this.selectedDistrict.id;
+    }
+    if (this.selectedMandal && this.selectedMandal.id) {
+      params += '&mandalId=' + this.selectedMandal.id;
+    }
+    if (this.selectedVilage && this.selectedVilage.id) {
+      params += '&villageId=' + this.selectedVilage.id;
+    }
+
+    if (this.selectedcategory && params.length > 0 && this.selectedcategory) {
+      params += '&typeId=' + this.selectedcategory;
+    } else if (this.selectedcategory && params.length == 0) {
+      params += 'typeId=' + this.selectedcategory;
+    }
+
+    if (this.selectedStatus && params.length > 0 && this.selectedStatus) {
+      params += '&status=' + this.selectedStatus;
+    } else if (this.selectedStatus && params.length == 0) {
+      params += 'status=' + this.selectedStatus;
+    }
+    params += '&page=' + this.pageNumber;
+    params += '&size=' + this.rows;
+
+    this.commonService.getProjects(params).subscribe(
+      (data: any) => {
+        this.projects = data.content;
+        this.projects.forEach((project: any) => {
+          const sponsorAmount = project.sponsersList.reduce(
+            (total, sponsor) => total + Number(sponsor.amount),
+            0
+          );
+          const publicEstimate =
+            project.projectEstimation * (project.publicShare / 100);
+          project.sponsorAmount = sponsorAmount;
+          project.disableAddSponsor = publicEstimate <= sponsorAmount;
+        });
+        this.totalRecords = data.totalElements;
       },
       (err) => {
         //Temp fix for Gopi
@@ -456,7 +482,7 @@ export class ProjectListComponent implements OnInit {
     this.commonService.getMandals(districtCode).subscribe(
       (data) => {
         this.mandals = data;
-        this.projectDMVSearch();
+        this.getProjects();
       },
       (err) => {
         //Temp fix for Gopi
@@ -472,7 +498,7 @@ export class ProjectListComponent implements OnInit {
     this.commonService.getVillages(mandalCode).subscribe(
       (data) => {
         this.villages = data;
-        this.projectDMVSearch();
+        this.getProjects();
       },
       (err) => {
         //Temp fix for Gopi
@@ -482,15 +508,15 @@ export class ProjectListComponent implements OnInit {
   }
 
   vilageChange(event: any) {
-    this.projectDMVSearch();
+    this.getProjects();
   }
 
   categoryChange(event: any) {
-    this.projectDMVSearch();
+    this.getProjects();
   }
 
   StatusChange(event: any) {
-    this.projectDMVSearch();
+    this.getProjects();
   }
 
   hideDialog() {
@@ -500,7 +526,9 @@ export class ProjectListComponent implements OnInit {
   refresh(val: boolean) {
     if (val) {
       this.hideDialog();
-      this.getProjects(0, 10);
+      this.pageNumber = 0;
+      this.rows = 10;
+      this.getProjects();
     }
   }
   // pageChange(event, first) {
@@ -509,7 +537,8 @@ export class ProjectListComponent implements OnInit {
   onPageChange(event: PageEvent) {
     this.first = event.first;
     this.rows = event.rows;
-    this.getProjects(event.page, event.rows);
+    this.pageNumber = event.page;
+    this.getProjects();
   }
   showDialog() {
     this.showProjectDialog = true;
@@ -532,7 +561,6 @@ export class ProjectListComponent implements OnInit {
     this.showDialog();
   }
 
-
   getProjectDetails(project: any) {
     //this.project = project;
     //this.productService.selectedProject.next(project);
@@ -553,13 +581,15 @@ export class ProjectListComponent implements OnInit {
     this.selectedDistrict = null;
     this.selectedMandal = null;
     this.selectedVilage = null;
-    this.getProjects(this.first, this.rows);
+    // this.first = 0;
+    // this.rows = 10;
+    this.getProjects();
   }
 
-   // Method to open the sponsor dialog
-   openSponsorDialog(project: any) {
+  // Method to open the sponsor dialog
+  openSponsorDialog(project: any) {
     this.project = project; // Set the selected project
     this.showSponsorDialog = true;
-    this.showDialog()
+    this.showDialog();
   }
 }

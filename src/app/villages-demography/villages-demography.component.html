@@ -38,8 +38,15 @@
       </div>
       <div class="container-fluid">
         <div class="row mb-4">
-          <div class="project-detail-h-set">
-            <h4>Location Details</h4>
+          <div class="project-detail-h-set mt-2">
+            <h4 class="inline-block">Location Details</h4>
+            <button
+              class="submit-btn-m"
+              (click)="editVillage()"
+              style="float: right"
+            >
+              Edit village Details
+            </button>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">District</div>
@@ -144,6 +151,10 @@
                 </div>
               </ng-template>
               <div>
+                <p-button
+                  label="Edit or Add"
+                  (onClick)="updatePopulationData()"
+                />
                 <p-table
                   [value]="CommunityPopulationData"
                   class="tab-data-table"
@@ -603,3 +614,268 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Edit Profile"
+  appendTo="body"
+  [modal]="true"
+  [(visible)]="villageFormVisible"
+  [style]="{ width: '90%', right: 'inherit', height: '80%' }"
+>
+  <form [formGroup]="villageForm" *ngIf="villageFormVisible">
+    <span class="p-text-secondary block mb-5">Update your information.</span>
+
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-3">
+        <label for="firstname6">Village</label>
+
+        <input
+          pInputText
+          FormControlName="Village"
+          aria-describedby="Village"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Panchayat / Block</label>
+        <input
+          pInputText
+          FormControlName="Panchayat"
+          aria-describedby="Panchayat"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">District</label>
+        <input
+          pInputText
+          FormControlName="District"
+          aria-describedby="District"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Mandal</label>
+        <input
+          pInputText
+          FormControlName="Mandal"
+          class="w-full"
+          aria-describedby="Mandal"
+        />
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <label for="firstname6">Majority Religion</label>
+        <input
+          pInputText
+          class="w-full"
+          FormControlName="Religion"
+          aria-describedby="Religion"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Language</label>
+        <input
+          class="w-full"
+          pInputText
+          FormControlName="Language"
+          aria-describedby="Language"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Time Zone</label>
+        <input
+          pInputText
+          FormControlName="TimeZone"
+          aria-describedby="TimeZone"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6" style="display: block"
+          >Latitude and Longitude</label
+        >
+        <p-button label="Get Geolocation" (onClick)="getLocation()" />
+
+        {{ GeolocationError }}
+
+        {{ Latitude }}
+
+        {{ longitude }}
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <label for="firstname6">Boundaries of the village</label>
+        <input
+          pInputText
+          FormControlName="Boundaries"
+          aria-describedby="Boundaries"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Geographical Area</label>
+        <input
+          pInputText
+          FormControlName="Geographical"
+          aria-describedby="Geographical"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Total House Holds</label>
+        <input
+          pInputText
+          FormControlName="TotalHouse"
+          aria-describedby="TotalHouse"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Population</label>
+        <input
+          pInputText
+          FormControlName="Population"
+          aria-describedby="Population"
+          class="w-full"
+        />
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <label for="firstname6">Male</label>
+        <input
+          pInputText
+          FormControlName="PopulationMale"
+          aria-describedby="PopulationMale"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Female</label>
+        <input
+          pInputText
+          FormControlName="PopulationFemale"
+          aria-describedby="PopulationFemale"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">ABOVE 18 MALE </label>
+        <input
+          pInputText
+          FormControlName="PopulationAboveEighteenMale"
+          aria-describedby="PopulationAboveEighteenMale"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">ABOVE 18 FEMALE</label>
+        <input
+          pInputText
+          FormControlName="PopulationAboveEighteenFeMale"
+          aria-describedby="PopulationAboveEighteenFeMale"
+          class="w-full"
+        />
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <label for="firstname6"> SENIOR CITIZENS>60 Male</label>
+        <input
+          pInputText
+          FormControlName="PopulationAbove60Male"
+          aria-describedby="PopulationAbove60Male"
+          class="w-full"
+        />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">SENIOR CITIZENS>60 Female</label>
+        <input
+          class="w-full"
+          pInputText
+          FormControlName="PopulationAbove60FeMale"
+          aria-describedby="PopulationAbove60FeMale"
+        />
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-2">
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        (onClick)="villageFormVisible = false"
+      />
+      <p-button label="Save" type="submit" />
+    </div>
+  </form>
+</p-dialog>
+
+<p-sidebar
+  [(visible)]="communityWisePopulationVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="communityWisePopulationForm"
+    *ngIf="communityWisePopulationVisible"
+  >
+    <div class="tab-pop-txt">
+      <h4>Add Community</h4>
+      <i
+        class="pi pi-times"
+        (click)="communityWisePopulationVisible = false"
+      ></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Community</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [options]="CommunityOptions"
+            FormControlName="community"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Community"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Female</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            mode="decimal"
+            FormControlName="communityFemale"
+            #communityFemale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Male</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="integeronly"
+            FormControlName="communityMale"
+            #communityMale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Total</div>
+        <div class="project-detail-set-v mt-2">
+          {{
+            (communityFemale.value == "" ? 0 : communityFemale.value) +
+              (communityMale.value == "" ? 0 : communityMale.value)
+          }}
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button label="Cancel " (click)="(false)" class="cancel-btn" />
+      <p-button label="Add " type="submit" class="submit-btn" />
+    </div>
+  </form>
+</p-sidebar>

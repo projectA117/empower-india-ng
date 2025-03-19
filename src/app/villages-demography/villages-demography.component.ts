@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from '@service/productservice';
@@ -11,6 +10,16 @@ import { Project } from 'src/models/Project';
 import { HardCodedInfo } from 'src/constants/HardCodedInfo';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
 
 interface PageEvent {
   first: number;
@@ -22,13 +31,17 @@ interface PageEvent {
 @Component({
   selector: 'app-villages-demography',
   standalone: true,
-  imports: [ImportsModule, ProjectComponent],
-  providers: [
-    MessageService,
-    ConfirmationService,
-    ProductService,
-
+  imports: [
+    ImportsModule,
+    ProjectComponent,
+    ImportsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    TableModule,
+    CommonModule,
   ],
+  providers: [MessageService, ConfirmationService, ProductService],
   templateUrl: './villages-demography.component.html',
   styleUrl: './villages-demography.component.scss',
   styles: [
@@ -51,6 +64,8 @@ export class VillagesDemographyComponent implements OnInit {
   cultivationCropsData: any = [];
   institutionsData: any = [];
   CommunityPopulationData: any = [];
+  CommunityOptions: any = [];
+  selectedCommunity: any = {};
 
   selectedDistrict: any = {};
   selectedMandal: any = {};
@@ -59,7 +74,13 @@ export class VillagesDemographyComponent implements OnInit {
   districts: any = [];
   mandals: any = [];
   villages: any = [];
-
+  villageFormVisible: boolean = false;
+  communityWisePopulationVisible: boolean = false;
+  communityWisePopulationForm: FormGroup = new FormGroup({});
+  villageForm: FormGroup = new FormGroup({});
+  GeolocationError = '';
+  Latitude: number;
+  longitude: number;
   constructor(
     private commonService: CommonService,
     private router: Router,
@@ -88,6 +109,42 @@ export class VillagesDemographyComponent implements OnInit {
       this.CommunityPopulationData = this.getVillagesDemographyData.populations;
     });
   }
+
+  createForm() {
+    this.communityWisePopulationForm = new FormGroup({
+      community: new FormControl('', [Validators.required]),
+      communityFemale: new FormControl(1234, [Validators.required]),
+      communityMale: new FormControl(22, [Validators.required]),
+    });
+  }
+
+  createVillageForm() {
+    this.villageForm = new FormGroup({
+      Village: new FormControl('', [Validators.required]),
+      Panchayat: new FormControl('', [Validators.required]),
+      District: new FormControl('', [Validators.required]),
+      Mandal: new FormControl('', [Validators.required]),
+      Religion: new FormControl('', [Validators.required]),
+      TimeZone: new FormControl('', [Validators.required]),
+      Boundaries: new FormControl('', [Validators.required]),
+      Geographical: new FormControl('', [Validators.required]),
+      Population: new FormControl('', [Validators.required]),
+      PopulationMale: new FormControl('', [Validators.required]),
+      PopulationFemale: new FormControl('', [Validators.required]),
+      PopulationAboveEighteenMale: new FormControl('', [Validators.required]),
+      PopulationAboveEighteenFeMale: new FormControl('', [Validators.required]),
+      PopulationAbove60Male: new FormControl('', [Validators.required]),
+      PopulationAbove60FeMale: new FormControl('', [Validators.required]),
+    });
+  }
+
+  getTotal() {
+    return (
+      this.communityWisePopulationForm.controls.communityFemale.value +
+      this.communityWisePopulationForm.controls.communityMale.value
+    );
+  }
+
   getDistricts() {
     this.commonService.getDistricts().subscribe(
       (data) => {
@@ -142,8 +199,35 @@ export class VillagesDemographyComponent implements OnInit {
   villagelookups() {
     this.commonService.villagelookups().subscribe((data: any) => {
       this.villagelookupsData = data;
+      this.CommunityOptions = data.community;
     });
   }
   projectDMVSearch() {}
   reset() {}
+
+  editVillage() {
+    this.createVillageForm();
+    this.villageFormVisible = true;
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.Latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+        },
+        (error) => {
+          alert('Sorry, no position available.');
+        }
+      );
+    } else {
+      this.GeolocationError = 'Geolocation is not supported by this browser.';
+    }
+  }
+
+  updatePopulationData() {
+    this.communityWisePopulationVisible = true;
+    this.createForm();
+  }
 }

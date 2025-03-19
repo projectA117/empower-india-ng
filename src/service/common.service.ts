@@ -79,11 +79,9 @@ export class CommonService {
       );
   }
 
-  getProjects(pagenumber: 0, pagesize: 10): Observable<any> {
+  getProjects(payLoad: any): Observable<any> {
     return this.httpClient
-      .get<any>(
-        `${environment.apiUrl}/project?page=${pagenumber}&size=${pagesize}`
-      )
+      .get<any>(`${environment.apiUrl}/project??${payLoad} `)
       .pipe(
         map((projects) => {
           return projects;
