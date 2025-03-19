@@ -26,7 +26,7 @@ import { TableModule } from 'primeng/table';
   ],
   templateUrl: './project-sponsors.component.html',
   styleUrl: './project-sponsors.component.scss',
-  providers: [ProjectDetailsService, CommonService, ProductService],
+  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectSponsorsComponent implements OnInit {
   donors!: [];

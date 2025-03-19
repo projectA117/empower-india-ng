@@ -19,7 +19,7 @@ import { CommonService } from '@service/common.service';
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
-  providers: [ProjectDetailsService, CommonService, ProductService],
+  providers: [ProjectDetailsService, ProductService],
 })
 export class ContactComponent implements OnInit {
   contactForm: FormGroup = new FormGroup({});

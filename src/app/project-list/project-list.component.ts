@@ -27,7 +27,6 @@ interface PageEvent {
     MessageService,
     ConfirmationService,
     ProductService,
-    CommonService,
   ],
   styleUrl: './project-list.component.scss',
   styles: [

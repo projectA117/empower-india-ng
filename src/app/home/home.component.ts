@@ -10,7 +10,7 @@ import { CommonService } from '@service/common.service';
   imports: [CarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  providers: [ProductService, CommonService],
+  providers: [ProductService],
 })
 export class HomeComponent {
   products: any;
@@ -148,7 +148,7 @@ export class HomeComponent {
         name: 'Machilipatnam',
         image: 'machilipatnam.jpg',
       },
-      
+
     ];
     this.responsiveOptionss = [
       {
@@ -238,7 +238,7 @@ export class HomeComponent {
         numScroll: 1,
       },
     ];
-    
+
   }
 
   getSeverity(status: string) {
