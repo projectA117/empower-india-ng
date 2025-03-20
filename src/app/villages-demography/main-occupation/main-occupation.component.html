@@ -1,0 +1,102 @@
+<p-button label="Edit or Add" (onClick)="updateOccupationsData()" />
+
+<p-table [value]="occupationsData" class="tab-data-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="firstName" class="text-center">
+        Sc No <p-sortIcon field="firstName" />
+      </th>
+
+      <th pSortableColumn="address" class="text-center">
+        Occupation <p-sortIcon field="address" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">
+        Number of Families <p-sortIcon field="Amount" />
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-occupationsData>
+    <tr>
+      <td class="text-center">
+        {{ occupationsData.id }}
+      </td>
+
+      <td class="text-right">
+        {{ villagelookupsData.community[occupationsData.occupationId].name }}
+      </td>
+
+      <td class="text-right">₹ {{ occupationsData.noOfFamilies }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="occupationsDataVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form [formGroup]="occupationsForm" *ngIf="occupationsDataVisible">
+    <div class="tab-pop-txt">
+      <h4>Add Occupation</h4>
+      <i class="pi pi-times" (click)="occupationsDataVisible = false"></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Community</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [options]="CommunityOptions"
+            FormControlName="community"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Community"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Government</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            mode="decimal"
+            FormControlName="government"
+            #communityFemale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Private</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="private"
+            FormControlName="private"
+            #communityMale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Self empolyment</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="SelfEmpolyment"
+            FormControlName="SelfEmpolyment"
+            #communityMale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Total</div>
+        <div class="project-detail-set-v mt-2">11111111</div>
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button label="Cancel " (click)="(false)" class="cancel-btn" />
+      <p-button label="Add " type="submit" class="submit-btn" />
+    </div>
+  </form>
+</p-sidebar>

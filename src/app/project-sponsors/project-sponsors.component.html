@@ -1,51 +1,6 @@
 <div class="grid">
   <div class="col-12">
-
-    <div class="project-amount-info-pop">
-      <div class="private-share">
-        Project Cost of Private Share
-        <span>{{ projectCost }}/-</span>
-      </div>
-      <div class="collected-amount">
-        Collected Amount
-        <span>{{ totalCollected}} /-</span>
-      </div>
-      <div class="remaining-amount">
-        Remaining Amount
-        <span>{{ remainingAmount }} /-</span>
-      </div>
-    </div>
-
-
-      <div class="table-container sponsor-table">
-        <p-table [value]="donors" class="tab-data-table">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-donor>
-            <tr>
-              <td>{{ donor.firstName }} {{ donor.lastName }}</td>
-              <td>{{ donor.amount }}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="footer">
-            <tr>
-              <td>Collected Amount</td>
-              <td>{{ totalCollected }}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="empty">
-            <tr>
-              <td colspan="2" class="text-center">No donors found.</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-
-      <!-- <div class="remaining-container mt-3">
+    <!-- <div class="remaining-container mt-3">
         <div class="flex justify-content-between">
           <span class="font-bold"
             >Remaining Amount: {{ remainingAmount }} /-</span
@@ -53,11 +8,10 @@
         </div>
       </div> -->
 
-      <form [formGroup]="donorForm" (ngSubmit)="updateDonorForm()">
-        <div class="sponsor-type">
-          <span>Are you a</span>
-          <div class="d-flex">
-
+    <form [formGroup]="donorForm" (ngSubmit)="updateDonorForm()">
+      <div class="sponsor-type">
+        <span>Are you a Sponsor</span>
+        <div class="d-flex">
           <div class="field-radiobutton ml-2">
             <p-radioButton
               name="sponsorTypeRight"
@@ -67,7 +21,7 @@
               [ngModelOptions]="{ standalone: true }"
               inputId="newRight"
             ></p-radioButton>
-            <label for="newRight" class="ml-2">New Sponsor</label>
+            <label for="newRight" class="ml-2"> Yes</label>
           </div>
           <div class="field-radiobutton ml-2">
             <p-radioButton
@@ -78,41 +32,40 @@
               [ngModelOptions]="{ standalone: true }"
               inputId="existingRight"
             ></p-radioButton>
-            <label for="existingRight" class="ml-2">Existing Sponsor</label>
+            <label for="existingRight" class="ml-2">No</label>
           </div>
         </div>
-
-        </div>
-        <!-- User search for existing sponsors -->
-        <div class="row" *ngIf="sponsorType === 'existing'">
-          <div class="col-12 mb-3">
-            <p-autoComplete
-              [suggestions]="filteredDonors"
-              (completeMethod)="searchDonors($event)"
-              [field]="'firstName'"
-              [dropdown]="true"
-              [forceSelection]="true"
-              placeholder="Search for existing donors"
-              (onSelect)="onDonorSelected($event)"
-              class="w-100"
-            >
-              <ng-template let-user pTemplate="item">
-                <div class="user-item">
-                  <div class="user-id">ID: {{ user.id }}</div>
-                  <div class="user-name">
-                    {{ user.firstName }} {{ user.lastName }}
-                  </div>
-                  <div class="user-email">{{ user.email }}</div>
+      </div>
+      <!-- User search for existing sponsors -->
+      <div class="row" *ngIf="sponsorType === 'existing'">
+        <div class="col-12 mb-3">
+          <p-autoComplete
+            [suggestions]="filteredDonors"
+            (completeMethod)="searchDonors($event)"
+            [field]="'firstName'"
+            [dropdown]="true"
+            [forceSelection]="true"
+            placeholder="Search for existing donors"
+            (onSelect)="onDonorSelected($event)"
+            class="w-100"
+          >
+            <ng-template let-user pTemplate="item">
+              <div class="user-item">
+                <div class="user-id">ID: {{ user.id }}</div>
+                <div class="user-name">
+                  {{ user.firstName }} {{ user.lastName }}
                 </div>
-              </ng-template>
+                <div class="user-email">{{ user.email }}</div>
+              </div>
+            </ng-template>
 
-              <ng-template pTemplate="empty">
-                <div class="user-empty">
-                  <p>No existing donors found.</p>
-                </div>
-              </ng-template>
-            </p-autoComplete>
-            <!-- <div *ngIf="selectedDonor" class="mt-2">
+            <ng-template pTemplate="empty">
+              <div class="user-empty">
+                <p>No existing donors found.</p>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+          <!-- <div *ngIf="selectedDonor" class="mt-2">
               <span class="selected-user-label"
                 >Selected Donor: {{ selectedDonor.firstName }}
                 {{ selectedDonor.lastName }} (ID: {{ selectedDonor.id }})</span
@@ -125,199 +78,242 @@
                 (click)="clearUserSelection()"
               ></button>
             </div> -->
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="tab-pop-txt">
+            <h4>Add Your Details</h4>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="tab-pop-txt">
-              <h4>Add Your Details</h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">First Name</div>
-              <div class="project-detail-set-v mt-2">
-                <input
-                  pInputText
-                  id="DonorsFirstName"
-                  formControlName="DonorsFirstName"
-                  aria-describedby="DonorsFirstName"
-                />
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsFirstName').invalid &&
-                    donorForm.get('DonorsFirstName').touched
-                  "
-                  class="p-error"
-                >
-                  First Name is required
-                </small>
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">Last Name</div>
-              <div class="project-detail-set-v mt-2">
-                <input
-                  pInputText
-                  id="DonorsLastName"
-                  formControlName="DonorsLastName"
-                  aria-describedby="DonorsLastName"
-                />
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsLastName').invalid &&
-                    donorForm.get('DonorsLastName').touched
-                  "
-                  class="p-error"
-                >
-                  Last Name is required
-                </small>
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">Phone</div>
-              <div class="project-detail-set-v mt-2">
-                <p-inputNumber
-                  id="DonorsPhone"
-                  mode="decimal"
-                  [useGrouping]="false"
-                  formControlName="DonorsPhone"
-                  aria-describedby="DonorsPhone"
-                ></p-inputNumber>
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsPhone').invalid &&
-                    donorForm.get('DonorsPhone').touched
-                  "
-                  class="p-error"
-                >
-                  Valid phone number is required
-                </small>
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">e-mail</div>
-              <div class="project-detail-set-v mt-2">
-                <input
-                  pInputText
-                  id="DonorsEmail"
-                  formControlName="DonorsEmail"
-                  aria-describedby="DonorsEmail"
-                />
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsEmail').invalid &&
-                    donorForm.get('DonorsEmail').touched
-                  "
-                  class="p-error"
-                >
-                  Valid email is required
-                </small>
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">Address</div>
-              <div class="project-detail-set-v mt-2">
-                <textarea
-                  rows="5"
-                  cols="30"
-                  pInputTextarea
-                  id="DonorsAddress"
-                  aria-describedby="DonorsAddress"
-                  formControlName="DonorsAddress"
-                ></textarea>
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsAddress').invalid &&
-                    donorForm.get('DonorsAddress').touched
-                  "
-                  class="p-error"
-                >
-                  Address is required
-                </small>
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">Memory of</div>
-              <div class="project-detail-set-v mt-2">
-                <input
-                  pInputText
-                  id="DonorsMemoryOf"
-                  aria-describedby="DonorsMemoryOf"
-                  formControlName="DonorsMemoryOf"
-                />
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">Amount</div>
-              <div class="project-detail-set-v mt-2">
-                <p-inputNumber
-                  id="DonorsAmount"
-                  mode="decimal"
-                  locale="en-IN"
-                  [min]="1"
-                  [max]="remainingAmount"
-                  [minFractionDigits]="2"
-                  formControlName="DonorsAmount"
-                ></p-inputNumber>
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsAmount').invalid &&
-                    donorForm.get('DonorsAmount').touched
-                  "
-                  class="p-error"
-                >
-                  Valid amount is required
-                </small>
-              </div>
-            </div>
-
-            <div class="mt-4 col-3">
-              <div class="project-detail-set-h">
-                Mode of Payment (Cash / Online)
-              </div>
-              <div class="project-detail-set-v mt-2">
-                <input
-                  pInputText
-                  id="DonorsModeofPayment"
-                  aria-describedby="DonorsModeofPayment"
-                  formControlName="DonorsModeofPayment"
-                />
-                <small
-                  *ngIf="
-                    donorForm.get('DonorsModeofPayment').invalid &&
-                    donorForm.get('DonorsModeofPayment').touched
-                  "
-                  class="p-error"
-                >
-                  Payment mode is required
-                </small>
-              </div>
+        <div class="row">
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">First Name</div>
+            <div class="project-detail-set-v mt-2">
+              <input
+                pInputText
+                id="DonorsFirstName"
+                formControlName="DonorsFirstName"
+                aria-describedby="DonorsFirstName"
+              />
+              <small
+                *ngIf="
+                  donorForm.get('DonorsFirstName').invalid &&
+                  donorForm.get('DonorsFirstName').touched
+                "
+                class="p-error"
+              >
+                First Name is required
+              </small>
             </div>
           </div>
 
-          <div class="row">
-            <div class="tab-footer-btns mt-4">
-              <p-button
-                label="Cancel "
-                (click)="onClose()"
-                class="cancel-btn"
-              ></p-button>
-              <p-button
-                label="Add "
-                type="submit"
-                class="submit-btn"
-                [disabled]="!donorForm.valid"
-              ></p-button>
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">Last Name</div>
+            <div class="project-detail-set-v mt-2">
+              <input
+                pInputText
+                id="DonorsLastName"
+                formControlName="DonorsLastName"
+                aria-describedby="DonorsLastName"
+              />
+              <small
+                *ngIf="
+                  donorForm.get('DonorsLastName').invalid &&
+                  donorForm.get('DonorsLastName').touched
+                "
+                class="p-error"
+              >
+                Last Name is required
+              </small>
+            </div>
+          </div>
+
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">Phone</div>
+            <div class="project-detail-set-v mt-2">
+              <p-inputNumber
+                id="DonorsPhone"
+                mode="decimal"
+                [useGrouping]="false"
+                formControlName="DonorsPhone"
+                aria-describedby="DonorsPhone"
+              ></p-inputNumber>
+              <small
+                *ngIf="
+                  donorForm.get('DonorsPhone').invalid &&
+                  donorForm.get('DonorsPhone').touched
+                "
+                class="p-error"
+              >
+                Valid phone number is required
+              </small>
+            </div>
+          </div>
+
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">e-mail</div>
+            <div class="project-detail-set-v mt-2">
+              <input
+                pInputText
+                id="DonorsEmail"
+                formControlName="DonorsEmail"
+                aria-describedby="DonorsEmail"
+              />
+              <small
+                *ngIf="
+                  donorForm.get('DonorsEmail').invalid &&
+                  donorForm.get('DonorsEmail').touched
+                "
+                class="p-error"
+              >
+                Valid email is required
+              </small>
+            </div>
+          </div>
+
+          <div class="mt-4 col-12">
+            <div class="project-detail-set-h">Address</div>
+            <div class="project-detail-set-v mt-2">
+              <textarea
+                rows="5"
+                cols="30"
+                pInputTextarea
+                id="DonorsAddress"
+                aria-describedby="DonorsAddress"
+                formControlName="DonorsAddress"
+              ></textarea>
+              <small
+                *ngIf="
+                  donorForm.get('DonorsAddress').invalid &&
+                  donorForm.get('DonorsAddress').touched
+                "
+                class="p-error"
+              >
+                Address is required
+              </small>
+            </div>
+          </div>
+
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">Memory of</div>
+            <div class="project-detail-set-v mt-2">
+              <input
+                pInputText
+                id="DonorsMemoryOf"
+                aria-describedby="DonorsMemoryOf"
+                formControlName="DonorsMemoryOf"
+              />
+            </div>
+          </div>
+
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">Amount</div>
+            <div class="project-detail-set-v mt-2">
+              <p-inputNumber
+                id="DonorsAmount"
+                mode="decimal"
+                locale="en-IN"
+                [min]="1"
+                [max]="remainingAmount"
+                [minFractionDigits]="2"
+                formControlName="DonorsAmount"
+              ></p-inputNumber>
+              <small
+                *ngIf="
+                  donorForm.get('DonorsAmount').invalid &&
+                  donorForm.get('DonorsAmount').touched
+                "
+                class="p-error"
+              >
+                Valid amount is required
+              </small>
+            </div>
+          </div>
+
+          <div class="mt-4 col-3">
+            <div class="project-detail-set-h">
+              Mode of Payment (Cash / Online)
+            </div>
+            <div class="project-detail-set-v mt-2">
+              <input
+                pInputText
+                id="DonorsModeofPayment"
+                aria-describedby="DonorsModeofPayment"
+                formControlName="DonorsModeofPayment"
+              />
+              <small
+                *ngIf="
+                  donorForm.get('DonorsModeofPayment').invalid &&
+                  donorForm.get('DonorsModeofPayment').touched
+                "
+                class="p-error"
+              >
+                Payment mode is required
+              </small>
             </div>
           </div>
         </div>
-      </form>
+
+        <div class="row">
+          <div class="tab-footer-btns mt-4">
+            <p-button
+              label="Cancel "
+              (click)="onClose()"
+              class="cancel-btn"
+            ></p-button>
+            <p-button
+              label="Add "
+              type="submit"
+              class="submit-btn"
+              [disabled]="!donorForm.valid"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="project-amount-info-pop">
+    <div class="private-share">
+      Project Cost of Private Share
+      <span>{{ projectCost }}/-</span>
+    </div>
+    <div class="collected-amount">
+      Collected Amount
+      <span>{{ totalCollected }} /-</span>
+    </div>
+    <div class="remaining-amount">
+      Remaining Amount
+      <span>{{ remainingAmount }} /-</span>
+    </div>
+  </div>
+
+  <div class="table-container sponsor-table">
+    <p-table [value]="donors" class="tab-data-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-donor>
+        <tr>
+          <td>{{ donor.firstName }} {{ donor.lastName }}</td>
+          <td>{{ donor.amount }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td>Collected Amount</td>
+          <td>{{ totalCollected }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="empty">
+        <tr>
+          <td colspan="2" class="text-center">No donors found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>

@@ -18,11 +18,7 @@ import { HardCodedInfo } from '../../constants/HardCodedInfo';
   templateUrl: './project.component.html',
   standalone: true,
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
-  providers: [
-    MessageService,
-    ConfirmationService,
-    ProductService
-  ],
+  providers: [MessageService, ConfirmationService, ProductService],
   styleUrl: './project.component.scss',
 })
 export class ProjectComponent implements OnInit {
@@ -43,6 +39,9 @@ export class ProjectComponent implements OnInit {
   projectForm: FormGroup = new FormGroup({});
   allProjects: any = [];
   governmentShareAmount: number = 0;
+  GeolocationError = '';
+  Latitude: number;
+  longitude: number;
 
   constructor(private commonService: CommonService) {}
 
@@ -93,7 +92,8 @@ export class ProjectComponent implements OnInit {
         this.project.projectEstimation ? this.project.projectEstimation : null
       ),
       governmentShare: new FormControl(
-        this.project.governmentShare ? this.project.governmentShare : null, [Validators.max(100), Validators.min(0)]
+        this.project.governmentShare ? this.project.governmentShare : null,
+        [Validators.max(100), Validators.min(0)]
       ),
       publicShare: new FormControl(
         this.project.publicShare ? this.project.publicShare : null
@@ -106,11 +106,15 @@ export class ProjectComponent implements OnInit {
       ),
     });
     this.projectForm.get('publicShare')?.disable();
-    this.projectForm.get('projectEstimation')?.valueChanges.subscribe((value) => {
-      this.governmentShareAmount = value * ((this.projectForm.get('governmentShare')?.value || 0) / 100);
-    });
+    this.projectForm
+      .get('projectEstimation')
+      ?.valueChanges.subscribe((value) => {
+        this.governmentShareAmount =
+          value * ((this.projectForm.get('governmentShare')?.value || 0) / 100);
+      });
     this.projectForm.get('governmentShare')?.valueChanges.subscribe((value) => {
-      this.governmentShareAmount = (this.projectForm.get('projectEstimation')?.value || 0) * (value / 100);
+      this.governmentShareAmount =
+        (this.projectForm.get('projectEstimation')?.value || 0) * (value / 100);
       this.projectForm.get('publicShare')?.setValue(100 - value);
     });
   }
@@ -268,6 +272,23 @@ export class ProjectComponent implements OnInit {
 
     return payload;
   }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.Latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+        },
+        (error) => {
+          alert('Sorry, no position available.');
+        }
+      );
+    } else {
+      this.GeolocationError = 'Geolocation is not supported by this browser.';
+    }
+  }
+
   closeDialog() {
     console.log('.......closeDialog.......');
     this.closeDialogEvent.emit(true);
