@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, computed, effect, inject } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  computed,
+  effect,
+  inject,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
 import { MenuItem } from 'primeng/api';
@@ -48,7 +54,7 @@ export class AppComponent {
           this.isSigninOrRegister = false;
         }
       }
-    })
+    });
     this.items = [
       {
         label: 'HOME',
@@ -77,6 +83,11 @@ export class AppComponent {
       {
         label: 'Contact',
         routerLink: 'contact',
+      },
+
+      {
+        label: 'villages',
+        routerLink: 'villages',
       },
     ];
   }
