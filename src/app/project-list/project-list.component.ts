@@ -96,21 +96,19 @@ export class ProjectListComponent implements OnInit {
         name: 'NEW',
       },
       {
-        id: 2,
-        name: 'APPROVED',
+        id: 5,
+        name: 'waiting for Sponsors',
       },
+
       {
         id: 3,
         name: 'REJECTED',
       },
       {
         id: 4,
-        name: 'WIP',
+        name: 'WORK IN PROGRESS',
       },
-      {
-        id: 5,
-        name: 'WFD',
-      },
+
       {
         id: 6,
         name: 'COMPLETED',

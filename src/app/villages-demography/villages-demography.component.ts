@@ -20,6 +20,13 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
+import { CommunityWisePopulationComponent } from './community-wise-population/community-wise-population.component';
+import { CultivationCropsComponent } from './cultivation-crops/cultivation-crops.component';
+import { EmployedyouthComponent } from './employedyouth/employedyouth.component';
+import { InstitutionsComponent } from './institutions/institutions.component';
+import { LandUtilizationComponent } from './land-utilization/land-utilization.component';
+import { MainOccupationComponent } from './main-occupation/main-occupation.component';
+import { UnemployedYouthComponent } from './unemployed-youth/unemployed-youth.component';
 
 interface PageEvent {
   first: number;
@@ -40,6 +47,13 @@ interface PageEvent {
     ButtonModule,
     TableModule,
     CommonModule,
+    CommunityWisePopulationComponent,
+    CultivationCropsComponent,
+    EmployedyouthComponent,
+    InstitutionsComponent,
+    LandUtilizationComponent,
+    MainOccupationComponent,
+    UnemployedYouthComponent,
   ],
   providers: [MessageService, ConfirmationService, ProductService],
   templateUrl: './villages-demography.component.html',
@@ -76,7 +90,6 @@ export class VillagesDemographyComponent implements OnInit {
   villages: any = [];
   villageFormVisible: boolean = false;
   communityWisePopulationVisible: boolean = false;
-  communityWisePopulationForm: FormGroup = new FormGroup({});
   villageForm: FormGroup = new FormGroup({});
   GeolocationError = '';
   Latitude: number;
@@ -110,14 +123,6 @@ export class VillagesDemographyComponent implements OnInit {
     });
   }
 
-  createForm() {
-    this.communityWisePopulationForm = new FormGroup({
-      community: new FormControl('', [Validators.required]),
-      communityFemale: new FormControl(1234, [Validators.required]),
-      communityMale: new FormControl(22, [Validators.required]),
-    });
-  }
-
   createVillageForm() {
     this.villageForm = new FormGroup({
       Village: new FormControl('', [Validators.required]),
@@ -136,13 +141,6 @@ export class VillagesDemographyComponent implements OnInit {
       PopulationAbove60Male: new FormControl('', [Validators.required]),
       PopulationAbove60FeMale: new FormControl('', [Validators.required]),
     });
-  }
-
-  getTotal() {
-    return (
-      this.communityWisePopulationForm.controls.communityFemale.value +
-      this.communityWisePopulationForm.controls.communityMale.value
-    );
   }
 
   getDistricts() {
@@ -224,10 +222,5 @@ export class VillagesDemographyComponent implements OnInit {
     } else {
       this.GeolocationError = 'Geolocation is not supported by this browser.';
     }
-  }
-
-  updatePopulationData() {
-    this.communityWisePopulationVisible = true;
-    this.createForm();
   }
 }

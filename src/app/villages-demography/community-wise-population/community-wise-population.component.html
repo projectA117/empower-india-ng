@@ -1,0 +1,117 @@
+<p-button label="Edit or Add" (onClick)="updatePopulationData()" />
+
+<p-table [value]="CommunityPopulationData" class="tab-data-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="firstName" class="text-center">
+        Sc No <p-sortIcon field="firstName" />
+      </th>
+      <th pSortableColumn="firstName" class="text-center">
+        Community<p-sortIcon field="firstName" />
+      </th>
+
+      <th pSortableColumn="address" class="text-center">
+        Female <p-sortIcon field="address" />
+      </th>
+
+      <th pSortableColumn="Amount" class="text-right">
+        Male <p-sortIcon field="Amount" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">
+        Total <p-sortIcon field="Amount" />
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-CommunityPopulation>
+    <tr>
+      <td class="text-center">{{ CommunityPopulation.id }}</td>
+
+      <td class="text-right">
+        {{ villagelookupsData.community[CommunityPopulation.communityId].name }}
+      </td>
+
+      <td class="text-right">
+        {{ CommunityPopulation.female }}
+      </td>
+
+      <td class="text-right">
+        {{ CommunityPopulation.male }}
+      </td>
+
+      <td class="text-right">
+        {{ CommunityPopulation.total }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="communityWisePopulationVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="communityWisePopulationForm"
+    *ngIf="communityWisePopulationVisible"
+  >
+    <div class="tab-pop-txt">
+      <h4>Add Community</h4>
+      <i
+        class="pi pi-times"
+        (click)="communityWisePopulationVisible = false"
+      ></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Community</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [options]="CommunityOptions"
+            FormControlName="community"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Community"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Female</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            mode="decimal"
+            FormControlName="communityFemale"
+            #communityFemale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Male</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="integeronly"
+            FormControlName="communityMale"
+            #communityMale
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Total</div>
+        <div class="project-detail-set-v mt-2">
+          {{
+            (communityFemale.value == "" ? 0 : communityFemale.value) +
+              (communityMale.value == "" ? 0 : communityMale.value)
+          }}
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button label="Cancel " (click)="(false)" class="cancel-btn" />
+      <p-button label="Add " type="submit" class="submit-btn" />
+    </div>
+  </form>
+</p-sidebar>
