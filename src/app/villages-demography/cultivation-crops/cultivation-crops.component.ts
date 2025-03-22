@@ -28,8 +28,9 @@ import {
   styleUrl: './cultivation-crops.component.scss',
 })
 export class CultivationCropsComponent implements OnInit {
+  @Input() cultivationCropsData: any;
+  @Input() cultivationCropsLookupData: any;
   cultivationDataForm: FormGroup = new FormGroup({});
-  cultivationCropsData: any = [];
   cultivationDataVisible: boolean = false;
   ngOnInit() {
     this.createForm();
@@ -37,13 +38,49 @@ export class CultivationCropsComponent implements OnInit {
 
   createForm() {
     this.cultivationDataForm = new FormGroup({
-      community: new FormControl('', [Validators.required]),
-      government: new FormControl(1234, [Validators.required]),
-      private: new FormControl(22, [Validators.required]),
-      SelfEmpolyment: new FormControl(22, [Validators.required]),
+      cultivationCrop: new FormControl('', [Validators.required]),
+      rabiKarif: new FormControl('', [Validators.required]),
+      areainAcrs: new FormControl('', [Validators.required]),
     });
   }
   updateCultivationCropsData() {
+    this.createForm();
     this.cultivationDataVisible = true;
+  }
+
+  getcultivationCropsName(id: any) {
+    return this.cultivationCropsLookupData.find((x: any) => x.id == id).name;
+  }
+  editCultivationData(cultivationData: any) {
+    this.createForm();
+    this.cultivationDataForm.patchValue({
+      cultivationCrop: cultivationData.cultivationId,
+      rabiKarif: cultivationData.seasonName,
+      areainAcrs: cultivationData.totalAcrs,
+    });
+    this.cultivationDataVisible = true;
+  }
+  deleteCultivationData(cultivationData: any) {}
+
+  updateCultivationDataForm() {
+    this.cultivationDataVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      unEmployedYouthVillage: [
+        {
+          villageId: 1,
+          cultivationId: this.cultivationDataForm.get('cultivationCrop')?.value,
+          seasonName: this.cultivationDataForm.get('rabiKarif')?.value,
+          totalAcrs: this.cultivationDataForm.get('areainAcrs')?.value,
+        },
+      ],
+    };
+    console.log(payload);
+    // this.commonService.saveVilageData(payload).subscribe((data) => {
+    //   if (data) {
+    //     this.cultivationDataForm.reset();
+    //   }
+    // });
   }
 }

@@ -81,7 +81,7 @@ export class CommonService {
 
   getProjects(payLoad: any): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/project??${payLoad} `)
+      .get<any>(`${environment.apiUrl}/project?${payLoad} `)
       .pipe(
         map((projects) => {
           return projects;
@@ -205,6 +205,28 @@ export class CommonService {
   villagelookups(): Observable<any> {
     return this.httpClient
       .get<any>(`${environment.apiUrl}/lookup/village-lookups`)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  saveVilageData(payLoad: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/village`, payLoad)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  getSelectedSponsors(payLoad: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/donars/donar-project`, payLoad)
       .pipe(
         map((response) => {
           return response;

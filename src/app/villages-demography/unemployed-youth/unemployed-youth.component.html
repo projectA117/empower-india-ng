@@ -1,6 +1,6 @@
 <p-button label="Edit or Add" (onClick)="updateunEmployedYouth()" />
 
-<p-table [value]="unEmployedYouthVillage" class="tab-data-table">
+<p-table [value]="unemployedData" class="tab-data-table">
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="firstName" class="text-center">
@@ -25,19 +25,24 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-unEmployeeData>
+  <ng-template pTemplate="body" let-unEmployee>
     <tr>
-      <td class="text-center">{{ unEmployeeData.id }}</td>
+      <td class="text-center">{{ unEmployee.id }}</td>
 
-      <td class="text-right">{{ unEmployeeData.communityId }}</td>
+      <td class="text-right">{{ getCommunityName(unEmployee.communityId) }}</td>
 
-      <td class="text-right">{{ unEmployeeData.age1830 }}</td>
+      <td class="text-right">{{ unEmployee.age1830 }}</td>
 
-      <td class="text-right">{{ unEmployeeData.age3145 }}</td>
+      <td class="text-right">{{ unEmployee.age3145 }}</td>
 
-      <td class="text-right">{{ unEmployeeData.age4660 }}</td>
+      <td class="text-right">{{ unEmployee.age4660 }}</td>
 
-      <td class="text-right">₹ {{ unEmployeeData.total }}</td>
+      <td class="text-right">₹ {{ unEmployee.total }}</td>
+
+      <td>
+        <i class="pi pi-pencil" (click)="editUnEmployeeData(unEmployee)"></i>
+        <i class="pi pi-trash" (click)="deleteUnEmployeeData(unEmployee)"></i>
+      </td>
     </tr>
   </ng-template>
 </p-table>
@@ -47,7 +52,11 @@
   position="right"
   [showCloseIcon]="false"
 >
-  <form [formGroup]="unemployedYouthForm" *ngIf="unEmployedYouthVisible">
+  <form
+    [formGroup]="unemployedYouthForm"
+    *ngIf="unEmployedYouthVisible"
+    (ngSubmit)="updateunEmployedYouthForm()"
+  >
     <div class="tab-pop-txt">
       <h4>Add Un Employed Youth</h4>
       <i class="pi pi-times" (click)="unEmployedYouthVisible = false"></i>
@@ -58,8 +67,8 @@
         <div class="project-detail-set-h">Community</div>
         <div class="project-detail-set-v mt-2">
           <p-dropdown
-            [options]="CommunityOptions"
-            FormControlName="community"
+            [options]="communityData"
+            formControlName="community"
             optionLabel="name"
             optionValue="id"
             placeholder="Select Community"
@@ -71,9 +80,9 @@
         <div class="project-detail-set-h">18-30</div>
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
-            mode="decimal"
-            FormControlName="belowThirty"
-            #communityFemale
+            inputId="belowThirty"
+            formControlName="belowThirty"
+            #belowThirty
           />
         </div>
       </div>
@@ -83,8 +92,8 @@
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
             inputId="belowFortyFive"
-            FormControlName="belowFortyFive"
-            #communityMale
+            formControlName="belowFortyFive"
+            #belowFortyFive
           />
         </div>
       </div>
@@ -94,8 +103,8 @@
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
             inputId="belowSixty"
-            FormControlName="belowSixty"
-            #communityMale
+            formControlName="belowSixty"
+            #belowSixty
           />
         </div>
       </div>
@@ -104,15 +113,20 @@
         <div class="project-detail-set-h">Total</div>
         <div class="project-detail-set-v mt-2">
           {{
-            (communityFemale.value == "" ? 0 : communityFemale.value) +
-              (communityMale.value == "" ? 0 : communityMale.value)
+            (belowThirty?.value == "" ? 0 : belowThirty?.value) +
+              (belowFortyFive?.value == "" ? 0 : belowFortyFive?.value) +
+              (belowSixty?.value == "" ? 0 : belowSixty?.value)
           }}
         </div>
       </div>
     </div>
 
     <div class="tab-footer-btns">
-      <p-button label="Cancel " (click)="(false)" class="cancel-btn" />
+      <p-button
+        label="Cancel "
+        (click)="unEmployedYouthVisible = false; editCommitee = false"
+        class="cancel-btn"
+      />
       <p-button label="Add " type="submit" class="submit-btn" />
     </div>
   </form>

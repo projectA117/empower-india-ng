@@ -28,9 +28,10 @@ import {
   styleUrl: './employedyouth.component.scss',
 })
 export class EmployedyouthComponent implements OnInit {
+  @Input() employedYouthVillage: any;
+  @Input() communityData: any;
   employedYouthForm: FormGroup = new FormGroup({});
   employedYouthVisible: boolean = false;
-  employedYouthVillage: any = [];
   ngOnInit() {
     this.createForm();
   }
@@ -38,13 +39,54 @@ export class EmployedyouthComponent implements OnInit {
   createForm() {
     this.employedYouthForm = new FormGroup({
       community: new FormControl('', [Validators.required]),
-      government: new FormControl(1234, [Validators.required]),
-      private: new FormControl(22, [Validators.required]),
-      SelfEmpolyment: new FormControl(22, [Validators.required]),
+      government: new FormControl('', [Validators.required]),
+      private: new FormControl('', [Validators.required]),
+      SelfEmpolyment: new FormControl('', [Validators.required]),
     });
   }
 
   updateemployedYouthData() {
     this.employedYouthVisible = true;
+  }
+  getCommunityName(id: any) {
+    return this.communityData.find((x: any) => x.id == id).name;
+  }
+  editemployedData(data: any) {
+    this.employedYouthVisible = true;
+    this.createForm();
+    this.employedYouthForm.patchValue({
+      community: data.communityId,
+      government: data.government,
+      private: data.privateJob,
+      SelfEmpolyment: data.selfEmployee,
+    });
+  }
+  deleteemployedData(data: any) {}
+
+  updateEmployedYouthForm() {
+    this.employedYouthVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      unEmployedYouthVillage: [
+        {
+          villageId: 1,
+          communityId: this.employedYouthForm.get('community')?.value,
+          government: this.employedYouthForm.get('government')?.value,
+          privateJob: this.employedYouthForm.get('private')?.value,
+          selfEmployee: this.employedYouthForm.get('SelfEmpolyment')?.value,
+          total:
+            this.employedYouthForm.get('government')?.value +
+            this.employedYouthForm.get('private')?.value +
+            this.employedYouthForm.get('SelfEmpolyment')?.value,
+        },
+      ],
+    };
+    console.log(payload);
+    // this.commonService.saveVilageData(payload).subscribe((data) => {
+    //   if (data) {
+    //     this.unemployedYouthForm.reset();
+    //   }
+    // });
   }
 }

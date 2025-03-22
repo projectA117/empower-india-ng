@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-community-wise-population',
@@ -28,12 +29,18 @@ import {
   styleUrl: './community-wise-population.component.scss',
 })
 export class CommunityWisePopulationComponent implements OnInit {
+  @Input() villagesDemographyData: any;
+  @Input() communityData: any;
   communityWisePopulationForm: FormGroup = new FormGroup({});
-  @Input() projectData: any;
   CommunityPopulationData: any = [];
   communityWisePopulationVisible: boolean = false;
 
-  ngOnInit() {}
+  constructor(private commonService: CommonService) {}
+
+  ngOnInit() {
+    this.CommunityPopulationData = this.villagesDemographyData;
+    console.log(this.CommunityPopulationData);
+  }
 
   updatePopulationData() {
     this.communityWisePopulationVisible = true;
@@ -43,8 +50,8 @@ export class CommunityWisePopulationComponent implements OnInit {
   createForm() {
     this.communityWisePopulationForm = new FormGroup({
       community: new FormControl('', [Validators.required]),
-      communityFemale: new FormControl(1234, [Validators.required]),
-      communityMale: new FormControl(22, [Validators.required]),
+      communityFemale: new FormControl(0, [Validators.required]),
+      communityMale: new FormControl(0, [Validators.required]),
     });
   }
   getTotal() {
@@ -53,4 +60,46 @@ export class CommunityWisePopulationComponent implements OnInit {
       this.communityWisePopulationForm.controls.communityMale.value
     );
   }
+
+  getCommunityName(id: any) {
+    return this.communityData.find((x: any) => x.id == id).name;
+  }
+
+  updateCommunityForm() {
+    this.communityWisePopulationVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      populations: [
+        {
+          villageId: 1,
+          communityId: this.communityWisePopulationForm.get('community')?.value,
+          male: this.communityWisePopulationForm.get('communityMale')?.value,
+          female:
+            this.communityWisePopulationForm.get('communityFemale')?.value,
+          total:
+            this.communityWisePopulationForm.get('communityFemale')?.value +
+            this.communityWisePopulationForm.get('communityMale')?.value,
+        },
+      ],
+    };
+
+    this.commonService.saveVilageData(payload).subscribe((data) => {
+      if (data) {
+        this.communityWisePopulationForm.reset();
+      }
+    });
+  }
+
+  editPoplationData(data: any) {
+    this.communityWisePopulationVisible = true;
+    this.createForm();
+    this.communityWisePopulationForm.patchValue({
+      community: data.communityId,
+      communityFemale: data.female,
+      communityMale: data.male,
+    });
+  }
+
+  deletePoplationData(data: any) {}
 }

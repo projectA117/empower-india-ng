@@ -121,118 +121,95 @@ export class ProjectListComponent implements OnInit {
     this.categories = [
       {
         id: 23,
-        description: 'Bus shelter',
-        image: 'bus_shelter.png',
+        description: 'Preventive Health Checkup',
       },
       {
         id: 22,
-        description: 'Library',
-        image: 'library.png',
+        description: 'Dental',
       },
       {
         id: 21,
-        description: 'Public Toilets',
-        image: 'public_toilets.png',
+        description: 'Eye Camp',
       },
       {
         id: 20,
-        description: 'RO Plants',
-        image: 'ro_plants.png',
+        description: 'Health Camp',
       },
       {
         id: 19,
-        description: 'Schools',
-        image: 'schools.png',
+        description: 'Compound Walls/ Gate',
       },
       {
         id: 18,
         description: 'Audio System',
-        image: 'project-1.jpg',
       },
       {
         id: 17,
         description: 'Computers',
-        image: 'project-1.jpg',
       },
       {
         id: 16,
         description: 'Sanitary Pad',
-        image: 'project-1.jpg',
       },
       {
         id: 15,
         description: 'Dustbins',
-        image: 'project-1.jpg',
       },
       {
         id: 14,
         description: 'Sports Kits',
-        image: 'project-1.jpg',
       },
       {
         id: 13,
         description: 'Paints',
-        image: 'project-1.jpg',
       },
       {
         id: 12,
         description: 'Cycles',
-        image: 'project-1.jpg',
       },
       {
         id: 11,
         description: 'Library',
-        image: 'project-1.jpg',
       },
       {
         id: 10,
         description: 'Toilets',
-        image: 'project-1.jpg',
       },
       {
         id: 9,
         description: 'RO Plant',
-        image: 'project-1.jpg',
       },
       {
         id: 8,
         description: 'Benches',
-        image: 'project-1.jpg',
       },
       {
         id: 7,
         description: 'Digital Boards',
-        image: 'project-1.jpg',
       },
       {
         id: 6,
         description: 'Solar Fencing',
-        image: 'project-1.jpg',
       },
       {
         id: 5,
         description: 'CC Cameras',
-        image: 'project-1.jpg',
       },
       {
         id: 4,
         description: 'Racks',
-        image: 'project-1.jpg',
       },
       {
         id: 3,
         description: 'Ceiling Fans',
-        image: 'project-1.jpg',
       },
       {
         id: 2,
         description: 'Class Rooms',
-        image: 'project-1.jpg',
       },
       {
         id: 1,
         description: 'Library Books',
-        image: 'project-1.jpg',
       },
     ];
 

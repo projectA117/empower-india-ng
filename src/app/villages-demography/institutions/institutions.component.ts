@@ -28,9 +28,11 @@ import {
   styleUrl: './institutions.component.scss',
 })
 export class InstitutionsComponent implements OnInit {
-  institutionsData: any = [];
+  @Input() institutionsData: any = {};
+  @Input() institutionsLookupData: any = {};
   institutionsDataVisible: boolean = false;
   institutionDataForm: FormGroup = new FormGroup({});
+  selectedInstitutions: any = {};
   ngOnInit() {}
   updateInstitutionsData() {
     this.institutionsDataVisible = true;
@@ -38,7 +40,30 @@ export class InstitutionsComponent implements OnInit {
   }
   createForm() {
     this.institutionDataForm = new FormGroup({
-      Institutions: new FormControl('', [Validators.required]),
+      institutions: new FormControl('', [Validators.required]),
     });
+  }
+  getInstitutionName(id: any) {
+    return this.institutionsLookupData.find((x: any) => x.id == id).name;
+  }
+
+  updateInstitutionDataForm() {
+    this.institutionsDataVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      unEmployedYouthVillage: [
+        {
+          villageId: 1,
+          instituteId: this.institutionDataForm.get('institutions')?.value,
+        },
+      ],
+    };
+    console.log(payload);
+    // this.commonService.saveVilageData(payload).subscribe((data) => {
+    //   if (data) {
+    //     this.unemployedYouthForm.reset();
+    //   }
+    // });
   }
 }

@@ -8,8 +8,6 @@ export class LoaderService {
   private _loading: WritableSignal<boolean> = signal(false);
   constructor() {}
 
-  // private isLoading = new BehaviorSubject<boolean>(false);
-  // loading$ = this.isLoading.asObservable();
   show() {
     this._loading.set(true);
     console.log('LoaderComponent: isLoading() changed to:', this._loading());
