@@ -85,7 +85,12 @@
         (click)="occupationsDataVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!occupationsForm.valid"
+      />
     </div>
   </form>
 </p-sidebar>

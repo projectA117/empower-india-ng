@@ -77,6 +77,8 @@ export class ProjectListComponent implements OnInit {
 
   // Store the project that will be passed to the dialog
   selectedProject: any;
+  datastatus: any;
+  serverError: boolean = false;
 
   constructor(
     private commonService: CommonService,
@@ -353,7 +355,15 @@ export class ProjectListComponent implements OnInit {
 
     this.commonService.getProjects(params).subscribe(
       (data: any) => {
+        if (!data.content) {
+          this.projects = [];
+          this.totalRecords = 0;
+          this.datastatus = data.status;
+          this.serverError = true;
+          return;
+        }
         this.projects = data.content;
+        this.serverError = false;
         this.projects.forEach((project: any) => {
           const sponsorAmount = project.sponsersList.reduce(
             (total, sponsor) => total + Number(sponsor.amount),
