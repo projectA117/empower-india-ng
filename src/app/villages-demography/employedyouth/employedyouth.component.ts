@@ -39,13 +39,14 @@ export class EmployedyouthComponent implements OnInit {
   createForm() {
     this.employedYouthForm = new FormGroup({
       community: new FormControl('', [Validators.required]),
-      government: new FormControl('', [Validators.required]),
-      private: new FormControl('', [Validators.required]),
-      SelfEmpolyment: new FormControl('', [Validators.required]),
+      government: new FormControl(0, [Validators.required]),
+      private: new FormControl(0, [Validators.required]),
+      SelfEmpolyment: new FormControl(0, [Validators.required]),
     });
   }
 
   updateemployedYouthData() {
+    this.createForm();
     this.employedYouthVisible = true;
   }
   getCommunityName(id: any) {

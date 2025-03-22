@@ -79,16 +79,14 @@
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Rabi/Karif</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            type="text"
-            pInputText
-            inputId="rabiKarif"
-            formControlName="rabiKarif"
-            #rabiKarif
-          />
-        </div>
+        <div class="project-detail-set-h">Rabi/Karif/All</div>
+        <p-dropdown
+          [options]="cultivationSeasons"
+          formControlName="seasons"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Season"
+        />
       </div>
 
       <div class="project-detail-set mt-4">
@@ -109,7 +107,12 @@
         (click)="cultivationDataVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        [disabled]="!cultivationDataForm.valid"
+        class="submit-btn"
+      />
     </div>
   </form>
 </p-sidebar>

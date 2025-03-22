@@ -63,6 +63,19 @@
 </div>
 <div class="main-container projects-set-list">
   <p-toast />
+  <div class="error_content text-center" *ngIf="serverError">
+    <h1>{{ datastatus }}</h1>
+
+    <h2><span>Oh no!</span> There's not Much Left Here for you</h2>
+  </div>
+
+  <div
+    class="error_content text-center"
+    *ngIf="datastatus == '200' && projects?.length < 1"
+  >
+    <h2><span>Oh no!</span> There's not Much Left Here for you</h2>
+  </div>
+
   <p-table
     #dt
     [value]="projects"

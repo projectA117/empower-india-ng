@@ -39,7 +39,7 @@ export class MainOccupationComponent implements OnInit {
   createForm() {
     this.occupationsForm = new FormGroup({
       occupation: new FormControl('', [Validators.required]),
-      NumberofFamilies: new FormControl('', [Validators.required]),
+      NumberofFamilies: new FormControl(0, [Validators.required]),
     });
   }
 

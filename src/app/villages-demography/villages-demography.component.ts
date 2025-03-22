@@ -125,10 +125,10 @@ export class VillagesDemographyComponent implements OnInit {
 
   createVillageForm() {
     this.villageForm = new FormGroup({
-      Village: new FormControl('', [Validators.required]),
-      Panchayat: new FormControl('', [Validators.required]),
-      District: new FormControl('', [Validators.required]),
-      Mandal: new FormControl('', [Validators.required]),
+      // Village: new FormControl('', [Validators.required]),
+      // Panchayat: new FormControl('', [Validators.required]),
+      // District: new FormControl('', [Validators.required]),
+      // Mandal: new FormControl('', [Validators.required]),
       Religion: new FormControl('', [Validators.required]),
       TimeZone: new FormControl('', [Validators.required]),
       Boundaries: new FormControl('', [Validators.required]),

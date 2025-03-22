@@ -50,9 +50,9 @@ export class UnemployedYouthComponent implements OnInit {
   createForm() {
     this.unemployedYouthForm = new FormGroup({
       community: new FormControl('', [Validators.required]),
-      belowThirty: new FormControl('', [Validators.required]),
-      belowFortyFive: new FormControl('', [Validators.required]),
-      belowSixty: new FormControl('', [Validators.required]),
+      belowThirty: new FormControl(0, [Validators.required]),
+      belowFortyFive: new FormControl(0, [Validators.required]),
+      belowSixty: new FormControl(0, [Validators.required]),
     });
   }
   getTotal() {

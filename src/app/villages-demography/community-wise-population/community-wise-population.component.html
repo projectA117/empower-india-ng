@@ -124,7 +124,12 @@
         (click)="communityWisePopulationVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!communityWisePopulationForm.valid"
+      />
     </div>
   </form>
 </p-sidebar>

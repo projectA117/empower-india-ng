@@ -1352,3 +1352,27 @@ h6 {
       gap: 10px;
       margin-bottom: 10px;
 }
+
+.error_content {
+  max-width: 630px;
+  margin: 0 auto;
+}
+.error_content h2 {
+  font-size: 28px;
+  color: #333333;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-bottom: 40px;
+}
+
+.error_content h1 {
+  font-size: 250px;
+  color: #c6cdd7;
+  background-image: -moz-linear-gradient(-45deg, rgba(149, 217, 89, 0.99608) 0%, #427b0f 100%);
+  background-image: -webkit-linear-gradient(-45deg, rgba(149, 217, 89, 0.99608) 0%, #427b0f 100%);
+  background-image: -ms-linear-gradient(-45deg, rgba(149, 217, 89, 0.99608) 0%, #427b0f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 240px;
+}

@@ -375,7 +375,7 @@
 </div>
 
 <p-dialog
-  header="Edit Profile"
+  header="Update Village Information"
   appendTo="body"
   [modal]="true"
   [(visible)]="villageFormVisible"
@@ -385,44 +385,6 @@
     <span class="p-text-secondary block mb-5">Update your information.</span>
 
     <div class="formgrid grid">
-      <div class="field col-12 md:col-3">
-        <label for="firstname6">Village</label>
-
-        <input
-          pInputText
-          FormControlName="Village"
-          aria-describedby="Village"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Panchayat / Block</label>
-        <input
-          pInputText
-          FormControlName="Panchayat"
-          aria-describedby="Panchayat"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">District</label>
-        <input
-          pInputText
-          FormControlName="District"
-          aria-describedby="District"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Mandal</label>
-        <input
-          pInputText
-          FormControlName="Mandal"
-          class="w-full"
-          aria-describedby="Mandal"
-        />
-      </div>
-
       <div class="field col-12 md:col-3">
         <label for="firstname6">Majority Religion</label>
         <input
@@ -538,7 +500,7 @@
       </div>
 
       <div class="field col-12 md:col-3">
-        <label for="firstname6"> SENIOR CITIZENS>60 Male</label>
+        <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
         <input
           pInputText
           FormControlName="PopulationAbove60Male"
@@ -547,7 +509,7 @@
         />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">SENIOR CITIZENS>60 Female</label>
+        <label for="lastname6">SENIOR CITIZENS ABOVE 60 Female</label>
         <input
           class="w-full"
           pInputText
@@ -563,7 +525,7 @@
         severity="secondary"
         (onClick)="villageFormVisible = false"
       />
-      <p-button label="Save" type="submit" />
+      <p-button label="Save" type="submit" [disabled]="!villageForm.valid" />
     </div>
   </form>
 </p-dialog>

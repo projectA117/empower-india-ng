@@ -127,7 +127,12 @@
         (click)="unEmployedYouthVisible = false; editCommitee = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!unemployedYouthForm.valid"
+      />
     </div>
   </form>
 </p-sidebar>

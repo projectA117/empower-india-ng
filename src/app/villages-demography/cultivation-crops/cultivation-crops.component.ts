@@ -31,7 +31,15 @@ export class CultivationCropsComponent implements OnInit {
   @Input() cultivationCropsData: any;
   @Input() cultivationCropsLookupData: any;
   cultivationDataForm: FormGroup = new FormGroup({});
+
+  cultivationSeasons: any[] = [
+    { name: 'Rabi', key: 'rabi' },
+    { name: 'kharif', key: 'kharif' },
+    { name: 'All seasons', key: 'All' },
+  ];
+
   cultivationDataVisible: boolean = false;
+
   ngOnInit() {
     this.createForm();
   }
@@ -39,8 +47,8 @@ export class CultivationCropsComponent implements OnInit {
   createForm() {
     this.cultivationDataForm = new FormGroup({
       cultivationCrop: new FormControl('', [Validators.required]),
-      rabiKarif: new FormControl('', [Validators.required]),
       areainAcrs: new FormControl('', [Validators.required]),
+      seasons: new FormControl(),
     });
   }
   updateCultivationCropsData() {
