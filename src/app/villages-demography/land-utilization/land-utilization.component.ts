@@ -28,22 +28,56 @@ import {
   styleUrl: './land-utilization.component.scss',
 })
 export class LandUtilizationComponent implements OnInit {
-  occupationsForm: FormGroup = new FormGroup({});
-  landUtilizationData: any = [];
-  occupationsDataVisible: boolean = false;
+  @Input() landUtilizationData: any;
+  @Input() landUtilizationLookupData: any;
+  landUtilizationForm: FormGroup = new FormGroup({});
+  landUtilizationDataVisible: boolean = false;
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    this.occupationsForm = new FormGroup({
-      community: new FormControl('', [Validators.required]),
-      government: new FormControl(1234, [Validators.required]),
-      private: new FormControl(22, [Validators.required]),
-      SelfEmpolyment: new FormControl(22, [Validators.required]),
+    this.landUtilizationForm = new FormGroup({
+      landUtilization: new FormControl('', [Validators.required]),
+      areaInAcrs: new FormControl('', [Validators.required]),
     });
   }
   updateLandUtilizationData() {
-    this.occupationsDataVisible = true;
+    this.createForm();
+    this.landUtilizationDataVisible = true;
+  }
+  getutilizationName(id: any) {
+    // return this.landUtilizationLookupData.utilization[id].name;
+    return this.landUtilizationLookupData.find((x: any) => x.id == id).name;
+  }
+  editUtilizationData(data: any) {
+    this.createForm();
+    this.landUtilizationDataVisible = true;
+    this.landUtilizationForm.patchValue({
+      landUtilization: data.landTypeId,
+      areaInAcrs: data.totalArea,
+    });
+  }
+  deleteUtilizationData() {}
+
+  updateoccupationsForm() {
+    this.landUtilizationDataVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      unEmployedYouthVillage: [
+        {
+          villageId: 1,
+          landTypeId: this.landUtilizationForm.get('landUtilization')?.value,
+          totalArea: this.landUtilizationForm.get('areaInAcrs')?.value,
+        },
+      ],
+    };
+    console.log(payload);
+    // this.commonService.saveVilageData(payload).subscribe((data) => {
+    //   if (data) {
+    //     this.unemployedYouthForm.reset();
+    //   }
+    // });
   }
 }

@@ -18,7 +18,7 @@
       </td>
 
       <td class="text-right">
-        {{ villagelookupsData.institutions[institution.instituteId].name }}
+        {{ getInstitutionName(institution.instituteId) }}
       </td>
     </tr>
   </ng-template>
@@ -29,28 +29,35 @@
   position="right"
   [showCloseIcon]="false"
 >
-  <form [formGroup]="institutionDataForm" *ngIf="institutionsDataVisible">
+  <form
+    [formGroup]="institutionDataForm"
+    (ngSubmit)="updateInstitutionDataForm()"
+    *ngIf="institutionsDataVisible"
+  >
     <div class="tab-pop-txt">
-      <h4>Add Land Utilization</h4>
+      <h4>Add Institutions</h4>
       <i class="pi pi-times" (click)="institutionsDataVisible = false"></i>
     </div>
 
     <div class="pop-data-set">
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Institutions</div>
-        <div class="project-detail-set-v mt-2">
-          <input
-            pInputText
-            id="Institutions"
-            formControlName="Institutions"
-            aria-describedby="Institutions"
-          />
-        </div>
+
+        <p-multiSelect
+          [options]="institutionsLookupData"
+          optionLabel="name"
+          placeholder="Select Institutions"
+          formControlName="institutions"
+        />
       </div>
     </div>
 
     <div class="tab-footer-btns">
-      <p-button label="Cancel " (click)="(false)" class="cancel-btn" />
+      <p-button
+        label="Cancel "
+        (click)="institutionsDataVisible = false"
+        class="cancel-btn"
+      />
       <p-button label="Add " type="submit" class="submit-btn" />
     </div>
   </form>

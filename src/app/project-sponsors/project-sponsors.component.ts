@@ -46,7 +46,8 @@ export class ProjectSponsorsComponent implements OnInit {
   ngOnInit() {
     this.donors = this.projectData.sponsersList;
     this.totalCollected = this.projectData.sponsorAmount;
-    this.projectCost = this.projectData.projectEstimation * (this.projectData.publicShare / 100);
+    this.projectCost =
+      this.projectData.projectEstimation * (this.projectData.publicShare / 100);
     this.remainingAmount = this.projectCost - this.totalCollected;
     this.createDonorForm();
   }
@@ -115,13 +116,16 @@ export class ProjectSponsorsComponent implements OnInit {
     const searchTerm = event.query;
 
     // Call your API with the search term
-    this.projectDetailsService.searchDonors(searchTerm).subscribe(donors => {
-      this.filteredDonors = donors;
-      this.isSearching = false;
-    }, error => {
-      console.error('Error fetching donors:', error);
-      this.isSearching = false;
-    });
+    this.projectDetailsService.searchDonors(searchTerm).subscribe(
+      (donors) => {
+        this.filteredDonors = donors;
+        this.isSearching = false;
+      },
+      (error) => {
+        console.error('Error fetching donors:', error);
+        this.isSearching = false;
+      }
+    );
   }
 
   onDonorSelected(donor: any) {

@@ -148,7 +148,6 @@ export class HomeComponent {
         name: 'Machilipatnam',
         image: 'machilipatnam.jpg',
       },
-
     ];
     this.responsiveOptionss = [
       {
@@ -238,7 +237,6 @@ export class HomeComponent {
         numScroll: 1,
       },
     ];
-
   }
 
   getSeverity(status: string) {
@@ -251,8 +249,10 @@ export class HomeComponent {
         return 'danger';
     }
   }
-  showSponsorDetails() {
-    this.router.navigate(['sponsors-details'], {});
+  showSponsorDetails(sponsor: any) {
+    this.router.navigate(['sponsors-details'], {
+      queryParams: { sponsorID: JSON.stringify(sponsor) },
+    });
   }
 
   showprojectcategoryDetails(selectedCategory: any) {

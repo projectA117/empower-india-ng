@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-unemployed-youth',
@@ -28,21 +29,30 @@ import {
   styleUrl: './unemployed-youth.component.scss',
 })
 export class UnemployedYouthComponent implements OnInit {
+  @Input() unemployedData: any;
+  @Input() communityData: any;
+  CommunityPopulationData: any = [];
   unemployedYouthForm: FormGroup = new FormGroup({});
   unEmployedYouthVillage: any = [];
   unEmployedYouthVisible: boolean = false;
-  ngOnInit() {}
+  editUnEmployedYouth: boolean = false;
+
+  constructor(private commonService: CommonService) {}
+  ngOnInit() {
+    this.createForm();
+  }
 
   updateunEmployedYouth() {
+    this.createForm();
     this.unEmployedYouthVisible = true;
   }
 
   createForm() {
     this.unemployedYouthForm = new FormGroup({
       community: new FormControl('', [Validators.required]),
-      belowThirty: new FormControl(1234, [Validators.required]),
-      belowFortyFive: new FormControl(22, [Validators.required]),
-      belowSixty: new FormControl(22, [Validators.required]),
+      belowThirty: new FormControl('', [Validators.required]),
+      belowFortyFive: new FormControl('', [Validators.required]),
+      belowSixty: new FormControl('', [Validators.required]),
     });
   }
   getTotal() {
@@ -51,5 +61,46 @@ export class UnemployedYouthComponent implements OnInit {
       this.unemployedYouthForm.controls.belowFortyFive.value +
       this.unemployedYouthForm.controls.belowSixty.value
     );
+  }
+  getCommunityName(id: any) {
+    return this.communityData.find((x: any) => x.id == id).name;
+  }
+  editUnEmployeeData(data: any) {
+    this.unEmployedYouthVisible = true;
+    this.createForm();
+    this.unemployedYouthForm.patchValue({
+      community: data.communityId,
+      belowThirty: data.age1830,
+      belowFortyFive: data.age3145,
+      belowSixty: data.age4660,
+    });
+  }
+  deleteUnEmployeeData(data: any) {}
+
+  updateunEmployedYouthForm() {
+    this.unEmployedYouthVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      unEmployedYouthVillage: [
+        {
+          villageId: 1,
+          communityId: this.unemployedYouthForm.get('community')?.value,
+          age1830: this.unemployedYouthForm.get('belowThirty')?.value,
+          age3145: this.unemployedYouthForm.get('belowFortyFive')?.value,
+          age4660: this.unemployedYouthForm.get('belowSixty')?.value,
+          total:
+            this.unemployedYouthForm.get('belowThirty')?.value +
+            this.unemployedYouthForm.get('belowFortyFive')?.value +
+            this.unemployedYouthForm.get('belowSixty')?.value,
+        },
+      ],
+    };
+    console.log(payload);
+    // this.commonService.saveVilageData(payload).subscribe((data) => {
+    //   if (data) {
+    //     this.unemployedYouthForm.reset();
+    //   }
+    // });
   }
 }

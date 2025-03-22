@@ -28,8 +28,9 @@ import {
   styleUrl: './main-occupation.component.scss',
 })
 export class MainOccupationComponent implements OnInit {
+  @Input() occupationsData: any;
+  @Input() occupationsLookupData: any;
   occupationsForm: FormGroup = new FormGroup({});
-  occupationsData: any = [];
   occupationsDataVisible: boolean = false;
   ngOnInit() {
     this.createForm();
@@ -37,14 +38,46 @@ export class MainOccupationComponent implements OnInit {
 
   createForm() {
     this.occupationsForm = new FormGroup({
-      community: new FormControl('', [Validators.required]),
-      government: new FormControl(1234, [Validators.required]),
-      private: new FormControl(22, [Validators.required]),
-      SelfEmpolyment: new FormControl(22, [Validators.required]),
+      occupation: new FormControl('', [Validators.required]),
+      NumberofFamilies: new FormControl('', [Validators.required]),
     });
   }
 
   updateOccupationsData() {
+    this.createForm();
     this.occupationsDataVisible = true;
+  }
+  getOccupationName(id: any) {
+    return this.occupationsLookupData.find((x: any) => x.id == id).name;
+  }
+  editOccupationsData(data: any) {
+    this.occupationsDataVisible = true;
+    this.createForm();
+    this.occupationsForm.patchValue({
+      occupation: data.occupationId,
+      NumberofFamilies: data.noOfFamilies,
+    });
+  }
+  deleteOccupationsData(data: any) {}
+
+  updateoccupationsForm() {
+    this.occupationsDataVisible = false;
+    const payload = {
+      id: 1,
+      villageId: 1,
+      unEmployedYouthVillage: [
+        {
+          villageId: 1,
+          occupationId: this.occupationsForm.get('occupation')?.value,
+          noOfFamilies: this.occupationsForm.get('NumberofFamilies')?.value,
+        },
+      ],
+    };
+    console.log(payload);
+    // this.commonService.saveVilageData(payload).subscribe((data) => {
+    //   if (data) {
+    //     this.unemployedYouthForm.reset();
+    //   }
+    // });
   }
 }

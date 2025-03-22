@@ -23,6 +23,7 @@
       <th pSortableColumn="Amount" class="text-right">
         Total <p-sortIcon field="Amount" />
       </th>
+      <th>&nbsp;</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-employedYouthVillageData>
@@ -32,7 +33,7 @@
       </td>
 
       <td class="text-right">
-        {{ employedYouthVillageData.communityId }}
+        {{ getCommunityName(employedYouthVillageData.communityId) }}
       </td>
 
       <td class="text-right">
@@ -47,7 +48,18 @@
         {{ employedYouthVillageData.selfEmployee }}
       </td>
 
-      <td class="text-right">₹ {{ employedYouthVillageData.total }}</td>
+      <td class="text-right">{{ employedYouthVillageData.total }}</td>
+
+      <td>
+        <i
+          class="pi pi-pencil"
+          (click)="editemployedData(employedYouthVillageData)"
+        ></i>
+        <i
+          class="pi pi-trash"
+          (click)="deleteemployedData(employedYouthVillageData)"
+        ></i>
+      </td>
     </tr>
   </ng-template>
 </p-table>
@@ -57,7 +69,11 @@
   position="right"
   [showCloseIcon]="false"
 >
-  <form [formGroup]="employedYouthForm" *ngIf="employedYouthVisible">
+  <form
+    [formGroup]="employedYouthForm"
+    (ngSubmit)="updateEmployedYouthForm()"
+    *ngIf="employedYouthVisible"
+  >
     <div class="tab-pop-txt">
       <h4>Add Employed Youth</h4>
       <i class="pi pi-times" (click)="employedYouthVisible = false"></i>
@@ -68,8 +84,8 @@
         <div class="project-detail-set-h">Community</div>
         <div class="project-detail-set-v mt-2">
           <p-dropdown
-            [options]="CommunityOptions"
-            FormControlName="community"
+            [options]="communityData"
+            formControlName="community"
             optionLabel="name"
             optionValue="id"
             placeholder="Select Community"
@@ -81,9 +97,9 @@
         <div class="project-detail-set-h">Government</div>
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
-            mode="decimal"
-            FormControlName="government"
-            #communityFemale
+            inputId="government"
+            formControlName="government"
+            #government
           />
         </div>
       </div>
@@ -91,11 +107,7 @@
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Private</div>
         <div class="project-detail-set-v mt-2">
-          <p-inputNumber
-            inputId="private"
-            FormControlName="private"
-            #communityMale
-          />
+          <p-inputNumber inputId="private" formControlName="private" #private />
         </div>
       </div>
 
@@ -104,20 +116,30 @@
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
             inputId="SelfEmpolyment"
-            FormControlName="SelfEmpolyment"
-            #communityMale
+            formControlName="SelfEmpolyment"
+            #SelfEmpolyment
           />
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Total</div>
-        <div class="project-detail-set-v mt-2">11111111</div>
+        <div class="project-detail-set-v mt-2">
+          {{
+            (government?.value == "" ? 0 : government?.value) +
+              (private?.value == "" ? 0 : private?.value) +
+              (SelfEmpolyment?.value == "" ? 0 : SelfEmpolyment?.value)
+          }}
+        </div>
       </div>
     </div>
 
     <div class="tab-footer-btns">
-      <p-button label="Cancel " (click)="(false)" class="cancel-btn" />
+      <p-button
+        label="Cancel "
+        (click)="employedYouthVisible = false"
+        class="cancel-btn"
+      />
       <p-button label="Add " type="submit" class="submit-btn" />
     </div>
   </form>
