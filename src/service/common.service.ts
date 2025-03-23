@@ -224,6 +224,17 @@ export class CommonService {
       );
   }
 
+  updateCommunityVilageData(payLoad: any): Observable<any> {
+    return this.httpClient
+      .put<any>(`${environment.apiUrl}/village`, payLoad)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
   getSelectedSponsors(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`${environment.apiUrl}/donars/donar-project`, payLoad)

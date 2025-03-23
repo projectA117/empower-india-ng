@@ -34,7 +34,7 @@ export class CommunityWisePopulationComponent implements OnInit {
   communityWisePopulationForm: FormGroup = new FormGroup({});
   CommunityPopulationData: any = [];
   communityWisePopulationVisible: boolean = false;
-
+  communityEditMode = false;
   constructor(private commonService: CommonService) {}
 
   ngOnInit() {
@@ -43,6 +43,7 @@ export class CommunityWisePopulationComponent implements OnInit {
   }
 
   updatePopulationData() {
+    this.communityEditMode = false;
     this.communityWisePopulationVisible = true;
     this.createForm();
   }
@@ -83,15 +84,25 @@ export class CommunityWisePopulationComponent implements OnInit {
         },
       ],
     };
-
-    this.commonService.saveVilageData(payload).subscribe((data) => {
-      if (data) {
-        this.communityWisePopulationForm.reset();
-      }
-    });
+    if (!this.communityEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.communityWisePopulationForm.reset();
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.communityWisePopulationForm.reset();
+          }
+        });
+    }
   }
 
   editPoplationData(data: any) {
+    this.communityEditMode = true;
     this.communityWisePopulationVisible = true;
     this.createForm();
     this.communityWisePopulationForm.patchValue({

@@ -99,7 +99,7 @@ export class ProjectListComponent implements OnInit {
       },
       {
         id: 5,
-        name: 'waiting for Sponsors',
+        name: 'WAITING FOR SPONSORS',
       },
 
       {
@@ -118,100 +118,6 @@ export class ProjectListComponent implements OnInit {
       {
         id: 7,
         name: 'OPEN',
-      },
-    ];
-    this.categories = [
-      {
-        id: 23,
-        description: 'Preventive Health Checkup',
-      },
-      {
-        id: 22,
-        description: 'Dental',
-      },
-      {
-        id: 21,
-        description: 'Eye Camp',
-      },
-      {
-        id: 20,
-        description: 'Health Camp',
-      },
-      {
-        id: 19,
-        description: 'Compound Walls/ Gate',
-      },
-      {
-        id: 18,
-        description: 'Audio System',
-      },
-      {
-        id: 17,
-        description: 'Computers',
-      },
-      {
-        id: 16,
-        description: 'Sanitary Pad',
-      },
-      {
-        id: 15,
-        description: 'Dustbins',
-      },
-      {
-        id: 14,
-        description: 'Sports Kits',
-      },
-      {
-        id: 13,
-        description: 'Paints',
-      },
-      {
-        id: 12,
-        description: 'Cycles',
-      },
-      {
-        id: 11,
-        description: 'Library',
-      },
-      {
-        id: 10,
-        description: 'Toilets',
-      },
-      {
-        id: 9,
-        description: 'RO Plant',
-      },
-      {
-        id: 8,
-        description: 'Benches',
-      },
-      {
-        id: 7,
-        description: 'Digital Boards',
-      },
-      {
-        id: 6,
-        description: 'Solar Fencing',
-      },
-      {
-        id: 5,
-        description: 'CC Cameras',
-      },
-      {
-        id: 4,
-        description: 'Racks',
-      },
-      {
-        id: 3,
-        description: 'Ceiling Fans',
-      },
-      {
-        id: 2,
-        description: 'Class Rooms',
-      },
-      {
-        id: 1,
-        description: 'Library Books',
       },
     ];
 
@@ -446,7 +352,14 @@ export class ProjectListComponent implements OnInit {
 
         for (var i = 0; i < data.length; i += 1) {
           if (data[i].projects.length > 0) {
-            this.categories.push(data[i].projects);
+            this.categories = [].concat.apply(
+              this.categories,
+              data[i].projects
+            );
+            // this.categories = [].concat.apply([], data[i].projects);
+            // this.categories = data[i].projects;
+            //  this.categories.concat(data[i].projects);
+            console.log(this.categories);
           }
         }
       },
