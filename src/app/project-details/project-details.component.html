@@ -143,11 +143,9 @@
 
               <!-- Bank Details -->
               <div *ngIf="activeTab === 'Bank Details'">
-                <h1>Private Account details</h1>
-                Bank: ICICI BANK IFSC: ICIC0001114 MICR Code: 500229034
-                <h1>Trust Account details</h1>
-                Bank: SBI BANK IFSC: ICIC0001114 MICR Code: 500229034
-                <p-button label="Add bank account details"></p-button>
+                <app-project-bank-details
+                  [projectData]="product"
+                ></app-project-bank-details>
               </div>
 
               <!-- Project Publish -->

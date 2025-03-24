@@ -32,19 +32,39 @@ export class ProjectApprovalComponent implements OnInit {
   value: string | undefined;
   approvalForm: FormGroup = new FormGroup({});
   value1: number;
+  governmentShareAmount: number = 0;
+
   constructor(private projectDetailsService: ProjectDetailsService) {}
+
   ngOnInit() {
     if (this.approvalForm) {
       this.createapprovalForm();
     }
   }
+
   createapprovalForm() {
     this.approvalForm = new FormGroup({
       ProjectEstimation: new FormControl(this.projectData?.projectEstimation),
       GovtShare: new FormControl(this.projectData?.governmentShare),
       PublicShare: new FormControl(this.projectData?.publicShare),
     });
+
+    this.governmentShareAmount = (this.projectData?.projectEstimation || 0) * (this.projectData?.governmentShare || 0) / 100;
+
+    this.approvalForm.get('PublicShare').disable();
+    this.approvalForm
+      .get('ProjectEstimation')
+      ?.valueChanges.subscribe((value) => {
+        this.governmentShareAmount =
+          value * ((this.approvalForm.get('GovtShare')?.value || 0) / 100);
+      });
+    this.approvalForm.get('GovtShare')?.valueChanges.subscribe((value) => {
+      this.governmentShareAmount =
+        (this.approvalForm.get('ProjectEstimation')?.value || 0) * (value / 100);
+      this.approvalForm.get('PublicShare')?.setValue(100 - value);
+    });
   }
+
   updateApproval() {
     const payload = {
       ...this.projectData,
