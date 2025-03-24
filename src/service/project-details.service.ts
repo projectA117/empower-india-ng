@@ -162,4 +162,31 @@ export class ProjectDetailsService {
         catchError((error) => of(error))
       );
   }
+
+  addBankDetails(payload) {
+    return this.httpClient.post(`${environment.apiUrl}/bank`, payload).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  updateBankDetails(payload) {
+    return this.httpClient.put(`${environment.apiUrl}/bank`, payload).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  getBankDetails(id) {
+    return this.httpClient.get<any>(`${environment.apiUrl}/bank/${id}`).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
 }

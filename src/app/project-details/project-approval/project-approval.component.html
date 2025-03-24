@@ -18,7 +18,9 @@
         </div>
       </div>
       <div class="project-detail-set col-2">
-        <div class="project-detail-set-h">Govt. Share %</div>
+        <div class="project-detail-set-h">
+          Govt. Share % (₹ {{ governmentShareAmount }}/-)
+        </div>
         <div class="project-detail-set-v mt-2">
           <input
             pInputText
@@ -29,7 +31,15 @@
         </div>
       </div>
       <div class="project-detail-set col-2">
-        <div class="project-detail-set-h">Private Share %</div>
+        <div class="project-detail-set-h">
+          Private Share % (₹
+          {{
+            approvalForm.get("GovtShare").value
+              ? (approvalForm.get("ProjectEstimation").value || 0) -
+                governmentShareAmount
+              : 0
+          }}/-)
+        </div>
         <div class="project-detail-set-v mt-2">
           <input
             pInputText

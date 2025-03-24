@@ -90,6 +90,8 @@ export class ProjectVendorsComponent implements OnInit {
         console.log('...Data', data);
         if (data) {
           this.showVendorsDetails();
+          this.vendorSidebarVisible = false;
+          this.VendorForm.reset()
         }
       });
   }

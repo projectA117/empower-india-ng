@@ -11,6 +11,7 @@ import { ProjectWorkInProgressComponent } from './project-work-in-progress/proje
 import { ProjectsignoffComponent } from './project-signoff/project-signoff.component';
 import { ProductService } from '@service/productservice';
 import { ActivatedRoute } from '@angular/router';
+import { ProjectBankDetailsComponent } from './project-bank-details/project-bank-details.component';
 export interface Tab {
   label: string;
   icon?: string;
@@ -32,6 +33,7 @@ export interface Tab {
     ProjectsignoffComponent,
     ProjectVendorsComponent,
     ProjectWorkInProgressComponent,
+    ProjectBankDetailsComponent
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',
@@ -98,7 +100,7 @@ export class ProjectDetailsComponent implements OnInit {
   isTabDisabled(index: number): boolean {
     if (
       this.product.status === 'New' ||
-      this.product.status === 'Waiting FOR DONOR'
+      this.product.status?.toLowerCase() === 'waiting for donor'
     ) {
       // Disable last 4 tabs when status is 'New' or 'Waiting FOR DONOR'
       return index >= this.tabs.length - 4;

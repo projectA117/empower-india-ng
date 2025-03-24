@@ -8,34 +8,50 @@
     <p-table [value]="doners" class="tab-data-table">
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="Date">
-            Donor Name<p-sortIcon field="DonorName" />
+          <th pSortableColumn="firstName" class="text-center">
+            Sponsor Name<p-sortIcon field="firstName" />
           </th>
-          <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
+          <th pSortableColumn="phoneNumber" class="text-center">
+            Phone <p-sortIcon field="phoneNumber" />
+          </th>
 
-          <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
-          <th pSortableColumn="Address">
-            Address <p-sortIcon field="Address" />
+          <th pSortableColumn="email" class="text-center">
+            Email <p-sortIcon field="email" />
           </th>
-          <th pSortableColumn="Memoryof">
-            Memory of <p-sortIcon field="Memory of" />
+          <th pSortableColumn="address" class="text-center">
+            Address <p-sortIcon field="address" />
           </th>
-          <th pSortableColumn="Amount">Amount <p-sortIcon field="Amount" /></th>
-          <th pSortableColumn="Payment">
-            Mode of Payment (Cash / Online) <p-sortIcon field="Payment" />
+          <th pSortableColumn="memoryOf" class="text-center">
+            Memory of <p-sortIcon field="memoryOf" />
+          </th>
+          <th pSortableColumn="Amount" class="text-right">
+            Amount <p-sortIcon field="Amount" />
+          </th>
+          <th pSortableColumn="Payment" class="text-center">
+            Mode of Payment <p-sortIcon field="Payment" />
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-doners>
+      <ng-template pTemplate="body" let-donor>
         <tr>
-          <td>{{ doners.firstName }}</td>
-          <td>{{ doners.phoneNumber }}</td>
-          <td>{{ doners.email }}</td>
-          <td>{{ doners.code }}</td>
-          <td>{{ doners.lastName }}</td>
-          <td>{{ doners.category }}</td>
-          <td>{{ doners.category }}</td>
-          <td>{{ doners.category }}</td>
+          <td class="text-center">
+            {{ donor.firstName }} {{ donor.lastName }}
+          </td>
+          <td class="text-center">
+            {{ donor.phoneNumber }}
+          </td>
+          <td class="text-center">{{ donor.email }}</td>
+          <td class="text-center">{{ donor.address }}</td>
+          <td class="text-center">{{ donor.memoryOf }}</td>
+          <td class="text-right">₹ {{ donor.amount }} /-</td>
+          <td class="text-center block">
+            {{ donor.ModeofPayment }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5" class="text-center">No Sponsors Found</td>
         </tr>
       </ng-template>
     </p-table>
