@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-cultivation-crops',
@@ -30,15 +31,19 @@ import {
 export class CultivationCropsComponent implements OnInit {
   @Input() cultivationCropsData: any;
   @Input() cultivationCropsLookupData: any;
+  @Input() vilageData: any;
   cultivationDataForm: FormGroup = new FormGroup({});
 
   cultivationSeasons: any[] = [
-    { name: 'Rabi', key: 'rabi' },
-    { name: 'kharif', key: 'kharif' },
-    { name: 'All seasons', key: 'All' },
+    { name: 'Rabi', id: 'rabi' },
+    { name: 'kharif', id: 'kharif' },
+    { name: 'All seasons', id: 'All' },
   ];
-
+  cultivationEditMode = false;
+  cultivationEditRecordID: any = null;
   cultivationDataVisible: boolean = false;
+
+  constructor(private commonService: CommonService) {}
 
   ngOnInit() {
     this.createForm();
@@ -48,10 +53,11 @@ export class CultivationCropsComponent implements OnInit {
     this.cultivationDataForm = new FormGroup({
       cultivationCrop: new FormControl('', [Validators.required]),
       areainAcrs: new FormControl('', [Validators.required]),
-      seasons: new FormControl(),
+      seasonsAll: new FormControl('', [Validators.required]),
     });
   }
   updateCultivationCropsData() {
+    this.cultivationEditMode = false;
     this.createForm();
     this.cultivationDataVisible = true;
   }
@@ -60,10 +66,12 @@ export class CultivationCropsComponent implements OnInit {
     return this.cultivationCropsLookupData.find((x: any) => x.id == id).name;
   }
   editCultivationData(cultivationData: any) {
+    this.cultivationEditMode = true;
+    this.cultivationEditRecordID = cultivationData.id;
     this.createForm();
     this.cultivationDataForm.patchValue({
       cultivationCrop: cultivationData.cultivationId,
-      rabiKarif: cultivationData.seasonName,
+      seasonsAll: cultivationData.seasonsAll,
       areainAcrs: cultivationData.totalAcrs,
     });
     this.cultivationDataVisible = true;
@@ -73,13 +81,15 @@ export class CultivationCropsComponent implements OnInit {
   updateCultivationDataForm() {
     this.cultivationDataVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
-      unEmployedYouthVillage: [
+      id: this.vilageData.id,
+      villageId: this.vilageData.villageId,
+      cultivationCropsVillage: [
         {
-          villageId: 1,
+          villageId: this.cultivationEditRecordID
+            ? this.cultivationEditRecordID
+            : '',
           cultivationId: this.cultivationDataForm.get('cultivationCrop')?.value,
-          seasonName: this.cultivationDataForm.get('rabiKarif')?.value,
+          seasonName: this.cultivationDataForm.get('seasonsAll')?.value,
           totalAcrs: this.cultivationDataForm.get('areainAcrs')?.value,
         },
       ],
@@ -90,5 +100,21 @@ export class CultivationCropsComponent implements OnInit {
     //     this.cultivationDataForm.reset();
     //   }
     // });
+
+    if (!this.cultivationEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.cultivationDataForm.reset();
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.cultivationDataForm.reset();
+          }
+        });
+    }
   }
 }

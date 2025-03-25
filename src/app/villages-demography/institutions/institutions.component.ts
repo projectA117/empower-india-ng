@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-institutions',
@@ -30,11 +31,18 @@ import {
 export class InstitutionsComponent implements OnInit {
   @Input() institutionsData: any = {};
   @Input() institutionsLookupData: any = {};
+  @Input() vilageData: any;
   institutionsDataVisible: boolean = false;
   institutionDataForm: FormGroup = new FormGroup({});
   selectedInstitutions: any = {};
+
+  institutionsEditMode = false;
+  institutionsEditRecordID: any = null;
+
+  constructor(private commonService: CommonService) {}
   ngOnInit() {}
   updateInstitutionsData() {
+    this.institutionsEditMode = false;
     this.institutionsDataVisible = true;
     this.createForm();
   }
@@ -50,11 +58,14 @@ export class InstitutionsComponent implements OnInit {
   updateInstitutionDataForm() {
     this.institutionsDataVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
-      unEmployedYouthVillage: [
+      id: this.vilageData.id,
+      villageId: this.vilageData.villageId,
+      institutionsVillages: [
         {
-          villageId: 1,
+          id: this.institutionsEditRecordID
+            ? this.institutionsEditRecordID
+            : '',
+          villageId: this.vilageData.institutionsVillages[0]?.villageId,
           instituteId: this.institutionDataForm.get('institutions')?.value,
         },
       ],
@@ -65,5 +76,21 @@ export class InstitutionsComponent implements OnInit {
     //     this.unemployedYouthForm.reset();
     //   }
     // });
+
+    if (!this.institutionsEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.institutionDataForm.reset();
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.institutionDataForm.reset();
+          }
+        });
+    }
   }
 }
