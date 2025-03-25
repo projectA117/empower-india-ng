@@ -189,4 +189,13 @@ export class ProjectDetailsService {
       catchError((error) => of(error))
     );
   }
+
+  publishProject(payload, id) {
+    return this.httpClient.post<any>(`${environment.apiUrl}/project/publish/${id}`, payload).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
 }

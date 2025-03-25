@@ -99,6 +99,7 @@
       <div class="row">
         <p-tabView
           styleClass="tabview-custom"
+          [scrollable]="true"
           (onChange)="onTabChange(tabs[$event.index].label)"
         >
           <p-tabPanel *ngFor="let tab of tabs" [disabled]="tab.isDisabled">
@@ -150,31 +151,16 @@
 
               <!-- Project Publish -->
               <div *ngIf="activeTab === 'Project Publish'">
-                <h1>Project publish form</h1>
-                <p>
-                  Is Estimation
-                  <input type="checkbox" id="Estimation" name="Estimation" />
-                </p>
-                <p>
-                  Is Bank Account
-                  <input type="checkbox" id="account" name="account" />
-                </p>
-                <p>
-                  Is Committee
-                  <input type="checkbox" id="committee" name="committee" />
-                </p>
-                <p-button label="Save"></p-button>
-                &nbsp;
-                <p-button label="Publish"></p-button>
-
-                Project total cost collected amount remaining amount
-
-                <button class="submit-btn-m">kick-off</button>
+                <app-project-publish
+                  [projectData]="product"
+                ></app-project-publish>
               </div>
 
               <!-- Project Kick-off -->
               <div *ngIf="activeTab === 'KickOff'">
                 <h1>Project Kick-off</h1>
+                <p>Project total estimation amount is collected.</p>
+                <p-button label="Kick Off"></p-button>
               </div>
 
               <!-- Finance -->
