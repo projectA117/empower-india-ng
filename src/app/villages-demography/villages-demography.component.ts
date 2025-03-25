@@ -105,7 +105,7 @@ export class VillagesDemographyComponent implements OnInit {
   ngOnInit() {
     this.getDistricts();
     this.villagelookups();
-    this.commonService.getVillagesDemography(1).subscribe((data: any) => {
+    this.commonService.getVillagesDemography(4304).subscribe((data: any) => {
       this.getVillagesDemographyData = data;
       this.unEmployedYouthVillage =
         this.getVillagesDemographyData.unEmployedYouthVillage;

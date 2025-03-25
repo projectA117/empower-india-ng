@@ -154,6 +154,7 @@
                 <app-community-wise-population
                   [villagesDemographyData]="CommunityPopulationData"
                   [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData"
                 ></app-community-wise-population>
               </div>
             </p-tabPanel>
@@ -171,6 +172,7 @@
                 <app-unemployed-youth
                   [unemployedData]="unEmployedYouthVillage"
                   [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData"
                 ></app-unemployed-youth>
               </div>
             </p-tabPanel>
@@ -188,6 +190,7 @@
                 <app-employedyouth
                   [employedYouthVillage]="employedYouthVillage"
                   [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData"
                 ></app-employedyouth>
               </div>
             </p-tabPanel>
@@ -203,6 +206,7 @@
                 <app-main-occupation
                   [occupationsData]="occupationsData"
                   [occupationsLookupData]="villagelookupsData.occupation"
+                  [vilageData]="getVillagesDemographyData"
                 ></app-main-occupation>
               </div>
             </p-tabPanel>
@@ -220,6 +224,7 @@
                   [landUtilizationLookupData]="
                     villagelookupsData.landUtilization
                   "
+                  [vilageData]="getVillagesDemographyData"
                 ></app-land-utilization>
               </div>
             </p-tabPanel>
@@ -238,6 +243,7 @@
                   [cultivationCropsLookupData]="
                     villagelookupsData.cultivationCrops
                   "
+                  [vilageData]="getVillagesDemographyData"
                 ></app-cultivation-crops>
               </div>
             </p-tabPanel>
@@ -254,6 +260,7 @@
                 <app-institutions
                   [institutionsData]="institutionsData"
                   [institutionsLookupData]="villagelookupsData.institutions"
+                  [vilageData]="getVillagesDemographyData"
                 ></app-institutions>
               </div>
             </p-tabPanel>

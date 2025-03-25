@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-main-occupation',
@@ -30,8 +31,13 @@ import {
 export class MainOccupationComponent implements OnInit {
   @Input() occupationsData: any;
   @Input() occupationsLookupData: any;
+  @Input() vilageData: any;
   occupationsForm: FormGroup = new FormGroup({});
   occupationsDataVisible: boolean = false;
+
+  occupationsEditMode = false;
+  occupationsEditRecordID: any = null;
+  constructor(private commonService: CommonService) {}
   ngOnInit() {
     this.createForm();
   }
@@ -44,6 +50,7 @@ export class MainOccupationComponent implements OnInit {
   }
 
   updateOccupationsData() {
+    this.occupationsEditMode = false;
     this.createForm();
     this.occupationsDataVisible = true;
   }
@@ -51,8 +58,10 @@ export class MainOccupationComponent implements OnInit {
     return this.occupationsLookupData.find((x: any) => x.id == id).name;
   }
   editOccupationsData(data: any) {
+    this.occupationsEditMode = true;
     this.occupationsDataVisible = true;
     this.createForm();
+    this.occupationsEditRecordID = data.id;
     this.occupationsForm.patchValue({
       occupation: data.occupationId,
       NumberofFamilies: data.noOfFamilies,
@@ -63,11 +72,12 @@ export class MainOccupationComponent implements OnInit {
   updateoccupationsForm() {
     this.occupationsDataVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
-      unEmployedYouthVillage: [
+      id: this.vilageData.id,
+      villageId: this.vilageData.villageId,
+      occupations: [
         {
-          villageId: 1,
+          id: this.occupationsEditRecordID ? this.occupationsEditRecordID : '',
+          villageId: this.vilageData.populations[0].villageId,
           occupationId: this.occupationsForm.get('occupation')?.value,
           noOfFamilies: this.occupationsForm.get('NumberofFamilies')?.value,
         },
@@ -79,5 +89,21 @@ export class MainOccupationComponent implements OnInit {
     //     this.unemployedYouthForm.reset();
     //   }
     // });
+
+    if (!this.occupationsEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.occupationsForm.reset();
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.occupationsForm.reset();
+          }
+        });
+    }
   }
 }

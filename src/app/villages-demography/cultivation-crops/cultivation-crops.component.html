@@ -74,6 +74,7 @@
             optionLabel="name"
             optionValue="id"
             placeholder="Select Cultivation"
+            #cultivationCrop
           />
         </div>
       </div>
@@ -82,10 +83,11 @@
         <div class="project-detail-set-h">Rabi/Karif/All</div>
         <p-dropdown
           [options]="cultivationSeasons"
-          formControlName="seasons"
+          formControlName="seasonsAll"
           optionLabel="name"
           optionValue="id"
           placeholder="Select Season"
+          #seasonsAll
         />
       </div>
 
@@ -107,12 +109,7 @@
         (click)="cultivationDataVisible = false"
         class="cancel-btn"
       />
-      <p-button
-        label="Add "
-        type="submit"
-        [disabled]="!cultivationDataForm.valid"
-        class="submit-btn"
-      />
+      <p-button label="Add " type="submit" class="submit-btn" />
     </div>
   </form>
 </p-sidebar>
