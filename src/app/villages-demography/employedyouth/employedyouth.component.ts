@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,7 @@ export class EmployedyouthComponent implements OnInit {
   @Input() employedYouthVillage: any;
   @Input() communityData: any;
   @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   employedyouthEditMode = false;
   employedyouthEditRecordID: any = null;
   employedYouthForm: FormGroup = new FormGroup({});
@@ -105,6 +106,7 @@ export class EmployedyouthComponent implements OnInit {
       this.commonService.saveVilageData(payload).subscribe((data) => {
         if (data) {
           this.employedYouthForm.reset();
+          this.closeDialogEvent.emit(true);
         }
       });
     } else {
@@ -113,6 +115,7 @@ export class EmployedyouthComponent implements OnInit {
         .subscribe((data) => {
           if (data) {
             this.employedYouthForm.reset();
+            this.closeDialogEvent.emit(true);
           }
         });
     }

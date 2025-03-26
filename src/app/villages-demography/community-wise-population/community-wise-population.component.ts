@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,7 @@ export class CommunityWisePopulationComponent implements OnInit {
   @Input() villagesDemographyData: any;
   @Input() communityData: any;
   @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   communityWisePopulationForm: FormGroup = new FormGroup({});
   CommunityPopulationData: any = [];
   communityWisePopulationVisible: boolean = false;
@@ -91,6 +92,7 @@ export class CommunityWisePopulationComponent implements OnInit {
       this.commonService.saveVilageData(payload).subscribe((data) => {
         if (data) {
           this.communityWisePopulationForm.reset();
+          this.closeDialogEvent.emit(true);
         }
       });
     } else {
@@ -99,6 +101,7 @@ export class CommunityWisePopulationComponent implements OnInit {
         .subscribe((data) => {
           if (data) {
             this.communityWisePopulationForm.reset();
+            this.closeDialogEvent.emit(true);
           }
         });
     }
