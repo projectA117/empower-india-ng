@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,7 @@ export class InstitutionsComponent implements OnInit {
   @Input() institutionsData: any = {};
   @Input() institutionsLookupData: any = {};
   @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   institutionsDataVisible: boolean = false;
   institutionDataForm: FormGroup = new FormGroup({});
   selectedInstitutions: any = {};
@@ -81,6 +82,7 @@ export class InstitutionsComponent implements OnInit {
       this.commonService.saveVilageData(payload).subscribe((data) => {
         if (data) {
           this.institutionDataForm.reset();
+          this.closeDialogEvent.emit(true);
         }
       });
     } else {
@@ -89,6 +91,7 @@ export class InstitutionsComponent implements OnInit {
         .subscribe((data) => {
           if (data) {
             this.institutionDataForm.reset();
+            this.closeDialogEvent.emit(true);
           }
         });
     }

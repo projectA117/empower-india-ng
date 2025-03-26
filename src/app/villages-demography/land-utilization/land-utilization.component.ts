@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,7 @@ export class LandUtilizationComponent implements OnInit {
   @Input() landUtilizationData: any;
   @Input() landUtilizationLookupData: any;
   @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   landUtilizationForm: FormGroup = new FormGroup({});
   landUtilizationDataVisible: boolean = false;
 
@@ -94,6 +95,7 @@ export class LandUtilizationComponent implements OnInit {
       this.commonService.saveVilageData(payload).subscribe((data) => {
         if (data) {
           this.landUtilizationForm.reset();
+          this.closeDialogEvent.emit(true);
         }
       });
     } else {
@@ -102,6 +104,7 @@ export class LandUtilizationComponent implements OnInit {
         .subscribe((data) => {
           if (data) {
             this.landUtilizationForm.reset();
+            this.closeDialogEvent.emit(true);
           }
         });
     }

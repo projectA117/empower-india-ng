@@ -43,11 +43,13 @@
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Institutions</div>
 
-        <p-multiSelect
+        <p-dropdown
           [options]="institutionsLookupData"
-          optionLabel="name"
-          placeholder="Select Institutions"
           formControlName="institutions"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Institutions"
+          #Institutions
         />
       </div>
     </div>

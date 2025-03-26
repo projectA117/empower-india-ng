@@ -51,19 +51,19 @@
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">District</div>
             <div class="project-detail-set-v mt-2">
-              {{ selectedDistrict.name }}
+              {{ selectedDistrict?.name }}
             </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Mandal</div>
             <div class="project-detail-set-v mt-2">
-              {{ selectedMandal.name }}
+              {{ selectedMandal?.name }}
             </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Village</div>
             <div class="project-detail-set-v mt-2">
-              {{ selectedVilage.name }}
+              {{ selectedVilage?.name }}
             </div>
           </div>
           <div class="project-detail-set col-2">
@@ -111,27 +111,27 @@
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Total House Holds</div>
             <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData.noOfHouses }}
+              {{ this.getVillagesDemographyData?.noOfHouses }}
             </div>
           </div>
 
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Population</div>
             <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData.totalPopulation }}
+              {{ this.getVillagesDemographyData?.totalPopulation }}
             </div>
           </div>
 
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Male</div>
             <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData.adultMalePopulation }}
+              {{ this.getVillagesDemographyData?.adultMalePopulation }}
             </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Female</div>
             <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData.adultFemalePopulation }}
+              {{ this.getVillagesDemographyData?.adultFemalePopulation }}
             </div>
           </div>
         </div>
@@ -155,6 +155,7 @@
                   [villagesDemographyData]="CommunityPopulationData"
                   [communityData]="CommunityOptions"
                   [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
                 ></app-community-wise-population>
               </div>
             </p-tabPanel>
@@ -191,6 +192,7 @@
                   [employedYouthVillage]="employedYouthVillage"
                   [communityData]="CommunityOptions"
                   [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
                 ></app-employedyouth>
               </div>
             </p-tabPanel>
@@ -225,6 +227,7 @@
                     villagelookupsData.landUtilization
                   "
                   [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
                 ></app-land-utilization>
               </div>
             </p-tabPanel>
@@ -244,6 +247,7 @@
                     villagelookupsData.cultivationCrops
                   "
                   [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
                 ></app-cultivation-crops>
               </div>
             </p-tabPanel>
@@ -261,6 +265,7 @@
                   [institutionsData]="institutionsData"
                   [institutionsLookupData]="villagelookupsData.institutions"
                   [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
                 ></app-institutions>
               </div>
             </p-tabPanel>
@@ -388,33 +393,52 @@
   [(visible)]="villageFormVisible"
   [style]="{ width: '90%', right: 'inherit', height: '80%' }"
 >
-  <form [formGroup]="villageForm" *ngIf="villageFormVisible">
-    <span class="p-text-secondary block mb-5">Update your information.</span>
-
+  <form
+    [formGroup]="villageForm"
+    (ngSubmit)="updateVillageDataForm()"
+    *ngIf="villageFormVisible"
+  >
     <div class="formgrid grid">
       <div class="field col-12 md:col-3">
-        <label for="firstname6">Majority Religion</label>
-        <input
+        <label for="firstname6" class="block">Majority Religion</label>
+        <!-- <input
           pInputText
           class="w-full"
-          FormControlName="Religion"
+          formControlName="Religion"
           aria-describedby="Religion"
+        /> -->
+
+        <p-dropdown
+          [options]="religionData"
+          formControlName="Religion"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Religion"
+          #Religion
+          class="w-full"
+          [autoWidth]="false"
+          [style]="{ minWidth: '100%' }"
         />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">Language</label>
-        <input
+        <label for="lastname6">Primary Language</label>
+        <p-dropdown
+          [options]="languageData"
+          formControlName="Language"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Language"
+          #Language
           class="w-full"
-          pInputText
-          FormControlName="Language"
-          aria-describedby="Language"
+          [autoWidth]="false"
+          [style]="{ minWidth: '100%' }"
         />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Time Zone</label>
         <input
           pInputText
-          FormControlName="TimeZone"
+          formControlName="TimeZone"
           aria-describedby="TimeZone"
           class="w-full"
         />
@@ -427,16 +451,16 @@
 
         {{ GeolocationError }}
 
-        {{ Latitude }}
+        {{ getVillagesDemographyData?.latitude }}
 
-        {{ longitude }}
+        {{ getVillagesDemographyData?.longitude }}
       </div>
 
       <div class="field col-12 md:col-3">
         <label for="firstname6">Boundaries of the village</label>
         <input
           pInputText
-          FormControlName="Boundaries"
+          formControlName="Boundaries"
           aria-describedby="Boundaries"
           class="w-full"
         />
@@ -445,7 +469,7 @@
         <label for="lastname6">Geographical Area</label>
         <input
           pInputText
-          FormControlName="Geographical"
+          formControlName="Geographical"
           aria-describedby="Geographical"
           class="w-full"
         />
@@ -454,8 +478,8 @@
         <label for="lastname6">Total House Holds</label>
         <input
           pInputText
-          FormControlName="TotalHouse"
-          aria-describedby="TotalHouse"
+          formControlName="totalHouse"
+          aria-describedby="totalHouse"
           class="w-full"
         />
       </div>
@@ -463,7 +487,7 @@
         <label for="lastname6">Population</label>
         <input
           pInputText
-          FormControlName="Population"
+          formControlName="Population"
           aria-describedby="Population"
           class="w-full"
         />
@@ -473,7 +497,7 @@
         <label for="firstname6">Male</label>
         <input
           pInputText
-          FormControlName="PopulationMale"
+          formControlName="PopulationMale"
           aria-describedby="PopulationMale"
           class="w-full"
         />
@@ -482,25 +506,25 @@
         <label for="lastname6">Female</label>
         <input
           pInputText
-          FormControlName="PopulationFemale"
+          formControlName="PopulationFemale"
           aria-describedby="PopulationFemale"
           class="w-full"
         />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">ABOVE 18 MALE </label>
+        <label for="lastname6">above 18 Male</label>
         <input
           pInputText
-          FormControlName="PopulationAboveEighteenMale"
+          formControlName="PopulationAboveEighteenMale"
           aria-describedby="PopulationAboveEighteenMale"
           class="w-full"
         />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">ABOVE 18 FEMALE</label>
+        <label for="lastname6"> above 18 Female</label>
         <input
           pInputText
-          FormControlName="PopulationAboveEighteenFeMale"
+          formControlName="PopulationAboveEighteenFeMale"
           aria-describedby="PopulationAboveEighteenFeMale"
           class="w-full"
         />
@@ -510,7 +534,7 @@
         <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
         <input
           pInputText
-          FormControlName="PopulationAbove60Male"
+          formControlName="PopulationAbove60Male"
           aria-describedby="PopulationAbove60Male"
           class="w-full"
         />
@@ -520,8 +544,18 @@
         <input
           class="w-full"
           pInputText
-          FormControlName="PopulationAbove60FeMale"
+          formControlName="PopulationAbove60FeMale"
           aria-describedby="PopulationAbove60FeMale"
+        />
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">area</label>
+        <input
+          class="w-full"
+          pInputText
+          formControlName="area"
+          aria-describedby="area"
         />
       </div>
     </div>
@@ -532,7 +566,8 @@
         severity="secondary"
         (onClick)="villageFormVisible = false"
       />
-      <p-button label="Save" type="submit" [disabled]="!villageForm.valid" />
+      <p-button label="Save" type="submit" />
     </div>
   </form>
 </p-dialog>
+<!-- [disabled]="!villageForm.valid" -->
