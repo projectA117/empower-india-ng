@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -31,11 +31,15 @@ import { CommonService } from '@service/common.service';
 export class UnemployedYouthComponent implements OnInit {
   @Input() unemployedData: any;
   @Input() communityData: any;
+  @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   CommunityPopulationData: any = [];
   unemployedYouthForm: FormGroup = new FormGroup({});
   unEmployedYouthVillage: any = [];
   unEmployedYouthVisible: boolean = false;
   editUnEmployedYouth: boolean = false;
+  unEmployedYouthEditRecordID: any = null;
+  unEmployedYouthEditMode = false;
 
   constructor(private commonService: CommonService) {}
   ngOnInit() {
@@ -45,6 +49,7 @@ export class UnemployedYouthComponent implements OnInit {
   updateunEmployedYouth() {
     this.createForm();
     this.unEmployedYouthVisible = true;
+    this.unEmployedYouthEditMode = false;
   }
 
   createForm() {
@@ -66,7 +71,9 @@ export class UnemployedYouthComponent implements OnInit {
     return this.communityData.find((x: any) => x.id == id).name;
   }
   editUnEmployeeData(data: any) {
+    this.unEmployedYouthEditMode = true;
     this.unEmployedYouthVisible = true;
+    this.unEmployedYouthEditRecordID = data.id;
     this.createForm();
     this.unemployedYouthForm.patchValue({
       community: data.communityId,
@@ -80,11 +87,14 @@ export class UnemployedYouthComponent implements OnInit {
   updateunEmployedYouthForm() {
     this.unEmployedYouthVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
+      id: this.vilageData?.id,
+      villageId: this.vilageData?.villageId,
       unEmployedYouthVillage: [
         {
-          villageId: 1,
+          id: this.unEmployedYouthEditRecordID
+            ? this.unEmployedYouthEditRecordID
+            : '',
+          villageId: this.vilageData.populations[0].villageId,
           communityId: this.unemployedYouthForm.get('community')?.value,
           age1830: this.unemployedYouthForm.get('belowThirty')?.value,
           age3145: this.unemployedYouthForm.get('belowFortyFive')?.value,
@@ -96,11 +106,22 @@ export class UnemployedYouthComponent implements OnInit {
         },
       ],
     };
-    console.log(payload);
-    // this.commonService.saveVilageData(payload).subscribe((data) => {
-    //   if (data) {
-    //     this.unemployedYouthForm.reset();
-    //   }
-    // });
+    if (!this.vilageData.id) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.unemployedYouthForm.reset();
+          this.closeDialogEvent.emit(true);
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.unemployedYouthForm.reset();
+            this.closeDialogEvent.emit(true);
+          }
+        });
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-employedyouth',
@@ -30,8 +31,15 @@ import {
 export class EmployedyouthComponent implements OnInit {
   @Input() employedYouthVillage: any;
   @Input() communityData: any;
+  @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
+  employedyouthEditMode = false;
+  employedyouthEditRecordID: any = null;
   employedYouthForm: FormGroup = new FormGroup({});
   employedYouthVisible: boolean = false;
+
+  constructor(private commonService: CommonService) {}
+
   ngOnInit() {
     this.createForm();
   }
@@ -46,6 +54,7 @@ export class EmployedyouthComponent implements OnInit {
   }
 
   updateemployedYouthData() {
+    this.employedyouthEditMode = false;
     this.createForm();
     this.employedYouthVisible = true;
   }
@@ -54,6 +63,7 @@ export class EmployedyouthComponent implements OnInit {
   }
   editemployedData(data: any) {
     this.employedYouthVisible = true;
+    this.employedyouthEditRecordID = data.id;
     this.createForm();
     this.employedYouthForm.patchValue({
       community: data.communityId,
@@ -67,11 +77,13 @@ export class EmployedyouthComponent implements OnInit {
   updateEmployedYouthForm() {
     this.employedYouthVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
-      unEmployedYouthVillage: [
+      id: this.vilageData.id,
+      villageId: this.vilageData.villageId,
+      employedYouthVillage: [
         {
-          villageId: 1,
+          villageId: this.employedyouthEditRecordID
+            ? this.employedyouthEditRecordID
+            : '',
           communityId: this.employedYouthForm.get('community')?.value,
           government: this.employedYouthForm.get('government')?.value,
           privateJob: this.employedYouthForm.get('private')?.value,
@@ -89,5 +101,23 @@ export class EmployedyouthComponent implements OnInit {
     //     this.unemployedYouthForm.reset();
     //   }
     // });
+
+    if (!this.employedyouthEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.employedYouthForm.reset();
+          this.closeDialogEvent.emit(true);
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.employedYouthForm.reset();
+            this.closeDialogEvent.emit(true);
+          }
+        });
+    }
   }
 }

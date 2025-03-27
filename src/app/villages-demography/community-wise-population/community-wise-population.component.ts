@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -31,10 +31,13 @@ import { CommonService } from '@service/common.service';
 export class CommunityWisePopulationComponent implements OnInit {
   @Input() villagesDemographyData: any;
   @Input() communityData: any;
+  @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   communityWisePopulationForm: FormGroup = new FormGroup({});
   CommunityPopulationData: any = [];
   communityWisePopulationVisible: boolean = false;
   communityEditMode = false;
+  communityEditRecordID: any = null;
   constructor(private commonService: CommonService) {}
 
   ngOnInit() {
@@ -69,11 +72,12 @@ export class CommunityWisePopulationComponent implements OnInit {
   updateCommunityForm() {
     this.communityWisePopulationVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
+      id: this.vilageData.id,
+      villageId: this.vilageData.villageId,
       populations: [
         {
-          villageId: 1,
+          id: this.communityEditRecordID ? this.communityEditRecordID : '',
+          villageId: this.vilageData.populations[0].villageId,
           communityId: this.communityWisePopulationForm.get('community')?.value,
           male: this.communityWisePopulationForm.get('communityMale')?.value,
           female:
@@ -84,10 +88,11 @@ export class CommunityWisePopulationComponent implements OnInit {
         },
       ],
     };
-    if (!this.communityEditMode) {
+    if (!this.vilageData.id) {
       this.commonService.saveVilageData(payload).subscribe((data) => {
         if (data) {
           this.communityWisePopulationForm.reset();
+          this.closeDialogEvent.emit(true);
         }
       });
     } else {
@@ -96,6 +101,7 @@ export class CommunityWisePopulationComponent implements OnInit {
         .subscribe((data) => {
           if (data) {
             this.communityWisePopulationForm.reset();
+            this.closeDialogEvent.emit(true);
           }
         });
     }
@@ -104,6 +110,7 @@ export class CommunityWisePopulationComponent implements OnInit {
   editPoplationData(data: any) {
     this.communityEditMode = true;
     this.communityWisePopulationVisible = true;
+    this.communityEditRecordID = data.id;
     this.createForm();
     this.communityWisePopulationForm.patchValue({
       community: data.communityId,

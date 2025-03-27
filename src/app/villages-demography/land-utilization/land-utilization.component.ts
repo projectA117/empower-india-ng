@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-land-utilization',
@@ -30,8 +31,15 @@ import {
 export class LandUtilizationComponent implements OnInit {
   @Input() landUtilizationData: any;
   @Input() landUtilizationLookupData: any;
+  @Input() vilageData: any;
+  @Output() closeDialogEvent = new EventEmitter<boolean>();
   landUtilizationForm: FormGroup = new FormGroup({});
   landUtilizationDataVisible: boolean = false;
+
+  landUtilizationEditMode = false;
+  landUtilizationEditRecordID: any = null;
+
+  constructor(private commonService: CommonService) {}
   ngOnInit() {
     this.createForm();
   }
@@ -43,6 +51,7 @@ export class LandUtilizationComponent implements OnInit {
     });
   }
   updateLandUtilizationData() {
+    this.landUtilizationEditMode = false;
     this.createForm();
     this.landUtilizationDataVisible = true;
   }
@@ -51,8 +60,10 @@ export class LandUtilizationComponent implements OnInit {
     return this.landUtilizationLookupData.find((x: any) => x.id == id).name;
   }
   editUtilizationData(data: any) {
+    this.landUtilizationEditMode = true;
     this.createForm();
     this.landUtilizationDataVisible = true;
+    this.landUtilizationEditRecordID = data.id;
     this.landUtilizationForm.patchValue({
       landUtilization: data.landTypeId,
       areaInAcrs: data.totalArea,
@@ -60,20 +71,43 @@ export class LandUtilizationComponent implements OnInit {
   }
   deleteUtilizationData() {}
 
-  updateoccupationsForm() {
+  updatelandUtilizationForm() {
     this.landUtilizationDataVisible = false;
     const payload = {
-      id: 1,
-      villageId: 1,
-      unEmployedYouthVillage: [
+      id: this.vilageData.id,
+      villageId: this.vilageData.villageId,
+      landUtilizationVillage: [
         {
-          villageId: 1,
+          id: this.landUtilizationEditRecordID
+            ? this.landUtilizationEditRecordID
+            : '',
+          villageId: this.vilageData.landUtilizationVillage[0]?.villageId
+            ? this.vilageData.landUtilizationVillage[0]?.villageId
+            : '',
           landTypeId: this.landUtilizationForm.get('landUtilization')?.value,
           totalArea: this.landUtilizationForm.get('areaInAcrs')?.value,
         },
       ],
     };
     console.log(payload);
+
+    if (!this.landUtilizationEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.landUtilizationForm.reset();
+          this.closeDialogEvent.emit(true);
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.landUtilizationForm.reset();
+            this.closeDialogEvent.emit(true);
+          }
+        });
+    }
     // this.commonService.saveVilageData(payload).subscribe((data) => {
     //   if (data) {
     //     this.unemployedYouthForm.reset();
