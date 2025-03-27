@@ -12,6 +12,7 @@ import { ProjectsignoffComponent } from './project-signoff/project-signoff.compo
 import { ProductService } from '@service/productservice';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectBankDetailsComponent } from './project-bank-details/project-bank-details.component';
+import { ProjectPublishComponent } from './project-publish/project-publish.component';
 export interface Tab {
   label: string;
   icon?: string;
@@ -33,7 +34,8 @@ export interface Tab {
     ProjectsignoffComponent,
     ProjectVendorsComponent,
     ProjectWorkInProgressComponent,
-    ProjectBankDetailsComponent
+    ProjectBankDetailsComponent,
+    ProjectPublishComponent
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',

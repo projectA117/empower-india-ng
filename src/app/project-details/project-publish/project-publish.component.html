@@ -1,0 +1,36 @@
+<div class="row mb-4">
+  <div class="project-detail-h-set tab-h-txt">
+    <h4>Project publish form</h4>
+  </div>
+
+  <div class="justify-content-start flex-wrap mt-15">
+    <p>
+      @if(isEstimationComplete) {
+      <i class="pi pi-check matched-condition"></i>
+      } @else {
+      <i class="pi pi-times not-matched-condition"></i>
+      } Is Estimation
+    </p>
+    <p>
+      @if(isBankDetailsPresent) {
+      <i class="pi pi-check matched-condition"></i>
+      } @else {
+      <i class="pi pi-times not-matched-condition"></i>
+      } Is Bank Account
+    </p>
+    <p>
+      @if(isCommittee) {
+      <i class="pi pi-check matched-condition"></i>
+      } @else {
+      <i class="pi pi-times not-matched-condition"></i>
+      } Is Committee
+    </p>
+    <p-button
+      [disabled]="
+        !(isBankDetailsPresent && isCommittee && isEstimationComplete)
+      "
+      label="Publish"
+      (onClick)="onProjectPublish()"
+    ></p-button>
+  </div>
+</div>
