@@ -1,4 +1,8 @@
-<p-button label="Edit or Add" (onClick)="updateLandUtilizationData()" />
+<p-button
+  label="Edit or Add"
+  (onClick)="updateLandUtilizationData()"
+  *appHasRole="[3]"
+/>
 <p-table [value]="landUtilizationData" class="tab-data-table">
   <ng-template pTemplate="header">
     <tr>
@@ -33,10 +37,12 @@
         <i
           class="pi pi-pencil"
           (click)="editUtilizationData(utilizationData)"
+          *appHasRole="[3]"
         ></i>
         <i
           class="pi pi-trash"
           (click)="deleteUtilizationData(utilizationData)"
+          *appHasRole="[3]"
         ></i>
       </td>
     </tr>

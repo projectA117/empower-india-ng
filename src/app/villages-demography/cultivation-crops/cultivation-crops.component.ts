@@ -13,6 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonService } from '@service/common.service';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 @Component({
   selector: 'app-cultivation-crops',
@@ -24,6 +25,7 @@ import { CommonService } from '@service/common.service';
     ImportsModule,
     FormsModule,
     ReactiveFormsModule,
+    RoleDirective,
   ],
   templateUrl: './cultivation-crops.component.html',
   styleUrl: './cultivation-crops.component.scss',

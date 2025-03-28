@@ -27,6 +27,7 @@ import { InstitutionsComponent } from './institutions/institutions.component';
 import { LandUtilizationComponent } from './land-utilization/land-utilization.component';
 import { MainOccupationComponent } from './main-occupation/main-occupation.component';
 import { UnemployedYouthComponent } from './unemployed-youth/unemployed-youth.component';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 interface PageEvent {
   first: number;
@@ -54,6 +55,7 @@ interface PageEvent {
     LandUtilizationComponent,
     MainOccupationComponent,
     UnemployedYouthComponent,
+    RoleDirective,
   ],
   providers: [MessageService, ConfirmationService, ProductService],
   templateUrl: './villages-demography.component.html',
@@ -283,8 +285,8 @@ export class VillagesDemographyComponent implements OnInit {
         this.getVillagesDemographyData.childMalePopulation,
       PopulationAboveEighteenFeMale:
         this.getVillagesDemographyData.childFemalePopulation,
-      //PopulationAbove60Male: this.getVillagesDemographyData.area,
-      // PopulationAbove60FeMale: this.getVillagesDemographyData.area,
+      PopulationAbove60Male: this.getVillagesDemographyData.area,
+      PopulationAbove60FeMale: this.getVillagesDemographyData.area,
     });
   }
 
@@ -322,14 +324,14 @@ export class VillagesDemographyComponent implements OnInit {
       villageId: this.getVillagesDemographyData.villageId,
       noOfHouses: this.villageForm.value.totalHouse,
       totalPopulation: this.villageForm.value.Population,
+      geographicalArea: this.villageForm.value.Geographical,
       adultMalePopulation: this.villageForm.value.PopulationMale,
       adultFemalePopulation: this.villageForm.value.PopulationFemale,
       childMalePopulation: this.villageForm.value.PopulationAboveEighteenMale,
       childFemalePopulation:
         this.villageForm.value.PopulationAboveEighteenFeMale,
-      aboveSixtyMalePopulation: this.villageForm.value.PopulationAbove60Male,
-      aboveSixtyFemalePopulation:
-        this.villageForm.value.PopulationAbove60FeMale,
+      above60Male: this.villageForm.value.PopulationAbove60Male,
+      above60Female: this.villageForm.value.PopulationAbove60FeMale,
       area: this.villageForm.value.area,
       latitude: this.Latitude,
       longitude: this.longitude,
