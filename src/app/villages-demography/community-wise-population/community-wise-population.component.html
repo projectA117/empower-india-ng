@@ -1,4 +1,8 @@
-<p-button label="Edit or Add" (onClick)="updatePopulationData()" />
+<p-button
+  label="Edit or Add"
+  (onClick)="updatePopulationData()"
+  *appHasRole="[3]"
+/>
 
 <p-table [value]="villagesDemographyData" class="tab-data-table">
   <ng-template pTemplate="header">
@@ -47,10 +51,12 @@
         <i
           class="pi pi-pencil"
           (click)="editPoplationData(CommunityPopulation)"
+          *appHasRole="[3]"
         ></i>
         <i
           class="pi pi-trash"
           (click)="deletePoplationData(CommunityPopulation)"
+          *appHasRole="[3]"
         ></i>
       </td>
     </tr>

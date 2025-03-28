@@ -1,4 +1,8 @@
-<p-button label="Edit or Add" (onClick)="updateunEmployedYouth()" />
+<p-button
+  label="Edit or Add"
+  (onClick)="updateunEmployedYouth()"
+  *appHasRole="[3]"
+/>
 
 <p-table [value]="unemployedData" class="tab-data-table">
   <ng-template pTemplate="header">
@@ -40,8 +44,16 @@
       <td class="text-right">₹ {{ unEmployee.total }}</td>
 
       <td>
-        <i class="pi pi-pencil" (click)="editUnEmployeeData(unEmployee)"></i>
-        <i class="pi pi-trash" (click)="deleteUnEmployeeData(unEmployee)"></i>
+        <i
+          class="pi pi-pencil"
+          (click)="editUnEmployeeData(unEmployee)"
+          *appHasRole="[3]"
+        ></i>
+        <i
+          class="pi pi-trash"
+          (click)="deleteUnEmployeeData(unEmployee)"
+          *appHasRole="[3]"
+        ></i>
       </td>
     </tr>
   </ng-template>

@@ -11,7 +11,7 @@ export class CommonService {
   constructor(private httpClient: HttpClient) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      this.user.set(storedUser);
+      this.user.set(JSON.parse(storedUser));
     }
 
     // Save to localStorage when the signal changes
