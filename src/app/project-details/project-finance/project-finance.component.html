@@ -1,6 +1,6 @@
 <div class="finance-values-set">
-  <div class="project-detail-h-set tab-h-txt">
-    <h4>Finance Details</h4>
+  <div class="tab-h-txt">
+    <h4 style="display: inline">Finance Details</h4>
   </div>
   <div>
     Total Fund <span class="t-fund">₹ {{ totalFunds }}/-</span>
@@ -11,7 +11,11 @@
   <div>
     Remaining Balance <span class="t-balance">₹ {{ remainingBalance }}/-</span>
   </div>
-  <p-button label="Add Expense" (click)="financeSidebarVisible = true" />
+  <p-button
+    label="Add Expense"
+    (click)="financeSidebarVisible = true"
+    *appHasRole="[3]"
+  />
 </div>
 
 <div class="justify-content-start flex-wrap mt-15">
@@ -205,4 +209,3 @@
     </div>
   </form>
 </p-sidebar>
- 

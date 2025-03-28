@@ -12,6 +12,7 @@ import { HardCodedInfo } from 'src/constants/HardCodedInfo';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
 import { ProjectSponsorsComponent } from '../project-sponsors/project-sponsors.component';
+import { RoleDirective } from 'src/directives/role-access.directive';
 interface PageEvent {
   first: number;
   rows: number;
@@ -22,7 +23,12 @@ interface PageEvent {
   selector: 'app-projects',
   templateUrl: './project-list.component.html',
   standalone: true,
-  imports: [ImportsModule, ProjectComponent, ProjectSponsorsComponent],
+  imports: [
+    ImportsModule,
+    ProjectComponent,
+    ProjectSponsorsComponent,
+    RoleDirective,
+  ],
   providers: [MessageService, ConfirmationService, ProductService],
   styleUrl: './project-list.component.scss',
   styles: [

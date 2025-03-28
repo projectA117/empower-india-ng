@@ -11,6 +11,7 @@ import { CommonService } from '@service/common.service';
 })
 export class SponsorsDetailsComponent implements OnInit {
   selectedSponsor: any;
+  selectedSponsorInformation: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService
@@ -38,6 +39,7 @@ export class SponsorsDetailsComponent implements OnInit {
       this.commonService.getSelectedSponsors(payload).subscribe(
         (data) => {
           console.log(data);
+          this.selectedSponsorInformation = data;
         },
         (err) => {
           //Temp fix for Gopi

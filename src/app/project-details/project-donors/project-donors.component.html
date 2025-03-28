@@ -1,7 +1,11 @@
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>Sponsor Details</h4>
-    <p-button label="Add Sponsor" (click)="donorsSidebarVisible = true" />
+    <p-button
+      label="Add Sponsor"
+      (click)="donorsSidebarVisible = true"
+      *appHasRole="[1, 3, 2]"
+    />
   </div>
 
   <div class="justify-content-start flex-wrap mt-15">

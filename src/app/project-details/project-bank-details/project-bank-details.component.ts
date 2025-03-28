@@ -11,6 +11,7 @@ import { ProjectDetailsService } from '@service/project-details.service';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { SidebarModule } from 'primeng/sidebar';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 @Component({
   selector: 'app-project-bank-details',
@@ -22,6 +23,7 @@ import { SidebarModule } from 'primeng/sidebar';
     ButtonModule,
     TableModule,
     SidebarModule,
+    RoleDirective,
   ],
   templateUrl: './project-bank-details.component.html',
   styleUrl: './project-bank-details.component.scss',
@@ -36,7 +38,7 @@ export class ProjectBankDetailsComponent {
   projectDetailsService = inject(ProjectDetailsService);
 
   ngOnInit() {
-    console.log(this.projectData.id)
+    console.log(this.projectData.id);
     this.bankDetailsForm = new FormGroup({
       id: new FormControl(0),
       projectId: new FormControl(this.projectData.id),

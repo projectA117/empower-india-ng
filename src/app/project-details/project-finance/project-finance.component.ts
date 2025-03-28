@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 export interface Product {
   id?: string;
@@ -36,6 +37,7 @@ export interface Product {
     ImportsModule,
     FormsModule,
     ReactiveFormsModule,
+    RoleDirective,
   ],
   templateUrl: './project-finance.component.html',
   styleUrl: './project-finance.component.scss',
@@ -107,4 +109,3 @@ export class ProjectFinanceComponent implements OnInit {
     });
   }
 }
- 

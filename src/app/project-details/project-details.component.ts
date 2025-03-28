@@ -13,6 +13,7 @@ import { ProductService } from '@service/productservice';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectBankDetailsComponent } from './project-bank-details/project-bank-details.component';
 import { ProjectPublishComponent } from './project-publish/project-publish.component';
+import { RoleDirective } from 'src/directives/role-access.directive';
 export interface Tab {
   label: string;
   icon?: string;
@@ -35,7 +36,8 @@ export interface Tab {
     ProjectVendorsComponent,
     ProjectWorkInProgressComponent,
     ProjectBankDetailsComponent,
-    ProjectPublishComponent
+    ProjectPublishComponent,
+    RoleDirective,
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',

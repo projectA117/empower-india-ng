@@ -170,7 +170,7 @@ export class CommonService {
 
   register(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(`${environment.apiUrl}/users/create`, payLoad)
+      .post<any>(`${environment.apiUrl}/users`, payLoad)
       .pipe(
         map((response) => {
           this.setUser(response);
@@ -237,7 +237,7 @@ export class CommonService {
 
   getSelectedSponsors(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(`${environment.apiUrl}/donars/donar-project`, payLoad)
+      .get<any>(`${environment.apiUrl}/donars/donar-project-info/10`)
       .pipe(
         map((response) => {
           return response;

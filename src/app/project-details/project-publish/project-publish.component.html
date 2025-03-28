@@ -26,6 +26,7 @@
       } Is Committee
     </p>
     <p-button
+      *appHasRole="[3]"
       [disabled]="
         !(isBankDetailsPresent && isCommittee && isEstimationComplete)
       "

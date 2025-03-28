@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 export interface Product {
   id?: string;
@@ -36,6 +37,7 @@ export interface Product {
     ImportsModule,
     FormsModule,
     ReactiveFormsModule,
+    RoleDirective,
   ],
   templateUrl: './project-vendors.component.html',
   styleUrl: './project-vendors.component.scss',
@@ -91,7 +93,7 @@ export class ProjectVendorsComponent implements OnInit {
         if (data) {
           this.showVendorsDetails();
           this.vendorSidebarVisible = false;
-          this.VendorForm.reset()
+          this.VendorForm.reset();
         }
       });
   }
