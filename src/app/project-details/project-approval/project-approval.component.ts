@@ -11,6 +11,7 @@ import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 @Component({
   selector: 'app-project-approval',
@@ -22,6 +23,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     FormsModule,
     DropdownModule,
     ReactiveFormsModule,
+    RoleDirective,
   ],
   templateUrl: './project-approval.component.html',
   styleUrl: './project-approval.component.scss',
@@ -33,12 +35,30 @@ export class ProjectApprovalComponent implements OnInit {
   approvalForm: FormGroup = new FormGroup({});
   value1: number;
   governmentShareAmount: number = 0;
-
+  nonAdmin: any = '';
   constructor(private projectDetailsService: ProjectDetailsService) {}
 
   ngOnInit() {
     if (this.approvalForm) {
       this.createapprovalForm();
+    }
+  }
+
+  // ngAfterViewInit() {
+  //   const localStorageuser = JSON.parse(localStorage.getItem('user'));
+  //   if (localStorageuser && localStorageuser.roles[0].id != 3) {
+  //     this.nonAdmin = '';
+  //   } else {
+  //     this.nonAdmin = 3;
+  //   }
+  // }
+
+  localStorageuser() {
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    if (!localStorageuser || localStorageuser.roles[0].id != 3) {
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -49,7 +69,10 @@ export class ProjectApprovalComponent implements OnInit {
       PublicShare: new FormControl(this.projectData?.publicShare),
     });
 
-    this.governmentShareAmount = (this.projectData?.projectEstimation || 0) * (this.projectData?.governmentShare || 0) / 100;
+    this.governmentShareAmount =
+      ((this.projectData?.projectEstimation || 0) *
+        (this.projectData?.governmentShare || 0)) /
+      100;
 
     this.approvalForm.get('PublicShare').disable();
     this.approvalForm
@@ -60,7 +83,8 @@ export class ProjectApprovalComponent implements OnInit {
       });
     this.approvalForm.get('GovtShare')?.valueChanges.subscribe((value) => {
       this.governmentShareAmount =
-        (this.approvalForm.get('ProjectEstimation')?.value || 0) * (value / 100);
+        (this.approvalForm.get('ProjectEstimation')?.value || 0) *
+        (value / 100);
       this.approvalForm.get('PublicShare')?.setValue(100 - value);
     });
   }

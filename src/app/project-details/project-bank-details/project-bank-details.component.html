@@ -1,7 +1,11 @@
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>Bank Details</h4>
-    <p-button label="Add Bank Details" (click)="addBankDetails()" />
+    <p-button
+      label="Add Bank Details"
+      (click)="addBankDetails()"
+      *appHasRole="[3]"
+    />
   </div>
   <div class="row tab-input-data">
     <p-table
@@ -32,7 +36,7 @@
           <td>{{ bank.ifscCode }}</td>
           <td>{{ bank.swiftCode }}</td>
           <td>
-            <i class="pi pi-pencil" (click)="edit(bank)"></i>
+            <i class="pi pi-pencil" (click)="edit(bank)" *appHasRole="[3]"></i>
           </td>
         </tr>
       </ng-template>

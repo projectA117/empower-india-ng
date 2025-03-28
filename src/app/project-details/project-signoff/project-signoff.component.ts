@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 export interface Product {
   id?: string;
@@ -29,7 +30,13 @@ export interface Product {
 @Component({
   selector: 'app-project-signoff',
   standalone: true,
-  imports: [ButtonModule, TableModule, CommonModule, ImportsModule],
+  imports: [
+    ButtonModule,
+    TableModule,
+    CommonModule,
+    ImportsModule,
+    RoleDirective,
+  ],
   templateUrl: './project-signoff.component.html',
   styleUrl: './project-signoff.component.scss',
   providers: [ProjectDetailsService, ProductService],

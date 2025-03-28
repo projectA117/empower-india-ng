@@ -1,7 +1,11 @@
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>Vendor Details</h4>
-    <p-button label="Add Vendor" (click)="vendorSidebarVisible = true" />
+    <p-button
+      label="Add Vendor"
+      (click)="vendorSidebarVisible = true"
+      *appHasRole="[2, 3]"
+    />
   </div>
 
   <div class="justify-content-start flex-wrap mt-15">

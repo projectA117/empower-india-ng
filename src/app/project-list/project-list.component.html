@@ -58,7 +58,11 @@
       />
     </span> -->
     <button class="submit-btn-m" (click)="reset()">Reset</button>
-    <p-button label="Add New Project" (onClick)="createProject()" />
+    <p-button
+      label="Add New Project"
+      (onClick)="createProject()"
+      *appHasRole="[3, 2]"
+    />
   </div>
 </div>
 <div class="main-container projects-set-list">
@@ -106,7 +110,7 @@
                 />
               </div>
               <div class="col-10 relative">
-                <div class="projects-actions">
+                <div class="projects-actions" *appHasRole="[3, 2]">
                   <img
                     src="assets/images/icon-view.svg"
                     (click)="getProjectDetails(info)"
@@ -252,6 +256,7 @@
                     class="submit-btn-m"
                     [disabled]="info.disableAddSponsor"
                     (click)="openSponsorDialog(info)"
+                    *appHasRole="[1, 3, 2]"
                   >
                     Sponsor
                   </button>

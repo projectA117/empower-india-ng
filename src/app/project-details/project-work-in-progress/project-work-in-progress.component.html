@@ -1,7 +1,11 @@
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
     <h4>WIP Details</h4>
-    <p-button label="Add WIP Details" (click)="WIPSidebarVisible = true" />
+    <p-button
+      label="Add WIP Details"
+      *appHasRole="[3]"
+      (click)="WIPSidebarVisible = true"
+    />
   </div>
 
   <div class="justify-content-start flex-wrap mt-15">

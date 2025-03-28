@@ -24,11 +24,21 @@
               <div class="login-scroll">
                 <div class="form-group">
                   <label for="firstName">First Name</label>
-                  <input type="text" formControlName="firstName" class="form-control" [ngClass]="{
-                  'is-invalid': f.firstName.touched && f.firstName.errors
-                }" />
-                  <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
-                    <div *ngIf="f.firstName.touched && f.firstName.errors.required">
+                  <input
+                    type="text"
+                    formControlName="firstName"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': f.firstName.touched && f.firstName.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="f.firstName.touched && f.firstName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="f.firstName.touched && f.firstName.errors.required"
+                    >
                       firstName is required
                     </div>
                   </div>
@@ -36,11 +46,21 @@
 
                 <div class="form-group">
                   <label for="lastName">Last Name</label>
-                  <input type="text" formControlName="lastName" class="form-control" [ngClass]="{
-                  'is-invalid': f.lastName.touched && f.lastName.errors
-                }" />
-                  <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
-                    <div *ngIf="f.lastName.touched && f.lastName.errors.required">
+                  <input
+                    type="text"
+                    formControlName="lastName"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': f.lastName.touched && f.lastName.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="f.lastName.touched && f.lastName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="f.lastName.touched && f.lastName.errors.required"
+                    >
                       last Name is required
                     </div>
                   </div>
@@ -48,14 +68,28 @@
 
                 <div class="form-group">
                   <label for="phoneNumber">Phone Number</label>
-                  <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{
-                  'is-invalid': f.phoneNumber.touched && f.phoneNumber.errors
-                }" />
+                  <input
+                    type="text"
+                    formControlName="phoneNumber"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid':
+                        f.phoneNumber.touched && f.phoneNumber.errors
+                    }"
+                  />
                   <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
-                    <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.required">
+                    <div
+                      *ngIf="
+                        f.phoneNumber.touched && f.phoneNumber.errors.required
+                      "
+                    >
                       Phone Number is required
                     </div>
-                    <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.pattern">
+                    <div
+                      *ngIf="
+                        f.phoneNumber.touched && f.phoneNumber.errors.pattern
+                      "
+                    >
                       Phone Number length should be 10
                     </div>
                   </div>
@@ -63,8 +97,14 @@
 
                 <div class="form-group">
                   <label for="email">e-mail </label>
-                  <input type="text" formControlName="email" class="form-control"
-                    [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" />
+                  <input
+                    type="text"
+                    formControlName="email"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': f.email.touched && f.email.errors
+                    }"
+                  />
                   <div *ngIf="f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.touched && f.email.errors.required">
                       e-mail is required
@@ -83,12 +123,48 @@
 
                 <div class="form-group">
                   <label for="username">User Name</label>
-                  <input type="text" formControlName="userName" class="form-control" [ngClass]="{
-                  'is-invalid': f.userName.touched && f.userName.errors
-                }" />
-                  <div *ngIf="f.userName.touched && f.userName.errors" class="invalid-feedback">
-                    <div *ngIf="f.userName.touched && f.userName.errors.required">
+                  <input
+                    type="text"
+                    formControlName="userName"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': f.userName.touched && f.userName.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="f.userName.touched && f.userName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="f.userName.touched && f.userName.errors.required"
+                    >
                       User Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    formControlName="password"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': f.password.touched && f.password.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="f.password.touched && f.password.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="f.password.touched && f.password.errors.required"
+                    >
+                      Password is required
+                    </div>
+                    <div
+                      *ngIf="f.password.touched && f.password.errors.minlength"
+                    >
+                      Password must be at least 6 characters
                     </div>
                   </div>
                 </div>
@@ -96,62 +172,80 @@
                 <div class="form-group">
                   <label for="AboutYourSelf">About your self</label>
 
-                  <textarea id="aboutYourSelf" formControlName="aboutYourSelf" name="aboutYourSelf" rows="4" cols="50"
-                    style="width: 100%">
-                At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-                </textarea>
+                  <textarea
+                    id="aboutYourSelf"
+                    formControlName="aboutYourSelf"
+                    name="aboutYourSelf"
+                    rows="4"
+                    cols="50"
+                    style="width: 100%"
+                  >
+                  </textarea>
 
-                  <!-- <input
-                type="text"
-               
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': f.userName.touched && f.userName.errors
-                }"
-              /> -->
-                  <div *ngIf="f.userName.touched && f.userName.errors" class="invalid-feedback">
-                    <div *ngIf="f.userName.touched && f.userName.errors.required">
+                  <div
+                    *ngIf="f.userName.touched && f.userName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="f.userName.touched && f.userName.errors.required"
+                    >
                       User name is required
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" formControlName="password" class="form-control" [ngClass]="{
-                  'is-invalid': f.password.touched && f.password.errors
-                }" />
-                  <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.touched && f.password.errors.required">
-                      Password is required
-                    </div>
-                    <div *ngIf="f.password.touched && f.password.errors.minlength">
-                      Password must be at least 6 characters
+                  <label for="AboutYourSelf">upload Profile Image </label>
+
+                  <p-fileUpload
+                    mode="basic"
+                    name="demo[]"
+                    chooseIcon="pi pi-upload"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    accept="image/*"
+                    maxFileSize="1000000"
+                    (onUpload)="onUpload($event)"
+                    [auto]="true"
+                    chooseLabel="Browse"
+                  />
+
+                  <div
+                    *ngIf="f.userName.touched && f.userName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="f.userName.touched && f.userName.errors.required"
+                    >
+                      User name is required
                     </div>
                   </div>
                 </div>
-
               </div>
               <div class="form-group">
-                <div  class="d-flex gap-2 jusify-space-between">
-                <div class="d-flex gap-1 align-items-center have-font">Have an account? <a [routerLink]="['/signin']" class="btn btn-link">Login In</a></div>
-                <button [disabled]="registerForm.invalid" class="btn btn-primary">
-                  Register
-                </button>
+                <div class="d-flex gap-2 jusify-space-between">
+                  <div class="d-flex gap-1 align-items-center have-font">
+                    Have an account?
+                    <a [routerLink]="['/signin']" class="btn btn-link"
+                      >Login In</a
+                    >
+                  </div>
+                  <button
+                    [disabled]="registerForm.invalid"
+                    class="btn btn-primary"
+                  >
+                    Register
+                  </button>
                 </div>
-                <img *ngIf="loading"
-                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                
+                <img
+                  *ngIf="loading"
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                />
               </div>
             </div>
-
           </form>
         </div>
       </div>
       <img src="assets/images/ap-bg.png" class="img-fluid login-bg-img" />
     </div>
   </div>
-
-
-
 </div>

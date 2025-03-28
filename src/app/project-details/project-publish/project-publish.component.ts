@@ -1,11 +1,12 @@
 import { Component, inject, Input } from '@angular/core';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ButtonModule } from 'primeng/button';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 @Component({
   selector: 'app-project-publish',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [ButtonModule, RoleDirective],
   templateUrl: './project-publish.component.html',
   styleUrl: './project-publish.component.scss',
 })

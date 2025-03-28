@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RoleDirective } from 'src/directives/role-access.directive';
 
 export interface Product {
   id?: string;
@@ -36,6 +37,7 @@ export interface Product {
     ImportsModule,
     FormsModule,
     ReactiveFormsModule,
+    RoleDirective,
   ],
   templateUrl: './project-committee.component.html',
   styleUrl: './project-committee.component.scss',
