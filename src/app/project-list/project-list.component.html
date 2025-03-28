@@ -110,7 +110,7 @@
                 />
               </div>
               <div class="col-10 relative">
-                <div class="projects-actions" *appHasRole="[3, 2]">
+                <div class="projects-actions">
                   <img
                     src="assets/images/icon-view.svg"
                     (click)="getProjectDetails(info)"
@@ -118,8 +118,12 @@
                   <img
                     src="assets/images/icon-edit.svg"
                     (click)="editProject(info)"
+                    *appHasRole="[3, 2]"
                   />
-                  <img src="assets/images/icon-delete.svg" />
+                  <img
+                    src="assets/images/icon-delete.svg"
+                    *appHasRole="[3, 2]"
+                  />
                 </div>
                 <div class="row mb-4">
                   <div class="project-detail-h-set">
