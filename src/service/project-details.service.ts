@@ -198,4 +198,13 @@ export class ProjectDetailsService {
       catchError((error) => of(error))
     );
   }
+
+  kickOffProject(id) {
+    return this.httpClient.post<any>(`${environment.apiUrl}/project/kick-off/${id}`, {}).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
 }
