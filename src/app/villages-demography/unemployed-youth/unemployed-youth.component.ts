@@ -34,6 +34,7 @@ export class UnemployedYouthComponent implements OnInit {
   @Input() unemployedData: any;
   @Input() communityData: any;
   @Input() vilageData: any;
+  @Input() selectedVilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   CommunityPopulationData: any = [];
   unemployedYouthForm: FormGroup = new FormGroup({});
@@ -85,6 +86,14 @@ export class UnemployedYouthComponent implements OnInit {
     });
   }
   deleteUnEmployeeData(data: any) {}
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   updateunEmployedYouthForm() {
     this.unEmployedYouthVisible = false;

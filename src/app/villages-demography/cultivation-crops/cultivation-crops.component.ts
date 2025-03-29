@@ -33,6 +33,7 @@ import { RoleDirective } from 'src/directives/role-access.directive';
 export class CultivationCropsComponent implements OnInit {
   @Input() cultivationCropsData: any;
   @Input() cultivationCropsLookupData: any;
+  @Input() selectedVilageData: any;
   @Input() vilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   cultivationDataForm: FormGroup = new FormGroup({});
@@ -80,6 +81,14 @@ export class CultivationCropsComponent implements OnInit {
     this.cultivationDataVisible = true;
   }
   deleteCultivationData(cultivationData: any) {}
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   updateCultivationDataForm() {
     this.cultivationDataVisible = false;

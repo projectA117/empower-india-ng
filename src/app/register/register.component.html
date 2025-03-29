@@ -197,7 +197,9 @@
                 <div class="form-group">
                   <label for="AboutYourSelf">upload Profile Image </label>
 
-                  <p-fileUpload
+                  <input type="file" (change)="onUpload($event)" />
+
+                  <!-- <p-fileUpload
                     mode="basic"
                     name="demo[]"
                     chooseIcon="pi pi-upload"
@@ -207,7 +209,7 @@
                     (onUpload)="onUpload($event)"
                     [auto]="true"
                     chooseLabel="Browse"
-                  />
+                  /> -->
 
                   <div
                     *ngIf="f.userName.touched && f.userName.errors"

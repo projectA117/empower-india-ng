@@ -1,8 +1,10 @@
+@if (ShowVilage()) {
 <p-button
   label="Edit or Add"
   (onClick)="updateemployedYouthData()"
   *appHasRole="[3]"
 />
+}
 
 <p-table [value]="employedYouthVillage" class="tab-data-table">
   <ng-template pTemplate="header">

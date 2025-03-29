@@ -152,17 +152,25 @@ export class VillagesDemographyComponent implements OnInit {
     this.timeZone = this.getTimeZone();
     this.getDistricts();
     this.villagelookups();
-    this.getVillagesDemography();
+    //this.getVillagesDemography();
   }
 
   reFreshVilageData(event: boolean) {
     if (event) {
-      this.getVillagesDemography();
+      // this.getVillagesDemography();
     }
   }
 
-  getVillagesDemography() {
-    this.commonService.getVillagesDemography(4304).subscribe((data: any) => {
+  ShowVilage() {
+    if (this.selectedVilage?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getVillagesDemography(id: any) {
+    this.commonService.getVillagesDemography(id).subscribe((data: any) => {
       this.getVillagesDemographyData = data;
       this.unEmployedYouthVillage =
         this.getVillagesDemographyData.unEmployedYouthVillage;
@@ -255,7 +263,8 @@ export class VillagesDemographyComponent implements OnInit {
   }
 
   vilageChange(event: any) {
-    this.projectDMVSearch();
+    // this.projectDMVSearch();
+    this.getVillagesDemography(event.value.id);
   }
   villagelookups() {
     this.commonService.villagelookups().subscribe((data: any) => {
@@ -321,7 +330,8 @@ export class VillagesDemographyComponent implements OnInit {
     this.villageFormVisible = false;
     const payload = {
       id: this.getVillagesDemographyData.id,
-      villageId: this.getVillagesDemographyData.villageId,
+      villageId:
+        this.getVillagesDemographyData.villageId ?? this.selectedVilage.id,
       noOfHouses: this.villageForm.value.totalHouse,
       totalPopulation: this.villageForm.value.Population,
       geographicalArea: this.villageForm.value.Geographical,

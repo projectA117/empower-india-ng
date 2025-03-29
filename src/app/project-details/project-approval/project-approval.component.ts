@@ -62,6 +62,25 @@ export class ProjectApprovalComponent implements OnInit {
     }
   }
 
+  profileImageShowHide() {
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    if (
+      localStorageuser?.profilePhoto &&
+      localStorageuser?.profilePhoto?.length > 4
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  localStorageuserimage() {
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    if (localStorageuser) {
+      return 'data:image/jpeg;base64,' + localStorageuser.profilePhoto;
+    }
+  }
+
   createapprovalForm() {
     this.approvalForm = new FormGroup({
       ProjectEstimation: new FormControl(this.projectData?.projectEstimation),

@@ -168,12 +168,14 @@ export class CommonService {
       );
   }
 
+  // headers: { 'Content-Type': 'multipart/form-data' }
+
   register(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`${environment.apiUrl}/users`, payLoad)
       .pipe(
         map((response) => {
-          this.setUser(response);
+          //this.setUser(response);
           return response;
         }),
         catchError((error) => of(error))
@@ -192,7 +194,7 @@ export class CommonService {
     return (
       this.httpClient
         // .get<any>(`${environment.apiUrl}/villages/demography?${payLoad}`)
-        .get<any>(`${environment.apiUrl}/village/4304`)
+        .get<any>(`${environment.apiUrl}/village/${payLoad}`)
         .pipe(
           map((response) => {
             return response;
