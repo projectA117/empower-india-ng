@@ -196,7 +196,7 @@ export class VillagesDemographyComponent implements OnInit {
       area: new FormControl('', [Validators.required]),
       Religion: new FormControl('', [Validators.required]),
       Language: new FormControl('', [Validators.required]),
-      TimeZone: new FormControl(this.timeZone, [Validators.required]),
+      pinCode: new FormControl('', [Validators.required]),
       Boundaries: new FormControl('', [Validators.required]),
       Geographical: new FormControl('', [Validators.required]),
       totalHouse: new FormControl('', [Validators.required]),
@@ -283,7 +283,7 @@ export class VillagesDemographyComponent implements OnInit {
       area: this.getVillagesDemographyData.area,
       Religion: this.religionData[0].id,
       Language: this.languageData[0].id,
-      TimeZone: this.getVillagesDemographyData.timeZone,
+      pinCode: this.getVillagesDemographyData.pinCode,
       Boundaries: '',
       Geographical: '',
       totalHouse: this.getVillagesDemographyData.noOfHouses,
@@ -334,6 +334,7 @@ export class VillagesDemographyComponent implements OnInit {
         this.getVillagesDemographyData.villageId ?? this.selectedVilage.id,
       noOfHouses: this.villageForm.value.totalHouse,
       totalPopulation: this.villageForm.value.Population,
+      boundariesVillage: this.villageForm.value.Boundaries,
       geographicalArea: this.villageForm.value.Geographical,
       adultMalePopulation: this.villageForm.value.PopulationMale,
       adultFemalePopulation: this.villageForm.value.PopulationFemale,
@@ -345,7 +346,7 @@ export class VillagesDemographyComponent implements OnInit {
       area: this.villageForm.value.area,
       latitude: this.Latitude,
       longitude: this.longitude,
-      timeZone: this.getTimeZone(),
+      pinCode: this.villageForm.value.pinCode,
     };
     // console.log(payload);
     if (this.vilagEditMode) {

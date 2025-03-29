@@ -109,7 +109,9 @@
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Geographical Area</div>
-            <div class="project-detail-set-v mt-2">---</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.geographicalArea }}
+            </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Total House Holds</div>
@@ -445,12 +447,13 @@
         />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">Time Zone</label>
+        <label for="lastname6">pinCode</label>
         <input
           pInputText
-          formControlName="TimeZone"
-          aria-describedby="TimeZone"
+          formControlName="pinCode"
+          aria-describedby="pinCode"
           class="w-full"
+          #pinCode
         />
       </div>
       <div class="field col-12 md:col-3">
