@@ -67,10 +67,12 @@ export class RegisterComponent {
     // const file = event.files;
     // console.log('...File', file);
 
-    const file = event.files[0]; // Get the selected file
+    const file = event.target?.files[0]; // Get the selected file
     const formData = new FormData();
 
     formData.append('file', file);
+
+    this.uploadimage = file;
 
     this.FileUpload = formData;
   }
@@ -84,11 +86,20 @@ export class RegisterComponent {
       email: this.registerForm.get('email')?.value,
       userName: this.registerForm.get('userName')?.value,
       password: this.registerForm.get('password')?.value,
+      roles: [
+        {
+          id: 3,
+        },
+      ],
     };
 
     const formData = new FormData();
     formData.append('profilePhoto', this.uploadimage); // Add the file
-    formData.append('user', JSON.stringify(this.testpayload));
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'user',
+      new Blob([JSON.stringify(this.testpayload)], { type: 'application/json' })
+    );
 
     //  formData.append('user', this.testpayload);
 
@@ -134,8 +145,8 @@ export class RegisterComponent {
     });
   }
   onProfileUpload(event: any) {
-    const file = event.files[0]; // Get the selected file
-    this.uploadimage = event.files[0];
+    const file = event; // Get the selected file
+    this.uploadimage = event;
     const formData = new FormData();
 
     //formData.append('profilePhoto', file);

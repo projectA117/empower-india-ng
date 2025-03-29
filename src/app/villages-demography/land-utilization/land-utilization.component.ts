@@ -34,6 +34,7 @@ export class LandUtilizationComponent implements OnInit {
   @Input() landUtilizationData: any;
   @Input() landUtilizationLookupData: any;
   @Input() vilageData: any;
+  @Input() selectedVilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   landUtilizationForm: FormGroup = new FormGroup({});
   landUtilizationDataVisible: boolean = false;
@@ -72,6 +73,14 @@ export class LandUtilizationComponent implements OnInit {
     });
   }
   deleteUtilizationData() {}
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   updatelandUtilizationForm() {
     this.landUtilizationDataVisible = false;
