@@ -62,9 +62,9 @@ export class ProjectDetailsService {
       );
   }
 
-  showDonars(): Observable<any> {
+  showDonars(projectId): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/showDonars`)
+      .get<any>(`${environment.apiUrl}/donars/showDonars?projectId=${projectId}`)
       .pipe(
         map((getStates) => {
           return getStates;
