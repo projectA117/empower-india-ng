@@ -82,7 +82,7 @@ export class ProjectDonorsComponent implements OnInit {
     });
   }
   showdonor() {
-    this.projectDetailsService.showDonars().subscribe((data) => {
+    this.projectDetailsService.showDonars(this.projectData.id).subscribe((data) => {
       this.doners = data;
     });
   }
