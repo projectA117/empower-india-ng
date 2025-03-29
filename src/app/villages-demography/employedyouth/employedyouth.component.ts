@@ -34,6 +34,7 @@ export class EmployedyouthComponent implements OnInit {
   @Input() employedYouthVillage: any;
   @Input() communityData: any;
   @Input() vilageData: any;
+  @Input() selectedVilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   employedyouthEditMode = false;
   employedyouthEditRecordID: any = null;
@@ -75,6 +76,14 @@ export class EmployedyouthComponent implements OnInit {
     });
   }
   deleteemployedData(data: any) {}
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   updateEmployedYouthForm() {
     this.employedYouthVisible = false;

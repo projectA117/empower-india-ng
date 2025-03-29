@@ -34,6 +34,7 @@ export class MainOccupationComponent implements OnInit {
   @Input() occupationsData: any;
   @Input() occupationsLookupData: any;
   @Input() vilageData: any;
+  @Input() selectedVilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   occupationsForm: FormGroup = new FormGroup({});
   occupationsDataVisible: boolean = false;
@@ -71,6 +72,14 @@ export class MainOccupationComponent implements OnInit {
     });
   }
   deleteOccupationsData(data: any) {}
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   updateoccupationsForm() {
     this.occupationsDataVisible = false;

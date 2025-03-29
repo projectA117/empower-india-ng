@@ -34,6 +34,7 @@ export class CommunityWisePopulationComponent implements OnInit {
   @Input() villagesDemographyData: any;
   @Input() communityData: any;
   @Input() vilageData: any;
+  @Input() selectedVilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   communityWisePopulationForm: FormGroup = new FormGroup({});
   CommunityPopulationData: any = [];
@@ -119,6 +120,14 @@ export class CommunityWisePopulationComponent implements OnInit {
       communityFemale: data.female,
       communityMale: data.male,
     });
+  }
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   deletePoplationData(data: any) {}

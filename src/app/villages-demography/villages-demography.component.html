@@ -40,6 +40,7 @@
         <div class="row mb-4">
           <div class="project-detail-h-set mt-2">
             <h4 class="inline-block">Location Details</h4>
+            @if (ShowVilage()) {
             <button
               class="submit-btn-m"
               (click)="editVillage()"
@@ -48,6 +49,7 @@
             >
               Edit village Details
             </button>
+            }
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">District</div>
@@ -156,6 +158,7 @@
                   [villagesDemographyData]="CommunityPopulationData"
                   [communityData]="CommunityOptions"
                   [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"
                   (closeDialogEvent)="reFreshVilageData($event)"
                 ></app-community-wise-population>
               </div>
@@ -175,6 +178,7 @@
                   [unemployedData]="unEmployedYouthVillage"
                   [communityData]="CommunityOptions"
                   [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"
                 ></app-unemployed-youth>
               </div>
             </p-tabPanel>
@@ -191,6 +195,7 @@
               <div>
                 <app-employedyouth
                   [employedYouthVillage]="employedYouthVillage"
+                  [selectedVilageData]="selectedVilage"
                   [communityData]="CommunityOptions"
                   [vilageData]="getVillagesDemographyData"
                   (closeDialogEvent)="reFreshVilageData($event)"
@@ -210,6 +215,7 @@
                   [occupationsData]="occupationsData"
                   [occupationsLookupData]="villagelookupsData.occupation"
                   [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"
                 ></app-main-occupation>
               </div>
             </p-tabPanel>
@@ -229,6 +235,7 @@
                   "
                   [vilageData]="getVillagesDemographyData"
                   (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"
                 ></app-land-utilization>
               </div>
             </p-tabPanel>
@@ -249,6 +256,7 @@
                   "
                   [vilageData]="getVillagesDemographyData"
                   (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"
                 ></app-cultivation-crops>
               </div>
             </p-tabPanel>
@@ -267,6 +275,7 @@
                   [institutionsLookupData]="villagelookupsData.institutions"
                   [vilageData]="getVillagesDemographyData"
                   (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"
                 ></app-institutions>
               </div>
             </p-tabPanel>

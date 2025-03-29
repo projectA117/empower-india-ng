@@ -33,6 +33,7 @@ import { RoleDirective } from 'src/directives/role-access.directive';
 export class InstitutionsComponent implements OnInit {
   @Input() institutionsData: any = {};
   @Input() institutionsLookupData: any = {};
+  @Input() selectedVilageData: any;
   @Input() vilageData: any;
   @Output() closeDialogEvent = new EventEmitter<boolean>();
   institutionsDataVisible: boolean = false;
@@ -56,6 +57,14 @@ export class InstitutionsComponent implements OnInit {
   }
   getInstitutionName(id: any) {
     return this.institutionsLookupData.find((x: any) => x.id == id).name;
+  }
+
+  ShowVilage() {
+    if (this.selectedVilageData?.id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   updateInstitutionDataForm() {
