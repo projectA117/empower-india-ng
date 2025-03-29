@@ -100,11 +100,6 @@ export class ProjectListComponent implements OnInit {
     this.getDistricts();
     this.status = [
       {
-        id: 2,
-        name: 'APPROVED',
-        status: 'APPROVED',
-      },
-      {
         id: 3,
         name: 'REJECTED',
         status: 'REJECTED',
