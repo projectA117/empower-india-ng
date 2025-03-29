@@ -62,9 +62,9 @@ export class ProjectDetailsService {
       );
   }
 
-  showDonars(): Observable<any> {
+  showDonars(projectId): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/showDonars`)
+      .get<any>(`${environment.apiUrl}/donars/showDonars?projectId=${projectId}`)
       .pipe(
         map((getStates) => {
           return getStates;
@@ -192,6 +192,15 @@ export class ProjectDetailsService {
 
   publishProject(payload, id) {
     return this.httpClient.post<any>(`${environment.apiUrl}/project/publish/${id}`, payload).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  kickOffProject(id) {
+    return this.httpClient.post<any>(`${environment.apiUrl}/project/kick-off/${id}`, {}).pipe(
       map((res) => {
         return res;
       }),
