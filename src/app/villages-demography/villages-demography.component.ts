@@ -157,7 +157,7 @@ export class VillagesDemographyComponent implements OnInit {
 
   reFreshVilageData(event: boolean) {
     if (event) {
-      // this.getVillagesDemography();
+      this.getVillagesDemography(this.selectedVilage.id);
     }
   }
 
@@ -353,6 +353,7 @@ export class VillagesDemographyComponent implements OnInit {
       this.commonService.saveVilageData(payload).subscribe((data) => {
         if (data) {
           this.villageForm.reset();
+          this.getVillagesDemography(this.selectedVilage.id);
         }
       });
     } else {
