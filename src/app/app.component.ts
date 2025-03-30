@@ -89,6 +89,10 @@ export class AppComponent {
         label: 'villages',
         routerLink: 'villages',
       },
+      {
+        label: 'users',
+        routerLink: 'users'
+      }
     ];
   }
 
