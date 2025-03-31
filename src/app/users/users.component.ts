@@ -2,10 +2,18 @@ import { Component, inject } from '@angular/core';
 import { Button } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CommonService } from '@service/common.service';
 import { HardCodedInfo } from 'src/constants/HardCodedInfo';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-users',
@@ -15,10 +23,11 @@ import { HardCodedInfo } from 'src/constants/HardCodedInfo';
     DialogModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule,
   ],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrl: './users.component.scss',
 })
 export class UsersComponent {
   users: any[] = [];
@@ -30,7 +39,21 @@ export class UsersComponent {
   selectedDistrict: any = {};
   selectedMandal: any = {};
   selectedVillage: any = {};
-  role = []
+  selectedRole: any = {};
+  roles = [
+    {
+      label: 'Admin',
+      value: 1
+    },
+    {
+      label: 'District Admin',
+      value: 2
+    },
+    {
+      label: 'District Volunteer',
+      value: 3
+    }
+  ];
 
   private formBuilder = inject(FormBuilder);
   private commonService = inject(CommonService);
@@ -42,29 +65,40 @@ export class UsersComponent {
   ngOnInit() {
     this.getAllUsers();
     this.createUserForm();
+    this.getDistricts();
   }
 
   createUserForm() {
-      this.userForm = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        aboutYourSelf: ['', Validators.required],
-        lastName: ['', Validators.required],
-        phoneNumber: new FormControl(null, [
-          Validators.required,
-          Validators.pattern(`^[0-9]{10}$`),
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ]),
-        email: new FormControl(null, [
-          Validators.required,
-          Validators.pattern(
-            '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
-          ),
-        ]),
-        userName: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required])
-      });
+    this.userForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      aboutYourSelf: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(`^[0-9]{10}$`),
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(
+          '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
+        ),
+      ]),
+      userName: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      role: new FormControl('', Validators.required),
+      assignedDistrict: new FormControl('')
+    });
 
+    this.userForm.get('role').valueChanges.subscribe((value) => {
+      console.log(value)
+      if (value && value.value !== 1) {
+        this.userForm.get('assignedDistrict').addValidators(Validators.required);
+      } else {
+        this.userForm.get('assignedDistrict').removeValidators(Validators.required);
+      }
+    })
   }
 
   onHideDialog() {
@@ -76,9 +110,7 @@ export class UsersComponent {
     this.addUserFlag = true;
   }
 
-  getAllUsers() {
-
-  }
+  getAllUsers() {}
 
   getDistricts() {
     this.commonService.getDistricts().subscribe(
@@ -86,7 +118,6 @@ export class UsersComponent {
         if (data.length > 0) {
           this.districts = data;
           if (this.selectedDistrict && this.selectedDistrict.id) {
-
           }
         }
       },
@@ -97,39 +128,15 @@ export class UsersComponent {
     );
   }
 
-  getMandals(event: any) {
-    const districtCode = event.value.id;
-    this.mandals = [];
-    this.villages = [];
-    this.selectedMandal = null;
-    this.selectedVillage = null;
-    this.commonService.getMandals(districtCode).subscribe(
-      (data) => {
-        this.mandals = data;
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.mandals = HardCodedInfo.mandals;
-      }
-    );
+  districtChange(event: any) {
+    this.getAllUsers();
   }
 
-  getvilages(event: any) {
-    const mandalCode = event.value.id;
-    this.villages = [];
-    this.selectedVillage = null;
-    this.commonService.getVillages(mandalCode).subscribe(
-      (data) => {
-        this.villages = data;
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.villages = HardCodedInfo.villages;
-      }
-    );
+  roleChange(event: any) {
+    this.getAllUsers()
   }
 
-  onSubmit() {
-
-  }
+  reset() {}
+  onSubmit() {}
 }
+ 

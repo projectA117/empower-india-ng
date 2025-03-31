@@ -1,30 +1,22 @@
 <div class="header-set">
   <div class="header-set-filter">
-    <!-- <p-dropdown
+    <p-dropdown
       filterBy="name"
       [filter]="true"
       [options]="districts"
       [(ngModel)]="selectedDistrict"
       optionLabel="name"
       placeholder="Select a District"
-      (onChange)="getMandals($event)"
+      (onChange)="districtChange($event)"
     />
     <p-dropdown
-      [filter]="true"
-      [options]="mandals"
-      [(ngModel)]="selectedMandal"
-      optionLabel="name"
-      placeholder="Select a Mandal"
-      (onChange)="getvilages($event)"
+      [options]="roles"
+      [(ngModel)]="selectedRole"
+      optionLabel="label"
+      placeholder="Select a role"
+      (onChange)="roleChange($event)"
     />
-    <p-dropdown
-      [filter]="true"
-      [options]="villages"
-      [(ngModel)]="selectedVilage"
-      optionLabel="name"
-      placeholder="Select a Vilage"
-      (onChange)="vilageChange($event)"
-    /> -->
+    <button class="submit-btn-m" (click)="reset()">Reset</button>
     <button class="submit-btn-m" (click)="addUser()">Add User</button>
   </div>
 </div>
@@ -190,6 +182,51 @@
                 </div>
               </div>
             </div>
+
+            <div class="form-group">
+              <label for="firstName">Role</label>
+              <p-dropdown
+                [options]="roles"
+                formControlName="role"
+                optionLabel="label"
+                placeholder="Select a role"
+              />
+              <div
+                *ngIf="f.role.touched && f.role.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.role.touched && f.role.errors.required">
+                  Role is required
+                </div>
+              </div>
+            </div>
+
+            @if(f.role.value && f.role.value.value !== 1) {
+            <div class="form-group">
+              <label for="firstName">Assigned District</label>
+              <p-dropdown
+                filterBy="name"
+                [filter]="true"
+                [options]="districts"
+                formControlName="assignedDistrict"
+                optionLabel="name"
+                placeholder="Select a District"
+              />
+              <div
+                *ngIf="f.assignedDistrict.touched && f.assignedDistrict.errors"
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="
+                    f.assignedDistrict.touched &&
+                    f.assignedDistrict.errors.required
+                  "
+                >
+                  District is required
+                </div>
+              </div>
+            </div>
+            }
           </div>
         </div>
         <div class="form-group">
@@ -201,3 +238,4 @@
     </ng-container>
   </p-dialog>
 </div>
+ 
