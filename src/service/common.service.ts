@@ -8,6 +8,8 @@ import { environment } from '../environments/environment';
 })
 export class CommonService {
   user = signal<any>(null);
+  roles = signal<any[]>([]);
+
   constructor(private httpClient: HttpClient) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -22,6 +24,12 @@ export class CommonService {
         localStorage.removeItem('user');
       }
     });
+
+    this.getUserRoles().subscribe((response) => {
+     if (response) {
+       this.roles.set(response);
+     }
+    })
   }
 
   getStates(): Observable<any> {
@@ -45,6 +53,7 @@ export class CommonService {
         catchError((error) => of(error))
       );
   }
+
   getMandals(districtCode: any): Observable<any> {
     return this.httpClient
       .get<any>(
@@ -246,5 +255,44 @@ export class CommonService {
         }),
         catchError((error) => of(error))
       );
+  }
+
+  getUserRoles(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/roles`)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  getUsers(query = "", roleId = 0, districtId = 0) {
+    let url = `${environment.apiUrl}/users`;
+    let queryParam = "";
+    if (query) {
+      queryParam += `?query=${query}`;
+    }
+    if (roleId) {
+      if (queryParam) {
+        queryParam += `&roleId=${roleId}`;
+      } else {
+        queryParam = `?roleId=${roleId}`
+      }
+    }
+    if (districtId) {
+      if (queryParam) {
+        queryParam += `&districtId=${districtId}`;
+      } else {
+        queryParam = `?districtId=${districtId}`
+      }
+    }
+    return this.httpClient.get<any>(url + queryParam).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => of(error))
+    );
   }
 }

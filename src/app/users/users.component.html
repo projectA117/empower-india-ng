@@ -10,14 +10,16 @@
       (onChange)="districtChange($event)"
     />
     <p-dropdown
-      [options]="roles"
+      [options]="roles()"
       [(ngModel)]="selectedRole"
-      optionLabel="label"
+      optionLabel="name"
       placeholder="Select a role"
       (onChange)="roleChange($event)"
     />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
-    <button class="submit-btn-m" (click)="addUser()">Add User</button>
+    <button class="submit-btn-m" (click)="this.addUserFlag = true">
+      Add User
+    </button>
   </div>
 </div>
 <div class="container-fluid">
@@ -37,8 +39,15 @@
           <td>{{ user.firstName }} {{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phoneNumber }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.assignedDistrict }}</td>
+          <td>
+            {{ user.roles && user.roles.length ? user.roles[0].name : "--" }}
+          </td>
+          <td>{{ user.districtId ? districtMap[user.districtId] : "--" }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5" class="text-center">No users</td>
         </tr>
       </ng-template>
     </p-table>
@@ -53,7 +62,7 @@
     (onHide)="onHideDialog()"
   >
     <ng-container *ngIf="addUserFlag">
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="userForm" (ngSubmit)="addUser()">
         <div class="form-login">
           <div class="login-scroll">
             <div class="form-group">
@@ -186,9 +195,9 @@
             <div class="form-group">
               <label for="firstName">Role</label>
               <p-dropdown
-                [options]="roles"
+                [options]="roles()"
                 formControlName="role"
-                optionLabel="label"
+                optionLabel="name"
                 placeholder="Select a role"
               />
               <div
@@ -200,8 +209,7 @@
                 </div>
               </div>
             </div>
-
-            @if(f.role.value && f.role.value.value !== 1) {
+            @if(f.role.value && f.role.value.id !== 3) {
             <div class="form-group">
               <label for="firstName">Assigned District</label>
               <p-dropdown
@@ -238,4 +246,3 @@
     </ng-container>
   </p-dialog>
 </div>
- 

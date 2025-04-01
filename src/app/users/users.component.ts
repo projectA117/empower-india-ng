@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Button } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
@@ -34,26 +34,13 @@ export class UsersComponent {
   addUserFlag = false;
   userForm: FormGroup;
   districts: any = [];
-  mandals: any = [];
-  villages: any = [];
+  districtMap: any = {};
   selectedDistrict: any = {};
-  selectedMandal: any = {};
-  selectedVillage: any = {};
   selectedRole: any = {};
-  roles = [
-    {
-      label: 'Admin',
-      value: 1
-    },
-    {
-      label: 'District Admin',
-      value: 2
-    },
-    {
-      label: 'District Volunteer',
-      value: 3
-    }
-  ];
+  searchQuery: string = '';
+  roles = computed(() =>
+    this.commonService.roles().filter((role) => [3, 4, 5].includes(role.id))
+  );
 
   private formBuilder = inject(FormBuilder);
   private commonService = inject(CommonService);
@@ -71,7 +58,6 @@ export class UsersComponent {
   createUserForm() {
     this.userForm = this.formBuilder.group({
       firstName: ['', Validators.required],
-      aboutYourSelf: ['', Validators.required],
       lastName: ['', Validators.required],
       phoneNumber: new FormControl(null, [
         Validators.required,
@@ -88,17 +74,24 @@ export class UsersComponent {
       userName: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       role: new FormControl('', Validators.required),
-      assignedDistrict: new FormControl('')
+      assignedDistrict: new FormControl(''),
     });
 
     this.userForm.get('role').valueChanges.subscribe((value) => {
-      console.log(value)
-      if (value && value.value !== 1) {
-        this.userForm.get('assignedDistrict').addValidators(Validators.required);
+      this.userForm.get('assignedDistrict').reset();
+      if (value && value.id !== 3) {
+        this.userForm
+          .get('assignedDistrict')
+          .addValidators(Validators.required);
+        this.userForm.updateValueAndValidity();
       } else {
-        this.userForm.get('assignedDistrict').removeValidators(Validators.required);
+        this.userForm
+          .get('assignedDistrict')
+          .removeValidators([Validators.required]);
       }
-    })
+      this.userForm.get('assignedDistrict').updateValueAndValidity();
+      this.userForm.updateValueAndValidity();
+    });
   }
 
   onHideDialog() {
@@ -107,17 +100,53 @@ export class UsersComponent {
   }
 
   addUser() {
-    this.addUserFlag = true;
+    const userData = {
+      firstName: this.userForm.get('firstName')?.value,
+      aboutYourSelf: this.userForm.get('aboutYourSelf')?.value,
+      lastName: this.userForm.get('lastName')?.value,
+      phoneNumber: this.userForm.get('phoneNumber')?.value,
+      email: this.userForm.get('email')?.value,
+      userName: this.userForm.get('userName')?.value,
+      password: this.userForm.get('password')?.value,
+      roles: [this.userForm.get('role')?.value],
+      districtId: this.userForm.get('assignedDistrict')?.value.id,
+    };
+    const formData = new FormData();
+
+    formData.append(
+      'user',
+      new Blob([JSON.stringify(userData)], { type: 'application/json' })
+    );
+
+    this.commonService.register(formData).subscribe((data) => {
+      if (data) {
+        this.getAllUsers();
+        this.addUserFlag = false;
+      }
+    });
   }
 
-  getAllUsers() {}
+  getAllUsers() {
+    const roleId = this.selectedRole ? this.selectedRole.id : 0;
+    const districtId = this.selectedDistrict ? this.selectedDistrict.id : 0;
+    this.commonService
+      .getUsers(this.searchQuery, roleId, districtId)
+      .subscribe((data) => {
+        this.users = data;
+      });
+  }
 
   getDistricts() {
     this.commonService.getDistricts().subscribe(
       (data) => {
         if (data.length > 0) {
           this.districts = data;
+
+          this.districts.forEach((district) => {
+            this.districtMap[district.id] = district.name;
+          });
           if (this.selectedDistrict && this.selectedDistrict.id) {
+            this.getAllUsers();
           }
         }
       },
@@ -133,10 +162,8 @@ export class UsersComponent {
   }
 
   roleChange(event: any) {
-    this.getAllUsers()
+    this.getAllUsers();
   }
 
   reset() {}
-  onSubmit() {}
 }
- 
