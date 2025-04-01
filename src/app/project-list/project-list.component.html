@@ -9,7 +9,7 @@
       [options]="status"
       [(ngModel)]="selectedStatus"
       optionLabel="name"
-      optionValue="name"
+      optionValue="status"
       placeholder="Select a Status"
       (onChange)="StatusChange($event)"
     />
@@ -122,7 +122,7 @@
         </td>
         <td>{{ info.projectType }}</td>
         <td>
-          <div class="open-status">{{ info.status }}</div>
+          <div class="open-status">{{ info.statusCode }}</div>
         </td>
         <td>₹ {{ info.projectEstimation || 0 }}/-</td>
         <td>

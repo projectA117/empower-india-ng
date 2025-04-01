@@ -79,10 +79,6 @@
               }}
             </div>
           </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Climatic condition</div>
-            <div class="project-detail-set-v mt-2">---</div>
-          </div>
 
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Latitude, Longitude</div>
@@ -105,11 +101,15 @@
         <div class="row mb-4">
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Boundaries of the village</div>
-            <div class="project-detail-set-v mt-2">---</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.boundariesVillage }}
+            </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Geographical Area</div>
-            <div class="project-detail-set-v mt-2">---</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.geographicalArea }}
+            </div>
           </div>
           <div class="project-detail-set col-2">
             <div class="project-detail-set-h">Total House Holds</div>
@@ -138,149 +138,177 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="projects-list-tab mt-3">
-      <div class="container-fluid">
-        <div class="row">
-          <p-tabView styleClass="tabview-custom">
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Community wise Population
-                  </span>
-                </div>
-              </ng-template>
-              <div>
-                <app-community-wise-population
-                  [villagesDemographyData]="CommunityPopulationData"
-                  [communityData]="CommunityOptions"
-                  [vilageData]="getVillagesDemographyData"
-                  [selectedVilageData]="selectedVilage"
-                  (closeDialogEvent)="reFreshVilageData($event)"
-                ></app-community-wise-population>
-              </div>
-            </p-tabPanel>
+        <div class="row mb-4">
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">above 18 Male</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.childMalePopulation }}
+            </div>
+          </div>
 
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Unemployed youth
-                  </span>
-                </div>
-              </ng-template>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">above 18 feMale</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.childFemalePopulation }}
+            </div>
+          </div>
 
-              <div>
-                <app-unemployed-youth
-                  [unemployedData]="unEmployedYouthVillage"
-                  [communityData]="CommunityOptions"
-                  [vilageData]="getVillagesDemographyData"
-                  [selectedVilageData]="selectedVilage"
-                ></app-unemployed-youth>
-              </div>
-            </p-tabPanel>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">ABOVE 60 Male</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.above60Male }}
+            </div>
+          </div>
 
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Employed youth
-                  </span>
-                </div>
-              </ng-template>
+          <div class="project-detail-set col-2">
+            <div class="project-detail-set-h">ABOVE 60 Male</div>
+            <div class="project-detail-set-v mt-2">
+              {{ this.getVillagesDemographyData?.above60Female }}
+            </div>
+          </div>
+        </div>
 
-              <div>
-                <app-employedyouth
-                  [employedYouthVillage]="employedYouthVillage"
-                  [selectedVilageData]="selectedVilage"
-                  [communityData]="CommunityOptions"
-                  [vilageData]="getVillagesDemographyData"
-                  (closeDialogEvent)="reFreshVilageData($event)"
-                ></app-employedyouth>
-              </div>
-            </p-tabPanel>
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Main Occupation
-                  </span>
-                </div>
-              </ng-template>
-              <div>
-                <app-main-occupation
-                  [occupationsData]="occupationsData"
-                  [occupationsLookupData]="villagelookupsData.occupation"
-                  [vilageData]="getVillagesDemographyData"
-                  [selectedVilageData]="selectedVilage"
-                ></app-main-occupation>
-              </div>
-            </p-tabPanel>
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Land Utilization
-                  </span>
-                </div>
-              </ng-template>
-              <div>
-                <app-land-utilization
-                  [landUtilizationData]="landUtilizationData"
-                  [landUtilizationLookupData]="
-                    villagelookupsData.landUtilization
-                  "
-                  [vilageData]="getVillagesDemographyData"
-                  (closeDialogEvent)="reFreshVilageData($event)"
-                  [selectedVilageData]="selectedVilage"
-                ></app-land-utilization>
-              </div>
-            </p-tabPanel>
+        <div class="projects-list-tab mt-3">
+          <div class="container-fluid">
+            <div class="row">
+              <p-tabView styleClass="tabview-custom">
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Community wise Population
+                      </span>
+                    </div>
+                  </ng-template>
+                  <div>
+                    <app-community-wise-population
+                      [villagesDemographyData]="CommunityPopulationData"
+                      [communityData]="CommunityOptions"
+                      [vilageData]="getVillagesDemographyData"
+                      [selectedVilageData]="selectedVilage"
+                      (closeDialogEvent)="reFreshVilageData($event)"
+                    ></app-community-wise-population>
+                  </div>
+                </p-tabPanel>
 
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Cultivation crops
-                  </span>
-                </div>
-              </ng-template>
-              <div>
-                <app-cultivation-crops
-                  [cultivationCropsData]="cultivationCropsData"
-                  [cultivationCropsLookupData]="
-                    villagelookupsData.cultivationCrops
-                  "
-                  [vilageData]="getVillagesDemographyData"
-                  (closeDialogEvent)="reFreshVilageData($event)"
-                  [selectedVilageData]="selectedVilage"
-                ></app-cultivation-crops>
-              </div>
-            </p-tabPanel>
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Unemployed youth
+                      </span>
+                    </div>
+                  </ng-template>
 
-            <p-tabPanel>
-              <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                  <span class="font-bold white-space-nowrap m-0">
-                    Institutions
-                  </span>
-                </div>
-              </ng-template>
-              <div>
-                <app-institutions
-                  [institutionsData]="institutionsData"
-                  [institutionsLookupData]="villagelookupsData.institutions"
-                  [vilageData]="getVillagesDemographyData"
-                  (closeDialogEvent)="reFreshVilageData($event)"
-                  [selectedVilageData]="selectedVilage"
-                ></app-institutions>
-              </div>
-            </p-tabPanel>
-          </p-tabView>
-          <!-- <p-tabView styleClass="tabview-custom">
+                  <div>
+                    <app-unemployed-youth
+                      [unemployedData]="unEmployedYouthVillage"
+                      [communityData]="CommunityOptions"
+                      [vilageData]="getVillagesDemographyData"
+                      [selectedVilageData]="selectedVilage"
+                    ></app-unemployed-youth>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Employed youth
+                      </span>
+                    </div>
+                  </ng-template>
+
+                  <div>
+                    <app-employedyouth
+                      [employedYouthVillage]="employedYouthVillage"
+                      [selectedVilageData]="selectedVilage"
+                      [communityData]="CommunityOptions"
+                      [vilageData]="getVillagesDemographyData"
+                      (closeDialogEvent)="reFreshVilageData($event)"
+                    ></app-employedyouth>
+                  </div>
+                </p-tabPanel>
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Main Occupation
+                      </span>
+                    </div>
+                  </ng-template>
+                  <div>
+                    <app-main-occupation
+                      [occupationsData]="occupationsData"
+                      [occupationsLookupData]="villagelookupsData.occupation"
+                      [vilageData]="getVillagesDemographyData"
+                      [selectedVilageData]="selectedVilage"
+                    ></app-main-occupation>
+                  </div>
+                </p-tabPanel>
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Land Utilization
+                      </span>
+                    </div>
+                  </ng-template>
+                  <div>
+                    <app-land-utilization
+                      [landUtilizationData]="landUtilizationData"
+                      [landUtilizationLookupData]="
+                        villagelookupsData.landUtilization
+                      "
+                      [vilageData]="getVillagesDemographyData"
+                      (closeDialogEvent)="reFreshVilageData($event)"
+                      [selectedVilageData]="selectedVilage"
+                    ></app-land-utilization>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Cultivation crops
+                      </span>
+                    </div>
+                  </ng-template>
+                  <div>
+                    <app-cultivation-crops
+                      [cultivationCropsData]="cultivationCropsData"
+                      [cultivationCropsLookupData]="
+                        villagelookupsData.cultivationCrops
+                      "
+                      [vilageData]="getVillagesDemographyData"
+                      (closeDialogEvent)="reFreshVilageData($event)"
+                      [selectedVilageData]="selectedVilage"
+                    ></app-cultivation-crops>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel>
+                  <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                      <span class="font-bold white-space-nowrap m-0">
+                        Institutions
+                      </span>
+                    </div>
+                  </ng-template>
+                  <div>
+                    <app-institutions
+                      [institutionsData]="institutionsData"
+                      [institutionsLookupData]="villagelookupsData.institutions"
+                      [vilageData]="getVillagesDemographyData"
+                      (closeDialogEvent)="reFreshVilageData($event)"
+                      [selectedVilageData]="selectedVilage"
+                    ></app-institutions>
+                  </div>
+                </p-tabPanel>
+              </p-tabView>
+              <!-- <p-tabView styleClass="tabview-custom">
           <p-tabPanel>
             <ng-template pTemplate="header">
               <div class="flex align-items-center gap-2">
@@ -390,194 +418,197 @@
             ></app-project-signoff>
           </p-tabPanel>
         </p-tabView> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<p-dialog
-  header="Update Village Information"
-  appendTo="body"
-  [modal]="true"
-  [(visible)]="villageFormVisible"
-  [style]="{ width: '90%', right: 'inherit', height: '80%' }"
->
-  <form
-    [formGroup]="villageForm"
-    (ngSubmit)="updateVillageDataForm()"
-    *ngIf="villageFormVisible"
-  >
-    <div class="formgrid grid">
-      <div class="field col-12 md:col-3">
-        <label for="firstname6" class="block">Majority Religion</label>
-        <!-- <input
+    <p-dialog
+      header="Update Village Information"
+      appendTo="body"
+      [modal]="true"
+      [(visible)]="villageFormVisible"
+      [style]="{ width: '90%', right: 'inherit', height: '80%' }"
+    >
+      <form
+        [formGroup]="villageForm"
+        (ngSubmit)="updateVillageDataForm()"
+        *ngIf="villageFormVisible"
+      >
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-3">
+            <label for="firstname6" class="block">Majority Religion</label>
+            <!-- <input
           pInputText
           class="w-full"
           formControlName="Religion"
           aria-describedby="Religion"
         /> -->
 
-        <p-dropdown
-          [options]="religionData"
-          formControlName="Religion"
-          optionLabel="name"
-          optionValue="id"
-          placeholder="Select Religion"
-          #Religion
-          class="w-full"
-          [autoWidth]="false"
-          [style]="{ minWidth: '100%' }"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Primary Language</label>
-        <p-dropdown
-          [options]="languageData"
-          formControlName="Language"
-          optionLabel="name"
-          optionValue="id"
-          placeholder="Select Language"
-          #Language
-          class="w-full"
-          [autoWidth]="false"
-          [style]="{ minWidth: '100%' }"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Time Zone</label>
-        <input
-          pInputText
-          formControlName="TimeZone"
-          aria-describedby="TimeZone"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6" style="display: block"
-          >Latitude and Longitude</label
-        >
-        <p-button label="Get Geolocation" (onClick)="getLocation()" />
+            <p-dropdown
+              [options]="religionData"
+              formControlName="Religion"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select Religion"
+              #Religion
+              class="w-full"
+              [autoWidth]="false"
+              [style]="{ minWidth: '100%' }"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">Primary Language</label>
+            <p-dropdown
+              [options]="languageData"
+              formControlName="Language"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select Language"
+              #Language
+              class="w-full"
+              [autoWidth]="false"
+              [style]="{ minWidth: '100%' }"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">pinCode</label>
+            <input
+              pInputText
+              formControlName="pinCode"
+              aria-describedby="pinCode"
+              class="w-full"
+              #pinCode
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6" style="display: block"
+              >Latitude and Longitude</label
+            >
+            <p-button label="Get Geolocation" (onClick)="getLocation()" />
 
-        {{ GeolocationError }}
+            {{ GeolocationError }}
 
-        {{ getVillagesDemographyData?.latitude }}
+            {{ getVillagesDemographyData?.latitude }}
 
-        {{ getVillagesDemographyData?.longitude }}
-      </div>
+            {{ getVillagesDemographyData?.longitude }}
+          </div>
 
-      <div class="field col-12 md:col-3">
-        <label for="firstname6">Boundaries of the village</label>
-        <input
-          pInputText
-          formControlName="Boundaries"
-          aria-describedby="Boundaries"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Geographical Area</label>
-        <input
-          pInputText
-          formControlName="Geographical"
-          aria-describedby="Geographical"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Total House Holds</label>
-        <input
-          pInputText
-          formControlName="totalHouse"
-          aria-describedby="totalHouse"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Population</label>
-        <input
-          pInputText
-          formControlName="Population"
-          aria-describedby="Population"
-          class="w-full"
-        />
-      </div>
+          <div class="field col-12 md:col-3">
+            <label for="firstname6">Boundaries of the village</label>
+            <input
+              pInputText
+              formControlName="Boundaries"
+              aria-describedby="Boundaries"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">Geographical Area</label>
+            <input
+              pInputText
+              formControlName="Geographical"
+              aria-describedby="Geographical"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">Total House Holds</label>
+            <input
+              pInputText
+              formControlName="totalHouse"
+              aria-describedby="totalHouse"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">Population</label>
+            <input
+              pInputText
+              formControlName="Population"
+              aria-describedby="Population"
+              class="w-full"
+            />
+          </div>
 
-      <div class="field col-12 md:col-3">
-        <label for="firstname6">Male</label>
-        <input
-          pInputText
-          formControlName="PopulationMale"
-          aria-describedby="PopulationMale"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">Female</label>
-        <input
-          pInputText
-          formControlName="PopulationFemale"
-          aria-describedby="PopulationFemale"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">above 18 Male</label>
-        <input
-          pInputText
-          formControlName="PopulationAboveEighteenMale"
-          aria-describedby="PopulationAboveEighteenMale"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6"> above 18 Female</label>
-        <input
-          pInputText
-          formControlName="PopulationAboveEighteenFeMale"
-          aria-describedby="PopulationAboveEighteenFeMale"
-          class="w-full"
-        />
-      </div>
+          <div class="field col-12 md:col-3">
+            <label for="firstname6">Male</label>
+            <input
+              pInputText
+              formControlName="PopulationMale"
+              aria-describedby="PopulationMale"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">Female</label>
+            <input
+              pInputText
+              formControlName="PopulationFemale"
+              aria-describedby="PopulationFemale"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">above 18 Male</label>
+            <input
+              pInputText
+              formControlName="PopulationAboveEighteenMale"
+              aria-describedby="PopulationAboveEighteenMale"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6"> above 18 Female</label>
+            <input
+              pInputText
+              formControlName="PopulationAboveEighteenFeMale"
+              aria-describedby="PopulationAboveEighteenFeMale"
+              class="w-full"
+            />
+          </div>
 
-      <div class="field col-12 md:col-3">
-        <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
-        <input
-          pInputText
-          formControlName="PopulationAbove60Male"
-          aria-describedby="PopulationAbove60Male"
-          class="w-full"
-        />
-      </div>
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">SENIOR CITIZENS ABOVE 60 Female</label>
-        <input
-          class="w-full"
-          pInputText
-          formControlName="PopulationAbove60FeMale"
-          aria-describedby="PopulationAbove60FeMale"
-        />
-      </div>
+          <div class="field col-12 md:col-3">
+            <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
+            <input
+              pInputText
+              formControlName="PopulationAbove60Male"
+              aria-describedby="PopulationAbove60Male"
+              class="w-full"
+            />
+          </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">SENIOR CITIZENS ABOVE 60 Female</label>
+            <input
+              class="w-full"
+              pInputText
+              formControlName="PopulationAbove60FeMale"
+              aria-describedby="PopulationAbove60FeMale"
+            />
+          </div>
 
-      <div class="field col-12 md:col-3">
-        <label for="lastname6">area</label>
-        <input
-          class="w-full"
-          pInputText
-          formControlName="area"
-          aria-describedby="area"
-        />
-      </div>
-    </div>
+          <div class="field col-12 md:col-3">
+            <label for="lastname6">area</label>
+            <input
+              class="w-full"
+              pInputText
+              formControlName="area"
+              aria-describedby="area"
+            />
+          </div>
+        </div>
 
-    <div class="flex justify-content-end gap-2">
-      <p-button
-        label="Cancel"
-        severity="secondary"
-        (onClick)="villageFormVisible = false"
-      />
-      <p-button label="Save" type="submit" />
-    </div>
-  </form>
-</p-dialog>
-<!-- [disabled]="!villageForm.valid" -->
+        <div class="flex justify-content-end gap-2">
+          <p-button
+            label="Cancel"
+            severity="secondary"
+            (onClick)="villageFormVisible = false"
+          />
+          <p-button label="Save" type="submit" />
+        </div>
+      </form>
+    </p-dialog>
+    <!-- [disabled]="!villageForm.valid" -->
+  </div>
+</div>

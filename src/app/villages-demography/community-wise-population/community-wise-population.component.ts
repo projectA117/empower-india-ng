@@ -80,7 +80,9 @@ export class CommunityWisePopulationComponent implements OnInit {
       populations: [
         {
           id: this.communityEditRecordID ? this.communityEditRecordID : '',
-          villageId: this.vilageData.populations[0].villageId,
+          villageId: this.vilageData?.populations[0]?.villageId
+            ? this.vilageData.populations[0].villageId
+            : '',
           communityId: this.communityWisePopulationForm.get('community')?.value,
           male: this.communityWisePopulationForm.get('communityMale')?.value,
           female:

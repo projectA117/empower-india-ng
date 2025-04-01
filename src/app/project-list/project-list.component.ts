@@ -100,32 +100,39 @@ export class ProjectListComponent implements OnInit {
     this.getDistricts();
     this.status = [
       {
-        id: 1,
-        name: 'NEW',
-      },
-      {
-        id: 5,
-        name: 'WAITING FOR SPONSORS',
-      },
-
-      {
         id: 3,
         name: 'REJECTED',
+        status: 'REJECTED',
       },
       {
         id: 4,
         name: 'WORK IN PROGRESS',
+        status: 'WIP',
+      },
+      {
+        id: 5,
+        name: 'WAITING FOR SPONSORS',
+        status: 'WFD',
       },
 
       {
         id: 6,
         name: 'COMPLETED',
-      },
-      {
-        id: 7,
-        name: 'OPEN',
+        status: 'COMPLETED',
       },
     ];
+
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+
+    if (localStorageuser?.roles[0].id == 3) {
+      this.status.push({
+        id: 1,
+        name: 'NEW',
+        status: 'NEW',
+      });
+    } else {
+      this.status = this.status.filter((status) => status.id != 1);
+    }
 
     this.activatedRoute.queryParams.subscribe((params) => {
       this.selectedcategory = parseInt(params['category']);
@@ -175,7 +182,17 @@ export class ProjectListComponent implements OnInit {
           this.serverError = true;
           return;
         }
-        this.projects = data.content;
+
+        const localStorageuser = JSON.parse(localStorage.getItem('user'));
+
+        if (localStorageuser?.roles[0].id == 3) {
+          this.projects = data.content;
+        } else {
+          this.projects = data.content.filter(
+            (item: any) => item.statusCode != 'NEW'
+          );
+        }
+
         this.serverError = false;
         this.projects.forEach((project: any) => {
           const sponsorAmount = project.sponsersList.reduce(
