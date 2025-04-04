@@ -43,7 +43,52 @@ export class AppComponent {
     private loaderService: LoaderService,
     private cdr: ChangeDetectorRef,
     private router: Router
-  ) {}
+  ) {
+    effect(() => {
+      const userRole = this.commonService.user()?.roles?.map(
+        (role: any) => role.id
+      ) ?? [];
+      this.items = [
+        {
+          label: 'HOME',
+          routerLink: 'home',
+        },
+        {
+          label: 'ABOUT US',
+          routerLink: 'about-us',
+        },
+        // {
+        //   label: 'VISION',
+        //   routerLink: 'vision',
+        // },
+        {
+          label: 'PROJECTS',
+          routerLink: 'projects',
+        },
+        {
+          label: 'SPONSORS',
+          routerLink: 'sponsors',
+        },
+        {
+          label: 'GALLERY',
+          routerLink: 'gallery',
+        },
+        {
+          label: 'Contact',
+          routerLink: 'contact',
+        },
+        {
+          label: 'villages',
+          routerLink: 'villages',
+        },
+        {
+          label: 'users',
+          routerLink: 'users',
+          visible: userRole.some(role => [3].includes(role))
+        }
+      ];
+    })
+  }
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -55,41 +100,6 @@ export class AppComponent {
         }
       }
     });
-    this.items = [
-      {
-        label: 'HOME',
-        routerLink: 'home',
-      },
-      {
-        label: 'ABOUT US',
-        routerLink: 'about-us',
-      },
-      // {
-      //   label: 'VISION',
-      //   routerLink: 'vision',
-      // },
-      {
-        label: 'PROJECTS',
-        routerLink: 'projects',
-      },
-      {
-        label: 'SPONSORS',
-        routerLink: 'sponsors',
-      },
-      {
-        label: 'GALLERY',
-        routerLink: 'gallery',
-      },
-      {
-        label: 'Contact',
-        routerLink: 'contact',
-      },
-
-      {
-        label: 'villages',
-        routerLink: 'villages',
-      },
-    ];
   }
 
   logout() {
