@@ -120,3 +120,39 @@
         border-bottom-left-radius: 0;
     }
 }
+
+.all-projects-arrow-set{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    border-radius: 40px;
+    cursor: pointer;
+    &:hover{
+        background-color: #c1d1aa;
+        border: 1px solid #4F7619;
+    }
+    img{
+        width: 15px;
+    }
+    div{
+        font-size: 15px;
+    }
+  }
+ 
+ .project-detail-name-h{
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    display: flex;
+    h4{
+        margin: 0;
+        color: #4F7619;
+        font-weight: bold;
+        font-size: 22px;
+    }
+  }

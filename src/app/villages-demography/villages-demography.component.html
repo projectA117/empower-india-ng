@@ -3,6 +3,26 @@
 
   <div class="header-set-filter">
     <p-dropdown
+      [filter]="true"
+      [options]="status"
+      [(ngModel)]="selectedStatus"
+      optionLabel="name"
+      optionValue="status"
+      placeholder="Select a Status"
+      (onChange)="StatusChange($event)"
+    />
+
+    <p-dropdown
+      [filter]="true"
+      [options]="categories"
+      [(ngModel)]="selectedcategory"
+      optionLabel="description"
+      optionValue="id"
+      placeholder="Select a Category"
+      (onChange)="categoryChange($event)"
+    />
+
+    <p-dropdown
       filterBy="name"
       [filter]="true"
       [options]="districts"
@@ -30,285 +50,471 @@
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid p-0">
   <div class="main-container-in">
     <div class="projects-list-detail">
-      <div class="row project-detail-name-h">
-        <div class="d-flex justify-content-between"></div>
-      </div>
-      <div class="container-fluid">
-        <div class="row mb-4">
-          <div class="project-detail-h-set mt-2">
-            <h4 class="inline-block">Location Details</h4>
-            @if (ShowVilage()) {
-            <button
-              class="submit-btn-m"
-              (click)="editVillage()"
-              style="float: right"
-              *appHasRole="[3]"
-            >
-              Edit village Details
-            </button>
-            }
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">District</div>
-            <div class="project-detail-set-v mt-2">
-              {{ selectedDistrict?.name }}
-            </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Mandal</div>
-            <div class="project-detail-set-v mt-2">
-              {{ selectedMandal?.name }}
-            </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Village</div>
-            <div class="project-detail-set-v mt-2">
-              {{ selectedVilage?.name }}
-            </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Pin Code</div>
-            <div class="project-detail-set-v mt-2">
-              {{
-                getVillagesDemographyData?.pinCode
-                  ? getVillagesDemographyData.pinCode
-                  : ""
-              }}
+      <div
+        class="container-fluid p-0"
+        id="SelectedVilageDetails"
+        *ngIf="isSelectedVilage"
+      >
+        <div class="container-fluid">
+          <div class="row project-detail-name-h">
+            <div class="d-flex justify-content-between">
+              <h4 class="inline-block">Location Details</h4>
+              <div
+                class="all-projects-arrow-set"
+                (click)="hideSelectedVillage(info)"
+              >
+                <img src="assets/images/back-arrow.svg" />
+                <div>Vilages List</div>
+              </div>
             </div>
           </div>
 
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Latitude, Longitude</div>
-            <div class="project-detail-set-v mt-2">
-              {{
-                getVillagesDemographyData?.latitude
-                  ? getVillagesDemographyData.latitude
-                  : ""
-              }}
-              ,
-              {{
-                getVillagesDemographyData?.longitude
-                  ? getVillagesDemographyData.longitude
-                  : ""
-              }}
+          <div class="row mb-4 pl-4 pr-4">
+            <div class="project-detail-h-set mt-2">
+              @if (ShowVilage()) {
+              <button
+                class="submit-btn-m"
+                (click)="editVillage()"
+                style="float: right"
+                *appHasRole="[3]"
+              >
+                Edit village Details
+              </button>
+              }
             </div>
-          </div>
-        </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">District</div>
+              <div class="project-detail-set-v mt-2">
+                {{ selectedDistrict?.name }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Mandal</div>
+              <div class="project-detail-set-v mt-2">
+                {{ selectedMandal?.name }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Village</div>
+              <div class="project-detail-set-v mt-2">
+                {{ selectedVilage?.name }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Pin Code</div>
+              <div class="project-detail-set-v mt-2">
+                {{
+                  getVillagesDemographyData?.pinCode
+                    ? getVillagesDemographyData.pinCode
+                    : ""
+                }}
+              </div>
+            </div>
 
-        <div class="row mb-4">
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Boundaries of the village</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.boundariesVillage }}
-            </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Geographical Area</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.geographicalArea }}
-            </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Total House Holds</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.noOfHouses }}
-            </div>
-          </div>
-
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Population</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.totalPopulation }}
-            </div>
-          </div>
-
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Male</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.adultMalePopulation }}
-            </div>
-          </div>
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">Female</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.adultFemalePopulation }}
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-4">
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">above 18 Male</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.childMalePopulation }}
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Latitude, Longitude</div>
+              <div class="project-detail-set-v mt-2">
+                {{
+                  getVillagesDemographyData?.latitude
+                    ? getVillagesDemographyData.latitude
+                    : ""
+                }}
+                ,
+                {{
+                  getVillagesDemographyData?.longitude
+                    ? getVillagesDemographyData.longitude
+                    : ""
+                }}
+              </div>
             </div>
           </div>
 
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">above 18 feMale</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.childFemalePopulation }}
+          <div class="row mb-4 pl-4 pr-4">
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Boundaries of the village</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.boundariesVillage }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Geographical Area</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.geographicalArea }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Total House Holds</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.noOfHouses }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Population</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.totalPopulation }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Male</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.adultMalePopulation }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Female</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.adultFemalePopulation }}
+              </div>
             </div>
           </div>
 
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">ABOVE 60 Male</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.above60Male }}
+          <div class="row mb-4 pl-4 pr-4">
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">above 18 Male</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.childMalePopulation }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">above 18 feMale</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.childFemalePopulation }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">ABOVE 60 Male</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.above60Male }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">ABOVE 60 Male</div>
+              <div class="project-detail-set-v mt-2">
+                {{ this.getVillagesDemographyData?.above60Female }}
+              </div>
             </div>
           </div>
 
-          <div class="project-detail-set col-2">
-            <div class="project-detail-set-h">ABOVE 60 Male</div>
-            <div class="project-detail-set-v mt-2">
-              {{ this.getVillagesDemographyData?.above60Female }}
+          <div class="row mb-4 pl-4 pr-4">
+            <div class="project-detail-h-set">
+              <h4>Project Details</h4>
             </div>
           </div>
-        </div>
 
-        <div class="projects-list-tab mt-3">
-          <div class="container-fluid">
-            <div class="row">
-              <p-tabView styleClass="tabview-custom">
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Community wise Population
-                      </span>
+          <div
+            class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
+            style="
+              background-color: #fff;
+              border: 1px solid #000;
+              padding-top: 10px;
+              --bs-gutter-x: 0;
+            "
+          >
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Project ID</div>
+              <div class="project-detail-set-v mt-2">486 Eye Camp</div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Project Type</div>
+              <div class="project-detail-set-v mt-2">New</div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Status</div>
+              <div class="project-detail-set-v mt-2">Work in progress</div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Estimation</div>
+              <div class="project-detail-set-v mt-2">₹ 30000000 /-</div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Govt. Share</div>
+              <div class="project-detail-set-v mt-2">20 %</div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Private Share</div>
+              <div class="project-detail-set-v mt-2">80 %</div>
+            </div>
+
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Sponsors list</div>
+              <div class="project-detail-set-v mt-2">
+                <ul style="margin: 0; padding: 0">
+                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
+                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
+                  <li>
+                    Dandigam Venkatesh , 9288299222,
+                    dandigam.venkatesh&#64;gmail.com
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Volunteer list</div>
+              <div class="project-detail-set-v mt-2">
+                <ul style="margin: 0; padding: 0">
+                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
+                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
+                  <li>
+                    Dandigam Venkatesh , 9288299222,
+                    dandigam.venkatesh&#64;gmail.com
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <!-- <div class="project-detail-set-h">Expenses</div> -->
+              <div class="project-detail-set-v mt-2">
+                <div class="row">
+                  <div class="col-6">Expense Type</div>
+                  <div class="col-6">Paid to</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Bricks</div>
+                  <div class="col-6">Venkat</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Cement</div>
+                  <div class="col-6">Nagarjuna</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
+            style="
+              background-color: #fff;
+              border: 1px solid #000;
+              padding-top: 10px;
+              --bs-gutter-x: 0;
+            "
+          >
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Project ID</div>
+              <div class="project-detail-set-v mt-2">486 Library</div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Project Type</div>
+              <div class="project-detail-set-v mt-2">New</div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Status</div>
+              <div class="project-detail-set-v mt-2">Work in progress</div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Estimation</div>
+              <div class="project-detail-set-v mt-2">₹ 30000000 /-</div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Govt. Share</div>
+              <div class="project-detail-set-v mt-2">20 %</div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Private Share</div>
+              <div class="project-detail-set-v mt-2">80 %</div>
+            </div>
+
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Sponsors list</div>
+              <div class="project-detail-set-v mt-2">
+                <ul style="margin: 0; padding: 0">
+                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
+                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
+                  <li>
+                    Dandigam Venkatesh , 9288299222,
+                    dandigam.venkatesh&#64;gmail.com
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Volunteer list</div>
+              <div class="project-detail-set-v mt-2">
+                <ul style="margin: 0; padding: 0">
+                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
+                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
+                  <li>
+                    Dandigam Venkatesh , 9288299222,
+                    dandigam.venkatesh&#64;gmail.com
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <!-- <div class="project-detail-set-h">Expenses</div> -->
+              <div class="project-detail-set-v mt-2">
+                <div class="row">
+                  <div class="col-6">Expense Type</div>
+                  <div class="col-6">Paid to</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Bricks</div>
+                  <div class="col-6">Venkat</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Cement</div>
+                  <div class="col-6">Nagarjuna</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="projects-list-tab mt-3">
+            <div class="container-fluid">
+              <div class="row">
+                <p-tabView styleClass="tabview-custom">
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Community wise Population
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div>
+                      <app-community-wise-population
+                        [villagesDemographyData]="CommunityPopulationData"
+                        [communityData]="CommunityOptions"
+                        [vilageData]="getVillagesDemographyData"
+                        [selectedVilageData]="selectedVilage"
+                        (closeDialogEvent)="reFreshVilageData($event)"
+                      ></app-community-wise-population>
                     </div>
-                  </ng-template>
-                  <div>
-                    <app-community-wise-population
-                      [villagesDemographyData]="CommunityPopulationData"
-                      [communityData]="CommunityOptions"
-                      [vilageData]="getVillagesDemographyData"
-                      [selectedVilageData]="selectedVilage"
-                      (closeDialogEvent)="reFreshVilageData($event)"
-                    ></app-community-wise-population>
-                  </div>
-                </p-tabPanel>
+                  </p-tabPanel>
 
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Unemployed youth
-                      </span>
-                    </div>
-                  </ng-template>
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Unemployed youth
+                        </span>
+                      </div>
+                    </ng-template>
 
-                  <div>
-                    <app-unemployed-youth
-                      [unemployedData]="unEmployedYouthVillage"
-                      [communityData]="CommunityOptions"
-                      [vilageData]="getVillagesDemographyData"
-                      [selectedVilageData]="selectedVilage"
-                    ></app-unemployed-youth>
-                  </div>
-                </p-tabPanel>
+                    <div>
+                      <app-unemployed-youth
+                        [unemployedData]="unEmployedYouthVillage"
+                        [communityData]="CommunityOptions"
+                        [vilageData]="getVillagesDemographyData"
+                        [selectedVilageData]="selectedVilage"
+                      ></app-unemployed-youth>
+                    </div>
+                  </p-tabPanel>
 
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Employed youth
-                      </span>
-                    </div>
-                  </ng-template>
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Employed youth
+                        </span>
+                      </div>
+                    </ng-template>
 
-                  <div>
-                    <app-employedyouth
-                      [employedYouthVillage]="employedYouthVillage"
-                      [selectedVilageData]="selectedVilage"
-                      [communityData]="CommunityOptions"
-                      [vilageData]="getVillagesDemographyData"
-                      (closeDialogEvent)="reFreshVilageData($event)"
-                    ></app-employedyouth>
-                  </div>
-                </p-tabPanel>
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Main Occupation
-                      </span>
+                    <div>
+                      <app-employedyouth
+                        [employedYouthVillage]="employedYouthVillage"
+                        [selectedVilageData]="selectedVilage"
+                        [communityData]="CommunityOptions"
+                        [vilageData]="getVillagesDemographyData"
+                        (closeDialogEvent)="reFreshVilageData($event)"
+                      ></app-employedyouth>
                     </div>
-                  </ng-template>
-                  <div>
-                    <app-main-occupation
-                      [occupationsData]="occupationsData"
-                      [occupationsLookupData]="villagelookupsData.occupation"
-                      [vilageData]="getVillagesDemographyData"
-                      [selectedVilageData]="selectedVilage"
-                    ></app-main-occupation>
-                  </div>
-                </p-tabPanel>
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Land Utilization
-                      </span>
+                  </p-tabPanel>
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Main Occupation
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div>
+                      <app-main-occupation
+                        [occupationsData]="occupationsData"
+                        [occupationsLookupData]="villagelookupsData.occupation"
+                        [vilageData]="getVillagesDemographyData"
+                        [selectedVilageData]="selectedVilage"
+                      ></app-main-occupation>
                     </div>
-                  </ng-template>
-                  <div>
-                    <app-land-utilization
-                      [landUtilizationData]="landUtilizationData"
-                      [landUtilizationLookupData]="
-                        villagelookupsData.landUtilization
-                      "
-                      [vilageData]="getVillagesDemographyData"
-                      (closeDialogEvent)="reFreshVilageData($event)"
-                      [selectedVilageData]="selectedVilage"
-                    ></app-land-utilization>
-                  </div>
-                </p-tabPanel>
+                  </p-tabPanel>
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Land Utilization
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div>
+                      <app-land-utilization
+                        [landUtilizationData]="landUtilizationData"
+                        [landUtilizationLookupData]="
+                          villagelookupsData.landUtilization
+                        "
+                        [vilageData]="getVillagesDemographyData"
+                        (closeDialogEvent)="reFreshVilageData($event)"
+                        [selectedVilageData]="selectedVilage"
+                      ></app-land-utilization>
+                    </div>
+                  </p-tabPanel>
 
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Cultivation crops
-                      </span>
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Cultivation crops
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div>
+                      <app-cultivation-crops
+                        [cultivationCropsData]="cultivationCropsData"
+                        [cultivationCropsLookupData]="
+                          villagelookupsData.cultivationCrops
+                        "
+                        [vilageData]="getVillagesDemographyData"
+                        (closeDialogEvent)="reFreshVilageData($event)"
+                        [selectedVilageData]="selectedVilage"
+                      ></app-cultivation-crops>
                     </div>
-                  </ng-template>
-                  <div>
-                    <app-cultivation-crops
-                      [cultivationCropsData]="cultivationCropsData"
-                      [cultivationCropsLookupData]="
-                        villagelookupsData.cultivationCrops
-                      "
-                      [vilageData]="getVillagesDemographyData"
-                      (closeDialogEvent)="reFreshVilageData($event)"
-                      [selectedVilageData]="selectedVilage"
-                    ></app-cultivation-crops>
-                  </div>
-                </p-tabPanel>
+                  </p-tabPanel>
 
-                <p-tabPanel>
-                  <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                      <span class="font-bold white-space-nowrap m-0">
-                        Institutions
-                      </span>
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Institutions
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div>
+                      <app-institutions
+                        [institutionsData]="institutionsData"
+                        [institutionsLookupData]="
+                          villagelookupsData.institutions
+                        "
+                        [vilageData]="getVillagesDemographyData"
+                        (closeDialogEvent)="reFreshVilageData($event)"
+                        [selectedVilageData]="selectedVilage"
+                      ></app-institutions>
                     </div>
-                  </ng-template>
-                  <div>
-                    <app-institutions
-                      [institutionsData]="institutionsData"
-                      [institutionsLookupData]="villagelookupsData.institutions"
-                      [vilageData]="getVillagesDemographyData"
-                      (closeDialogEvent)="reFreshVilageData($event)"
-                      [selectedVilageData]="selectedVilage"
-                    ></app-institutions>
-                  </div>
-                </p-tabPanel>
-              </p-tabView>
-              <!-- <p-tabView styleClass="tabview-custom">
+                  </p-tabPanel>
+                </p-tabView>
+                <!-- <p-tabView styleClass="tabview-custom">
           <p-tabPanel>
             <ng-template pTemplate="header">
               <div class="flex align-items-center gap-2">
@@ -418,9 +624,77 @@
             ></app-project-signoff>
           </p-tabPanel>
         </p-tabView> -->
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="" id="VilageList" *ngIf="!isSelectedVilage">
+        <p-table
+          #dt
+          [value]="getVillagesDemographyDataList"
+          [rows]="10"
+          [paginator]="false"
+          [globalFilterFields]="['name']"
+          [tableStyle]="{ 'min-width': '75rem' }"
+          [(selection)]="project"
+          [rowHover]="true"
+          dataKey="id"
+          (sortFunction)="customSort($event)"
+          [customSort]="true"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Dist</th>
+              <th>Mandal</th>
+              <th>Village</th>
+              <th>population</th>
+              <th>progress</th>
+              <th>Completed</th>
+              <th>WFS</th>
+              <th>approved</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-info>
+            <tr>
+              <td>{{ info.districtName }}</td>
+              <td>
+                {{ info.mandalName }}
+              </td>
+              <td>{{ info.villageName }}</td>
+              <td>
+                {{ info.totalPopulation }}
+              </td>
+              <td>
+                {{ info.inProgress }}
+              </td>
+              <td>{{ info.completed }}</td>
+              <td>{{ info.waitingSponsers }}</td>
+              <td>{{ info.approvals }}</td>
+
+              <td>
+                <div class="projects-actions-buttons">
+                  <img
+                    src="assets/images/icon-view.svg"
+                    (click)="showSelectedVillage(info)"
+                  />
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [first]="first"
+          [rows]="rows"
+          [totalRecords]="totalRecords"
+          [showCurrentPageReport]="true"
+          [showPageLinks]="true"
+          [showJumpToPageDropdown]="false"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+        />
       </div>
     </div>
 
@@ -486,7 +760,10 @@
             <label for="lastname6" style="display: block"
               >Latitude and Longitude</label
             >
-            <p-button label="Get Geolocation" (onClick)="getLocation()" />
+            <p-button
+              label="Get Geolocation"
+              (onClick)="getLocation(getVillagesDemographyData)"
+            />
 
             {{ GeolocationError }}
 
