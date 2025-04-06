@@ -10,6 +10,7 @@
       optionValue="status"
       placeholder="Select a Status"
       (onChange)="StatusChange($event)"
+      [showClear]="selectedStatus.length > 0"
     />
 
     <p-dropdown
@@ -20,6 +21,7 @@
       optionValue="id"
       placeholder="Select a Category"
       (onChange)="categoryChange($event)"
+      [showClear]="selectedcategory.length > 0"
     />
 
     <p-dropdown
@@ -29,6 +31,7 @@
       [(ngModel)]="selectedDistrict"
       optionLabel="name"
       placeholder="Select a District"
+      [showClear]="selectedDistrict?.id"
       (onChange)="getMandals($event)"
     />
     <p-dropdown
@@ -38,6 +41,7 @@
       optionLabel="name"
       placeholder="Select a Mandal"
       (onChange)="getvilages($event)"
+      [showClear]="selectedMandal?.id"
     />
     <p-dropdown
       [filter]="true"
@@ -45,7 +49,9 @@
       [(ngModel)]="selectedVilage"
       optionLabel="name"
       placeholder="Select a Vilage"
+      [showClear]="true"
       (onChange)="vilageChange($event)"
+      [showClear]="selectedVilage?.id"
     />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
@@ -641,34 +647,50 @@
           [(selection)]="project"
           [rowHover]="true"
           dataKey="id"
-          (sortFunction)="customSort($event)"
-          [customSort]="true"
+          selectionMode="single"
+          [(selection)]="selectedProduct"
         >
           <ng-template pTemplate="header">
             <tr>
-              <th>Dist</th>
-              <th>Mandal</th>
-              <th>Village</th>
-              <th>population</th>
-              <th>progress</th>
-              <th>Completed</th>
-              <th>WFS</th>
-              <th>approved</th>
+              <th pSortableColumn="districtName">
+                Dist <p-sortIcon field="districtName" />
+              </th>
+              <th pSortableColumn="mandalName">
+                Mandal <p-sortIcon field="mandalName" />
+              </th>
+              <th pSortableColumn="villageName">
+                Village <p-sortIcon field="villageName" />
+              </th>
+              <th pSortableColumn="totalPopulation">
+                Population <p-sortIcon field="totalPopulation" />
+              </th>
+              <th pSortableColumn="inprogress">
+                Progress <p-sortIcon field="inprogress" />
+              </th>
+              <th pSortableColumn="completed">
+                Completed <p-sortIcon field="completed" />
+              </th>
+              <th pSortableColumn="waitingSponsers">
+                WFS <p-sortIcon field="waitingSponsers" />
+              </th>
+              <th pSortableColumn="approvals">
+                Approved <p-sortIcon field="approvals" />
+              </th>
               <th>Actions</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-info>
-            <tr>
+            <tr [pSelectableRow]="product">
               <td>{{ info.districtName }}</td>
               <td>
                 {{ info.mandalName }}
               </td>
               <td>{{ info.villageName }}</td>
               <td>
-                {{ info.totalPopulation }}
+                {{ info.totalPopulation ?? "N/A" }}
               </td>
               <td>
-                {{ info.inProgress }}
+                {{ info.inprogress }}
               </td>
               <td>{{ info.completed }}</td>
               <td>{{ info.waitingSponsers }}</td>
