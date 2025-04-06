@@ -34,7 +34,8 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -140,6 +141,14 @@ export class RegisterComponent {
         this.registerForm.reset();
         if (data.id) {
           this.router.navigate(['/home']);
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail:
+              data.error ??
+              'The application has encountered an unknown error. Please try again later.',
+          });
         }
       }
     });
