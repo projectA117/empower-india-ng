@@ -34,7 +34,7 @@
       <div class="col-lg-6 m-mt-50">
         <form
           [formGroup]="contactForm"
-          style=" margin: auto"
+          style="margin: auto"
           (ngSubmit)="updateContactForm()"
         >
           <div class="row">
@@ -85,7 +85,12 @@
             ></textarea>
           </div>
           <div class="tab-footer-btns mt-4">
-            <button type="button" label="Cancel" class="cancel-btn-m">
+            <button
+              type="button"
+              label="Cancel"
+              class="cancel-btn-m"
+              (click)="cancelForm()"
+            >
               Cancel
             </button>
 

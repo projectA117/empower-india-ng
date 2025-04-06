@@ -63,4 +63,7 @@ export class ContactComponent implements OnInit {
       }
     });
   }
+  cancelForm() {
+    this.contactForm.reset();
+  }
 }
