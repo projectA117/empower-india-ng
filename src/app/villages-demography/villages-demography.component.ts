@@ -352,24 +352,28 @@ export class VillagesDemographyComponent implements OnInit {
   }
 
   getMandals(event: any) {
-    const districtCode = event.value.id;
+    const districtCode = event?.value?.id ? event.value.id : null;
     this.first = 0;
     this.pageNumber = 0;
     this.mandals = [];
     this.villages = [];
     this.selectedMandal = null;
     this.selectedVilage = null;
-    this.commonService.getMandals(districtCode).subscribe(
-      (data) => {
-        this.mandals = data;
-        // this.projectDMVSearch();
-        this.getFilterVillagesDemographyData();
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.mandals = HardCodedInfo.mandals;
-      }
-    );
+    if (districtCode) {
+      this.commonService.getMandals(districtCode).subscribe(
+        (data) => {
+          this.mandals = data;
+          // this.projectDMVSearch();
+          this.getFilterVillagesDemographyData();
+        },
+        (err) => {
+          //Temp fix for Gopi
+          this.mandals = HardCodedInfo.mandals;
+        }
+      );
+    } else {
+      this.getFilterVillagesDemographyData();
+    }
   }
 
   getvilages(event: any) {

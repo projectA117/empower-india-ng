@@ -4,6 +4,7 @@
       filterBy="name"
       [filter]="true"
       [options]="districts"
+      appendTo="body"
       [(ngModel)]="selectedDistrict"
       optionLabel="name"
       placeholder="Select a District"
@@ -12,6 +13,7 @@
     <p-dropdown
       [options]="roles()"
       [(ngModel)]="selectedRole"
+      appendTo="body"
       optionLabel="name"
       placeholder="Select a role"
       (onChange)="roleChange($event)"
@@ -24,7 +26,7 @@
 </div>
 <div class="container-fluid">
   <div class="main-container-in">
-    <p-table [value]="users">
+    <p-table [value]="users" [rowHover]="true">
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
