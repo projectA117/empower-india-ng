@@ -4,29 +4,32 @@
   <div class="header-set-filter">
     <p-dropdown
       [filter]="true"
+      appendTo="body"
       [options]="status"
       [(ngModel)]="selectedStatus"
       optionLabel="name"
       optionValue="status"
       placeholder="Select a Status"
       (onChange)="StatusChange($event)"
-      [showClear]="selectedStatus.length > 0"
+      [showClear]="selectedStatus?.length > 0"
     />
 
     <p-dropdown
       [filter]="true"
+      appendTo="body"
       [options]="categories"
       [(ngModel)]="selectedcategory"
       optionLabel="description"
       optionValue="id"
       placeholder="Select a Category"
       (onChange)="categoryChange($event)"
-      [showClear]="selectedcategory.length > 0"
+      [showClear]="selectedcategory?.length > 0"
     />
 
     <p-dropdown
       filterBy="name"
       [filter]="true"
+      appendTo="body"
       [options]="districts"
       [(ngModel)]="selectedDistrict"
       optionLabel="name"
@@ -36,6 +39,7 @@
     />
     <p-dropdown
       [filter]="true"
+      appendTo="body"
       [options]="mandals"
       [(ngModel)]="selectedMandal"
       optionLabel="name"
@@ -45,6 +49,7 @@
     />
     <p-dropdown
       [filter]="true"
+      appendTo="body"
       [options]="villages"
       [(ngModel)]="selectedVilage"
       optionLabel="name"
@@ -903,8 +908,9 @@
             label="Cancel"
             severity="secondary"
             (onClick)="villageFormVisible = false"
+            class="defaultPadding"
           />
-          <p-button label="Save" type="submit" />
+          <p-button label="Save" type="submit" class="defaultPadding" />
         </div>
       </form>
     </p-dialog>

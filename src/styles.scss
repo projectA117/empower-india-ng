@@ -282,10 +282,11 @@ button[type=submit] {
   background: var(--accent-color);
   color: var(--contrast-color);
   border: 0;
-  padding: 13px 50px;
   transition: 0.4s;
   border-radius: 4px;
 }
+
+.defaultPadding button {padding: 13px 50px; border: 0;} 
 
 .page-title {
   color: var(--default-color);

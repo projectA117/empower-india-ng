@@ -403,6 +403,7 @@ export class ProjectListComponent implements OnInit {
     this.selectedDistrict = null;
     this.selectedMandal = null;
     this.selectedVilage = null;
+    this.selectedStatus = null;
     // this.first = 0;
     // this.rows = 10;
     this.getProjects();
