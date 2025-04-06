@@ -20,12 +20,7 @@ import { ProductService } from '@service/productservice';
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss',
-  providers: [
-    MessageService,
-    ConfirmationService,
-    ProductService,
-
-  ],
+  providers: [MessageService, ConfirmationService, ProductService],
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup = new FormGroup({});
@@ -38,7 +33,8 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +60,15 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['/home']);
         } else {
           this.invalidUserNameOrPassword = true;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail:
+              data.error ??
+              'The application has encountered an unknown error. Please try again later.',
+          });
         }
-        }
+      }
     });
   }
 }
