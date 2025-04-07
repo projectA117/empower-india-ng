@@ -228,145 +228,75 @@
               padding-top: 10px;
               --bs-gutter-x: 0;
             "
-          >
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project ID</div>
-              <div class="project-detail-set-v mt-2">486 Eye Camp</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">New</div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">Work in progress</div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Estimation</div>
-              <div class="project-detail-set-v mt-2">₹ 30000000 /-</div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Govt. Share</div>
-              <div class="project-detail-set-v mt-2">20 %</div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Private Share</div>
-              <div class="project-detail-set-v mt-2">80 %</div>
-            </div>
-
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Sponsors list</div>
-              <div class="project-detail-set-v mt-2">
-                <ul style="margin: 0; padding: 0">
-                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
-                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
-                  <li>
-                    Dandigam Venkatesh , 9288299222,
-                    dandigam.venkatesh&#64;gmail.com
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Volunteer list</div>
-              <div class="project-detail-set-v mt-2">
-                <ul style="margin: 0; padding: 0">
-                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
-                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
-                  <li>
-                    Dandigam Venkatesh , 9288299222,
-                    dandigam.venkatesh&#64;gmail.com
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="project-detail-set col-4">
-              <!-- <div class="project-detail-set-h">Expenses</div> -->
-              <div class="project-detail-set-v mt-2">
-                <div class="row">
-                  <div class="col-6">Expense Type</div>
-                  <div class="col-6">Paid to</div>
-                </div>
-                <div class="row">
-                  <div class="col-6">Bricks</div>
-                  <div class="col-6">Venkat</div>
-                </div>
-                <div class="row">
-                  <div class="col-6">Cement</div>
-                  <div class="col-6">Nagarjuna</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
-            style="
-              background-color: #fff;
-              border: 1px solid #000;
-              padding-top: 10px;
-              --bs-gutter-x: 0;
+            *ngFor="
+              let project of getVillagesDemographyData?.projectResponseList
             "
           >
             <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project ID</div>
-              <div class="project-detail-set-v mt-2">486 Library</div>
-            </div>
-            <div class="project-detail-set col-2">
               <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">New</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project?.projectType }}
+              </div>
             </div>
             <div class="project-detail-set col-2">
               <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">Work in progress</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project.status }}
+              </div>
             </div>
 
             <div class="project-detail-set col-2">
               <div class="project-detail-set-h">Estimation</div>
-              <div class="project-detail-set-v mt-2">₹ 30000000 /-</div>
+              <div class="project-detail-set-v mt-2">
+                ₹
+                {{ project.projectEstimation }}
+                /-
+              </div>
             </div>
 
             <div class="project-detail-set col-2">
               <div class="project-detail-set-h">Govt. Share</div>
-              <div class="project-detail-set-v mt-2">20 %</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project?.governmentShare }} %
+              </div>
             </div>
 
             <div class="project-detail-set col-2">
               <div class="project-detail-set-h">Private Share</div>
-              <div class="project-detail-set-v mt-2">80 %</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project?.publicShare }} %
+              </div>
             </div>
 
             <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Sponsors list</div>
+              <div class="project-detail-set-h">Sponsors</div>
               <div class="project-detail-set-v mt-2">
-                <ul style="margin: 0; padding: 0">
-                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
-                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
+                <ul
+                  style="margin: 0; padding: 0"
+                  *ngFor="let sponsers of project?.sponsersList"
+                >
                   <li>
-                    Dandigam Venkatesh , 9288299222,
-                    dandigam.venkatesh&#64;gmail.com
+                    {{ sponsers?.firstName }} {{ sponsers?.lastName }},
+                    {{ sponsers?.phoneNumber }}, {{ sponsers?.email }}
                   </li>
                 </ul>
               </div>
             </div>
             <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Volunteer list</div>
+              <div class="project-detail-set-h">Committee Members</div>
               <div class="project-detail-set-v mt-2">
-                <ul style="margin: 0; padding: 0">
-                  <li>Ravi, 9246287919, ravi.pocham&#64;gmail.com</li>
-                  <li>Gopi, 9246287919, gopi.pocham&#64;gmail.com</li>
+                <ul
+                  style="margin: 0; padding: 0"
+                  *ngFor="let committee of project?.committeeMembersList"
+                >
                   <li>
-                    Dandigam Venkatesh , 9288299222,
-                    dandigam.venkatesh&#64;gmail.com
+                    {{ committee?.firstName }} {{ committee?.lastName }},
+                    {{ committee?.phoneNumber }}, {{ committee?.email }}
                   </li>
                 </ul>
               </div>
             </div>
             <div class="project-detail-set col-4">
-              <!-- <div class="project-detail-set-h">Expenses</div> -->
               <div class="project-detail-set-v mt-2">
                 <div class="row">
                   <div class="col-6">Expense Type</div>

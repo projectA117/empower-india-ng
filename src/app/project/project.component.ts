@@ -43,6 +43,9 @@ export class ProjectComponent implements OnInit {
   Latitude: number;
   longitude: number;
 
+  FileUpload: any;
+  uploadimage: any;
+  imagePreview: any = 'assets/images/upload-img.svg';
   constructor(private commonService: CommonService) {}
 
   ngOnInit() {
@@ -270,7 +273,15 @@ export class ProjectComponent implements OnInit {
       }),
     };
 
-    return payload;
+    const formData = new FormData();
+    formData.append('projectImage', this.uploadimage); // Add the file
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'project',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+
+    return formData;
   }
 
   getLocation() {
@@ -295,5 +306,22 @@ export class ProjectComponent implements OnInit {
   }
   cancel() {
     this.closeDialog();
+  }
+
+  onUpload(event: any) {
+    const file = event.target?.files[0]; // Get the selected file
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    this.uploadimage = file;
+
+    this.FileUpload = formData;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }

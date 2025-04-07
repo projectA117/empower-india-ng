@@ -287,8 +287,9 @@
 
     <div class="col-4">
       <div class="upload-picture-set">
-        <div class="upload-picture">Take Picture</div>
-        <img src="assets/images/upload-img.svg" class="img-fluid" />
+        <div class="upload-picture">Upload Picture</div>
+        <input type="file" (change)="onUpload($event)" accept="image/*" />
+        <img [src]="imagePreview" class="img-fluid" />
       </div>
     </div>
   </div>
