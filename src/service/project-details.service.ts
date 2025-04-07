@@ -64,7 +64,9 @@ export class ProjectDetailsService {
 
   showDonars(projectId): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/showDonars?projectId=${projectId}`)
+      .get<any>(
+        `${environment.apiUrl}/donars/showDonars?projectId=${projectId}`
+      )
       .pipe(
         map((getStates) => {
           return getStates;
@@ -107,7 +109,7 @@ export class ProjectDetailsService {
   addDonors(payLoad: any, id: any): Observable<any> {
     return this.httpClient
       .post<any>(
-        `${environment.apiUrl}/donars/addDonars?projectId=${id}`,
+        `${environment.apiUrl}/donars/addDonars-image?projectId=${id}`,
         payLoad
       )
       .pipe(
@@ -120,9 +122,7 @@ export class ProjectDetailsService {
 
   searchDonors(searchTerm: string): Observable<any> {
     return this.httpClient
-      .get<any>(
-        `${environment.apiUrl}/donars/search?searchTerm=${searchTerm}`
-      )
+      .get<any>(`${environment.apiUrl}/donars/search?searchTerm=${searchTerm}`)
       .pipe(
         map((res) => {
           return res;
@@ -191,20 +191,24 @@ export class ProjectDetailsService {
   }
 
   publishProject(payload, id) {
-    return this.httpClient.post<any>(`${environment.apiUrl}/project/publish/${id}`, payload).pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/project/publish/${id}`, payload)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   kickOffProject(id) {
-    return this.httpClient.post<any>(`${environment.apiUrl}/project/kick-off/${id}`, {}).pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/project/kick-off/${id}`, {})
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 }

@@ -226,6 +226,7 @@ export class VillagesDemographyComponent implements OnInit {
         Actions: 'Actions',
       },
     ];
+    this.getVillagesDemography(5);
   }
 
   async defaultDistricts() {

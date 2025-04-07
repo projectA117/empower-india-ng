@@ -49,6 +49,9 @@ export class ProjectDonorsComponent implements OnInit {
   doners!: [];
   donorsSidebarVisible: boolean = false;
   donorForm: FormGroup = new FormGroup({});
+  FileUpload: any;
+  uploadimage: any;
+  imagePreview: any = 'assets/images/upload-img.svg';
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService,
@@ -82,9 +85,11 @@ export class ProjectDonorsComponent implements OnInit {
     });
   }
   showdonor() {
-    this.projectDetailsService.showDonars(this.projectData.id).subscribe((data) => {
-      this.doners = data;
-    });
+    this.projectDetailsService
+      .showDonars(this.projectData.id)
+      .subscribe((data) => {
+        this.doners = data;
+      });
   }
   updatedonorForm() {
     const payload = {
@@ -99,12 +104,34 @@ export class ProjectDonorsComponent implements OnInit {
       modeOfPayment: this.donorForm.get('DonorsModeofPayment')?.value,
     };
 
+    const formData = new FormData();
+    formData.append('donarImage', this.uploadimage); // Add the file
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'donar',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+
     this.projectDetailsService
-      .addDonors(payload, this.projectData.id)
+      .addDonors(formData, this.projectData.id)
       .subscribe((data) => {
         if (data) {
           this.showdonor();
         }
       });
+  }
+
+  onUpload(event: any) {
+    // const file = event.files;
+    // console.log('...File', file);
+
+    const file = event.target?.files[0]; // Get the selected file
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    this.uploadimage = file;
+
+    this.FileUpload = formData;
   }
 }
