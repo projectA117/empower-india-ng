@@ -97,18 +97,20 @@
               <div class="row mb-4 pl-4 pr-4">
                 <div class="project-detail-set col-12">
                   <p-tabView styleClass="tabview-custom">
+                    @for (projectTab of projectMenuTab; track
+                    projectTab.tabName) {
                     <p-tabPanel>
                       <ng-template pTemplate="header">
                         <div class="flex align-items-center gap-2">
                           <span class="font-bold white-space-nowrap m-0">
-                            waiting for sponsors
+                            {{ projectTab.tabName }}
                           </span>
                         </div>
                       </ng-template>
                       <div>
                         <p-table
                           #dt
-                          [value]="projects"
+                          [value]="projectTab.projectList"
                           [rows]="10"
                           [paginator]="false"
                           [globalFilterFields]="['name']"
@@ -193,44 +195,7 @@
                         </p-table>
                       </div>
                     </p-tabPanel>
-
-                    <p-tabPanel>
-                      <ng-template pTemplate="header">
-                        <div class="flex align-items-center gap-2">
-                          <span class="font-bold white-space-nowrap m-0">
-                            Work in progress
-                          </span>
-                        </div>
-                      </ng-template>
-
-                      <div>
-                        <app-unemployed-youth
-                          [unemployedData]="unEmployedYouthVillage"
-                          [communityData]="CommunityOptions"
-                          [vilageData]="getVillagesDemographyData"
-                          [selectedVilageData]="selectedVilage"
-                        ></app-unemployed-youth>
-                      </div>
-                    </p-tabPanel>
-
-                    <p-tabPanel>
-                      <ng-template pTemplate="header">
-                        <div class="flex align-items-center gap-2">
-                          <span class="font-bold white-space-nowrap m-0">
-                            Completed
-                          </span>
-                        </div>
-                      </ng-template>
-
-                      <div>
-                        <app-unemployed-youth
-                          [unemployedData]="unEmployedYouthVillage"
-                          [communityData]="CommunityOptions"
-                          [vilageData]="getVillagesDemographyData"
-                          [selectedVilageData]="selectedVilage"
-                        ></app-unemployed-youth>
-                      </div>
-                    </p-tabPanel>
+                    }
                   </p-tabView>
                 </div>
               </div>
