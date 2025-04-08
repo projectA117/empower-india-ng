@@ -91,6 +91,153 @@
               <h4>Project Details</h4>
             </div>
           </div>
+          <!-- tab pael start -->
+          <div class="projects-list-tab mt-3">
+            <div class="container-fluid">
+              <div class="row mb-4 pl-4 pr-4">
+                <div class="project-detail-set col-12">
+                  <p-tabView styleClass="tabview-custom">
+                    <p-tabPanel>
+                      <ng-template pTemplate="header">
+                        <div class="flex align-items-center gap-2">
+                          <span class="font-bold white-space-nowrap m-0">
+                            waiting for sponsors
+                          </span>
+                        </div>
+                      </ng-template>
+                      <div>
+                        <p-table
+                          #dt
+                          [value]="projects"
+                          [rows]="10"
+                          [paginator]="false"
+                          [globalFilterFields]="['name']"
+                          [tableStyle]="{ 'min-width': '75rem' }"
+                          [(selection)]="project"
+                          [rowHover]="true"
+                          dataKey="id"
+                        >
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th>Project Category</th>
+                              <th>Project Type</th>
+                              <th>Status</th>
+                              <th>Estimation</th>
+                              <th>Govt Share</th>
+                              <th>Private Share</th>
+                              <th>Sponsors</th>
+                              <th>Committee Members</th>
+                              <th>Expense</th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-info>
+                            <tr>
+                              <td>
+                                <img
+                                  [src]="
+                                    'assets/images/projects/' +
+                                    (projectImages[info.projectType] ||
+                                      projectImages[info.projectCategory] ||
+                                      'default.png')
+                                  "
+                                  class="img-fluid"
+                                  [alt]="info.projectType"
+                                />
+                              </td>
+                              <td>{{ info.projectType }}</td>
+                              <td>
+                                <div class="open-status">
+                                  {{ info.statusCode }}
+                                </div>
+                              </td>
+                              <td>₹ {{ info.projectEstimation || 0 }}/-</td>
+                              <td>
+                                {{ info.governmentShare || 0 }} % (₹
+                                {{
+                                  info.projectEstimation *
+                                    (info.governmentShare / 100)
+                                }}
+                                /-)
+                              </td>
+                              <td>
+                                {{ info.publicShare || 0 }} % (₹
+                                {{
+                                  info.projectEstimation *
+                                    (info.publicShare / 100)
+                                }}
+                                /-)
+                              </td>
+                              <td>{{ info.districtName }}</td>
+                              <td>{{ info.mandalName }}</td>
+                              <td>{{ info.villageName }}</td>
+                              <td>{{ info.pinCode }}</td>
+                              <td>
+                                <div class="projects-actions-buttons">
+                                  <img
+                                    src="assets/images/icon-view.svg"
+                                    (click)="getProjectDetails(info)"
+                                  />
+                                  <img
+                                    src="assets/images/icon-edit.svg"
+                                    (click)="editProject(info)"
+                                    *appHasRole="[3, 2]"
+                                  />
+                                  <img
+                                    src="assets/images/icon-delete.svg"
+                                    *appHasRole="[3, 2]"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
+                      </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel>
+                      <ng-template pTemplate="header">
+                        <div class="flex align-items-center gap-2">
+                          <span class="font-bold white-space-nowrap m-0">
+                            Work in progress
+                          </span>
+                        </div>
+                      </ng-template>
+
+                      <div>
+                        <app-unemployed-youth
+                          [unemployedData]="unEmployedYouthVillage"
+                          [communityData]="CommunityOptions"
+                          [vilageData]="getVillagesDemographyData"
+                          [selectedVilageData]="selectedVilage"
+                        ></app-unemployed-youth>
+                      </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel>
+                      <ng-template pTemplate="header">
+                        <div class="flex align-items-center gap-2">
+                          <span class="font-bold white-space-nowrap m-0">
+                            Completed
+                          </span>
+                        </div>
+                      </ng-template>
+
+                      <div>
+                        <app-unemployed-youth
+                          [unemployedData]="unEmployedYouthVillage"
+                          [communityData]="CommunityOptions"
+                          [vilageData]="getVillagesDemographyData"
+                          [selectedVilageData]="selectedVilage"
+                        ></app-unemployed-youth>
+                      </div>
+                    </p-tabPanel>
+                  </p-tabView>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- tab panel end  -->
 
           <div
             class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
@@ -183,6 +330,12 @@
                   <div class="col-6">Nagarjuna</div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div class="row mb-4 pl-4 pr-4">
+            <div class="project-detail-h-set">
+              <h4>Vilage Details</h4>
             </div>
           </div>
 

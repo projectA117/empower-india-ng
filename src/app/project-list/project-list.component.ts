@@ -85,6 +85,7 @@ export class ProjectListComponent implements OnInit {
   selectedProject: any;
   datastatus: any;
   serverError: boolean = false;
+  projectsProgressImages: any;
 
   constructor(
     private commonService: CommonService,
@@ -414,5 +415,16 @@ export class ProjectListComponent implements OnInit {
     this.project = project; // Set the selected project
     this.showSponsorDialog = true;
     this.showDialog();
+  }
+  getProjectProgressImages(data: any) {
+    this.commonService.getProjectProgressImages(data.id).subscribe(
+      (data: any) => {
+        this.projectsProgressImages = data;
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.projectsProgressImages = '';
+      }
+    );
   }
 }
