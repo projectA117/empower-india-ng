@@ -272,6 +272,17 @@ export class CommonService {
       );
   }
 
+  getProjectProgressImages(payLoad: any): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/project/status/${45}`)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
   getUserRoles(): Observable<any> {
     return this.httpClient.get<any>(`${environment.apiUrl}/roles`).pipe(
       map((response) => {
