@@ -1,37 +1,27 @@
 <div class="header-set">
   <h3>Gallery</h3>
+  <p-button label="Add New Image" (onClick)="createProject()" *appHasRole="[3, 2]" />
 </div>
 
 
 <div class="main-container sponsors-list gallery-set">
-    <div *ngIf="images" class="grid">
-      <div
-        *ngFor="let image of images; let index = index"
-        key="index" class="col-lg-2 col-md-2 col-sm-4 col-xs-2"
-      >
-        <img
-          [src]="image.thumbnailImageSrc"
-          [alt]="image.alt"
-          style="cursor: pointer"
-          (click)="imageClick(index)"
-        />
-      </div>
+  <div *ngIf="images" class="grid">
+    <div *ngFor="let image of images; let index = index" key="index" class="col-lg-2 col-md-2 col-sm-4 col-xs-2">
+      <img [src]="image.imgSrc" [alt]="image.eventType" style="cursor: pointer" (click)="imageClick(index)" />
     </div>
-    <p-galleria
-      [(value)]="images"
-      [(visible)]="displayCustom"
-      [(activeIndex)]="activeIndex"
-      [responsiveOptions]="responsiveOptions"
-      [numVisible]="7"
-      [circular]="true"
-      [fullScreen]="true"
-      [showItemNavigators]="true"
-      [showThumbnails]="false"
-    >
-      <ng-template pTemplate="item" let-item>
-        <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
-      </ng-template>
-    </p-galleria>
+  </div>
+  <p-galleria [(value)]="images" [(visible)]="displayCustom" [(activeIndex)]="activeIndex"
+    [responsiveOptions]="responsiveOptions" [numVisible]="7" [circular]="true" [fullScreen]="true"
+    [showItemNavigators]="true" [showThumbnails]="false">
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item.imgSrc" style="width: 100%; display: block" />
+    </ng-template>
+  </p-galleria>
+
+  <p-dialog [(visible)]="showImageUploadDialog" [style]="{ width: '25%' }" header="Upload New Image" [modal]="true"
+    styleClass="p-fluid" (onHide)="onHideDialog()">
+    <app-gallery-image-upload (closeSidebar)="showSponsorDialog = false" (closeDialogEvent)="refresh($event)"></app-gallery-image-upload>
+  </p-dialog>
 </div>
 
 <div class="ep-footer">
@@ -42,9 +32,7 @@
         <div style="line-height: 20px">
           <div>+91 9288227228</div>
           <div>
-            <a href="mailto:info&#64;empowerandhra.com" class="link"
-              >info&#64;empowerandhra.com</a
-            >
+            <a href="mailto:info&#64;empowerandhra.com" class="link">info&#64;empowerandhra.com</a>
           </div>
         </div>
       </div>

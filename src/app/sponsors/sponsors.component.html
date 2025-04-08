@@ -2,9 +2,9 @@
   <h3>Sponsors <span>55</span></h3>
 </div>
 
-<div class="main-container projects-set-list sponsors-list" style="display: none">
-  <div class="sponsor-in-card cursor-pointer" *ngFor="let sponsor of allSponsers" (click)="showSponsorDetails()">
-    <img src="assets/images/sponsors/01.png" class="img-fluid" width="100%" />
+<div class="main-container projects-set-list sponsors-list row">
+  <div class="sponsor-in-card cursor-pointer col-lg-1 col-md-2  col-sm-2" *ngFor="let sponsor of allSponsers" (click)="showSponsorDetails(sponsor)">
+    <img [src]="sponsor.imgSrc" alt="{{ sponsor.firstName }} {{ sponsor.lastName }}" class="img-fluid" width="100%" />
     <div class="sponspor-details">
       <div class="sponspor-details-name">
         {{ sponsor.firstName }} {{ sponsor.lastName }}
@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<div class="main-container projects-set-list ">
+<!-- <div class="main-container projects-set-list ">
   <div class="sponsors-list row">
     <div class="sponsor-in-card cursor-pointer col-lg-1 col-md-2  col-sm-2" (click)="showSponsorDetails()">
       <img src="assets/images/sponsors/01.png" class="img-fluid" width="100%" />
@@ -181,4 +181,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

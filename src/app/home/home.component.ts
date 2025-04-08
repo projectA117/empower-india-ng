@@ -29,103 +29,103 @@ export class HomeComponent {
   ngOnInit() {
     this.getTopSponsers();
 
-    this.topSponsers = [
-      {
-        id: null,
-        firstName: 'Srini ',
-        lastName: 'Nannapaneni',
-        phoneNumber: '1234567890',
-        email: '2343242@gmai.com',
-        address: '234324',
-        amount: '15,00,000',
-        category: null,
-        villageId: null,
-        villageName: 'Kakarla',
-        mandalId: null,
-        mandalName: 'Tiruvuru',
-        districtId: null,
-        districtName: 'NTR',
-        memoryOf: null,
-        modeOfPayment: null,
-        image: '01.png',
-      },
-      {
-        id: null,
-        firstName: 'Madhusudhan',
-        lastName: '',
-        phoneNumber: '1234567890',
-        email: '2343242@gmai.com',
-        address: '234324',
-        amount: '12,00,000',
-        category: null,
-        villageId: null,
-        villageName: 'Kavali',
-        mandalId: null,
-        mandalName: 'Kavali',
-        districtId: null,
-        districtName: 'Nellore',
-        memoryOf: null,
-        modeOfPayment: null,
-        image: '05.png',
-      },
-      {
-        id: null,
-        firstName: 'Suhasini',
-        lastName: '',
-        phoneNumber: '1234567890',
-        email: '2343242@gmai.com',
-        address: '234324',
-        amount: '9,00,000',
-        category: null,
-        villageId: null,
-        villageName: 'Samalkota',
-        mandalId: null,
-        mandalName: 'Samalkot',
-        districtId: null,
-        districtName: 'East Godavari',
-        memoryOf: null,
-        modeOfPayment: null,
-        image: '09.png',
-      },
-      {
-        id: null,
-        firstName: 'Rajani',
-        lastName: 'Gandham',
-        phoneNumber: '1234567890',
-        email: '2343242@gmai.com',
-        address: '234324',
-        amount: '9,00,000',
-        category: null,
-        villageId: null,
-        villageName: 'Amalapuram',
-        mandalId: null,
-        mandalName: 'Amalapuram',
-        districtId: null,
-        districtName: 'East Godavari',
-        memoryOf: null,
-        modeOfPayment: null,
-        image: '16.png',
-      },
-      {
-        id: null,
-        firstName: 'Somesh',
-        lastName: 'Veera',
-        phoneNumber: '1234567890',
-        email: '2343242@gmai.com',
-        address: '234324',
-        amount: '8,50,000',
-        category: null,
-        villageId: null,
-        villageName: 'Avulanatham',
-        mandalId: null,
-        mandalName: 'Kuppam',
-        districtId: null,
-        districtName: 'Chittore',
-        memoryOf: null,
-        modeOfPayment: null,
-        image: '18.png',
-      },
-    ];
+    // this.topSponsers = [
+    //   {
+    //     id: null,
+    //     firstName: 'Srini ',
+    //     lastName: 'Nannapaneni',
+    //     phoneNumber: '1234567890',
+    //     email: '2343242@gmai.com',
+    //     address: '234324',
+    //     amount: '15,00,000',
+    //     category: null,
+    //     villageId: null,
+    //     villageName: 'Kakarla',
+    //     mandalId: null,
+    //     mandalName: 'Tiruvuru',
+    //     districtId: null,
+    //     districtName: 'NTR',
+    //     memoryOf: null,
+    //     modeOfPayment: null,
+    //     image: '01.png',
+    //   },
+    //   {
+    //     id: null,
+    //     firstName: 'Madhusudhan',
+    //     lastName: '',
+    //     phoneNumber: '1234567890',
+    //     email: '2343242@gmai.com',
+    //     address: '234324',
+    //     amount: '12,00,000',
+    //     category: null,
+    //     villageId: null,
+    //     villageName: 'Kavali',
+    //     mandalId: null,
+    //     mandalName: 'Kavali',
+    //     districtId: null,
+    //     districtName: 'Nellore',
+    //     memoryOf: null,
+    //     modeOfPayment: null,
+    //     image: '05.png',
+    //   },
+    //   {
+    //     id: null,
+    //     firstName: 'Suhasini',
+    //     lastName: '',
+    //     phoneNumber: '1234567890',
+    //     email: '2343242@gmai.com',
+    //     address: '234324',
+    //     amount: '9,00,000',
+    //     category: null,
+    //     villageId: null,
+    //     villageName: 'Samalkota',
+    //     mandalId: null,
+    //     mandalName: 'Samalkot',
+    //     districtId: null,
+    //     districtName: 'East Godavari',
+    //     memoryOf: null,
+    //     modeOfPayment: null,
+    //     image: '09.png',
+    //   },
+    //   {
+    //     id: null,
+    //     firstName: 'Rajani',
+    //     lastName: 'Gandham',
+    //     phoneNumber: '1234567890',
+    //     email: '2343242@gmai.com',
+    //     address: '234324',
+    //     amount: '9,00,000',
+    //     category: null,
+    //     villageId: null,
+    //     villageName: 'Amalapuram',
+    //     mandalId: null,
+    //     mandalName: 'Amalapuram',
+    //     districtId: null,
+    //     districtName: 'East Godavari',
+    //     memoryOf: null,
+    //     modeOfPayment: null,
+    //     image: '16.png',
+    //   },
+    //   {
+    //     id: null,
+    //     firstName: 'Somesh',
+    //     lastName: 'Veera',
+    //     phoneNumber: '1234567890',
+    //     email: '2343242@gmai.com',
+    //     address: '234324',
+    //     amount: '8,50,000',
+    //     category: null,
+    //     villageId: null,
+    //     villageName: 'Avulanatham',
+    //     mandalId: null,
+    //     mandalName: 'Kuppam',
+    //     districtId: null,
+    //     districtName: 'Chittore',
+    //     memoryOf: null,
+    //     modeOfPayment: null,
+    //     image: '18.png',
+    //   },
+    // ];
 
     this.products = [
       {
@@ -250,9 +250,7 @@ export class HomeComponent {
     }
   }
   showSponsorDetails(sponsor: any) {
-    this.router.navigate(['sponsors-details'], {
-      queryParams: { sponsorID: JSON.stringify(sponsor) },
-    });
+    this.router.navigate(['sponsors-details', sponsor.id]);
   }
 
   showprojectcategoryDetails(selectedCategory: any) {
@@ -265,9 +263,14 @@ export class HomeComponent {
     this.commonService.getTopSponsers().subscribe({
       next: (data) => {
         if (!data.error) {
-          // this.topSponsers = data;
+          this.topSponsers = data;
+          this.topSponsers = this.topSponsers.map(item => ({
+            ...item, 
+            imgSrc: `data:image/png;base64,${item.image}`
+          }));
         }
-        console.log(data);
+        
+        console.log(data);  
       },
       error: (err) => console.error('An error occurred :', err),
     });

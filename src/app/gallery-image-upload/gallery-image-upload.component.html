@@ -1,0 +1,31 @@
+<form [formGroup]="imageUploadForm" (ngSubmit)="updateImageUploadForm()">
+    <div class="pop-data-set">
+        <div class="project-detail-set mt-4">
+            <div class="project-detail-set-h">Event Type</div>
+            <div class="project-detail-set-v mt-2">
+                <input pInputText id="eventType" formControlName="eventType" aria-describedby="eventType" />
+            </div>
+        </div>
+        <div class="project-detail-set mt-4">
+            <div class="project-detail-set-h">Description</div>
+            <div class="project-detail-set-v mt-2">
+                <textarea rows="5" cols="30" pInputTextarea id="description" aria-describedby="description"
+                    formControlName="description">
+        </textarea>
+            </div>
+        </div>
+        <div class="project-detail-set mt-4">
+            <div class="project-detail-set-h">upload Profile Image</div>
+            <div class="project-detail-set-v mt-2">
+                <input type="file" (change)="onUpload($event)" accept="image/*" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="tab-footer-btns mt-4">
+            <p-button label="Cancel " (click)="onClose()" class="cancel-btn"></p-button>
+            <p-button label="Add " type="submit" class="submit-btn" [disabled]="!imageUploadForm.valid"></p-button>
+        </div>
+    </div>
+</form>
