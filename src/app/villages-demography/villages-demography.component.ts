@@ -155,6 +155,19 @@ export class VillagesDemographyComponent implements OnInit {
   serverError: boolean = false;
   isSelectedVilage: boolean = false;
   isLoggedIn = computed(() => this.commonService.user() !== null);
+  projectMenuTab: any[] = [];
+  projectImages = {
+    Computers: 'computer.png',
+    Dustbins: 'dustbin.png',
+    'Library Books': 'library.png',
+    'Audio System': 'music.png',
+    Toilets: 'public_toilets.png',
+    'RO Plant': 'ro_plants.png',
+    'Sanitary Pad': 'sanitary.png',
+    'Sports Kits': 'sports.png',
+    'Bus Shelter': 'bus_shelter.png',
+    School: 'schools.png',
+  };
   constructor(
     private commonService: CommonService,
     private router: Router,
@@ -310,6 +323,18 @@ export class VillagesDemographyComponent implements OnInit {
       this.institutionsData =
         this.getVillagesDemographyData.institutionsVillages;
       this.CommunityPopulationData = this.getVillagesDemographyData.populations;
+      this.projectMenuTab = [];
+      this.getVillagesDemographyData?.projectResponseList?.forEach((project) => {
+        const projectTab = this.projectMenuTab.find((p) => p.tabName === project.statusCode)
+        if (projectTab) {
+          projectTab.projectList.push(project);
+        } else {
+          this.projectMenuTab.push({
+            tabName: project.statusCode,
+            projectList: [project]
+          })
+        }
+      })
     });
   }
   createVillageForm() {
