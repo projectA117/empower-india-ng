@@ -88,7 +88,7 @@ export class ProjectComponent implements OnInit {
         this.project.projectTypeId ? this.project.projectTypeId : null,
         [Validators.required]
       ),
-      projectNeed: new FormControl(this.project.isNew ? 'New' : 'Existing', [
+      projectNeed: new FormControl(this.project.isNew ? 'Draft' : 'Existing', [
         Validators.required,
       ]),
       projectEstimation: new FormControl(
