@@ -523,13 +523,12 @@
                               <th>Project Category</th>
                               <th>Project Type</th>
 
-                              <th>Estimation</th>
-                              <th>Govt Share</th>
-                              <th>Private Share</th>
-                              <th>Expense</th>
+                              <th>Project cost</th>
+                              <th>Sponsors amount</th>
                               <th>avilabul funds</th>
+                              <th>Expense</th>
                               <th>Sponsors</th>
-                              <th>Committee</th>
+                              <th>Project governance body</th>
                             </tr>
                           </ng-template>
                           <ng-template pTemplate="body" let-info>
@@ -548,25 +547,25 @@
                               </td>
                               <td>{{ info.projectType }}</td>
 
-                              <td>₹ {{ info.projectEstimation || 0 }}/-</td>
                               <td>
-                                {{ info.governmentShare || 0 }} % (₹
-                                <br />
-                                {{
+                                Estimation : ₹
+                                {{ info.projectEstimation || 0 }}/- <br />
+                                Govt Share : ₹{{
                                   info.projectEstimation *
                                     (info.governmentShare / 100)
                                 }}
-                                /-)
-                              </td>
-                              <td>
-                                {{ info.publicShare || 0 }} % (₹
-                                <br />
+                                /- ({{ info.governmentShare || 0 }} %)<br />
+
+                                Private Share : ₹
+
                                 {{
                                   info.projectEstimation *
                                     (info.publicShare / 100)
                                 }}
-                                /-)
+                                /- ({{ info.publicShare || 0 }} % )
                               </td>
+                              <td>6000</td>
+                              <td>10000</td>
                               <td>Funds</td>
                               <td>
                                 <div class="project-detail-set-v mt-2">
@@ -620,6 +619,7 @@
           <div
             class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
             style="
+              display: none;
               background-color: #fff;
               border: 1px solid #000;
               padding-top: 10px;
