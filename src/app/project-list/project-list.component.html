@@ -168,6 +168,22 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
   />
 
+  <p-galleria
+    [(value)]="images"
+    [(visible)]="displayCustom"
+    [(activeIndex)]="activeIndex"
+    [responsiveOptions]="responsiveOptions"
+    [numVisible]="7"
+    [circular]="true"
+    [fullScreen]="true"
+    [showItemNavigators]="true"
+    [showThumbnails]="false"
+  >
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
+    </ng-template>
+  </p-galleria>
+
   <!-- <div class="tab-pop-txt">
     <h4>Add Vendor</h4>
     <i class="pi pi-times"></i>

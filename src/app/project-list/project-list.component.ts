@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
 import { ProjectSponsorsComponent } from '../project-sponsors/project-sponsors.component';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { map } from 'rxjs';
 interface PageEvent {
   first: number;
   rows: number;
@@ -86,6 +87,27 @@ export class ProjectListComponent implements OnInit {
   datastatus: any;
   serverError: boolean = false;
   projectsProgressImages: any;
+  images: any;
+  displayCustom = false;
+  activeIndex: number = 0;
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1500px',
+      numVisible: 5,
+    },
+    {
+      breakpoint: '1024px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 2,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+    },
+  ];
 
   constructor(
     private commonService: CommonService,
@@ -97,9 +119,108 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit() {
     // this.getProjects(this.first, this.rows);
+
+    this.images = [
+      {
+        itemImageSrc: 'assets/images/gallery/01.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/01.jpg',
+        alt: 'Description for Image 1',
+        title: 'Title 1',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/02.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/02.jpg',
+        alt: 'Description for Image 2',
+        title: 'Title 2',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/03.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/03.jpg',
+        alt: 'Description for Image 3',
+        title: 'Title 3',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/04.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/04.jpg',
+        alt: 'Description for Image 4',
+        title: 'Title 4',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/05.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/05.jpg',
+        alt: 'Description for Image 5',
+        title: 'Title 5',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/06.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/06.jpg',
+        alt: 'Description for Image 6',
+        title: 'Title 6',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/07.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/07.jpg',
+        alt: 'Description for Image 7',
+        title: 'Title 7',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/08.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/08.jpg',
+        alt: 'Description for Image 8',
+        title: 'Title 8',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/09.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/09.jpg',
+        alt: 'Description for Image 9',
+        title: 'Title 9',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/10.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/10.jpg',
+        alt: 'Description for Image 10',
+        title: 'Title 10',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/11.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/11.jpg',
+        alt: 'Description for Image 11',
+        title: 'Title 11',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/12.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/12.jpg',
+        alt: 'Description for Image 12',
+        title: 'Title 12',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/13.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/13.jpg',
+        alt: 'Description for Image 13',
+        title: 'Title 13',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/14.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/14.jpg',
+        alt: 'Description for Image 14',
+        title: 'Title 14',
+      },
+      {
+        itemImageSrc: 'assets/images/gallery/15.jpg',
+        thumbnailImageSrc: 'assets/images/gallery/15.jpg',
+        alt: 'Description for Image 15',
+        title: 'Title 15',
+      },
+    ];
+
     this.getCategories();
     this.getDistricts();
     this.status = [
+      {
+        id: 7,
+        name: 'DRAFT',
+        status: 'DRAFT',
+      },
       {
         id: 3,
         name: 'REJECTED',
@@ -419,7 +540,19 @@ export class ProjectListComponent implements OnInit {
   getProjectProgressImages(data: any) {
     this.commonService.getProjectProgressImages(data.id).subscribe(
       (data: any) => {
-        this.projectsProgressImages = data;
+        this.projectsProgressImages = data?.filter(
+          (item) => item.statusImage != null
+        );
+        this.activeIndex = 1;
+        this.displayCustom = true;
+        this.images = this.projectsProgressImages.map((item) => {
+          return {
+            itemImageSrc: `data:image/jpeg;base64,${item.statusImage}`,
+            thumbnailImageSrc: `data:image/jpeg;base64,${item.statusImage}`,
+            alt: item.status,
+            title: item.status,
+          };
+        });
       },
       (err) => {
         //Temp fix for Gopi
