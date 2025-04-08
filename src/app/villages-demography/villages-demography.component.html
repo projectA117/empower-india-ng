@@ -73,8 +73,8 @@
           <div class="row project-detail-name-h">
             <div class="d-flex justify-content-between">
               <h4 class="inline-block">
-                Location Details - {{ selectedDistrict?.name }} >
-                {{ selectedMandal?.name }} > {{ selectedVilage?.name }}
+                {{ selectedDistrict?.name }} > {{ selectedMandal?.name }} >
+                {{ selectedVilage?.name }}
               </h4>
               <div
                 class="all-projects-arrow-set"
@@ -82,234 +82,6 @@
               >
                 <img src="assets/images/back-arrow.svg" />
                 <div>Vilages List</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4 pl-4 pr-4">
-            <div class="project-detail-h-set">
-              <h4>Project Details</h4>
-            </div>
-          </div>
-          <!-- tab pael start -->
-          <div class="projects-list-tab mt-3">
-            <div class="container-fluid">
-              <div class="row mb-4 pl-4 pr-4">
-                <div class="project-detail-set col-12">
-                  <p-tabView styleClass="tabview-custom">
-                    @for (projectTab of projectMenuTab; track
-                    projectTab.tabName) {
-                    <p-tabPanel>
-                      <ng-template pTemplate="header">
-                        <div class="flex align-items-center gap-2">
-                          <span class="font-bold white-space-nowrap m-0">
-                            {{ projectTab.tabName }}
-                          </span>
-                        </div>
-                      </ng-template>
-                      <div>
-                        <p-table
-                          #dt
-                          [value]="projectTab.projectList"
-                          [rows]="10"
-                          [paginator]="false"
-                          [globalFilterFields]="['name']"
-                          [tableStyle]="{ 'min-width': '75rem' }"
-                          [(selection)]="project"
-                          [rowHover]="true"
-                          dataKey="id"
-                        >
-                          <ng-template pTemplate="header">
-                            <tr>
-                              <th>Project Category</th>
-                              <th>Project Type</th>
-                              <th>Status</th>
-                              <th>Estimation</th>
-                              <th>Govt Share</th>
-                              <th>Private Share</th>
-                              <th>Sponsors</th>
-                              <th>Committee Members</th>
-                              <th>Expense</th>
-                            </tr>
-                          </ng-template>
-                          <ng-template pTemplate="body" let-info>
-                            <tr>
-                              <td>
-                                <img
-                                  [src]="
-                                    'assets/images/projects/' +
-                                    (projectImages[info.projectType] ||
-                                      projectImages[info.projectCategory] ||
-                                      'default.png')
-                                  "
-                                  class="img-fluid"
-                                  [alt]="info.projectType"
-                                />
-                              </td>
-                              <td>{{ info.projectType }}</td>
-                              <td>
-                                <div class="open-status">
-                                  {{ info.statusCode }}
-                                </div>
-                              </td>
-                              <td>₹ {{ info.projectEstimation || 0 }}/-</td>
-                              <td>
-                                {{ info.governmentShare || 0 }} % (₹
-                                {{
-                                  info.projectEstimation *
-                                    (info.governmentShare / 100)
-                                }}
-                                /-)
-                              </td>
-                              <td>
-                                {{ info.publicShare || 0 }} % (₹
-                                {{
-                                  info.projectEstimation *
-                                    (info.publicShare / 100)
-                                }}
-                                /-)
-                              </td>
-                              <td>
-                                <div class="project-detail-set-v mt-2">
-                                  @if(info?.sponsersList.length > 0) {
-                                  <ul
-                                    style="margin: 0; padding: 0"
-                                    *ngFor="let sponsers of info?.sponsersList"
-                                  >
-                                    <li>
-                                      {{ sponsers?.firstName }}
-                                      {{ sponsers?.lastName }},
-                                      {{ sponsers?.phoneNumber }},
-                                      {{ sponsers?.email }}
-                                    </li>
-                                  </ul>
-                                  } @else { -- }
-                                </div>
-                              </td>
-                              <td>
-                                <div class="project-detail-set-v mt-2">
-                                  @if(info?.committeeMembersList.length > 0) {
-                                  <ul
-                                    style="margin: 0; padding: 0"
-                                    *ngFor="
-                                      let committee of info?.committeeMembersList
-                                    "
-                                  >
-                                    <li>
-                                      {{ committee?.firstName }}
-                                      {{ committee?.lastName }},
-                                      {{ committee?.phoneNumber }},
-                                      {{ committee?.email }}
-                                    </li>
-                                  </ul>
-                                  } @else { -- }
-                                </div>
-                              </td>
-                              <td>--</td>
-                            </tr>
-                          </ng-template>
-                        </p-table>
-                      </div>
-                    </p-tabPanel>
-                    }
-                  </p-tabView>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- tab panel end  -->
-
-          <div
-            class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
-            style="
-              background-color: #fff;
-              border: 1px solid #000;
-              padding-top: 10px;
-              --bs-gutter-x: 0;
-            "
-            *ngFor="
-              let project of getVillagesDemographyData?.projectResponseList
-            "
-          >
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project?.projectType }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project.status }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Estimation</div>
-              <div class="project-detail-set-v mt-2">
-                ₹
-                {{ project.projectEstimation }}
-                /-
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Govt. Share</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project?.governmentShare }} %
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Private Share</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project?.publicShare }} %
-              </div>
-            </div>
-
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Sponsors</div>
-              <div class="project-detail-set-v mt-2">
-                <ul
-                  style="margin: 0; padding: 0"
-                  *ngFor="let sponsers of project?.sponsersList"
-                >
-                  <li>
-                    {{ sponsers?.firstName }} {{ sponsers?.lastName }},
-                    {{ sponsers?.phoneNumber }}, {{ sponsers?.email }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Committee Members</div>
-              <div class="project-detail-set-v mt-2">
-                <ul
-                  style="margin: 0; padding: 0"
-                  *ngFor="let committee of project?.committeeMembersList"
-                >
-                  <li>
-                    {{ committee?.firstName }} {{ committee?.lastName }},
-                    {{ committee?.phoneNumber }}, {{ committee?.email }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-v mt-2">
-                <div class="row">
-                  <div class="col-6">Expense Type</div>
-                  <div class="col-6">Paid to</div>
-                </div>
-                <div class="row">
-                  <div class="col-6">Bricks</div>
-                  <div class="col-6">Venkat</div>
-                </div>
-                <div class="row">
-                  <div class="col-6">Cement</div>
-                  <div class="col-6">Nagarjuna</div>
-                </div>
               </div>
             </div>
           </div>
@@ -712,6 +484,232 @@
               </div>
             </div>
           </div>
+
+          <div class="row mb-4 pl-4 pr-4">
+            <div class="project-detail-h-set">
+              <h4>Project Details</h4>
+            </div>
+          </div>
+          <!-- tab pael start -->
+          <div class="projects-list-tab mt-3">
+            <div class="container-fluid">
+              <div class="row mb-4 pl-4 pr-4">
+                <div class="project-detail-set col-12">
+                  <p-tabView styleClass="tabview-custom">
+                    @for (projectTab of projectMenuTab; track
+                    projectTab.tabName) {
+                    <p-tabPanel>
+                      <ng-template pTemplate="header">
+                        <div class="flex align-items-center gap-2">
+                          <span class="font-bold white-space-nowrap m-0">
+                            {{ projectTab.tabName }}
+                          </span>
+                        </div>
+                      </ng-template>
+                      <div>
+                        <p-table
+                          #dt
+                          [value]="projectTab.projectList"
+                          [rows]="10"
+                          [paginator]="false"
+                          [globalFilterFields]="['name']"
+                          [tableStyle]="{ 'min-width': '75rem' }"
+                          [(selection)]="project"
+                          [rowHover]="true"
+                          dataKey="id"
+                        >
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th>Project Category</th>
+                              <th>Project Type</th>
+
+                              <th>Project cost</th>
+                              <th>Sponsors amount</th>
+                              <th>avilabul funds</th>
+                              <th>Expense</th>
+                              <th>Sponsors</th>
+                              <th>Project governance body</th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-info>
+                            <tr>
+                              <td>
+                                <img
+                                  [src]="
+                                    'assets/images/projects/' +
+                                    (projectImages[info.projectType] ||
+                                      projectImages[info.projectCategory] ||
+                                      'default.png')
+                                  "
+                                  class="img-fluid"
+                                  [alt]="info.projectType"
+                                />
+                              </td>
+                              <td>{{ info.projectType }}</td>
+
+                              <td>
+                                Estimation : ₹
+                                {{ info.projectEstimation || 0 }}/- <br />
+                                Govt Share : ₹{{
+                                  info.projectEstimation *
+                                    (info.governmentShare / 100)
+                                }}
+                                /- ({{ info.governmentShare || 0 }} %)<br />
+
+                                Private Share : ₹
+
+                                {{
+                                  info.projectEstimation *
+                                    (info.publicShare / 100)
+                                }}
+                                /- ({{ info.publicShare || 0 }} % )
+                              </td>
+                              <td>6000</td>
+                              <td>10000</td>
+                              <td>Funds</td>
+                              <td>
+                                <div class="project-detail-set-v mt-2">
+                                  @if(info?.sponsersList.length > 0) {
+                                  <ul
+                                    style="margin: 0; padding: 0"
+                                    *ngFor="let sponsers of info?.sponsersList"
+                                  >
+                                    <li>
+                                      {{ sponsers?.firstName }}
+                                      {{ sponsers?.lastName }} |
+                                      {{ sponsers?.amount }} Rs
+                                    </li>
+                                  </ul>
+                                  } @else { -- }
+                                </div>
+                              </td>
+                              <td>
+                                <div class="project-detail-set-v mt-2">
+                                  @if(info?.committeeMembersList.length > 0) {
+                                  <ul
+                                    style="margin: 0; padding: 0"
+                                    *ngFor="
+                                      let committee of info?.committeeMembersList
+                                    "
+                                  >
+                                    <li>
+                                      {{ committee?.firstName }}
+                                      {{ committee?.lastName }} |
+                                      {{ committee?.phoneNumber }}
+                                    </li>
+                                  </ul>
+                                  } @else { -- }
+                                </div>
+                              </td>
+                              <td>--</td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
+                      </div>
+                    </p-tabPanel>
+                    }
+                  </p-tabView>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- tab panel end  -->
+
+          <div
+            class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
+            style="
+              display: none;
+              background-color: #fff;
+              border: 1px solid #000;
+              padding-top: 10px;
+              --bs-gutter-x: 0;
+            "
+            *ngFor="
+              let project of getVillagesDemographyData?.projectResponseList
+            "
+          >
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Project Type</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project?.projectType }}
+              </div>
+            </div>
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Status</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project.status }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Estimation</div>
+              <div class="project-detail-set-v mt-2">
+                ₹
+                {{ project.projectEstimation }}
+                /-
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Govt. Share</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project?.governmentShare }} %
+              </div>
+            </div>
+
+            <div class="project-detail-set col-2">
+              <div class="project-detail-set-h">Private Share</div>
+              <div class="project-detail-set-v mt-2">
+                {{ project?.publicShare }} %
+              </div>
+            </div>
+
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Sponsors</div>
+              <div class="project-detail-set-v mt-2">
+                <ul
+                  style="margin: 0; padding: 0"
+                  *ngFor="let sponsers of project?.sponsersList"
+                >
+                  <li>
+                    {{ sponsers?.firstName }} {{ sponsers?.lastName }},
+                    {{ sponsers?.phoneNumber }}, {{ sponsers?.email }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Committee Members</div>
+              <div class="project-detail-set-v mt-2">
+                <ul
+                  style="margin: 0; padding: 0"
+                  *ngFor="let committee of project?.committeeMembersList"
+                >
+                  <li>
+                    {{ committee?.firstName }} {{ committee?.lastName }},
+                    {{ committee?.phoneNumber }}, {{ committee?.email }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-v mt-2">
+                <div class="row">
+                  <div class="col-6">Expense Type</div>
+                  <div class="col-6">Paid to</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Bricks</div>
+                  <div class="col-6">Venkat</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Cement</div>
+                  <div class="col-6">Nagarjuna</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -754,7 +752,11 @@
               </th>
               @if (isLoggedIn()) {
               <th pSortableColumn="approvals">
-                Approved <p-sortIcon field="approvals" />
+                Draft <p-sortIcon field="approvals" />
+              </th>
+
+              <th pSortableColumn="approvals">
+                Wating for Approval <p-sortIcon field="approvals" />
               </th>
               }
               <th>Actions</th>
@@ -776,6 +778,8 @@
               <td>{{ info.completed }}</td>
               <td>{{ info.waitingSponsers }}</td>
               @if (isLoggedIn()) {
+              <td>{{ info.waitingSponsers }}</td>
+
               <td>{{ info.approvals }}</td>
               }
 
