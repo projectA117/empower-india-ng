@@ -4,7 +4,7 @@
     <p-button
       label="Add WIP Details"
       *appHasRole="[3]"
-      (click)="WIPSidebarVisible = true"
+      (click)="WIPSidebarVisible = true; WIPForm.reset()"
     />
   </div>
 
@@ -23,14 +23,34 @@
           <th pSortableColumn="Photos">
             Photos/Videos <p-sortIcon field="Photos" />
           </th>
+          <td>Actions</td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-product>
+      <ng-template pTemplate="body" let-WIP>
         <tr>
-          <td>{{ product.code }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.code }}</td>
+          <td>{{ WIP.createdDate | date : "dd-MM-yyyy" }}</td>
+          <td>{{ WIP.status }}</td>
+          <td>{{ WIP.createdBy }}</td>
+          <td>
+            @if(WIP.statusImage) {
+            <img
+              style="width: 100px; height: 100px"
+              [src]="'data:image/jpeg;base64,' + WIP.statusImage"
+            />
+            } @else { -- No Image -- }
+          </td>
+          <td>
+            <i
+              class="pi pi-pencil"
+              (click)="onEditWIP(WIP)"
+              *appHasRole="[3]"
+            ></i>
+            <i
+              class="pi pi-trash"
+              (click)="onDelete(WIP.id)"
+              *appHasRole="[3]"
+            ></i>
+          </td>
         </tr>
       </ng-template>
     </p-table>
@@ -49,7 +69,7 @@
   >
     <div class="tab-pop-txt">
       <h4>Add WIP Details</h4>
-      <i class="pi pi-times" (click)="WIPSidebarVisible = false"></i>
+      <i class="pi pi-times" (click)="onClear()"></i>
     </div>
 
     <div class="pop-data-set">
@@ -96,25 +116,45 @@
             aria-describedby="WIPPhotosVideos"
           /> -->
 
-          <p-fileUpload
-            mode="basic"
+          <!-- <p-fileUpload
+            [multiple]="true"
             chooseLabel="Choose"
             chooseIcon="pi pi-upload"
             name="demo[]"
-            url=""
             accept="image/*"
             maxFileSize="1000000"
-            (onUpload)="onUpload($event)"
-          />
+            (onSelect)="onUpload($event)"
+            (onRemove)="onUpload($event)"
+          /> -->
+          <div class="upload-container">
+            <input
+              type="file"
+              (change)="onFileChange($event)"
+              multiple
+              accept="image/*"
+            />
+
+            <div class="preview-container">
+              <div
+                class="preview"
+                *ngFor="let img of imagePreviews; let i = index"
+              >
+                <img [src]="img" />
+                <button
+                  type="button"
+                  class="remove-btn"
+                  (click)="removeImage(i)"
+                >
+                  ✖
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="tab-footer-btns">
-      <p-button
-        label="Cancel "
-        (click)="WIPSidebarVisible = false"
-        class="cancel-btn"
-      />
+      <p-button label="Cancel " (click)="onClear()" class="cancel-btn" />
       <p-button
         label="Add "
         type="submit"

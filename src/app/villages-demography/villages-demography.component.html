@@ -72,144 +72,16 @@
         <div class="container-fluid">
           <div class="row project-detail-name-h">
             <div class="d-flex justify-content-between">
-              <h4 class="inline-block">Location Details</h4>
+              <h4 class="inline-block">
+                Location Details - {{ selectedDistrict?.name }} >
+                {{ selectedMandal?.name }} > {{ selectedVilage?.name }}
+              </h4>
               <div
                 class="all-projects-arrow-set"
                 (click)="hideSelectedVillage(info)"
               >
                 <img src="assets/images/back-arrow.svg" />
                 <div>Vilages List</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4 pl-4 pr-4">
-            <div class="project-detail-h-set mt-2">
-              @if (ShowVilage()) {
-              <button
-                class="submit-btn-m"
-                (click)="editVillage()"
-                style="float: right"
-                *appHasRole="[3]"
-              >
-                Edit village Details
-              </button>
-              }
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">District</div>
-              <div class="project-detail-set-v mt-2">
-                {{ selectedDistrict?.name }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Mandal</div>
-              <div class="project-detail-set-v mt-2">
-                {{ selectedMandal?.name }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Village</div>
-              <div class="project-detail-set-v mt-2">
-                {{ selectedVilage?.name }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Pin Code</div>
-              <div class="project-detail-set-v mt-2">
-                {{
-                  getVillagesDemographyData?.pinCode
-                    ? getVillagesDemographyData.pinCode
-                    : ""
-                }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Latitude, Longitude</div>
-              <div class="project-detail-set-v mt-2">
-                {{
-                  getVillagesDemographyData?.latitude
-                    ? getVillagesDemographyData.latitude
-                    : ""
-                }}
-                ,
-                {{
-                  getVillagesDemographyData?.longitude
-                    ? getVillagesDemographyData.longitude
-                    : ""
-                }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4 pl-4 pr-4">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Boundaries of the village</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.boundariesVillage }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Geographical Area</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.geographicalArea }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Total House Holds</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.noOfHouses }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Population</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.totalPopulation }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Male</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.adultMalePopulation }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Female</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.adultFemalePopulation }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4 pl-4 pr-4">
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">above 18 Male</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.childMalePopulation }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">above 18 feMale</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.childFemalePopulation }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">ABOVE 60 Male</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.above60Male }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">ABOVE 60 Male</div>
-              <div class="project-detail-set-v mt-2">
-                {{ this.getVillagesDemographyData?.above60Female }}
               </div>
             </div>
           </div>
@@ -318,6 +190,144 @@
             <div class="container-fluid">
               <div class="row">
                 <p-tabView styleClass="tabview-custom">
+                  <p-tabPanel>
+                    <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2">
+                        <span class="font-bold white-space-nowrap m-0">
+                          Village Details
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div>
+                      <div class="row mb-4 pl-4 pr-4">
+                        <div class="project-detail-h-set mt-2">
+                          @if (ShowVilage()) {
+                          <button
+                            class="submit-btn-m"
+                            (click)="editVillage()"
+                            style="float: right"
+                            *appHasRole="[3]"
+                          >
+                            Edit village Details
+                          </button>
+                          }
+                        </div>
+                      </div>
+
+                      <div class="row mb-4 pl-4 pr-4">
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">
+                            Latitude, Longitude
+                          </div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              getVillagesDemographyData?.latitude
+                                ? getVillagesDemographyData.latitude
+                                : ""
+                            }}
+                            ,
+                            {{
+                              getVillagesDemographyData?.longitude
+                                ? getVillagesDemographyData.longitude
+                                : ""
+                            }}
+                          </div>
+                        </div>
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">
+                            Boundaries of the village
+                          </div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData?.boundariesVillage
+                            }}
+                          </div>
+                        </div>
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">
+                            Geographical Area
+                          </div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData?.geographicalArea
+                            }}
+                          </div>
+                        </div>
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">
+                            Total House Holds
+                          </div>
+                          <div class="project-detail-set-v mt-2">
+                            {{ this.getVillagesDemographyData?.noOfHouses }}
+                          </div>
+                        </div>
+
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">Population</div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData?.totalPopulation
+                            }}
+                          </div>
+                        </div>
+
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">Male</div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData
+                                ?.adultMalePopulation
+                            }}
+                          </div>
+                        </div>
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">Female</div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData
+                                ?.adultFemalePopulation
+                            }}
+                          </div>
+                        </div>
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">above 18 Male</div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData
+                                ?.childMalePopulation
+                            }}
+                          </div>
+                        </div>
+
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">
+                            above 18 feMale
+                          </div>
+                          <div class="project-detail-set-v mt-2">
+                            {{
+                              this.getVillagesDemographyData
+                                ?.childFemalePopulation
+                            }}
+                          </div>
+                        </div>
+
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">ABOVE 60 Male</div>
+                          <div class="project-detail-set-v mt-2">
+                            {{ this.getVillagesDemographyData?.above60Male }}
+                          </div>
+                        </div>
+
+                        <div class="project-detail-set col-2">
+                          <div class="project-detail-set-h">ABOVE 60 Male</div>
+                          <div class="project-detail-set-v mt-2">
+                            {{ this.getVillagesDemographyData?.above60Female }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+
                   <p-tabPanel>
                     <ng-template pTemplate="header">
                       <div class="flex align-items-center gap-2">
@@ -608,9 +618,11 @@
               <th pSortableColumn="waitingSponsers">
                 WFS <p-sortIcon field="waitingSponsers" />
               </th>
+              @if (isLoggedIn()) {
               <th pSortableColumn="approvals">
                 Approved <p-sortIcon field="approvals" />
               </th>
+              }
               <th>Actions</th>
             </tr>
           </ng-template>
@@ -629,7 +641,9 @@
               </td>
               <td>{{ info.completed }}</td>
               <td>{{ info.waitingSponsers }}</td>
+              @if (isLoggedIn()) {
               <td>{{ info.approvals }}</td>
+              }
 
               <td>
                 <div class="projects-actions-buttons">

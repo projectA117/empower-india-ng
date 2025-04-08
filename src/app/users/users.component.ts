@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { CommonService } from '@service/common.service';
 import { HardCodedInfo } from 'src/constants/HardCodedInfo';
 import { DropdownModule } from 'primeng/dropdown';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @Component({
   selector: 'app-users',
@@ -25,6 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
     FormsModule,
     ReactiveFormsModule,
     DropdownModule,
+    InputSwitchModule
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
@@ -133,6 +136,9 @@ export class UsersComponent {
       .getUsers(this.searchQuery, roleId, districtId)
       .subscribe((data) => {
         this.users = data;
+        (this.users || []).forEach((user) => {
+          user.isEnabled = user.isEnabled === 1 ? true : false;
+        })
       });
   }
 
@@ -165,5 +171,16 @@ export class UsersComponent {
     this.getAllUsers();
   }
 
-  reset() {}
+  activeInactiveChange(event, user) {
+    this.commonService.activeDeActiveUser(user.id, event.value ? 1 : 0).subscribe(data => {
+      this.getAllUsers();
+    })
+  }
+
+  reset() {
+    this.searchQuery = '';
+    this.selectedDistrict = null;
+    this.selectedRole = null;
+    this.getAllUsers();
+  }
 }

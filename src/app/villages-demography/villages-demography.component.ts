@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, effect, OnInit } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
 import { ProductService } from '@service/productservice';
@@ -154,6 +154,7 @@ export class VillagesDemographyComponent implements OnInit {
   datastatus: any;
   serverError: boolean = false;
   isSelectedVilage: boolean = false;
+  isLoggedIn = computed(() => this.commonService.user() !== null);
   constructor(
     private commonService: CommonService,
     private router: Router,

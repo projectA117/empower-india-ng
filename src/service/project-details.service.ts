@@ -131,16 +131,6 @@ export class ProjectDetailsService {
       );
   }
 
-  updateWIP(payLoad: any): Observable<any> {
-    return this.httpClient
-      .post<any>(`${environment.apiUrl}/WIP/updateWIP`, payLoad)
-      .pipe(
-        map((res) => {
-          return res;
-        }),
-        catchError((error) => of(error))
-      );
-  }
   updateApproval(payLoad: any): Observable<any> {
     return this.httpClient
       .put<any>(`${environment.apiUrl}/project`, payLoad)
@@ -210,5 +200,45 @@ export class ProjectDetailsService {
         }),
         catchError((error) => of(error))
       );
+  }
+
+  showWIP(id: number) {
+    return this.httpClient.get<any>(`${environment.apiUrl}/project/status/${id}`)
+    .pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  createWIP(payload: any) {
+    return this.httpClient.post<any>(`${environment.apiUrl}/project/status`, payload)
+    .pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  updateWIP(payload: any) {
+    return this.httpClient.put<any>(`${environment.apiUrl}/project/status`, payload)
+    .pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
+  deleteWIP(id: number) {
+    return this.httpClient.delete<any>(`${environment.apiUrl}/project/status/${id}`)
+    .pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
   }
 }

@@ -34,6 +34,7 @@
           <th>Phone Number</th>
           <th>Role</th>
           <th>Assigned District</th>
+          <th>Active</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
@@ -45,6 +46,12 @@
             {{ user.roles && user.roles.length ? user.roles[0].name : "--" }}
           </td>
           <td>{{ user.districtId ? districtMap[user.districtId] : "--" }}</td>
+          <td>
+            <p-inputSwitch
+              [(ngModel)]="user.isEnabled"
+              (ngModelChange)="activeInactiveChange($event, user)"
+            />
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">

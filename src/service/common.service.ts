@@ -308,4 +308,9 @@ export class CommonService {
       catchError((error) => of(error))
     );
   }
+
+  activeDeActiveUser(userId: Number, isActive: number) {
+    let url = `${environment.apiUrl}/users/${userId}/status?isActive=${isActive}`;
+    return this.httpClient.put<any>(url, {});
+  }
 }
