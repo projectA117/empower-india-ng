@@ -169,27 +169,43 @@
                                 }}
                                 /-)
                               </td>
-                              <td>{{ info.districtName }}</td>
-                              <td>{{ info.mandalName }}</td>
-                              <td>{{ info.villageName }}</td>
-                              <td>{{ info.pinCode }}</td>
                               <td>
-                                <div class="projects-actions-buttons">
-                                  <img
-                                    src="assets/images/icon-view.svg"
-                                    (click)="getProjectDetails(info)"
-                                  />
-                                  <img
-                                    src="assets/images/icon-edit.svg"
-                                    (click)="editProject(info)"
-                                    *appHasRole="[3, 2]"
-                                  />
-                                  <img
-                                    src="assets/images/icon-delete.svg"
-                                    *appHasRole="[3, 2]"
-                                  />
+                                <div class="project-detail-set-v mt-2">
+                                  @if(info?.sponsersList.length > 0) {
+                                  <ul
+                                    style="margin: 0; padding: 0"
+                                    *ngFor="let sponsers of info?.sponsersList"
+                                  >
+                                    <li>
+                                      {{ sponsers?.firstName }}
+                                      {{ sponsers?.lastName }},
+                                      {{ sponsers?.phoneNumber }},
+                                      {{ sponsers?.email }}
+                                    </li>
+                                  </ul>
+                                  } @else { -- }
                                 </div>
                               </td>
+                              <td>
+                                <div class="project-detail-set-v mt-2">
+                                  @if(info?.committeeMembersList.length > 0) {
+                                  <ul
+                                    style="margin: 0; padding: 0"
+                                    *ngFor="
+                                      let committee of info?.committeeMembersList
+                                    "
+                                  >
+                                    <li>
+                                      {{ committee?.firstName }}
+                                      {{ committee?.lastName }},
+                                      {{ committee?.phoneNumber }},
+                                      {{ committee?.email }}
+                                    </li>
+                                  </ul>
+                                  } @else { -- }
+                                </div>
+                              </td>
+                              <td>--</td>
                             </tr>
                           </ng-template>
                         </p-table>
