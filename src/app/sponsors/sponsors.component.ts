@@ -18,14 +18,14 @@ export class SponsorsComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private commonService: CommonService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getAllSponsers();
   }
 
-  showSponsorDetails() {
-    this.router.navigate(['sponsors-details'], {});
+  showSponsorDetails(sponser: any) {
+    this.router.navigate(['sponsors-details', sponser.id]);
   }
 
   getAllSponsers() {
@@ -33,6 +33,10 @@ export class SponsorsComponent implements OnInit {
       next: (data) => {
         if (!data.error) {
           this.allSponsers = data;
+          this.allSponsers = this.allSponsers.map(item => ({
+            ...item,
+            imgSrc: `data:image/png;base64,${item.image}`
+          }));
         }
         console.log(data);
       },

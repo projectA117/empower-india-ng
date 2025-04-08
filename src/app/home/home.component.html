@@ -117,9 +117,10 @@
         <ng-template let-sponsor pTemplate="item">
           <div class="sponsor-card" (click)="showSponsorDetails(sponsor)">
             <img
-              src="assets/images/sponsors/{{ sponsor.image }}"
-              [alt]="sponsor.name"
+              [src]="sponsor.imgSrc"
+              alt="{{ sponsor.firstName }} {{ sponsor.lastName }}"
               class="img-fluid"
+              
             />
             <div class="sponspor-details">
               <div class="sponspor-details-name">

@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'project-details', component: ProjectDetailsComponent },
   { path: 'project-sponsors', component: ProjectSponsorsComponent },
-  { path: 'sponsors-details', component: SponsorsDetailsComponent },
+  { path: 'sponsors-details/:id', component: SponsorsDetailsComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'villages', component: VillagesDemographyComponent },

@@ -1,60 +1,66 @@
-<div class="inner-margin-top pos-rel">
-  <div class="sponsor-img-set">
-    <img src="assets/images/sponsors/01.png"/>
-    <div class="sponsor-amount">
-      <div class="sponsor-amount-txt">Donated Amount</div>
-      <div class="sponsor-amount-price">15,00,000/-</div>
-      <div class="sponsor-amount-words">(Fifteen Lakhs)</div>
+<div *ngIf="selectedSponsorInformation">
+  <div class="inner-margin-top pos-rel">
+    <div class="sponsor-img-set">
+      <img
+        [src]="selectedSponsorInformation?.imgSrc"
+        alt="{{ selectedSponsorInformation.donarInfo.firstName }}
+      {{ selectedSponsorInformation.donarInfo.lastName }}"
+      />
+      <div class="sponsor-amount">
+        <div class="sponsor-amount-txt">Donated Amount</div>
+        <div class="sponsor-amount-price">
+          {{ selectedSponsorInformation.donarInfo.amount }}/-
+        </div>
+        <div class="sponsor-amount-words">(Fifteen Lakhs)</div>
+      </div>
+    </div>
+    <div class="sponsor-name">
+      {{ selectedSponsorInformation.donarInfo.firstName }}
+      {{ selectedSponsorInformation.donarInfo.lastName }}
+    </div>
+    <img src="assets/images/platinum.png" class="sponsor-badge" />
+    <img src="assets/images/sponsor-bg.jpg" />
+  </div>
+  <div class="container-fluid container-w">
+    <div class="container flex-end">
+      <div class="all-projects-arrow-set" onclick="history.back()">
+        <img src="assets/images/back-arrow.svg" />
+        <div>Sponsors</div>
+      </div>
+    </div>
+
+    <div class="container inner-page-content">
+      <h3>
+        {{ selectedSponsorInformation?.donarInfo?.firstName }}
+        {{ selectedSponsorInformation?.donarInfo?.lastName }} Generous
+        Contribution to Empower Program in his Village
+      </h3>
+      <p>{{ selectedSponsorInformation?.donarInfo?.description }}</p>
+    </div>
+
+    <div class="container">
+      <h3 class="donated">
+        Sponsored Project and Amount Details:
+        <span>{{ selectedSponsorInformation.donarInfo.amount }}/-</span>
+      </h3>
+      <table id="customers">
+        <tr>
+          <th>Project Name</th>
+          <th>Amount</th>
+          <th>Location</th>
+        </tr>
+        <tr *ngFor="let project of selectedSponsorInformation.projectsInfo">
+          <td>{{ project.projectType }}</td>
+          <td>{{ project.amount }}</td>
+          <td>
+            {{ project.villageName }} | {{ project.mandalName }} |
+            {{ project.districtName }}
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-  <div class="sponsor-name">Srini Nannapaneni</div>
-  <img src="assets/images/platinum.png" class="sponsor-badge"/>
-  <img src="assets/images/sponsor-bg.jpg"/>
 </div>
-<div class="container-fluid container-w">
-
-<div class="container flex-end">
-    <div class="all-projects-arrow-set" onclick="history.back()">
-      <img src="assets/images/back-arrow.svg" />
-      <div>Sponsors</div>
-    </div>
-</div>
-
-<div class="container inner-page-content">
-  <h3>Srini Nannapaneni's Generous Contribution to Empower Program in his Village</h3>
-  <p>Srini Nannapaneni, an esteemed Non-Resident Indian (NRI), has demonstrated an inspiring act of generosity by contributing a remarkable sum of ₹15 lakh to his native village. This contribution is dedicated to the Empower Program, a transformative initiative aimed at uplifting the local community through education, skill development, and infrastructure enhancement.
-    Hailing from the village, Srini has always maintained a deep connection to his roots, despite living abroad. His philanthropic gesture reflects his commitment to giving back to the community that played a significant role in shaping his early life.</p>
-</div>
-
-<div class="container ">
-  <h3 class="donated">Sponsored Project and Amount Details: <span>15,00,000/-</span></h3>
-  <table id="customers">
-    <tr>
-      <th>Project Name</th>
-      <th>Amount</th>
-      <th>Location</th>
-    </tr>
-    <tr>
-      <td>RO Plant</td>
-      <td>4,50,000/-</td>
-      <td>Kakarla | Tiruvuru | NTR</td>
-    </tr>
-   
-    <tr>
-      <td>Bus Shulter</td>
-      <td>3,50,000/-</td>
-      <td>Main Road, Kakarla | Tiruvuru | NTR</td>
-    </tr>
-    <tr>
-      <td>School Benches & Computer Lab</td>
-      <td>7,00,000/-</td>
-      <td>ZPHS, Kakarla | Tiruvuru | NTR</td>
-    </tr>
-  </table>
-</div>
-</div>
-
-
 
 <div class="ep-footer">
   <div class="container">

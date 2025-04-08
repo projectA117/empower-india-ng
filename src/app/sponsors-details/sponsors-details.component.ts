@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from '@service/common.service';
@@ -5,7 +6,7 @@ import { CommonService } from '@service/common.service';
 @Component({
   selector: 'app-sponsors-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './sponsors-details.component.html',
   styleUrl: './sponsors-details.component.scss',
 })
@@ -15,36 +16,23 @@ export class SponsorsDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.selectedSponsor = JSON.parse(params['sponsorID']);
-      console.log(this.selectedSponsor);
+    const cardId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.commonService.getSelectedSponsors(cardId).subscribe(
+      (data) => {
+        console.log(data);
+        this.selectedSponsorInformation = data;
+        this.selectedSponsorInformation = {
+          ...this.selectedSponsorInformation,
+          imgSrc: `data:image/png;base64,${this.selectedSponsorInformation.donarInfo.image}`
+        };
+      },
+      (err) => {
+        //Temp fix for Gopi
+      }
+    );
 
-      if (!this.selectedSponsor) return;
-      const payload = {
-        // firstName: this.selectedSponsor.firstName,
-        // lastName: this.selectedSponsor.lastName,
-        // phoneNumber: this.selectedSponsor.phoneNumber,
-        // email: this.selectedSponsor.email,
-        // address: null,
-
-        firstName: 'sadasd',
-        lastName: 'sadasd',
-        phoneNumber: '1234567890',
-        email: '2343242@gmai.com',
-        address: null,
-      };
-      this.commonService.getSelectedSponsors(payload).subscribe(
-        (data) => {
-          console.log(data);
-          this.selectedSponsorInformation = data;
-        },
-        (err) => {
-          //Temp fix for Gopi
-        }
-      );
-    });
   }
 }
