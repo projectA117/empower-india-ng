@@ -168,6 +168,7 @@ export class VillagesDemographyComponent implements OnInit {
     'Bus Shelter': 'bus_shelter.png',
     School: 'schools.png',
   };
+
   constructor(
     private commonService: CommonService,
     private router: Router,
@@ -259,10 +260,15 @@ export class VillagesDemographyComponent implements OnInit {
     console.log(event);
   }
 
+  allCategories: any = [];
+  allProjectTypes: any = {};
+
   getCategories(isDefaultLoad?: boolean) {
     this.commonService.getProjectCategories().subscribe(
       (data) => {
         // this.categories = data.projects;
+        this.allCategories = data;
+
 
         for (var i = 0; i < data.length; i += 1) {
           if (data[i].projects.length > 0) {
@@ -270,9 +276,6 @@ export class VillagesDemographyComponent implements OnInit {
               this.categories,
               data[i].projects
             );
-            // this.categories = [].concat.apply([], data[i].projects);
-            // this.categories = data[i].projects;
-            //  this.categories.concat(data[i].projects);
             console.log(this.categories);
           }
         }
@@ -283,6 +286,57 @@ export class VillagesDemographyComponent implements OnInit {
         this.categories = HardCodedInfo.categories;
       }
     );
+  }
+
+  onCategoryChange(project: any) {
+    project.projectTypeId = null;
+  }
+
+  getTypesByCategory(categoryId: number) {
+    const category = this.allCategories.find((cat) => cat.id === categoryId);
+    return category ? category.projects : [];
+  }
+
+  getCategoryName(categoryId: number) {
+    const category = this.allCategories.find((cat) => cat.id === categoryId);
+    return category?.name || '';
+  }
+
+  getTypeDescription(categoryId: number, typeId: number) {
+    const types = this.getTypesByCategory(categoryId);
+    const type = types.find((t) => t.id === typeId);
+    return type?.description || '';
+  }
+
+  createPayload(project, statusCode) {
+    const payload = {
+      ...project,
+      statusCode: statusCode,
+    };
+
+    const formData = new FormData();
+ // Add the file
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'project',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+
+    this.commonService.updateProject(payload).subscribe(
+      (data) => {
+        console.log('...Data', data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  getProjectDetails(project: any) {
+    //this.project = project;
+    //this.productService.selectedProject.next(project);
+    this.router.navigate(['project-details'], {
+      queryParams: { projectId: project.id },
+    });
   }
 
   categoryChange(event: any) {
@@ -324,15 +378,39 @@ export class VillagesDemographyComponent implements OnInit {
         this.getVillagesDemographyData.institutionsVillages;
       this.CommunityPopulationData = this.getVillagesDemographyData.populations;
       this.projectMenuTab = [];
+      if (this.isLoggedIn()) {
+        this.projectMenuTab.push({
+          tabName: 'Draft',
+          statusCode: 'DRAFT',
+          projectList: [],
+        })
+        this.projectMenuTab.push({
+          tabName: 'Waiting for approval',
+          statusCode: 'WFA',
+          projectList: [],
+        })
+      }
+      this.projectMenuTab.push({
+        tabName: 'Waiting For Sponsor',
+        statusCode: 'WFD',
+        projectList: [],
+      })
+      this.projectMenuTab.push({
+        tabName: 'Work in Progress',
+        statusCode: 'WIP',
+        projectList: [],
+      })
+      this.projectMenuTab.push({
+        tabName: 'Completed',
+        statusCode: 'COMPLETED',
+        projectList: [],
+      })
+
+
       this.getVillagesDemographyData?.projectResponseList?.forEach((project) => {
-        const projectTab = this.projectMenuTab.find((p) => p.tabName === project.statusCode)
+        const projectTab = this.projectMenuTab.find((p) => p.statusCode === project.statusCode)
         if (projectTab) {
           projectTab.projectList.push(project);
-        } else {
-          this.projectMenuTab.push({
-            tabName: project.statusCode,
-            projectList: [project]
-          })
         }
       })
     });
@@ -626,4 +704,15 @@ export class VillagesDemographyComponent implements OnInit {
     this.pageNumber = event.page;
     this.getFilterVillagesDemographyData();
   }
+
+  clonedProjects: { [s: string]: any } = {};
+  onRowEditInit(project) {
+    this.clonedProjects[project.id] = { ...project};
+  }
+
+  onRowEditCancel(project: any, index: number, tabName) {
+    const tabMenu = this.projectMenuTab.find((p) => p.tabName === tabName);
+    tabMenu.projectList[index] = this.clonedProjects[project.id as string];
+    delete this.clonedProjects[project.id as string];
+}
 }

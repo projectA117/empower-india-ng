@@ -507,6 +507,161 @@
                         </div>
                       </ng-template>
                       <div>
+                        @if (projectTab.tabName === 'Draft' ||
+                        projectTab.tabName === 'Waiting for approval') {
+
+                        <p-table
+                          [value]="projectTab.projectList"
+                          dataKey="id"
+                          editMode="row"
+                        >
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th style="width: 25%">Project Category</th>
+                              <th style="width: 25%">Project Type</th>
+                              <th style="width: 30%">Project Description</th>
+                              <th style="width: 20%"></th>
+                            </tr>
+                          </ng-template>
+                          <ng-template
+                            pTemplate="body"
+                            let-project
+                            let-editing="editing"
+                            let-ri="rowIndex"
+                          >
+                            <tr [pEditableRow]="project">
+                              <!-- Project Category -->
+                              <td>
+                                <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                    <p-dropdown
+                                      [options]="allCategories"
+                                      optionLabel="name"
+                                      optionValue="id"
+                                      [(ngModel)]="project.projectCategoryId"
+                                      (onChange)="onCategoryChange(project)"
+                                      placeholder="Select Category"
+                                      [style]="{ width: '100%' }"
+                                    ></p-dropdown>
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                    {{
+                                      getCategoryName(project.projectCategoryId)
+                                    }}
+                                  </ng-template>
+                                </p-cellEditor>
+                              </td>
+
+                              <!-- Project Type -->
+                              <td>
+                                <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                    <p-dropdown
+                                      [options]="
+                                        getTypesByCategory(
+                                          project.projectCategoryId
+                                        )
+                                      "
+                                      optionLabel="description"
+                                      optionValue="id"
+                                      [(ngModel)]="project.projectTypeId"
+                                      placeholder="Select Type"
+                                      [style]="{ width: '100%' }"
+                                    ></p-dropdown>
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                    {{
+                                      getTypeDescription(
+                                        project.projectCategoryId,
+                                        project.projectTypeId
+                                      )
+                                    }}
+                                  </ng-template>
+                                </p-cellEditor>
+                              </td>
+
+                              <!-- Project Description -->
+                              <td>
+                                <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                    <input
+                                      pInputText
+                                      type="text"
+                                      [(ngModel)]="project.description"
+                                      placeholder="Enter Description"
+                                      style="width: 100%"
+                                    />
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                    {{ project.description }}
+                                  </ng-template>
+                                </p-cellEditor>
+                              </td>
+
+                              <!-- Actions -->
+                              <td>
+                                <div
+                                  class="flex align-items-center justify-content-center gap-2"
+                                >
+                                  <button
+                                    *ngIf="!editing"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    pInitEditableRow
+                                    label="Edit"
+                                    (click)="onRowEditInit(project)"
+                                    class="p-button-rounded p-button-text"
+                                  ></button>
+                                  <button
+                                    *ngIf="editing"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    pSaveEditableRow
+                                    label="Save"
+                                    (click)="createPayload(project, 'DRAFT')"
+                                    class="p-button-rounded p-button-text p-button-success mr-2"
+                                  ></button>
+                                  <button
+                                    *ngIf="editing"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    pSaveEditableRow
+                                    label="Save as Waiting for Approval"
+                                    (click)="createPayload(project, 'WFA')"
+                                    class="p-button-rounded p-button-text p-button-success mr-2"
+                                  ></button>
+                                  <button
+                                    *ngIf="editing"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    pCancelEditableRow
+                                    label="Cancel"
+                                    (click)="
+                                      onRowEditCancel(
+                                        project,
+                                        ri,
+                                        projectTab.tabName
+                                      )
+                                    "
+                                    class="p-button-rounded p-button-text p-button-danger"
+                                  ></button>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="emptymessage">
+                            <tr>
+                              <td colspan="4" class="text-center">
+                                No {{ projectTab.tabName }} Projects Found
+                              </td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
+                        } @else {
                         <p-table
                           #dt
                           [value]="projectTab.projectList"
@@ -522,7 +677,6 @@
                             <tr>
                               <th>Project Category</th>
                               <th>Project Type</th>
-
                               <th>Project cost</th>
                               <th>Sponsors amount</th>
                               <th>avilabul funds</th>
@@ -601,10 +755,27 @@
                                   } @else { -- }
                                 </div>
                               </td>
-                              <td>--</td>
+                              <td>
+                                <div class="projects-actions-buttons">
+                                  <img
+                                    src="assets/images/icon-view.svg"
+                                    (click)="getProjectDetails(info)"
+                                  />
+                                  <img
+                                    src="assets/images/icon-edit.svg"
+                                    (click)="getProjectDetails(info)"
+                                    *appHasRole="[3, 2]"
+                                  />
+                                  <img
+                                    src="assets/images/icon-delete.svg"
+                                    *appHasRole="[3, 2]"
+                                  />
+                                </div>
+                              </td>
                             </tr>
                           </ng-template>
                         </p-table>
+                        }
                       </div>
                     </p-tabPanel>
                     }

@@ -509,7 +509,7 @@ export class ProjectListComponent implements OnInit {
     //this.project = project;
     //this.productService.selectedProject.next(project);
     this.router.navigate(['project-details'], {
-      queryParams: { project: JSON.stringify(project) },
+      queryParams: { projectId: project.id },
     });
   }
 

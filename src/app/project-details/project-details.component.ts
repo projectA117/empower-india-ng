@@ -115,11 +115,21 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.product = JSON.parse(params['project']);
+      // this.product = JSON.parse(params['project']);
+      // this.tabs.forEach((tab, index) => {
+      //   tab.isDisabled = this.isTabDisabled(index);
+      // });
+      this.getProjectDetails(params['projectId'])
+    });
+  }
+
+  getProjectDetails(id) {
+    this.projectDetailsService.getProjectDetailsById(id).subscribe((data) => {
+      this.product = data;
       this.tabs.forEach((tab, index) => {
         tab.isDisabled = this.isTabDisabled(index);
       });
-    });
+    })
   }
 
   projectKickOff() {
