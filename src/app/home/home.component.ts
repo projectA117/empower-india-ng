@@ -263,7 +263,7 @@ export class HomeComponent {
     this.commonService.getTopSponsers().subscribe({
       next: (data) => {
         if (!data.error) {
-          this.topSponsers = data;
+          this.topSponsers = data.content;
           this.topSponsers = this.topSponsers.map(item => ({
             ...item, 
             imgSrc: `data:image/png;base64,${item.image}`

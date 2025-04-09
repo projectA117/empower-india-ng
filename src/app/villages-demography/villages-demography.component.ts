@@ -505,7 +505,7 @@ export class VillagesDemographyComponent implements OnInit {
   }
 
   getvilages(event: any) {
-    const mandalCode = event.value.id;
+    const mandalCode = event?.value?.id;
     this.first = 0;
     this.pageNumber = 0;
     this.villages = [];
