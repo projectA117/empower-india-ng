@@ -97,6 +97,7 @@ export class ProjectDetailsComponent implements OnInit {
       isDisabled: true,
     },
   ];
+  fromPage = 'project';
 
   onTabChange(label: string) {
     this.activeTab = label;
@@ -120,6 +121,9 @@ export class ProjectDetailsComponent implements OnInit {
       //   tab.isDisabled = this.isTabDisabled(index);
       // });
       this.getProjectDetails(params['projectId'])
+      if (params['fromPage']) {
+        this.fromPage = params['fromPage']
+      }
     });
   }
 

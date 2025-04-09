@@ -242,6 +242,16 @@ export class VillagesDemographyComponent implements OnInit {
       },
     ];
     this.getVillagesDemography(5);
+
+    this.activatedRoute.queryParams.subscribe((params) => {
+      // this.product = JSON.parse(params['project']);
+      // this.tabs.forEach((tab, index) => {
+      //   tab.isDisabled = this.isTabDisabled(index);
+      // });
+      if (params['villageId']) {
+        this.showSelectedVillage({ villageId: params['villageId'], districtId: params['districtId'], mandalId: params['mandalId'] });
+      }
+    });
   }
 
   async defaultDistricts() {
@@ -335,7 +345,7 @@ export class VillagesDemographyComponent implements OnInit {
     //this.project = project;
     //this.productService.selectedProject.next(project);
     this.router.navigate(['project-details'], {
-      queryParams: { projectId: project.id },
+      queryParams: { projectId: project.id, fromPage: 'village' },
     });
   }
 
@@ -363,6 +373,7 @@ export class VillagesDemographyComponent implements OnInit {
 
   getVillagesDemography(id: any) {
     this.commonService.getVillagesDemography(id).subscribe((data: any) => {
+      // this.selectedDistrict = this.districts
       this.getVillagesDemographyData = data;
       this.unEmployedYouthVillage =
         this.getVillagesDemographyData.unEmployedYouthVillage;
@@ -615,8 +626,17 @@ export class VillagesDemographyComponent implements OnInit {
     }
   }
 
+  selectedVillage(data) {
+    this.router.navigate([], {
+      queryParams: { villageId: data.villageId, districtId: data.districtId, mandalId: data.mandalId },
+      queryParamsHandling: 'merge' // this merges with existing query params
+    });
+  }
+
   async showSelectedVillage(data: any) {
+    this.districts = await lastValueFrom(this.commonService.getDistricts());
     this.selectedDistrict = this.districts.find((d) => d.id == data.districtId);
+    console.log(this.selectedDistrict);
 
     this.mandals = await lastValueFrom(
       this.commonService.getMandals(this.selectedDistrict.id)
@@ -628,6 +648,7 @@ export class VillagesDemographyComponent implements OnInit {
     );
     this.selectedVilage = this.villages.find((d) => d.id == data.villageId);
     this.isSelectedVilage = true;
+
     this.getVillagesDemography(data.villageId);
   }
 
@@ -637,6 +658,10 @@ export class VillagesDemographyComponent implements OnInit {
     this.pageNumber = 0;
     this.first = 0;
     this.getFilterVillagesDemographyData();
+    this.router.navigate([], {
+      queryParams: {}, // empty object removes all
+      queryParamsHandling: '' // do not merge with existing params
+    });
     //this.reset();
   }
 
