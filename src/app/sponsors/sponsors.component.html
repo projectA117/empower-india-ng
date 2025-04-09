@@ -1,22 +1,51 @@
 <div class="header-set">
-  <h3>Sponsors <span>55</span></h3>
+  <h3>Sponsors <span>{{totalRecords}}</span></h3>
+  <div class="header-set-filter">
+    <p-dropdown filterBy="name" [filter]="true" [options]="districts" [(ngModel)]="selectedDistrict"
+      optionLabel="name" placeholder="Select a District" (onChange)="getMandals($event)" />
+    <p-dropdown [filter]="true" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
+      placeholder="Select a Mandal" (onChange)="getvilages($event)" />
+    <p-dropdown [filter]="true" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
+      placeholder="Select a Vilage" (onChange)="vilageChange($event)" />
+      <button class="submit-btn-m" (click)="reset()">Reset</button>
+  </div>
 </div>
 
 <div class="main-container projects-set-list sponsors-list row">
-  <div class="sponsor-in-card cursor-pointer col-lg-1 col-md-2  col-sm-2" *ngFor="let sponsor of allSponsers" (click)="showSponsorDetails(sponsor)">
-    <img [src]="sponsor.imgSrc" alt="{{ sponsor.firstName }} {{ sponsor.lastName }}" class="img-fluid" width="100%" />
-    <div class="sponspor-details">
-      <div class="sponspor-details-name">
-        {{ sponsor.firstName }} {{ sponsor.lastName }}
+  <ng-container *ngIf="allSponsers.length > 0 && !noRecords; else noSponsors">
+    <div class="sponsor-in-card cursor-pointer col-lg-1 col-md-2  col-sm-2" *ngFor="let sponsor of allSponsers"
+      (click)="showSponsorDetails(sponsor)">
+      <img [src]="sponsor.imgSrc" alt="{{ sponsor.firstName }} {{ sponsor.lastName }}" class="img-fluid" width="100%" />
+      <div class="sponspor-details">
+        <div class="sponspor-details-name">
+          {{ sponsor.firstName }} {{ sponsor.lastName }}
+        </div>
+        <div class="sponspor-details-v">
+          {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
+          {{ sponsor.districtName }} District
+        </div>
+        <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
       </div>
-      <div class="sponspor-details-v">
-        {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
-        {{ sponsor.districtName }} District
-      </div>
-      <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #noSponsors>
+    <div class="col-12 text-center">
+      <p>No records found.</p>
+    </div>
+  </ng-template>
+
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="true"
+    [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+  />
 </div>
+
 
 <!-- <div class="main-container projects-set-list ">
   <div class="sponsors-list row">
