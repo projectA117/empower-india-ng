@@ -1,6 +1,6 @@
 <div class="header-set">
+  @if(!isSelectedVilage) {
   <h3 style="visibility: hidden">Projects List <span>55</span></h3>
-
   <div class="header-set-filter">
     <p-dropdown
       [filter]="true"
@@ -60,6 +60,7 @@
     />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
+  }
 </div>
 <div class="container-fluid p-0">
   <div class="main-container-in">
@@ -958,7 +959,7 @@
                 <div class="projects-actions-buttons">
                   <img
                     src="assets/images/icon-view.svg"
-                    (click)="showSelectedVillage(info)"
+                    (click)="selectedVillage(info)"
                   />
                 </div>
               </td>

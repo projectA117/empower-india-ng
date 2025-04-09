@@ -18,7 +18,11 @@
         <h4>{{ product.villageName }}</h4>
         <div class="all-projects-arrow-set" onclick="history.back()">
           <img src="assets/images/back-arrow.svg" />
+          @if (fromPage === 'project') {
           <div>All Projects</div>
+          } @else {
+          <div>Back to village</div>
+          }
         </div>
       </div>
     </div>
