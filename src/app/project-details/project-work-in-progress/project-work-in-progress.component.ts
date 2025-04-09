@@ -69,6 +69,7 @@ export class ProjectWorkInProgressComponent implements OnInit {
       WIPDate: new FormControl('', [Validators.required]),
       WIPDescription: new FormControl('', [Validators.required]),
       WIPAuditor: new FormControl('', [Validators.required]),
+      WIPPublishToGallery: new FormControl(''),
       // WIPPhotosVideos: new FormControl('', [Validators.required]),
     });
   }
@@ -76,7 +77,7 @@ export class ProjectWorkInProgressComponent implements OnInit {
   showWIPDetails() {
     this.projectDetailsService.showWIP(this.projectData.id).subscribe((res) => {
       this.WIPDetails = res;
-    })
+    });
   }
 
   onFileChange(event: Event): void {
@@ -86,7 +87,7 @@ export class ProjectWorkInProgressComponent implements OnInit {
     this.imagePreviews = [];
     this.selectedFiles = Array.from(input.files);
 
-    this.selectedFiles.forEach(file => {
+    this.selectedFiles.forEach((file) => {
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreviews.push(reader.result as string);
@@ -106,28 +107,34 @@ export class ProjectWorkInProgressComponent implements OnInit {
     if (this.isLoading) {
       return;
     }
-    this.isLoading = true
+    this.isLoading = true;
     const payload = {
-      "status": this.WIPForm.get('WIPDescription').value,
-      "createdBy": this.WIPForm.get('WIPAuditor').value,
-      "createdDate": this.WIPForm.get('WIPDate').value,
-      "projectId": this.projectData.id,
-      "id": this.WIPForm.get('id').value,
-    }
+      status: this.WIPForm.get('WIPDescription').value,
+      createdBy: this.WIPForm.get('WIPAuditor').value,
+      createdDate: this.WIPForm.get('WIPDate').value,
+      PublishToGallery: this.WIPForm.get('WIPPublishToGallery').value
+        ? true
+        : false,
+      projectId: this.projectData.id,
+      id: this.WIPForm.get('id').value,
+    };
 
     const formData = new FormData();
-    formData.append('projectStatus', new Blob([JSON.stringify(payload)], { type: 'application/json' }))
-    formData.append('images', new Blob(this.selectedFiles as BlobPart[]))
+    formData.append(
+      'projectStatus',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+    formData.append('images', new Blob(this.selectedFiles as BlobPart[]));
     if (this.editWIP) {
-      this.projectDetailsService.updateWIP(formData).subscribe(res => {
+      this.projectDetailsService.updateWIP(formData).subscribe((res) => {
         this.showWIPDetails();
-       this.onClear();
-      })
+        this.onClear();
+      });
     } else {
-      this.projectDetailsService.createWIP(formData).subscribe(res => {
+      this.projectDetailsService.createWIP(formData).subscribe((res) => {
         this.showWIPDetails();
-       this.onClear();
-      })
+        this.onClear();
+      });
     }
   }
 
@@ -140,20 +147,21 @@ export class ProjectWorkInProgressComponent implements OnInit {
       WIPDate: new Date(wip.createdDate),
       WIPAuditor: wip.createdBy,
       WIPDescription: wip.status,
+      WIPPublishToGallery: wip.PublishToGallery,
     });
     if (wip.statusImage) {
       this.imagePreviews.push(`data:image/jpeg;base64,${wip.statusImage}`);
-      this.selectedFiles = this.imagePreviews.map(b64 => ({
+      this.selectedFiles = this.imagePreviews.map((b64) => ({
         base64: b64,
-        fromServer: true
+        fromServer: true,
       }));
     }
   }
 
   onDelete(id) {
-    this.projectDetailsService.deleteWIP(id).subscribe(res => {
+    this.projectDetailsService.deleteWIP(id).subscribe((res) => {
       this.showWIPDetails();
-    })
+    });
   }
 
   onClear() {

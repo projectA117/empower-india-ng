@@ -5,7 +5,7 @@
       <div class="banner-txt-a">RO</div>
       <div class="banner-txt-b">Plant</div>
       <div class="banner-txt-c">
-        {{ product.villageName }} | {{ product.location }}
+        {{ product?.villageName }} | {{ product?.location }}
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
   <div class="projects-list-detail">
     <div class="row project-detail-name-h">
       <div class="d-flex justify-content-between">
-        <h4>{{ product.villageName }}</h4>
+        <h4>{{ product?.villageName }}</h4>
         <div class="all-projects-arrow-set" onclick="history.back()">
           <img src="assets/images/back-arrow.svg" />
           @if (fromPage === 'project') {
@@ -34,30 +34,32 @@
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">District</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.districtName }}
+            {{ product?.districtName }}
           </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Mandal</div>
-          <div class="project-detail-set-v mt-2">{{ product.mandalName }}</div>
+          <div class="project-detail-set-v mt-2">{{ product?.mandalName }}</div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Village</div>
-          <div class="project-detail-set-v mt-2">{{ product.villageName }}</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product?.villageName }}
+          </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Pin Code</div>
-          <div class="project-detail-set-v mt-2">{{ product.pinCode }}</div>
+          <div class="project-detail-set-v mt-2">{{ product?.pinCode }}</div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Colony</div>
-          <div class="project-detail-set-v mt-2">{{ product.location }}</div>
+          <div class="project-detail-set-v mt-2">{{ product?.location }}</div>
         </div>
 
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Latitude, Longitude</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.latitude }} , {{ product.longitude }}
+            {{ product?.latitude }} , {{ product?.longitude }}
           </div>
         </div>
       </div>
@@ -69,25 +71,25 @@
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Project ID</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.id }}
+            {{ product?.id }}
           </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Project Category</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.projectCategory }}
+            {{ product?.projectCategory }}
           </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Project Type</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.projectType }}
+            {{ product?.projectType }}
           </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Status</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.statusCode }}
+            {{ product?.statusCode }}
           </div>
         </div>
       </div>
@@ -98,7 +100,7 @@
         </div>
 
         <div class="project-detail-set col-2">
-          <div class="project-detail-set-h">{{ product.description }}</div>
+          <div class="project-detail-set-h">{{ product?.description }}</div>
         </div>
       </div>
     </div>

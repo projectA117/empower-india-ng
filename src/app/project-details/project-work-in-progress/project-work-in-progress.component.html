@@ -23,7 +23,7 @@
           <th pSortableColumn="Photos">
             Photos/Videos <p-sortIcon field="Photos" />
           </th>
-          <td>Actions</td>
+          <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-WIP>
@@ -103,6 +103,25 @@
             formControlName="WIPAuditor"
             aria-describedby="WIPAuditor"
           />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="flex items-center">
+          <p-checkbox
+            id="WIPPublishToGallery"
+            inputId="WIPPublishToGallery"
+            name="WIPPublishToGallery"
+            value="Publish To Gallery"
+            formControlName="WIPPublishToGallery"
+          />
+          <label
+            for="WIPPublishToGallery"
+            class="ml-2"
+            style="line-height: 30px"
+          >
+            Publish To Gallery
+          </label>
         </div>
       </div>
 

@@ -1,3 +1,9 @@
+<p-toast
+  position="bottom-right"
+  [life]="1000"
+  [autoZIndex]="true"
+  [baseZIndex]="1000"
+/>
 <div class="header-set">
   <div class="header-set-filter">
     <p-dropdown
@@ -34,7 +40,7 @@
           <th>Phone Number</th>
           <th>Role</th>
           <th>Assigned District</th>
-          <th>Active</th>
+          <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
@@ -47,10 +53,18 @@
           </td>
           <td>{{ user.districtId ? districtMap[user.districtId] : "--" }}</td>
           <td>
-            <p-inputSwitch
-              [(ngModel)]="user.isEnabled"
-              (ngModelChange)="activeInactiveChange($event, user)"
-            />
+            <div class="right-0 flex">
+              <p-inputSwitch
+                class="mr-5"
+                [(ngModel)]="user.isEnabled"
+                (ngModelChange)="activeInactiveChange($event, user)"
+              />
+              <i
+                class="pi pi-pencil"
+                (click)="editUsers(user)"
+                *appHasRole="[2, 3]"
+              ></i>
+            </div>
           </td>
         </tr>
       </ng-template>
@@ -178,7 +192,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="!useredit">
               <label for="password">Password</label>
               <input
                 type="password"
