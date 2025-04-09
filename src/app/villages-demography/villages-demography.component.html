@@ -508,8 +508,7 @@
                         </div>
                       </ng-template>
                       <div>
-                        @if (projectTab.tabName === 'Draft' ||
-                        projectTab.tabName === 'Waiting for approval') {
+                        @if (projectTab.tabName === 'Draft') {
 
                         <p-table
                           [value]="projectTab.projectList"
@@ -543,6 +542,7 @@
                                       (onChange)="onCategoryChange(project)"
                                       placeholder="Select Category"
                                       [style]="{ width: '100%' }"
+                                      appendTo="body"
                                     ></p-dropdown>
                                   </ng-template>
                                   <ng-template pTemplate="output">
@@ -568,6 +568,7 @@
                                       [(ngModel)]="project.projectTypeId"
                                       placeholder="Select Type"
                                       [style]="{ width: '100%' }"
+                                      appendTo="body"
                                     ></p-dropdown>
                                   </ng-template>
                                   <ng-template pTemplate="output">
@@ -613,6 +614,7 @@
                                     label="Edit"
                                     (click)="onRowEditInit(project)"
                                     class="p-button-rounded p-button-text"
+                                    class="submit-btn-m"
                                   ></button>
                                   <button
                                     *ngIf="editing"
@@ -623,6 +625,7 @@
                                     label="Save"
                                     (click)="createPayload(project, 'DRAFT')"
                                     class="p-button-rounded p-button-text p-button-success mr-2"
+                                    class="submit-btn-m"
                                   ></button>
                                   <button
                                     *ngIf="editing"
@@ -633,6 +636,7 @@
                                     label="Save as Waiting for Approval"
                                     (click)="createPayload(project, 'WFA')"
                                     class="p-button-rounded p-button-text p-button-success mr-2"
+                                    class="submit-btn-m"
                                   ></button>
                                   <button
                                     *ngIf="editing"
@@ -684,6 +688,7 @@
                               <th>Expense</th>
                               <th>Sponsors</th>
                               <th>Project governance body</th>
+                              <th></th>
                             </tr>
                           </ng-template>
                           <ng-template pTemplate="body" let-info>
@@ -772,6 +777,13 @@
                                     *appHasRole="[3, 2]"
                                   />
                                 </div>
+                              </td>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="emptymessage">
+                            <tr>
+                              <td colspan="9" class="text-center">
+                                No {{ projectTab.tabName }} Projects Found
                               </td>
                             </tr>
                           </ng-template>

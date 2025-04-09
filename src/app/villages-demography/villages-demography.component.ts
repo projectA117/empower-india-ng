@@ -332,7 +332,7 @@ export class VillagesDemographyComponent implements OnInit {
       new Blob([JSON.stringify(payload)], { type: 'application/json' })
     );
 
-    this.commonService.updateProject(payload).subscribe(
+    this.commonService.updateProject(formData).subscribe(
       (data) => {
         console.log('...Data', data);
       },
