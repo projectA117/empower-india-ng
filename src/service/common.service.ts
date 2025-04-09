@@ -172,9 +172,9 @@ export class CommonService {
       );
   }
 
-  getAllSponsers(): Observable<any> {
+  getAllSponsers(payload: any): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/all-donars`)
+      .get<any>(`${environment.apiUrl}/donars/all-donars?${payload}`)
       .pipe(
         map((allSponsors) => {
           return allSponsors;
