@@ -726,7 +726,43 @@
                               </td>
                               <td>6000</td>
                               <td>10000</td>
-                              <td>Funds</td>
+                              <td>
+                                <div class="project-detail-set-v mt-2">
+                                  <div>
+                                    totalExpenses :
+                                    {{
+                                      info?.villageProjectExpenseResponse
+                                        .totalExpenses
+                                    }}, totalFunds :
+                                    {{
+                                      info?.villageProjectExpenseResponse
+                                        .totalFunds
+                                    }}, remainingBalance :
+                                    {{
+                                      info?.villageProjectExpenseResponse
+                                        .remainingBalance
+                                    }}
+                                  </div>
+                                  @if(info?.villageProjectExpenseResponse.transactions.length
+                                  > 0) {
+                                  <ul
+                                    style="margin: 0; padding: 0"
+                                    *ngFor="
+                                      let expense of info
+                                        ?.villageProjectExpenseResponse
+                                        .transactions
+                                    "
+                                  >
+                                    <li>
+                                      {{ expense?.paymentMode }} |
+                                      {{ expense?.expenseType }} |
+                                      {{ expense?.spentBy }} |
+                                      {{ expense?.paidTo }} |
+                                    </li>
+                                  </ul>
+                                  } @else { -- }
+                                </div>
+                              </td>
                               <td>
                                 <div class="project-detail-set-v mt-2">
                                   @if(info?.sponsersList.length > 0) {

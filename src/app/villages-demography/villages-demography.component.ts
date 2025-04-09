@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, computed, effect, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  computed,
+  effect,
+  OnInit,
+} from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
 import { ProductService } from '@service/productservice';
@@ -249,7 +255,11 @@ export class VillagesDemographyComponent implements OnInit {
       //   tab.isDisabled = this.isTabDisabled(index);
       // });
       if (params['villageId']) {
-        this.showSelectedVillage({ villageId: params['villageId'], districtId: params['districtId'], mandalId: params['mandalId'] });
+        this.showSelectedVillage({
+          villageId: params['villageId'],
+          districtId: params['districtId'],
+          mandalId: params['mandalId'],
+        });
       }
     });
   }
@@ -278,7 +288,6 @@ export class VillagesDemographyComponent implements OnInit {
       (data) => {
         // this.categories = data.projects;
         this.allCategories = data;
-
 
         for (var i = 0; i < data.length; i += 1) {
           if (data[i].projects.length > 0) {
@@ -325,7 +334,7 @@ export class VillagesDemographyComponent implements OnInit {
     };
 
     const formData = new FormData();
- // Add the file
+    // Add the file
     // formData.append('user', this.testpayload);
     formData.append(
       'project',
@@ -394,36 +403,39 @@ export class VillagesDemographyComponent implements OnInit {
           tabName: 'Draft',
           statusCode: 'DRAFT',
           projectList: [],
-        })
+        });
         this.projectMenuTab.push({
           tabName: 'Waiting for approval',
           statusCode: 'WFA',
           projectList: [],
-        })
+        });
       }
       this.projectMenuTab.push({
         tabName: 'Waiting For Sponsor',
         statusCode: 'WFD',
         projectList: [],
-      })
+      });
       this.projectMenuTab.push({
         tabName: 'Work in Progress',
         statusCode: 'WIP',
         projectList: [],
-      })
+      });
       this.projectMenuTab.push({
         tabName: 'Completed',
         statusCode: 'COMPLETED',
         projectList: [],
-      })
+      });
 
-
-      this.getVillagesDemographyData?.projectResponseList?.forEach((project) => {
-        const projectTab = this.projectMenuTab.find((p) => p.statusCode === project.statusCode)
-        if (projectTab) {
-          projectTab.projectList.push(project);
+      this.getVillagesDemographyData?.projectResponseList?.forEach(
+        (project) => {
+          const projectTab = this.projectMenuTab.find(
+            (p) => p.statusCode === project.statusCode
+          );
+          if (projectTab) {
+            projectTab.projectList.push(project);
+          }
         }
-      })
+      );
     });
   }
   createVillageForm() {
@@ -628,8 +640,12 @@ export class VillagesDemographyComponent implements OnInit {
 
   selectedVillage(data) {
     this.router.navigate([], {
-      queryParams: { villageId: data.villageId, districtId: data.districtId, mandalId: data.mandalId },
-      queryParamsHandling: 'merge' // this merges with existing query params
+      queryParams: {
+        villageId: data.villageId,
+        districtId: data.districtId,
+        mandalId: data.mandalId,
+      },
+      queryParamsHandling: 'merge', // this merges with existing query params
     });
   }
 
@@ -660,9 +676,18 @@ export class VillagesDemographyComponent implements OnInit {
     this.getFilterVillagesDemographyData();
     this.router.navigate([], {
       queryParams: {}, // empty object removes all
-      queryParamsHandling: '' // do not merge with existing params
+      queryParamsHandling: '', // do not merge with existing params
     });
     //this.reset();
+  }
+
+  localStorageuser() {
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    if (!localStorageuser || localStorageuser.roles[0].id != 3) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   getFilterVillagesDemographyData() {
@@ -691,6 +716,11 @@ export class VillagesDemographyComponent implements OnInit {
     }
     params += '&page=' + this.pageNumber;
     params += '&size=' + this.rows;
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    const userid = localStorageuser?.id;
+    if (userid) {
+      params += '&userId=' + userid;
+    }
 
     this.commonService.villageslookupProjects(params).subscribe(
       (data: any) => {
@@ -732,12 +762,12 @@ export class VillagesDemographyComponent implements OnInit {
 
   clonedProjects: { [s: string]: any } = {};
   onRowEditInit(project) {
-    this.clonedProjects[project.id] = { ...project};
+    this.clonedProjects[project.id] = { ...project };
   }
 
   onRowEditCancel(project: any, index: number, tabName) {
     const tabMenu = this.projectMenuTab.find((p) => p.tabName === tabName);
     tabMenu.projectList[index] = this.clonedProjects[project.id as string];
     delete this.clonedProjects[project.id as string];
-}
+  }
 }
