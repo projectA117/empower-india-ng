@@ -267,8 +267,8 @@ export class ProjectComponent implements OnInit {
       governmentShare: this.projectForm.get('governmentShare')?.value,
       publicShare: this.projectForm.get('publicShare')?.value,
       description: this.projectForm.get('description')?.value,
+      statusCode: 'DRAFT',
       ...(this.updateExistingProject && {
-        statusCode: this.project.status,
         id: this.project.id,
       }),
     };
@@ -290,6 +290,8 @@ export class ProjectComponent implements OnInit {
         (position) => {
           this.Latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
+          this.projectForm.get('latitude').setValue(this.Latitude);
+          this.projectForm.get('longitude').setValue(this.longitude);
         },
         (error) => {
           alert('Sorry, no position available.');

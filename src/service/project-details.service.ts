@@ -10,6 +10,16 @@ import { environment } from '../environments/environment';
 export class ProjectDetailsService {
   constructor(private httpClient: HttpClient) {}
 
+  getProjectDetailsById(id: number): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/project/getProjectById?projectId=${id}`)
+    .pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
   showCommittee(id: any): Observable<any> {
     return this.httpClient
       .get<any>(`${environment.apiUrl}/committee/showCommittee?projectId=${id}`)

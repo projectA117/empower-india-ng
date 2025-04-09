@@ -69,15 +69,21 @@
           </div>
         </div>
         <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Project Category</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product.projectCategory }}
+          </div>
+        </div>
+        <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Project Type</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.projectType ? "New" : "Existing" }}
+            {{ product.projectType }}
           </div>
         </div>
         <div class="project-detail-set col-2">
           <div class="project-detail-set-h">Status</div>
           <div class="project-detail-set-v mt-2">
-            {{ product.status }}
+            {{ product.statusCode }}
           </div>
         </div>
       </div>

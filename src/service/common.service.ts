@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 export class CommonService {
   user = signal<any>(null);
   roles = signal<any[]>([]);
+  projectStatus = signal<any[]>([]);
 
   constructor(private httpClient: HttpClient) {
     const storedUser = localStorage.getItem('user');
@@ -30,6 +31,21 @@ export class CommonService {
         this.roles.set(response);
       }
     });
+
+    this.getProjectStatus().subscribe((response) => {
+      if (response) {
+        this.projectStatus.set(response);
+      }
+    });
+  }
+
+  getProjectStatus(): Observable<any> {
+    return this.httpClient.get<any[]>(`${environment.apiUrl}/status`).pipe(
+      map((response) => {
+        return response.filter((status) => !status.isDeleted)
+      }),
+      catchError((error) => of(error))
+    )
   }
 
   getStates(): Observable<any> {
@@ -136,7 +152,7 @@ export class CommonService {
 
   updateProject(payLoad: any): Observable<any> {
     return this.httpClient
-      .put<any>(`${environment.apiUrl}/project/project-image`, payLoad)
+      .put<any>(`${environment.apiUrl}/project`, payLoad)
       .pipe(
         map((response) => {
           return response;
