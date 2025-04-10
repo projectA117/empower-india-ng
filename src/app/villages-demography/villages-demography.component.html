@@ -1,378 +1,297 @@
 <div class="header-set">
+  <h3>
+    Villages List <span>{{ totalRecords }}</span>
+  </h3>
   @if(!isSelectedVilage) {
   <h3 style="visibility: hidden">Projects List <span>55</span></h3>
   <div class="header-set-filter">
-    <p-dropdown
-      [filter]="true"
-      appendTo="body"
-      [options]="status"
-      [(ngModel)]="selectedStatus"
-      optionLabel="name"
-      optionValue="status"
-      placeholder="Select a Status"
-      (onChange)="StatusChange($event)"
-      [showClear]="selectedStatus?.length > 0"
-    />
+    <p-dropdown [filter]="true" appendTo="body" [options]="status" [(ngModel)]="selectedStatus" optionLabel="name"
+      optionValue="status" placeholder="Select a Status" (onChange)="StatusChange($event)"
+      [showClear]="selectedStatus?.length > 0" />
 
-    <p-dropdown
-      [filter]="true"
-      appendTo="body"
-      [options]="categories"
-      [(ngModel)]="selectedcategory"
-      optionLabel="description"
-      optionValue="id"
-      placeholder="Select a Category"
-      (onChange)="categoryChange($event)"
-      [showClear]="selectedcategory?.length > 0"
-    />
+    <p-dropdown [filter]="true" appendTo="body" [options]="categories" [(ngModel)]="selectedcategory"
+      optionLabel="description" optionValue="id" placeholder="Select a Category" (onChange)="categoryChange($event)"
+      [showClear]="selectedcategory?.length > 0" />
 
-    <p-dropdown
-      filterBy="name"
-      [filter]="true"
-      appendTo="body"
-      [options]="districts"
-      [(ngModel)]="selectedDistrict"
-      optionLabel="name"
-      placeholder="Select a District"
-      [showClear]="selectedDistrict?.id"
-      (onChange)="getMandals($event)"
-    />
-    <p-dropdown
-      [filter]="true"
-      appendTo="body"
-      [options]="mandals"
-      [(ngModel)]="selectedMandal"
-      optionLabel="name"
-      placeholder="Select a Mandal"
-      (onChange)="getvilages($event)"
-      [showClear]="selectedMandal?.id"
-    />
-    <p-dropdown
-      [filter]="true"
-      appendTo="body"
-      [options]="villages"
-      [(ngModel)]="selectedVilage"
-      optionLabel="name"
-      placeholder="Select a Vilage"
-      [showClear]="true"
-      (onChange)="vilageChange($event)"
-      [showClear]="selectedVilage?.id"
-    />
+    <p-dropdown filterBy="name" [filter]="true" appendTo="body" [options]="districts" [(ngModel)]="selectedDistrict"
+      optionLabel="name" placeholder="Select a District" [showClear]="selectedDistrict?.id"
+      (onChange)="getMandals($event)" />
+    <p-dropdown [filter]="true" appendTo="body" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
+      placeholder="Select a Mandal" (onChange)="getvilages($event)" [showClear]="selectedMandal?.id" />
+    <p-dropdown [filter]="true" appendTo="body" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
+      placeholder="Select a Vilage" [showClear]="true" (onChange)="vilageChange($event)"
+      [showClear]="selectedVilage?.id" />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
   }
 </div>
-<div class="container-fluid p-0">
-  <div class="main-container-in">
-    <div class="projects-list-detail">
-      <div
-        class="container-fluid p-0"
-        id="SelectedVilageDetails"
-        *ngIf="isSelectedVilage"
-      >
-        <div class="container-fluid">
-          <div class="row project-detail-name-h">
-            <div class="d-flex justify-content-between">
-              <h4 class="inline-block">
-                {{ selectedDistrict?.name }} > {{ selectedMandal?.name }} >
-                {{ selectedVilage?.name }}
-              </h4>
-              <div
-                class="all-projects-arrow-set"
-                (click)="hideSelectedVillage(info)"
-              >
-                <img src="assets/images/back-arrow.svg" />
-                <div>Vilages List</div>
+<div class="container-fluid p-0" id="SelectedVilageDetails" *ngIf="isSelectedVilage">
+  <div class="container-fluid">
+    <div class="row project-detail-name-h">
+      <div class="d-flex justify-content-between">
+        <h4 class="inline-block">
+          {{ selectedDistrict?.name }} > {{ selectedMandal?.name }} >
+          {{ selectedVilage?.name }}
+        </h4>
+        <div class="all-projects-arrow-set" (click)="hideSelectedVillage(info)">
+          <img src="assets/images/back-arrow.svg" />
+          <div>Vilages List</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4 pl-4 pr-4">
+      <div class="project-detail-h-set">
+        <h4>Vilage Details</h4>
+      </div>
+    </div>
+
+    <div class="projects-list-tab mt-3">
+      <div class="container-fluid">
+        <div class="row">
+          <p-tabView styleClass="tabview-custom">
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Village Details
+                  </span>
+                </div>
+              </ng-template>
+              <div>
+                <div class="row mb-4 pl-4 pr-4">
+                  <div class="project-detail-h-set mt-2">
+                    @if (ShowVilage()) {
+                    <button class="submit-btn-m" (click)="editVillage()" style="float: right" *appHasRole="[3]">
+                      Edit village Details
+                    </button>
+                    }
+                  </div>
+                </div>
+
+                <div class="row mb-4 pl-4 pr-4">
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">
+                      Latitude, Longitude
+                    </div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      getVillagesDemographyData?.latitude
+                      ? getVillagesDemographyData.latitude
+                      : ""
+                      }}
+                      ,
+                      {{
+                      getVillagesDemographyData?.longitude
+                      ? getVillagesDemographyData.longitude
+                      : ""
+                      }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">
+                      Boundaries of the village
+                    </div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData?.boundariesVillage
+                      }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">
+                      Geographical Area
+                    </div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData?.geographicalArea
+                      }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">
+                      Total House Holds
+                    </div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ this.getVillagesDemographyData?.noOfHouses }}
+                    </div>
+                  </div>
+
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Population</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData?.totalPopulation
+                      }}
+                    </div>
+                  </div>
+
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Male</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData
+                      ?.adultMalePopulation
+                      }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">Female</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData
+                      ?.adultFemalePopulation
+                      }}
+                    </div>
+                  </div>
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">above 18 Male</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData
+                      ?.childMalePopulation
+                      }}
+                    </div>
+                  </div>
+
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">
+                      above 18 feMale
+                    </div>
+                    <div class="project-detail-set-v mt-2">
+                      {{
+                      this.getVillagesDemographyData
+                      ?.childFemalePopulation
+                      }}
+                    </div>
+                  </div>
+
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">ABOVE 60 Male</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ this.getVillagesDemographyData?.above60Male }}
+                    </div>
+                  </div>
+
+                  <div class="project-detail-set col-2">
+                    <div class="project-detail-set-h">ABOVE 60 Male</div>
+                    <div class="project-detail-set-v mt-2">
+                      {{ this.getVillagesDemographyData?.above60Female }}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </p-tabPanel>
 
-          <div class="row mb-4 pl-4 pr-4">
-            <div class="project-detail-h-set">
-              <h4>Vilage Details</h4>
-            </div>
-          </div>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Community wise Population
+                  </span>
+                </div>
+              </ng-template>
+              <div>
+                <app-community-wise-population [villagesDemographyData]="CommunityPopulationData"
+                  [communityData]="CommunityOptions" [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"
+                  (closeDialogEvent)="reFreshVilageData($event)"></app-community-wise-population>
+              </div>
+            </p-tabPanel>
 
-          <div class="projects-list-tab mt-3">
-            <div class="container-fluid">
-              <div class="row">
-                <p-tabView styleClass="tabview-custom">
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Village Details
-                        </span>
-                      </div>
-                    </ng-template>
-                    <div>
-                      <div class="row mb-4 pl-4 pr-4">
-                        <div class="project-detail-h-set mt-2">
-                          @if (ShowVilage()) {
-                          <button
-                            class="submit-btn-m"
-                            (click)="editVillage()"
-                            style="float: right"
-                            *appHasRole="[3]"
-                          >
-                            Edit village Details
-                          </button>
-                          }
-                        </div>
-                      </div>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Unemployed youth
+                  </span>
+                </div>
+              </ng-template>
 
-                      <div class="row mb-4 pl-4 pr-4">
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">
-                            Latitude, Longitude
-                          </div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              getVillagesDemographyData?.latitude
-                                ? getVillagesDemographyData.latitude
-                                : ""
-                            }}
-                            ,
-                            {{
-                              getVillagesDemographyData?.longitude
-                                ? getVillagesDemographyData.longitude
-                                : ""
-                            }}
-                          </div>
-                        </div>
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">
-                            Boundaries of the village
-                          </div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData?.boundariesVillage
-                            }}
-                          </div>
-                        </div>
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">
-                            Geographical Area
-                          </div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData?.geographicalArea
-                            }}
-                          </div>
-                        </div>
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">
-                            Total House Holds
-                          </div>
-                          <div class="project-detail-set-v mt-2">
-                            {{ this.getVillagesDemographyData?.noOfHouses }}
-                          </div>
-                        </div>
+              <div>
+                <app-unemployed-youth [unemployedData]="unEmployedYouthVillage" [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData" [selectedVilageData]="selectedVilage"></app-unemployed-youth>
+              </div>
+            </p-tabPanel>
 
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">Population</div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData?.totalPopulation
-                            }}
-                          </div>
-                        </div>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Employed youth
+                  </span>
+                </div>
+              </ng-template>
 
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">Male</div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData
-                                ?.adultMalePopulation
-                            }}
-                          </div>
-                        </div>
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">Female</div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData
-                                ?.adultFemalePopulation
-                            }}
-                          </div>
-                        </div>
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">above 18 Male</div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData
-                                ?.childMalePopulation
-                            }}
-                          </div>
-                        </div>
-
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">
-                            above 18 feMale
-                          </div>
-                          <div class="project-detail-set-v mt-2">
-                            {{
-                              this.getVillagesDemographyData
-                                ?.childFemalePopulation
-                            }}
-                          </div>
-                        </div>
-
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">ABOVE 60 Male</div>
-                          <div class="project-detail-set-v mt-2">
-                            {{ this.getVillagesDemographyData?.above60Male }}
-                          </div>
-                        </div>
-
-                        <div class="project-detail-set col-2">
-                          <div class="project-detail-set-h">ABOVE 60 Male</div>
-                          <div class="project-detail-set-v mt-2">
-                            {{ this.getVillagesDemographyData?.above60Female }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </p-tabPanel>
-
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Community wise Population
-                        </span>
-                      </div>
-                    </ng-template>
-                    <div>
-                      <app-community-wise-population
-                        [villagesDemographyData]="CommunityPopulationData"
-                        [communityData]="CommunityOptions"
-                        [vilageData]="getVillagesDemographyData"
-                        [selectedVilageData]="selectedVilage"
-                        (closeDialogEvent)="reFreshVilageData($event)"
-                      ></app-community-wise-population>
-                    </div>
-                  </p-tabPanel>
-
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Unemployed youth
-                        </span>
-                      </div>
-                    </ng-template>
-
-                    <div>
-                      <app-unemployed-youth
-                        [unemployedData]="unEmployedYouthVillage"
-                        [communityData]="CommunityOptions"
-                        [vilageData]="getVillagesDemographyData"
-                        [selectedVilageData]="selectedVilage"
-                      ></app-unemployed-youth>
-                    </div>
-                  </p-tabPanel>
-
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Employed youth
-                        </span>
-                      </div>
-                    </ng-template>
-
-                    <div>
-                      <app-employedyouth
-                        [employedYouthVillage]="employedYouthVillage"
-                        [selectedVilageData]="selectedVilage"
-                        [communityData]="CommunityOptions"
-                        [vilageData]="getVillagesDemographyData"
-                        (closeDialogEvent)="reFreshVilageData($event)"
-                      ></app-employedyouth>
-                    </div>
-                  </p-tabPanel>
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Main Occupation
-                        </span>
-                      </div>
-                    </ng-template>
-                    <div>
-                      <app-main-occupation
-                        [occupationsData]="occupationsData"
-                        [occupationsLookupData]="villagelookupsData.occupation"
-                        [vilageData]="getVillagesDemographyData"
-                        [selectedVilageData]="selectedVilage"
-                      ></app-main-occupation>
-                    </div>
-                  </p-tabPanel>
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Land Utilization
-                        </span>
-                      </div>
-                    </ng-template>
-                    <div>
-                      <app-land-utilization
-                        [landUtilizationData]="landUtilizationData"
-                        [landUtilizationLookupData]="
+              <div>
+                <app-employedyouth [employedYouthVillage]="employedYouthVillage" [selectedVilageData]="selectedVilage"
+                  [communityData]="CommunityOptions" [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"></app-employedyouth>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Main Occupation
+                  </span>
+                </div>
+              </ng-template>
+              <div>
+                <app-main-occupation [occupationsData]="occupationsData"
+                  [occupationsLookupData]="villagelookupsData.occupation" [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"></app-main-occupation>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Land Utilization
+                  </span>
+                </div>
+              </ng-template>
+              <div>
+                <app-land-utilization [landUtilizationData]="landUtilizationData" [landUtilizationLookupData]="
                           villagelookupsData.landUtilization
-                        "
-                        [vilageData]="getVillagesDemographyData"
-                        (closeDialogEvent)="reFreshVilageData($event)"
-                        [selectedVilageData]="selectedVilage"
-                      ></app-land-utilization>
-                    </div>
-                  </p-tabPanel>
+                        " [vilageData]="getVillagesDemographyData" (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"></app-land-utilization>
+              </div>
+            </p-tabPanel>
 
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Cultivation crops
-                        </span>
-                      </div>
-                    </ng-template>
-                    <div>
-                      <app-cultivation-crops
-                        [cultivationCropsData]="cultivationCropsData"
-                        [cultivationCropsLookupData]="
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Cultivation crops
+                  </span>
+                </div>
+              </ng-template>
+              <div>
+                <app-cultivation-crops [cultivationCropsData]="cultivationCropsData" [cultivationCropsLookupData]="
                           villagelookupsData.cultivationCrops
-                        "
-                        [vilageData]="getVillagesDemographyData"
-                        (closeDialogEvent)="reFreshVilageData($event)"
-                        [selectedVilageData]="selectedVilage"
-                      ></app-cultivation-crops>
-                    </div>
-                  </p-tabPanel>
+                        " [vilageData]="getVillagesDemographyData" (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"></app-cultivation-crops>
+              </div>
+            </p-tabPanel>
 
-                  <p-tabPanel>
-                    <ng-template pTemplate="header">
-                      <div class="flex align-items-center gap-2">
-                        <span class="font-bold white-space-nowrap m-0">
-                          Institutions
-                        </span>
-                      </div>
-                    </ng-template>
-                    <div>
-                      <app-institutions
-                        [institutionsData]="institutionsData"
-                        [institutionsLookupData]="
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2">
+                  <span class="font-bold white-space-nowrap m-0">
+                    Institutions
+                  </span>
+                </div>
+              </ng-template>
+              <div>
+                <app-institutions [institutionsData]="institutionsData" [institutionsLookupData]="
                           villagelookupsData.institutions
-                        "
-                        [vilageData]="getVillagesDemographyData"
-                        (closeDialogEvent)="reFreshVilageData($event)"
-                        [selectedVilageData]="selectedVilage"
-                      ></app-institutions>
-                    </div>
-                  </p-tabPanel>
-                </p-tabView>
-                <!-- <p-tabView styleClass="tabview-custom">
+                        " [vilageData]="getVillagesDemographyData" (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"></app-institutions>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
+          <!-- <p-tabView styleClass="tabview-custom">
           <p-tabPanel>
             <ng-template pTemplate="header">
               <div class="flex align-items-center gap-2">
@@ -482,740 +401,523 @@
             ></app-project-signoff>
           </p-tabPanel>
         </p-tabView> -->
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="row mb-4 pl-4 pr-4">
-            <div class="project-detail-h-set">
-              <h4>Project Details</h4>
-            </div>
-          </div>
-          <!-- tab pael start -->
-          <div class="projects-list-tab mt-3">
-            <div class="container-fluid">
-              <div class="row mb-4 pl-4 pr-4">
-                <div class="project-detail-set col-12">
-                  <p-tabView styleClass="tabview-custom">
-                    @for (projectTab of projectMenuTab; track
-                    projectTab.tabName) {
-                    <p-tabPanel>
-                      <ng-template pTemplate="header">
-                        <div class="flex align-items-center gap-2">
-                          <span class="font-bold white-space-nowrap m-0">
-                            {{ projectTab.tabName }}
-                          </span>
-                        </div>
-                      </ng-template>
-                      <div>
-                        @if (projectTab.tabName === 'Draft') {
+    <div class="row mb-4 pl-4 pr-4">
+      <div class="project-detail-h-set">
+        <h4>Project Details</h4>
+      </div>
+    </div>
+    <!-- tab pael start -->
+    <div class="projects-list-tab mt-3">
+      <div class="container-fluid">
+        <div class="row mb-4 pl-4 pr-4">
+          <div class="project-detail-set col-12">
+            <p-tabView styleClass="tabview-custom">
+              @for (projectTab of projectMenuTab; track
+              projectTab.tabName) {
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <div class="flex align-items-center gap-2">
+                    <span class="font-bold white-space-nowrap m-0">
+                      {{ projectTab.tabName }}
+                    </span>
+                  </div>
+                </ng-template>
+                <div>
+                  @if (projectTab.tabName === 'Draft') {
 
-                        <p-table
-                          [value]="projectTab.projectList"
-                          dataKey="id"
-                          editMode="row"
-                        >
-                          <ng-template pTemplate="header">
-                            <tr>
-                              <th style="width: 25%">Project Category</th>
-                              <th style="width: 25%">Project Type</th>
-                              <th style="width: 30%">Project Description</th>
-                              <th style="width: 20%"></th>
-                            </tr>
-                          </ng-template>
-                          <ng-template
-                            pTemplate="body"
-                            let-project
-                            let-editing="editing"
-                            let-ri="rowIndex"
-                          >
-                            <tr [pEditableRow]="project">
-                              <!-- Project Category -->
-                              <td>
-                                <p-cellEditor>
-                                  <ng-template pTemplate="input">
-                                    <p-dropdown
-                                      [options]="allCategories"
-                                      optionLabel="name"
-                                      optionValue="id"
-                                      [(ngModel)]="project.projectCategoryId"
-                                      (onChange)="onCategoryChange(project)"
-                                      placeholder="Select Category"
-                                      [style]="{ width: '100%' }"
-                                      appendTo="body"
-                                    ></p-dropdown>
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                    {{
-                                      getCategoryName(project.projectCategoryId)
-                                    }}
-                                  </ng-template>
-                                </p-cellEditor>
-                              </td>
+                  <p-table [value]="projectTab.projectList" dataKey="id" editMode="row">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th style="width: 25%">Project Category</th>
+                        <th style="width: 25%">Project Type</th>
+                        <th style="width: 30%">Project Description</th>
+                        <th style="width: 20%"></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-project let-editing="editing" let-ri="rowIndex">
+                      <tr [pEditableRow]="project">
+                        <!-- Project Category -->
+                        <td>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <p-dropdown [options]="allCategories" optionLabel="name" optionValue="id"
+                                [(ngModel)]="project.projectCategoryId" (onChange)="onCategoryChange(project)"
+                                placeholder="Select Category" [style]="{ width: '100%' }" appendTo="body"></p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{
+                              getCategoryName(project.projectCategoryId)
+                              }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
 
-                              <!-- Project Type -->
-                              <td>
-                                <p-cellEditor>
-                                  <ng-template pTemplate="input">
-                                    <p-dropdown
-                                      [options]="
+                        <!-- Project Type -->
+                        <td>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <p-dropdown [options]="
                                         getTypesByCategory(
                                           project.projectCategoryId
                                         )
-                                      "
-                                      optionLabel="description"
-                                      optionValue="id"
-                                      [(ngModel)]="project.projectTypeId"
-                                      placeholder="Select Type"
-                                      [style]="{ width: '100%' }"
-                                      appendTo="body"
-                                    ></p-dropdown>
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                    {{
-                                      getTypeDescription(
-                                        project.projectCategoryId,
-                                        project.projectTypeId
-                                      )
-                                    }}
-                                  </ng-template>
-                                </p-cellEditor>
-                              </td>
+                                      " optionLabel="description" optionValue="id" [(ngModel)]="project.projectTypeId"
+                                placeholder="Select Type" [style]="{ width: '100%' }" appendTo="body"></p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{
+                              getTypeDescription(
+                              project.projectCategoryId,
+                              project.projectTypeId
+                              )
+                              }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
 
-                              <!-- Project Description -->
-                              <td>
-                                <p-cellEditor>
-                                  <ng-template pTemplate="input">
-                                    <input
-                                      pInputText
-                                      type="text"
-                                      [(ngModel)]="project.description"
-                                      placeholder="Enter Description"
-                                      style="width: 100%"
-                                    />
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                    {{ project.description }}
-                                  </ng-template>
-                                </p-cellEditor>
-                              </td>
+                        <!-- Project Description -->
+                        <td>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input pInputText type="text" [(ngModel)]="project.description"
+                                placeholder="Enter Description" style="width: 100%" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{ project.description }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
 
-                              <!-- Actions -->
-                              <td>
-                                <div
-                                  class="flex align-items-center justify-content-center gap-2"
-                                >
-                                  <button
-                                    *ngIf="!editing"
-                                    pButton
-                                    pRipple
-                                    type="button"
-                                    pInitEditableRow
-                                    label="Edit"
-                                    (click)="onRowEditInit(project)"
-                                    class="p-button-rounded p-button-text"
-                                    class="submit-btn-m"
-                                  ></button>
-                                  <button
-                                    *ngIf="editing"
-                                    pButton
-                                    pRipple
-                                    type="button"
-                                    pSaveEditableRow
-                                    label="Save"
-                                    (click)="createPayload(project, 'DRAFT')"
-                                    class="p-button-rounded p-button-text p-button-success mr-2"
-                                    class="submit-btn-m"
-                                  ></button>
-                                  <button
-                                    *ngIf="editing"
-                                    pButton
-                                    pRipple
-                                    type="button"
-                                    pSaveEditableRow
-                                    label="Save as Waiting for Approval"
-                                    (click)="createPayload(project, 'WFA')"
-                                    class="p-button-rounded p-button-text p-button-success mr-2"
-                                    class="submit-btn-m"
-                                  ></button>
-                                  <button
-                                    *ngIf="editing"
-                                    pButton
-                                    pRipple
-                                    type="button"
-                                    pCancelEditableRow
-                                    label="Cancel"
-                                    (click)="
+                        <!-- Actions -->
+                        <td>
+                          <div class="flex align-items-center justify-content-center gap-2">
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow label="Edit"
+                              (click)="onRowEditInit(project)" class="p-button-rounded p-button-text"
+                              class="submit-btn-m"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow label="Save"
+                              (click)="createPayload(project, 'DRAFT')"
+                              class="p-button-rounded p-button-text p-button-success mr-2"
+                              class="submit-btn-m"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
+                              label="Save as Waiting for Approval" (click)="createPayload(project, 'WFA')"
+                              class="p-button-rounded p-button-text p-button-success mr-2"
+                              class="submit-btn-m"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow label="Cancel"
+                              (click)="
                                       onRowEditCancel(
                                         project,
                                         ri,
                                         projectTab.tabName
                                       )
-                                    "
-                                    class="p-button-rounded p-button-text p-button-danger"
-                                  ></button>
-                                </div>
-                              </td>
-                            </tr>
-                          </ng-template>
-                          <ng-template pTemplate="emptymessage">
-                            <tr>
-                              <td colspan="4" class="text-center">
-                                No {{ projectTab.tabName }} Projects Found
-                              </td>
-                            </tr>
-                          </ng-template>
-                        </p-table>
-                        } @else {
-                        <p-table
-                          #dt
-                          [value]="projectTab.projectList"
-                          [rows]="10"
-                          [paginator]="false"
-                          [globalFilterFields]="['name']"
-                          [tableStyle]="{ 'min-width': '75rem' }"
-                          [(selection)]="project"
-                          [rowHover]="true"
-                          dataKey="id"
-                        >
-                          <ng-template pTemplate="header">
-                            <tr>
-                              <th>Project Category</th>
-                              <th>Project Type</th>
-                              <th>Project cost</th>
-                              <th>Sponsors amount</th>
-                              <th>avilabul funds</th>
-                              <th>Expense</th>
-                              <th>Sponsors</th>
-                              <th>Project governance body</th>
-                              <th></th>
-                            </tr>
-                          </ng-template>
-                          <ng-template pTemplate="body" let-info>
-                            <tr>
-                              <td>
-                                <img
-                                  [src]="
+                                    " class="p-button-rounded p-button-text p-button-danger"></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="4" class="text-center">
+                          No {{ projectTab.tabName }} Projects Found
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                  } @else {
+                  <p-table #dt [value]="projectTab.projectList" [rows]="10" [paginator]="false"
+                    [globalFilterFields]="['name']" [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="project"
+                    [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th>Project Category</th>
+                        <th>Project Type</th>
+                        <th>Project cost</th>
+                        <th>Sponsors amount</th>
+                        <th>avilabul funds</th>
+                        <th>Expense</th>
+                        <th>Sponsors</th>
+                        <th>Project governance body</th>
+                        <th></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-info>
+                      <tr>
+                        <td>
+                          <img [src]="
                                     'assets/images/projects/' +
                                     (projectImages[info.projectType] ||
                                       projectImages[info.projectCategory] ||
                                       'default.png')
-                                  "
-                                  class="img-fluid"
-                                  [alt]="info.projectType"
-                                />
-                              </td>
-                              <td>{{ info.projectType }}</td>
+                                  " class="img-fluid" [alt]="info.projectType" />
+                        </td>
+                        <td>{{ info.projectType }}</td>
 
-                              <td>
-                                Estimation : ₹
-                                {{ info.projectEstimation || 0 }}/- <br />
-                                Govt Share : ₹{{
-                                  info.projectEstimation *
-                                    (info.governmentShare / 100)
-                                }}
-                                /- ({{ info.governmentShare || 0 }} %)<br />
+                        <td>
+                          Estimation : ₹
+                          {{ info.projectEstimation || 0 }}/- <br />
+                          Govt Share : ₹{{
+                          info.projectEstimation *
+                          (info.governmentShare / 100)
+                          }}
+                          /- ({{ info.governmentShare || 0 }} %)<br />
 
-                                Private Share : ₹
+                          Private Share : ₹
 
-                                {{
-                                  info.projectEstimation *
-                                    (info.publicShare / 100)
-                                }}
-                                /- ({{ info.publicShare || 0 }} % )
-                              </td>
-                              <td>6000</td>
-                              <td>10000</td>
-                              <td>
-                                <div class="project-detail-set-v mt-2">
-                                  <div>
-                                    totalExpenses :
-                                    {{
-                                      info?.villageProjectExpenseResponse
-                                        .totalExpenses
-                                    }}, totalFunds :
-                                    {{
-                                      info?.villageProjectExpenseResponse
-                                        .totalFunds
-                                    }}, remainingBalance :
-                                    {{
-                                      info?.villageProjectExpenseResponse
-                                        .remainingBalance
-                                    }}
-                                  </div>
-                                  @if(info?.villageProjectExpenseResponse.transactions.length
-                                  > 0) {
-                                  <ul
-                                    style="margin: 0; padding: 0"
-                                    *ngFor="
+                          {{
+                          info.projectEstimation *
+                          (info.publicShare / 100)
+                          }}
+                          /- ({{ info.publicShare || 0 }} % )
+                        </td>
+                        <td>6000</td>
+                        <td>10000</td>
+                        <td>
+                          <div class="project-detail-set-v mt-2">
+                            <div>
+                              totalExpenses :
+                              {{
+                              info?.villageProjectExpenseResponse
+                              .totalExpenses
+                              }}, totalFunds :
+                              {{
+                              info?.villageProjectExpenseResponse
+                              .totalFunds
+                              }}, remainingBalance :
+                              {{
+                              info?.villageProjectExpenseResponse
+                              .remainingBalance
+                              }}
+                            </div>
+                            @if(info?.villageProjectExpenseResponse.transactions.length
+                            > 0) {
+                            <ul style="margin: 0; padding: 0" *ngFor="
                                       let expense of info
                                         ?.villageProjectExpenseResponse
                                         .transactions
-                                    "
-                                  >
-                                    <li>
-                                      {{ expense?.paymentMode }} |
-                                      {{ expense?.expenseType }} |
-                                      {{ expense?.spentBy }} |
-                                      {{ expense?.paidTo }} |
-                                    </li>
-                                  </ul>
-                                  } @else { -- }
-                                </div>
-                              </td>
-                              <td>
-                                <div class="project-detail-set-v mt-2">
-                                  @if(info?.sponsersList.length > 0) {
-                                  <ul
-                                    style="margin: 0; padding: 0"
-                                    *ngFor="let sponsers of info?.sponsersList"
-                                  >
-                                    <li>
-                                      {{ sponsers?.firstName }}
-                                      {{ sponsers?.lastName }} |
-                                      {{ sponsers?.amount }} Rs
-                                    </li>
-                                  </ul>
-                                  } @else { -- }
-                                </div>
-                              </td>
-                              <td>
-                                <div class="project-detail-set-v mt-2">
-                                  @if(info?.committeeMembersList.length > 0) {
-                                  <ul
-                                    style="margin: 0; padding: 0"
-                                    *ngFor="
+                                    ">
+                              <li>
+                                {{ expense?.paymentMode }} |
+                                {{ expense?.expenseType }} |
+                                {{ expense?.spentBy }} |
+                                {{ expense?.paidTo }} |
+                              </li>
+                            </ul>
+                            } @else { -- }
+                          </div>
+                        </td>
+                        <td>
+                          <div class="project-detail-set-v mt-2">
+                            @if(info?.sponsersList.length > 0) {
+                            <ul style="margin: 0; padding: 0" *ngFor="let sponsers of info?.sponsersList">
+                              <li>
+                                {{ sponsers?.firstName }}
+                                {{ sponsers?.lastName }} |
+                                {{ sponsers?.amount }} Rs
+                              </li>
+                            </ul>
+                            } @else { -- }
+                          </div>
+                        </td>
+                        <td>
+                          <div class="project-detail-set-v mt-2">
+                            @if(info?.committeeMembersList.length > 0) {
+                            <ul style="margin: 0; padding: 0" *ngFor="
                                       let committee of info?.committeeMembersList
-                                    "
-                                  >
-                                    <li>
-                                      {{ committee?.firstName }}
-                                      {{ committee?.lastName }} |
-                                      {{ committee?.phoneNumber }}
-                                    </li>
-                                  </ul>
-                                  } @else { -- }
-                                </div>
-                              </td>
-                              <td>
-                                <div class="projects-actions-buttons">
-                                  <img
-                                    src="assets/images/icon-view.svg"
-                                    (click)="getProjectDetails(info)"
-                                  />
-                                  <img
-                                    src="assets/images/icon-edit.svg"
-                                    (click)="getProjectDetails(info)"
-                                    *appHasRole="[3, 2]"
-                                  />
-                                  <img
-                                    src="assets/images/icon-delete.svg"
-                                    *appHasRole="[3, 2]"
-                                  />
-                                </div>
-                              </td>
-                            </tr>
-                          </ng-template>
-                          <ng-template pTemplate="emptymessage">
-                            <tr>
-                              <td colspan="9" class="text-center">
-                                No {{ projectTab.tabName }} Projects Found
-                              </td>
-                            </tr>
-                          </ng-template>
-                        </p-table>
-                        }
-                      </div>
-                    </p-tabPanel>
-                    }
-                  </p-tabView>
+                                    ">
+                              <li>
+                                {{ committee?.firstName }}
+                                {{ committee?.lastName }} |
+                                {{ committee?.phoneNumber }}
+                              </li>
+                            </ul>
+                            } @else { -- }
+                          </div>
+                        </td>
+                        <td>
+                          <div class="projects-actions-buttons">
+                            <img src="assets/images/icon-view.svg" (click)="getProjectDetails(info)" />
+                            <img src="assets/images/icon-edit.svg" (click)="getProjectDetails(info)"
+                              *appHasRole="[3, 2]" />
+                            <img src="assets/images/icon-delete.svg" *appHasRole="[3, 2]" />
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="9" class="text-center">
+                          No {{ projectTab.tabName }} Projects Found
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                  }
                 </div>
-              </div>
-            </div>
+              </p-tabPanel>
+              }
+            </p-tabView>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- tab panel end  -->
+    <!-- tab panel end  -->
 
-          <div
-            class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
-            style="
+    <div class="row mb-4 pl-4 pr-4 projects-list-tab mt-3" style="
               display: none;
               background-color: #fff;
               border: 1px solid #000;
               padding-top: 10px;
               --bs-gutter-x: 0;
-            "
-            *ngFor="
+            " *ngFor="
               let project of getVillagesDemographyData?.projectResponseList
-            "
-          >
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Project Type</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project?.projectType }}
-              </div>
-            </div>
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Status</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project.status }}
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Estimation</div>
-              <div class="project-detail-set-v mt-2">
-                ₹
-                {{ project.projectEstimation }}
-                /-
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Govt. Share</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project?.governmentShare }} %
-              </div>
-            </div>
-
-            <div class="project-detail-set col-2">
-              <div class="project-detail-set-h">Private Share</div>
-              <div class="project-detail-set-v mt-2">
-                {{ project?.publicShare }} %
-              </div>
-            </div>
-
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Sponsors</div>
-              <div class="project-detail-set-v mt-2">
-                <ul
-                  style="margin: 0; padding: 0"
-                  *ngFor="let sponsers of project?.sponsersList"
-                >
-                  <li>
-                    {{ sponsers?.firstName }} {{ sponsers?.lastName }},
-                    {{ sponsers?.phoneNumber }}, {{ sponsers?.email }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-h">Committee Members</div>
-              <div class="project-detail-set-v mt-2">
-                <ul
-                  style="margin: 0; padding: 0"
-                  *ngFor="let committee of project?.committeeMembersList"
-                >
-                  <li>
-                    {{ committee?.firstName }} {{ committee?.lastName }},
-                    {{ committee?.phoneNumber }}, {{ committee?.email }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="project-detail-set col-4">
-              <div class="project-detail-set-v mt-2">
-                <div class="row">
-                  <div class="col-6">Expense Type</div>
-                  <div class="col-6">Paid to</div>
-                </div>
-                <div class="row">
-                  <div class="col-6">Bricks</div>
-                  <div class="col-6">Venkat</div>
-                </div>
-                <div class="row">
-                  <div class="col-6">Cement</div>
-                  <div class="col-6">Nagarjuna</div>
-                </div>
-              </div>
-            </div>
-          </div>
+            ">
+      <div class="project-detail-set col-2">
+        <div class="project-detail-set-h">Project Type</div>
+        <div class="project-detail-set-v mt-2">
+          {{ project?.projectType }}
+        </div>
+      </div>
+      <div class="project-detail-set col-2">
+        <div class="project-detail-set-h">Status</div>
+        <div class="project-detail-set-v mt-2">
+          {{ project.status }}
         </div>
       </div>
 
-      <div class="main-container projects-set-list" id="VilageList" *ngIf="!isSelectedVilage">
-        <p-table
-          #dt
-          [value]="getVillagesDemographyDataList"
-          [rows]="10"
-          [paginator]="false"
-          [globalFilterFields]="['name']"
-          [tableStyle]="{ 'min-width': '75rem' }"
-          [(selection)]="project"
-          [rowHover]="true"
-          dataKey="id"
-          selectionMode="single"
-          [(selection)]="selectedProduct"
-        >
-          <ng-template pTemplate="header">
-            <tr>
-              <th pSortableColumn="districtName">
-                Dist <p-sortIcon field="districtName" />
-              </th>
-              <th pSortableColumn="mandalName">
-                Mandal <p-sortIcon field="mandalName" />
-              </th>
-              <th pSortableColumn="villageName">
-                Village <p-sortIcon field="villageName" />
-              </th>
-              <th pSortableColumn="totalPopulation">
-                Population <p-sortIcon field="totalPopulation" />
-              </th>
-              <th pSortableColumn="inprogress">
-                Progress <p-sortIcon field="inprogress" />
-              </th>
-              <th pSortableColumn="completed">
-                Completed <p-sortIcon field="completed" />
-              </th>
-              <th pSortableColumn="waitingSponsers">
-                WFS <p-sortIcon field="waitingSponsers" />
-              </th>
-              @if (isLoggedIn()) {
-              <th pSortableColumn="approvals">
-                Draft <p-sortIcon field="approvals" />
-              </th>
+      <div class="project-detail-set col-2">
+        <div class="project-detail-set-h">Estimation</div>
+        <div class="project-detail-set-v mt-2">
+          ₹
+          {{ project.projectEstimation }}
+          /-
+        </div>
+      </div>
 
-              <th pSortableColumn="approvals">
-                Wating for Approval <p-sortIcon field="approvals" />
-              </th>
-              }
-              <th>Actions</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-info>
-            <tr [pSelectableRow]="product">
-              <td>{{ info.districtName }}</td>
-              <td>
-                {{ info.mandalName }}
-              </td>
-              <td>{{ info.villageName }}</td>
-              <td>
-                {{ info.totalPopulation ?? "N/A" }}
-              </td>
-              <td>
-                {{ info.inprogress }}
-              </td>
-              <td>{{ info.completed }}</td>
-              <td>{{ info.waitingSponsers }}</td>
-              @if (isLoggedIn()) {
-              <td>{{ info.waitingSponsers }}</td>
+      <div class="project-detail-set col-2">
+        <div class="project-detail-set-h">Govt. Share</div>
+        <div class="project-detail-set-v mt-2">
+          {{ project?.governmentShare }} %
+        </div>
+      </div>
 
-              <td>{{ info.approvals }}</td>
-              }
+      <div class="project-detail-set col-2">
+        <div class="project-detail-set-h">Private Share</div>
+        <div class="project-detail-set-v mt-2">
+          {{ project?.publicShare }} %
+        </div>
+      </div>
 
-              <td>
-                <div class="projects-actions-buttons">
-                  <img
-                    src="assets/images/icon-view.svg"
-                    (click)="selectedVillage(info)"
-                  />
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-        <p-paginator
-          (onPageChange)="onPageChange($event)"
-          [first]="first"
-          [rows]="rows"
-          [totalRecords]="totalRecords"
-          [showCurrentPageReport]="true"
-          [showPageLinks]="true"
-          [showJumpToPageDropdown]="false"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-        />
+      <div class="project-detail-set col-4">
+        <div class="project-detail-set-h">Sponsors</div>
+        <div class="project-detail-set-v mt-2">
+          <ul style="margin: 0; padding: 0" *ngFor="let sponsers of project?.sponsersList">
+            <li>
+              {{ sponsers?.firstName }} {{ sponsers?.lastName }},
+              {{ sponsers?.phoneNumber }}, {{ sponsers?.email }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-detail-set col-4">
+        <div class="project-detail-set-h">Committee Members</div>
+        <div class="project-detail-set-v mt-2">
+          <ul style="margin: 0; padding: 0" *ngFor="let committee of project?.committeeMembersList">
+            <li>
+              {{ committee?.firstName }} {{ committee?.lastName }},
+              {{ committee?.phoneNumber }}, {{ committee?.email }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-detail-set col-4">
+        <div class="project-detail-set-v mt-2">
+          <div class="row">
+            <div class="col-6">Expense Type</div>
+            <div class="col-6">Paid to</div>
+          </div>
+          <div class="row">
+            <div class="col-6">Bricks</div>
+            <div class="col-6">Venkat</div>
+          </div>
+          <div class="row">
+            <div class="col-6">Cement</div>
+            <div class="col-6">Nagarjuna</div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <p-dialog
-      header="Update Village Information"
-      appendTo="body"
-      [modal]="true"
-      [(visible)]="villageFormVisible"
-      [style]="{ width: '90%', right: 'inherit', height: '80%' }"
-    >
-      <form
-        [formGroup]="villageForm"
-        (ngSubmit)="updateVillageDataForm()"
-        *ngIf="villageFormVisible"
-      >
-        <div class="formgrid grid">
-          <div class="field col-12 md:col-3">
-            <label for="firstname6" class="block">Majority Religion</label>
-            <!-- <input
+<div class="main-container projects-set-list" id="VilageList" *ngIf="!isSelectedVilage">
+  <p-table #dt [value]="getVillagesDemographyDataList" [rows]="10" [paginator]="false" [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="project" [rowHover]="true" dataKey="id"
+    selectionMode="single" [(selection)]="selectedProduct">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="districtName">
+          Dist <p-sortIcon field="districtName" />
+        </th>
+        <th pSortableColumn="mandalName">
+          Mandal <p-sortIcon field="mandalName" />
+        </th>
+        <th pSortableColumn="villageName">
+          Village <p-sortIcon field="villageName" />
+        </th>
+        <th pSortableColumn="totalPopulation">
+          Population <p-sortIcon field="totalPopulation" />
+        </th>
+        <th pSortableColumn="inprogress">
+          Progress <p-sortIcon field="inprogress" />
+        </th>
+        <th pSortableColumn="completed">
+          Completed <p-sortIcon field="completed" />
+        </th>
+        <th pSortableColumn="waitingSponsers">
+          WFS <p-sortIcon field="waitingSponsers" />
+        </th>
+        @if (isLoggedIn()) {
+        <th pSortableColumn="approvals">
+          Draft <p-sortIcon field="approvals" />
+        </th>
+
+        <th pSortableColumn="approvals">
+          Wating for Approval <p-sortIcon field="approvals" />
+        </th>
+        }
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-info>
+      <tr [pSelectableRow]="product">
+        <td>{{ info.districtName }}</td>
+        <td>
+          {{ info.mandalName }}
+        </td>
+        <td>{{ info.villageName }}</td>
+        <td>
+          {{ info.totalPopulation ?? "N/A" }}
+        </td>
+        <td>
+          {{ info.inprogress }}
+        </td>
+        <td>{{ info.completed }}</td>
+        <td>{{ info.waitingSponsers }}</td>
+        @if (isLoggedIn()) {
+        <td>{{ info.waitingSponsers }}</td>
+
+        <td>{{ info.approvals }}</td>
+        }
+
+        <td>
+          <div class="projects-actions-buttons">
+            <img src="assets/images/icon-view.svg" (click)="selectedVillage(info)" />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true" [showPageLinks]="true" [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" />
+</div>
+
+<p-dialog header="Update Village Information" appendTo="body" [modal]="true" [(visible)]="villageFormVisible"
+  [style]="{ width: '90%', right: 'inherit', height: '80%' }">
+  <form [formGroup]="villageForm" (ngSubmit)="updateVillageDataForm()" *ngIf="villageFormVisible">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-3">
+        <label for="firstname6" class="block">Majority Religion</label>
+        <!-- <input
           pInputText
           class="w-full"
           formControlName="Religion"
           aria-describedby="Religion"
         /> -->
 
-            <p-dropdown
-              [options]="religionData"
-              formControlName="Religion"
-              optionLabel="name"
-              optionValue="id"
-              placeholder="Select Religion"
-              #Religion
-              class="w-full"
-              [autoWidth]="false"
-              [style]="{ minWidth: '100%' }"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">Primary Language</label>
-            <p-dropdown
-              [options]="languageData"
-              formControlName="Language"
-              optionLabel="name"
-              optionValue="id"
-              placeholder="Select Language"
-              #Language
-              class="w-full"
-              [autoWidth]="false"
-              [style]="{ minWidth: '100%' }"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">pinCode</label>
-            <input
-              pInputText
-              formControlName="pinCode"
-              aria-describedby="pinCode"
-              class="w-full"
-              #pinCode
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6" style="display: block"
-              >Latitude and Longitude</label
-            >
-            <p-button
-              label="Get Geolocation"
-              (onClick)="getLocation(getVillagesDemographyData)"
-            />
+        <p-dropdown [options]="religionData" formControlName="Religion" optionLabel="name" optionValue="id"
+          placeholder="Select Religion" #Religion class="w-full" [autoWidth]="false" [style]="{ minWidth: '100%' }" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Primary Language</label>
+        <p-dropdown [options]="languageData" formControlName="Language" optionLabel="name" optionValue="id"
+          placeholder="Select Language" #Language class="w-full" [autoWidth]="false" [style]="{ minWidth: '100%' }" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">pinCode</label>
+        <input pInputText formControlName="pinCode" aria-describedby="pinCode" class="w-full" #pinCode />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6" style="display: block">Latitude and Longitude</label>
+        <p-button label="Get Geolocation" (onClick)="getLocation(getVillagesDemographyData)" />
 
-            {{ GeolocationError }}
+        {{ GeolocationError }}
 
-            {{ getVillagesDemographyData?.latitude }}
+        {{ getVillagesDemographyData?.latitude }}
 
-            {{ getVillagesDemographyData?.longitude }}
-          </div>
+        {{ getVillagesDemographyData?.longitude }}
+      </div>
 
-          <div class="field col-12 md:col-3">
-            <label for="firstname6">Boundaries of the village</label>
-            <input
-              pInputText
-              formControlName="Boundaries"
-              aria-describedby="Boundaries"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">Geographical Area</label>
-            <input
-              pInputText
-              formControlName="Geographical"
-              aria-describedby="Geographical"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">Total House Holds</label>
-            <input
-              pInputText
-              formControlName="totalHouse"
-              aria-describedby="totalHouse"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">Population</label>
-            <input
-              pInputText
-              formControlName="Population"
-              aria-describedby="Population"
-              class="w-full"
-            />
-          </div>
+      <div class="field col-12 md:col-3">
+        <label for="firstname6">Boundaries of the village</label>
+        <input pInputText formControlName="Boundaries" aria-describedby="Boundaries" class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Geographical Area</label>
+        <input pInputText formControlName="Geographical" aria-describedby="Geographical" class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Total House Holds</label>
+        <input pInputText formControlName="totalHouse" aria-describedby="totalHouse" class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Population</label>
+        <input pInputText formControlName="Population" aria-describedby="Population" class="w-full" />
+      </div>
 
-          <div class="field col-12 md:col-3">
-            <label for="firstname6">Male</label>
-            <input
-              pInputText
-              formControlName="PopulationMale"
-              aria-describedby="PopulationMale"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">Female</label>
-            <input
-              pInputText
-              formControlName="PopulationFemale"
-              aria-describedby="PopulationFemale"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">above 18 Male</label>
-            <input
-              pInputText
-              formControlName="PopulationAboveEighteenMale"
-              aria-describedby="PopulationAboveEighteenMale"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6"> above 18 Female</label>
-            <input
-              pInputText
-              formControlName="PopulationAboveEighteenFeMale"
-              aria-describedby="PopulationAboveEighteenFeMale"
-              class="w-full"
-            />
-          </div>
+      <div class="field col-12 md:col-3">
+        <label for="firstname6">Male</label>
+        <input pInputText formControlName="PopulationMale" aria-describedby="PopulationMale" class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">Female</label>
+        <input pInputText formControlName="PopulationFemale" aria-describedby="PopulationFemale" class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">above 18 Male</label>
+        <input pInputText formControlName="PopulationAboveEighteenMale" aria-describedby="PopulationAboveEighteenMale"
+          class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6"> above 18 Female</label>
+        <input pInputText formControlName="PopulationAboveEighteenFeMale"
+          aria-describedby="PopulationAboveEighteenFeMale" class="w-full" />
+      </div>
 
-          <div class="field col-12 md:col-3">
-            <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
-            <input
-              pInputText
-              formControlName="PopulationAbove60Male"
-              aria-describedby="PopulationAbove60Male"
-              class="w-full"
-            />
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">SENIOR CITIZENS ABOVE 60 Female</label>
-            <input
-              class="w-full"
-              pInputText
-              formControlName="PopulationAbove60FeMale"
-              aria-describedby="PopulationAbove60FeMale"
-            />
-          </div>
+      <div class="field col-12 md:col-3">
+        <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
+        <input pInputText formControlName="PopulationAbove60Male" aria-describedby="PopulationAbove60Male"
+          class="w-full" />
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">SENIOR CITIZENS ABOVE 60 Female</label>
+        <input class="w-full" pInputText formControlName="PopulationAbove60FeMale"
+          aria-describedby="PopulationAbove60FeMale" />
+      </div>
 
-          <div class="field col-12 md:col-3">
-            <label for="lastname6">area</label>
-            <input
-              class="w-full"
-              pInputText
-              formControlName="area"
-              aria-describedby="area"
-            />
-          </div>
-        </div>
+      <div class="field col-12 md:col-3">
+        <label for="lastname6">area</label>
+        <input class="w-full" pInputText formControlName="area" aria-describedby="area" />
+      </div>
+    </div>
 
-        <div class="flex justify-content-end gap-2">
-          <p-button
-            label="Cancel"
-            severity="secondary"
-            (onClick)="villageFormVisible = false"
-            class="defaultPadding"
-          />
-          <p-button label="Save" type="submit" class="defaultPadding" />
-        </div>
-      </form>
-    </p-dialog>
-    <!-- [disabled]="!villageForm.valid" -->
-  </div>
-</div>
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Cancel" severity="secondary" (onClick)="villageFormVisible = false" class="defaultPadding" />
+      <p-button label="Save" type="submit" class="defaultPadding" />
+    </div>
+  </form>
+</p-dialog>
+<!-- [disabled]="!villageForm.valid" -->

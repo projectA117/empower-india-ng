@@ -998,7 +998,7 @@ h6 {
 
 
 .projects-set-list {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 195px);
   overflow: auto;
 }
 
@@ -1457,4 +1457,17 @@ h6 {
 
 .p-paginator .p-paginator-pages .p-paginator-page, .p-paginator, .p-icon {
   color: #444444;
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: #507619;
+  border-radius: 100px;
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before, .p-inputswitch .p-inputswitch-slider, .p-inputswitch .p-inputswitch-slider:before {
+  border-radius: 100px;
+}
+
+.cursor-hand{
+  cursor: pointer;
 }
