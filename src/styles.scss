@@ -795,13 +795,18 @@ h6 {
 }
 
 .leaders-top {
-  display: table;
-  left: 0;
-  right: 0;
   margin: auto;
   position: absolute;
+  display: inline-flex;
+  gap: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
+.leaders-top img{
+  border: 1px solid #c2d7aa;
+  border-radius: 100px;
+}
 .gap-2 {
   gap: 10px;
 }
@@ -1386,6 +1391,7 @@ h6 {
 }
 .p-datatable .p-datatable-tbody > tr > td{
   border-bottom: 1px solid #EDF0F5 ;
+  padding: 0;
 }
 
 .p-datatable .p-datatable-tbody > tr:nth-child(even) {
@@ -1440,7 +1446,7 @@ h6 {
   background-color: #fff;
     padding: 10px;
     width: 85px;
-    border: 1px solid #eef0f4;
+    // border: 1px solid #eef0f4;
     border-radius: 8px;
 }
 

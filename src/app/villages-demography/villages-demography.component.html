@@ -1,8 +1,9 @@
+@if(!isSelectedVilage) {
 <div class="header-set">
   <h3>
     Villages List <span>{{ totalRecords }}</span>
   </h3>
-  @if(!isSelectedVilage) {
+  
   <h3 style="visibility: hidden">Projects List <span>55</span></h3>
   <div class="header-set-filter">
     <p-dropdown [filter]="true" appendTo="body" [options]="status" [(ngModel)]="selectedStatus" optionLabel="name"
@@ -23,8 +24,8 @@
       [showClear]="selectedVilage?.id" />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
-  }
 </div>
+}
 <div class="container-fluid p-0" id="SelectedVilageDetails" *ngIf="isSelectedVilage">
   <div class="container-fluid">
     <div class="row project-detail-name-h">
