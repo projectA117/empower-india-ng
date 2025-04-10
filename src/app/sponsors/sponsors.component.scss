@@ -8,6 +8,7 @@
     transition: all 0.2s ease-out;
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
     cursor: pointer;
+    padding: 0;
 
     &:hover {
         transform: translateY(-2px) scale(1.015) translateZ(0);
@@ -26,7 +27,7 @@
         .sponspor-details-name {
             font-weight: 800;
             color: #BF3700;
-            font-size: 18px;
+            font-size: 15px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
