@@ -222,7 +222,7 @@ export class UsersComponent {
       (d) => d.id == user.districtId
     );
     // this.userForm.removeControl('password');
-    this.userForm.controls['password'].setValue('****');
+    // this.userForm.controls['password'].setValue('****');
     this.userForm.patchValue({
       id: user.id,
       firstName: user.firstName,
