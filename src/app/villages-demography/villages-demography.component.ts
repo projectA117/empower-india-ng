@@ -505,21 +505,25 @@ export class VillagesDemographyComponent implements OnInit {
   }
 
   getvilages(event: any) {
-    const mandalCode = event?.value?.id;
+    const mandalCode = event?.value?.id ? event.value.id : null;
     this.first = 0;
     this.pageNumber = 0;
     this.villages = [];
     this.selectedVilage = null;
-    this.commonService.getVillages(mandalCode).subscribe(
-      (data) => {
-        this.villages = data;
-        this.getFilterVillagesDemographyData();
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.villages = HardCodedInfo.villages;
-      }
-    );
+    if (mandalCode) {
+      this.commonService.getVillages(mandalCode).subscribe(
+        (data) => {
+          this.villages = data;
+          this.getFilterVillagesDemographyData();
+        },
+        (err) => {
+          //Temp fix for Gopi
+          this.villages = HardCodedInfo.villages;
+        }
+      );
+    } else {
+      this.getFilterVillagesDemographyData();
+    }
   }
 
   vilageChange(event: any) {

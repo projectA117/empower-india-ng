@@ -42,10 +42,10 @@ export class CommonService {
   getProjectStatus(): Observable<any> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/status`).pipe(
       map((response) => {
-        return response.filter((status) => !status.isDeleted)
+        return response.filter((status) => !status.isDeleted);
       }),
       catchError((error) => of(error))
-    )
+    );
   }
 
   getStates(): Observable<any> {
@@ -234,7 +234,7 @@ export class CommonService {
     return (
       this.httpClient
         // .get<any>(`${environment.apiUrl}/villages/demography?${payLoad}`)
-        .get<any>(`${environment.apiUrl}/village/village-project/4304`)
+        .get<any>(`${environment.apiUrl}/village/village-project/${payLoad}`)
         .pipe(
           map((response) => {
             return response;
@@ -342,20 +342,19 @@ export class CommonService {
   }
 
   getGalleryImages(): Observable<any> {
-    return this.httpClient.get<any>(`${environment.apiUrl}/gallery-images/`).pipe(
-      map((response) => {
-        return response;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/gallery-images/`)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   addNewImages(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(
-        `${environment.apiUrl}/gallery-images/uploadImage`,
-        payLoad
-      )
+      .post<any>(`${environment.apiUrl}/gallery-images/uploadImage`, payLoad)
       .pipe(
         map((res) => {
           return res;

@@ -47,6 +47,7 @@ export class UsersComponent {
   selectedDistrict: any = {};
   selectedRole: any = {};
   searchQuery: string = '';
+  AddEditUser: string = 'Add User';
   roles = computed(() =>
     this.commonService.roles().filter((role) => [3, 4, 5].includes(role.id))
   );
@@ -54,6 +55,7 @@ export class UsersComponent {
   private formBuilder = inject(FormBuilder);
   private commonService = inject(CommonService);
   private messageService = inject(MessageService);
+  selectedEditUser: null;
 
   get f() {
     return this.userForm.controls;
@@ -110,7 +112,9 @@ export class UsersComponent {
   }
 
   addUser() {
+    this.AddEditUser = 'Add User';
     const userData = {
+      id: this.selectedEditUser ?? null,
       firstName: this.userForm.get('firstName')?.value,
       aboutYourSelf: this.userForm.get('aboutYourSelf')?.value,
       lastName: this.userForm.get('lastName')?.value,
@@ -124,7 +128,9 @@ export class UsersComponent {
         : null,
     };
     const formData = new FormData();
-
+    if (this.useredit) {
+      delete userData['password'];
+    }
     formData.append(
       'user',
       new Blob([JSON.stringify(userData)], { type: 'application/json' })
@@ -203,13 +209,16 @@ export class UsersComponent {
     this.getAllUsers();
   }
   editUsers(user) {
+    this.selectedEditUser = user?.id;
     this.useredit = true;
+    this.AddEditUser = 'Edit User';
     this.addUserFlag = true;
     // this.districts = await lastValueFrom(this.commonService.getDistricts());
     const selectedDistrict = this.districts.find(
       (d) => d.id == user.districtId
     );
-    this.userForm.removeControl('password');
+    // this.userForm.removeControl('password');
+    this.userForm.controls['password'].setValue('****');
     this.userForm.patchValue({
       firstName: user.firstName,
       lastName: user.lastName,
@@ -219,5 +228,14 @@ export class UsersComponent {
       role: user.roles[0],
       assignedDistrict: selectedDistrict,
     });
+  }
+  addNewUser() {
+    // this.createUserForm();
+    // this.userForm.addControl(
+    //   'password',
+    //   this.formBuilder.control('', [Validators.required])
+    // );
+    this.useredit = false;
+    this.addUserFlag = true;
   }
 }
