@@ -290,7 +290,7 @@ export class CommonService {
 
   getProjectProgressImages(payLoad: any): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/project/status/${45}`)
+      .get<any>(`${environment.apiUrl}/project/status/${payLoad}`)
       .pipe(
         map((response) => {
           return response;
@@ -341,9 +341,9 @@ export class CommonService {
     return this.httpClient.put<any>(url, {});
   }
 
-  getGalleryImages(): Observable<any> {
+  getGalleryImages(payload): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/gallery-images/`)
+      .get<any>(`${environment.apiUrl}/gallery-images/all?${payload}`)
       .pipe(
         map((response) => {
           return response;

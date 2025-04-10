@@ -108,7 +108,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-info>
       <tr>
-        <td>
+        <td style="position: relative">
           <img
             [src]="
               'assets/images/projects/' +
@@ -118,8 +118,31 @@
             "
             class="img-fluid"
             [alt]="info.projectType"
-            (click)="getProjectProgressImages(info)"
+            (click)="getProjectProgressImages(info, info.statusImage)"
           />
+          <div
+            *ngIf="info.statusImage"
+            (click)="getProjectProgressImages(info, info.statusImage)"
+            class="rounded-6 flex items-center justify-center py-0.5p pr-2 h-2p absolute bottom-0 left-1.5p z-1 po:mb-0.8p po:ml-0.6p"
+            style="
+              background: linear-gradient(
+                  279deg,
+                  rgb(155, 0, 0) 0%,
+                  rgb(209, 19, 38) 100%
+                )
+                0% 0% no-repeat padding-box padding-box transparent;
+              padding: 5px 0;
+            "
+          >
+            <img
+              src="https://static.99acres.com/universalapp/img/toapzImage.png"
+              style="width: 16px"
+            />
+            <span
+              class="text-14 text-white capitalize tracking-normal text-left font-semibold"
+              >Progress images</span
+            >
+          </div>
         </td>
         <td>{{ info.projectType }}</td>
         <td>
