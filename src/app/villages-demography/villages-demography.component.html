@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="row mb-4 pl-4 pr-4">
+    <div class="row pl-4 pr-4">
       <div class="project-detail-h-set">
         <h4>Vilage Details</h4>
       </div>
@@ -66,17 +66,16 @@
                 </div>
               </ng-template>
               <div>
-                <div class="row mb-4 pl-4 pr-4">
-                  <div class="project-detail-h-set mt-2">
+                  <div class="edit-village">
                     @if (ShowVilage()) {
-                    <button class="submit-btn-m" (click)="editVillage()" style="float: right" *appHasRole="[3]">
+                      <img src="assets/images/icon-edit.svg" (click)="editVillage()" *appHasRole="[3]"/>
+                    <!-- <button class="submit-btn-m"  style="float: right" >
                       Edit village Details
-                    </button>
+                    </button> -->
                     }
                   </div>
-                </div>
 
-                <div class="row mb-4 pl-4 pr-4">
+                <div class="row pl-4 pr-4">
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">
                       Latitude, Longitude
@@ -152,7 +151,7 @@
                     </div>
                   </div>
                   <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h">above 18 Male</div>
+                    <div class="project-detail-set-h">Above 18 Male</div>
                     <div class="project-detail-set-v mt-2">
                       {{
                       this.getVillagesDemographyData
@@ -163,7 +162,7 @@
 
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">
-                      above 18 feMale
+                      Above 18 Female
                     </div>
                     <div class="project-detail-set-v mt-2">
                       {{
@@ -174,14 +173,14 @@
                   </div>
 
                   <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h">ABOVE 60 Male</div>
+                    <div class="project-detail-set-h">Above 60 Male</div>
                     <div class="project-detail-set-v mt-2">
                       {{ this.getVillagesDemographyData?.above60Male }}
                     </div>
                   </div>
 
                   <div class="project-detail-set col-2">
-                    <div class="project-detail-set-h">ABOVE 60 Male</div>
+                    <div class="project-detail-set-h">Above 60 Male</div>
                     <div class="project-detail-set-v mt-2">
                       {{ this.getVillagesDemographyData?.above60Female }}
                     </div>
@@ -210,7 +209,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Unemployed youth
+                    Unemployed Youth
                   </span>
                 </div>
               </ng-template>
@@ -225,7 +224,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Employed youth
+                    Employed Youth
                   </span>
                 </div>
               </ng-template>
@@ -270,7 +269,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Cultivation crops
+                    Cultivation Crops
                   </span>
                 </div>
               </ng-template>
@@ -412,7 +411,7 @@
       </div>
     </div>
 
-    <div class="row mb-4 pl-4 pr-4">
+    <div class="row pl-4 pr-4">
       <div class="project-detail-h-set">
         <h4>Project Details</h4>
       </div>
@@ -442,7 +441,7 @@
                         <th style="width: 25%">Project Category</th>
                         <th style="width: 25%">Project Type</th>
                         <th style="width: 30%">Project Description</th>
-                        <th style="width: 20%"></th>
+                        <th style="width: 20%">Actions</th>
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-project let-editing="editing" let-ri="rowIndex">
@@ -500,10 +499,11 @@
 
                         <!-- Actions -->
                         <td>
-                          <div class="flex align-items-center justify-content-center gap-2">
-                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow label="Edit"
+
+                            <img src="assets/images/icon-edit.svg"   pRipple  pInitEditableRow  *ngIf="!editing" (click)="onRowEditInit(project)" class="cursor-hand" />
+                            <!-- <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow label="Edit"
                               (click)="onRowEditInit(project)" class="p-button-rounded p-button-text"
-                              class="submit-btn-m"></button>
+                              class="submit-btn-m"></button> -->
                             <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow label="Save"
                               (click)="createPayload(project, 'DRAFT')"
                               class="p-button-rounded p-button-text p-button-success mr-2"
@@ -520,7 +520,6 @@
                                         projectTab.tabName
                                       )
                                     " class="p-button-rounded p-button-text p-button-danger"></button>
-                          </div>
                         </td>
                       </tr>
                     </ng-template>
@@ -540,12 +539,12 @@
                       <tr>
                         <th>Project Category</th>
                         <th>Project Type</th>
-                        <th>Project cost</th>
-                        <th>Sponsors amount</th>
-                        <th>avilabul funds</th>
+                        <th>Project Cost</th>
+                        <th>Sponsors Amount</th>
+                        <th>Avilabul Funds</th>
                         <th>Expense</th>
                         <th>Sponsors</th>
-                        <th>Project governance body</th>
+                        <th>Project Governance Body</th>
                         <th></th>
                       </tr>
                     </ng-template>
@@ -583,16 +582,17 @@
                         <td>
                           <div class="project-detail-set-v mt-2">
                             <div>
-                              totalExpenses :
-                              {{
+                              Total Expenses :
+                              ₹ {{
                               info?.villageProjectExpenseResponse
                               .totalExpenses
-                              }}, totalFunds :
-                              {{
+                              }}, 
+                               Total Funds :
+                               ₹ {{
                               info?.villageProjectExpenseResponse
                               .totalFunds
-                              }}, remainingBalance :
-                              {{
+                              }}, Remaining Balance :
+                              ₹ {{
                               info?.villageProjectExpenseResponse
                               .remainingBalance
                               }}
@@ -854,7 +854,7 @@
           placeholder="Select Language" #Language class="w-full" [autoWidth]="false" [style]="{ minWidth: '100%' }" />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">pinCode</label>
+        <label for="lastname6">Pin Code</label>
         <input pInputText formControlName="pinCode" aria-describedby="pinCode" class="w-full" #pinCode />
       </div>
       <div class="field col-12 md:col-3">
@@ -894,29 +894,29 @@
         <input pInputText formControlName="PopulationFemale" aria-describedby="PopulationFemale" class="w-full" />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">above 18 Male</label>
+        <label for="lastname6">Above 18 Male</label>
         <input pInputText formControlName="PopulationAboveEighteenMale" aria-describedby="PopulationAboveEighteenMale"
           class="w-full" />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6"> above 18 Female</label>
+        <label for="lastname6"> Above 18 Female</label>
         <input pInputText formControlName="PopulationAboveEighteenFeMale"
           aria-describedby="PopulationAboveEighteenFeMale" class="w-full" />
       </div>
 
       <div class="field col-12 md:col-3">
-        <label for="firstname6"> SENIOR CITIZENS ABOVE 60 Male</label>
+        <label for="firstname6"> Seniro Citizens Above 60 Male</label>
         <input pInputText formControlName="PopulationAbove60Male" aria-describedby="PopulationAbove60Male"
           class="w-full" />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6">SENIOR CITIZENS ABOVE 60 Female</label>
+        <label for="lastname6">Seniro Citizens Above 60 Female</label>
         <input class="w-full" pInputText formControlName="PopulationAbove60FeMale"
           aria-describedby="PopulationAbove60FeMale" />
       </div>
 
       <div class="field col-12 md:col-3">
-        <label for="lastname6">area</label>
+        <label for="lastname6">Area</label>
         <input class="w-full" pInputText formControlName="area" aria-describedby="area" />
       </div>
     </div>

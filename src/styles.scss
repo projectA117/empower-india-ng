@@ -579,7 +579,7 @@ h6 {
   border-radius: 5px;
   margin-bottom: 20px;
   transition: .3s ease;
-
+ 
 }
 
 .project-detail-set {
@@ -669,7 +669,6 @@ h6 {
 }
 
 .project-detail-h-set {
-  margin-bottom: 10px;
   width: 100%;
 
   h4 {
@@ -1481,4 +1480,19 @@ h6 {
 
 .mt-140{
   margin-top: 140px;
+}
+
+.p-tabview-panel{
+  position: relative;
+}
+
+.edit-village{
+  position: absolute;
+    right: -17px;
+    top: -18px;
+    padding: 10px;
+    background-color: #EDF0F5;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
 }
