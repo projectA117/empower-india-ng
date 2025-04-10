@@ -67,6 +67,7 @@ export class UsersComponent {
 
   createUserForm() {
     this.userForm = this.formBuilder.group({
+      id: new FormControl(''),
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phoneNumber: new FormControl(null, [
@@ -107,10 +108,13 @@ export class UsersComponent {
   onHideDialog() {
     this.addUserFlag = false;
     this.userForm.reset();
+    this.useredit = false;
+    this.userForm.get('password').setValidators([Validators.required]);
   }
 
   addUser() {
     const userData = {
+      id: this.userForm.get('id')?.value,
       firstName: this.userForm.get('firstName')?.value,
       aboutYourSelf: this.userForm.get('aboutYourSelf')?.value,
       lastName: this.userForm.get('lastName')?.value,
@@ -202,6 +206,7 @@ export class UsersComponent {
     this.selectedRole = null;
     this.getAllUsers();
   }
+
   editUsers(user) {
     this.useredit = true;
     this.addUserFlag = true;
@@ -209,8 +214,9 @@ export class UsersComponent {
     const selectedDistrict = this.districts.find(
       (d) => d.id == user.districtId
     );
-    this.userForm.removeControl('password');
+    // this.userForm.removeControl('password');
     this.userForm.patchValue({
+      id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
@@ -219,5 +225,7 @@ export class UsersComponent {
       role: user.roles[0],
       assignedDistrict: selectedDistrict,
     });
+
+    this.userForm.get('password').clearValidators();
   }
 }

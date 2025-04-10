@@ -70,7 +70,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5" class="text-center">No users</td>
+          <td colspan="6" class="text-center">No users</td>
         </tr>
       </ng-template>
     </p-table>
@@ -232,7 +232,8 @@
                 </div>
               </div>
             </div>
-            @if(f.role.value && f.role.value.id !== 3) {
+            @if(f.role.value && (f.role.value.id === 4 || f.role.value.id ===
+            5)) {
             <div class="form-group">
               <label for="firstName">Assigned District</label>
               <p-dropdown
@@ -262,7 +263,7 @@
         </div>
         <div class="form-group">
           <button [disabled]="userForm.invalid" class="btn btn-primary">
-            {{ "Add User" }}
+            {{ useredit ? "Update User" : "Add User" }}
           </button>
         </div>
       </form>
