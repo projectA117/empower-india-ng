@@ -1,5 +1,7 @@
-@if(!isSelectedVilage) {
+
+
 <div class="header-set">
+  @if(!isSelectedVilage) {
   <h3>
     Villages List <span>{{ totalRecords }}</span>
   </h3>
@@ -24,8 +26,9 @@
       [showClear]="selectedVilage?.id" />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
-</div>
 }
+
+</div>
 <div class="container-fluid p-0" id="SelectedVilageDetails" *ngIf="isSelectedVilage">
   <div class="container-fluid">
     <div class="row project-detail-name-h">
