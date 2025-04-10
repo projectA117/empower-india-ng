@@ -537,27 +537,29 @@ export class ProjectListComponent implements OnInit {
     this.showSponsorDialog = true;
     this.showDialog();
   }
-  getProjectProgressImages(data: any) {
-    this.commonService.getProjectProgressImages(data.id).subscribe(
-      (data: any) => {
-        this.projectsProgressImages = data?.filter(
-          (item) => item.statusImage != null
-        );
-        this.activeIndex = 1;
-        this.displayCustom = true;
-        this.images = this.projectsProgressImages.map((item) => {
-          return {
-            itemImageSrc: `data:image/jpeg;base64,${item.statusImage}`,
-            thumbnailImageSrc: `data:image/jpeg;base64,${item.statusImage}`,
-            alt: item.status,
-            title: item.status,
-          };
-        });
-      },
-      (err) => {
-        //Temp fix for Gopi
-        this.projectsProgressImages = '';
-      }
-    );
+  getProjectProgressImages(data: any, statusImage) {
+    if (statusImage) {
+      this.commonService.getProjectProgressImages(data.id).subscribe(
+        (data: any) => {
+          this.projectsProgressImages = data?.filter(
+            (item) => item.statusImage != null
+          );
+          this.activeIndex = 1;
+          this.displayCustom = true;
+          this.images = this.projectsProgressImages.map((item) => {
+            return {
+              itemImageSrc: `data:image/jpeg;base64,${item.statusImage}`,
+              thumbnailImageSrc: `data:image/jpeg;base64,${item.statusImage}`,
+              alt: item.status,
+              title: item.status,
+            };
+          });
+        },
+        (err) => {
+          //Temp fix for Gopi
+          this.projectsProgressImages = '';
+        }
+      );
+    }
   }
 }

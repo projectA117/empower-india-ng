@@ -9,15 +9,31 @@ import { GalleryImageUploadComponent } from '../gallery-image-upload/gallery-ima
 @Component({
   selector: 'app-sponsors',
   standalone: true,
-  imports: [GalleriaModule, CommonModule,
+  imports: [
+    GalleriaModule,
+    CommonModule,
     ImportsModule,
     RoleDirective,
-    GalleryImageUploadComponent
+    GalleryImageUploadComponent,
   ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent implements OnInit {
+  allSponsers: any = [];
+  selectedDistrict: any = {};
+  selectedMandal: any = {};
+  selectedVilage: any = {};
+  totalRecords: number = 0;
+  first: number = 0;
+  rows: number = 30;
+  pageNumber: number = 0;
+  serverError: boolean;
+  mandals: any[];
+  villages: any[];
+  districts: any[];
+  noRecords: boolean = false;
+
   displayCustom: boolean | undefined;
 
   activeIndex: number = 0;
@@ -48,11 +64,11 @@ export class GalleryComponent implements OnInit {
   showSponsorDialog: boolean = false;
   showImageUploadDialog: boolean = false;
 
-  constructor(
-    private commonService: CommonService
-  ) { }
+  constructor(private commonService: CommonService) {}
 
   ngOnInit() {
+    this.getDistricts();
+    this.getAllGalleryImages();
     //this.photoService.getImages().then((images) => (this.images = images));
     // this.images = [
     //   {
@@ -176,13 +192,59 @@ export class GalleryComponent implements OnInit {
     //     title: 'Title 15',
     //   },
     // ];
-    this.commonService.getGalleryImages().subscribe(res => {
-      this.images = res;
-      this.images = this.images.map(item => ({
+
+    /*
+    this.commonService.getGalleryImages().subscribe((res) => {
+      if (!res.content) {
+        this.allSponsers = [];
+        this.totalRecords = 0;
+        return;
+      }
+      this.images = res.content;
+      this.images = this.images.map((item) => ({
         ...item,
-        imgSrc: `data:image/png;base64,${item.image}`
-      }))
-    })
+        imgSrc: `data:image/png;base64,${item.image}`,
+      }));
+    }); */
+  }
+
+  getAllGalleryImages() {
+    let params = '';
+
+    if (this.selectedDistrict && this.selectedDistrict.id) {
+      params = 'districtId=' + this.selectedDistrict.id;
+    }
+    if (this.selectedMandal && this.selectedMandal.id) {
+      params += '&mandalId=' + this.selectedMandal.id;
+    }
+    if (this.selectedVilage && this.selectedVilage.id) {
+      params += '&villageId=' + this.selectedVilage.id;
+    }
+
+    params += '&page=' + this.pageNumber;
+    params += '&size=' + this.rows;
+
+    this.commonService.getGalleryImages(params).subscribe(
+      (data: any) => {
+        this.noRecords = false;
+        if (!data.content) {
+          this.allSponsers = [];
+          this.totalRecords = 0;
+          return;
+        }
+        this.images = data.content;
+        this.images = this.images.map((item) => ({
+          ...item,
+          imgSrc: `data:image/jpeg;base64,${item.statusImage}`,
+        }));
+        this.totalRecords = data.totalElements;
+      },
+      (err) => {
+        this.noRecords = true;
+        //Temp fix for Gopi
+        console.log('Error:', err);
+      }
+    );
   }
 
   imageClick(index: number) {
@@ -211,5 +273,70 @@ export class GalleryComponent implements OnInit {
     if (val) {
       this.hideDialog();
     }
+  }
+
+  getDistricts() {
+    this.commonService.getDistricts().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.districts = data;
+          if (this.selectedDistrict && this.selectedDistrict.id) {
+            //this.getAllSponsers();
+          }
+        }
+      },
+      (err) => {
+        console.log('Error:', err);
+      }
+    );
+  }
+
+  getMandals(event: any) {
+    const districtCode = event.value.id;
+    this.selectedDistrict = event.value;
+    this.mandals = [];
+    this.villages = [];
+    this.selectedMandal = null;
+    this.selectedVilage = null;
+    this.commonService.getMandals(districtCode).subscribe(
+      (data) => {
+        this.mandals = data;
+        this.getAllGalleryImages();
+      },
+      (err) => {
+        console.log('Error:', err);
+      }
+    );
+  }
+
+  getvilages(event: any) {
+    const mandalCode = event.value.id;
+    this.selectedMandal = event.value;
+    this.villages = [];
+    this.selectedVilage = null;
+    this.commonService.getVillages(mandalCode).subscribe(
+      (data) => {
+        this.villages = data;
+        this.getAllGalleryImages();
+      },
+      (err) => {
+        console.log('Error:', err);
+      }
+    );
+  }
+
+  vilageChange(event: any) {
+    this.selectedVilage = event.value;
+    this.getAllGalleryImages();
+  }
+
+  reset() {
+    this.selectedDistrict = null;
+    this.selectedMandal = null;
+    this.selectedVilage = null;
+    this.getAllGalleryImages();
+    // this.first = 0;
+    // this.rows = 10;
+    //this.getAllSponsers();
   }
 }
