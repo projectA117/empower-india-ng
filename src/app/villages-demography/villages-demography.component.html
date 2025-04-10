@@ -1,7 +1,7 @@
 
-
+@if(!isSelectedVilage) {
 <div class="header-set">
-  @if(!isSelectedVilage) {
+  
   <h3>
     Villages List <span>{{ totalRecords }}</span>
   </h3>
@@ -26,17 +26,20 @@
       [showClear]="selectedVilage?.id" />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
-}
+
 
 </div>
-<div class="container-fluid p-0" id="SelectedVilageDetails" *ngIf="isSelectedVilage">
+
+}
+
+<div class="container-fluid p-0 mt-140" id="SelectedVilageDetails" *ngIf="isSelectedVilage">
   <div class="container-fluid">
     <div class="row project-detail-name-h">
       <div class="d-flex justify-content-between">
-        <h4 class="inline-block">
-          {{ selectedDistrict?.name }} > {{ selectedMandal?.name }} >
+        <div class="page-breadcrumb">
+          {{ selectedDistrict?.name }} › {{ selectedMandal?.name }} › 
           {{ selectedVilage?.name }}
-        </h4>
+        </div>
         <div class="all-projects-arrow-set" (click)="hideSelectedVillage(info)">
           <img src="assets/images/back-arrow.svg" />
           <div>Vilages List</div>
