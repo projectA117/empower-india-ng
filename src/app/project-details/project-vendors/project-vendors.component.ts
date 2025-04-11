@@ -68,6 +68,7 @@ export class ProjectVendorsComponent implements OnInit {
 
   createVendorForm() {
     this.VendorForm = new FormGroup({
+      id: new FormControl(0),
       VendorName: new FormControl('', [Validators.required]),
       VendorContractorName: new FormControl('', [Validators.required]),
       VendorMobile: new FormControl(null, [
@@ -82,15 +83,17 @@ export class ProjectVendorsComponent implements OnInit {
 
   updateVendor() {
     const payload = {
+      id: this.VendorForm.get('id')?.value,
       name: this.VendorForm.get('VendorName')?.value,
       contractorName: this.VendorForm.get('VendorContractorName')?.value,
       phone: this.VendorForm.get('VendorMobile')?.value,
       address: this.VendorForm.get('VendorAddress')?.value,
+      "projectId": this.projectData.id,
       //villageId: this.projectData.villageId,
       //id: this.projectData.id,
     };
     this.projectDetailsService
-      .addVendors(payload, this.projectData.id)
+      .addVendors(payload)
       .subscribe((data) => {
         console.log('...Data', data);
         if (data) {
@@ -102,17 +105,19 @@ export class ProjectVendorsComponent implements OnInit {
   }
   onEditVendors(VendorsDetails: any) {
     this.vendorSidebarVisible = true;
-    this.VendorAddEditText = 'Edit Vendor';
+    this.VendorAddEditText = 'Edit';
     this.VendorForm.patchValue({
+      id: VendorsDetails.id,
       VendorName: VendorsDetails.name,
       VendorContractorName: VendorsDetails.contractorName,
       VendorMobile: VendorsDetails.phone,
       VendorAddress: VendorsDetails.address,
     });
   }
+
   onDelete(id) {
     this.projectDetailsService
-      .deleteVendors(id, this.projectData.id)
+      .deleteVendors(id)
       .subscribe((res) => {
         this.showVendorsDetails();
       });

@@ -110,9 +110,9 @@ export class ProjectDetailsService {
       );
   }
 
-  addVendors(payLoad: any, id: any): Observable<any> {
+  addVendors(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(`${environment.apiUrl}/vendors?projectId=${id}`, payLoad)
+      .post<any>(`${environment.apiUrl}/vendors`, payLoad)
       .pipe(
         map((res) => {
           return res;
@@ -121,9 +121,9 @@ export class ProjectDetailsService {
       );
   }
 
-  deleteVendors(vendorid: any, projectid: any): Observable<any> {
+  deleteVendors(vendorid: any): Observable<any> {
     return this.httpClient
-      .delete<any>(`${environment.apiUrl}/vendors/${vendorid}/${projectid}`)
+      .delete<any>(`${environment.apiUrl}/vendors/${vendorid}`)
       .pipe(
         map((res) => {
           return res;
@@ -182,6 +182,28 @@ export class ProjectDetailsService {
   addFinanceExpence(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`${environment.apiUrl}/finance/addTransaction`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  updateFinanceExpence(payLoad: any): Observable<any> {
+    return this.httpClient
+      .put<any>(`${environment.apiUrl}/finance/update`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  deleteFinanceExpence(id: number, projectId:  number): Observable<any> {
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/finance/${id}/${projectId}`)
       .pipe(
         map((res) => {
           return res;
