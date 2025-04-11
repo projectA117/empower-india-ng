@@ -215,19 +215,19 @@ export class ProjectComponent implements OnInit {
       this.projectForm.get('projectTypeId')?.setValue(null);
     }
   }
-  onSubmit() {
+  onSubmit(statusCode: string = 'DRAFT') {
     if (this.addNewProject) {
-      this.save();
+      this.save(statusCode);
     } else if (this.updateExistingProject) {
-      this.update();
+      this.update(statusCode);
     }
   }
-  save() {
+  save(statusCode: string = 'DRAFT') {
     this.submitted = true;
     if (this.projectForm.invalid) {
       return;
     }
-    this.commonService.saveProject(this.createPayload()).subscribe(
+    this.commonService.saveProject(this.createPayload(statusCode)).subscribe(
       (data) => {
         console.log('...Data', data);
         this.closeDialog();
@@ -237,12 +237,13 @@ export class ProjectComponent implements OnInit {
       }
     );
   }
-  update() {
+
+  update(statusCode: string = 'DRAFT') {
     this.submitted = true;
     if (this.projectForm.invalid) {
       return;
     }
-    this.commonService.updateProject(this.createPayload()).subscribe(
+    this.commonService.updateProject(this.createPayload(statusCode)).subscribe(
       (data) => {
         console.log('...Data', data);
         this.closeDialog();
@@ -252,7 +253,8 @@ export class ProjectComponent implements OnInit {
       }
     );
   }
-  createPayload() {
+
+  createPayload(statusCode: string = 'DRAFT') {
     const payload = {
       districtId: this.projectForm.get('districtId')?.value,
       mandalId: this.projectForm.get('mandalId')?.value,
@@ -267,14 +269,16 @@ export class ProjectComponent implements OnInit {
       governmentShare: this.projectForm.get('governmentShare')?.value,
       publicShare: this.projectForm.get('publicShare')?.value,
       description: this.projectForm.get('description')?.value,
-      statusCode: 'DRAFT',
+      statusCode: statusCode,
       ...(this.updateExistingProject && {
         id: this.project.id,
       }),
     };
 
     const formData = new FormData();
-    formData.append('projectImage', this.uploadimage); // Add the file
+    if (this.uploadimage) {
+      formData.append('projectImage', this.uploadimage); // Add the file
+    }
     // formData.append('user', this.testpayload);
     formData.append(
       'project',

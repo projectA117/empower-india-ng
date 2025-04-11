@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import {
   FormsModule,
@@ -29,7 +29,7 @@ import { RoleDirective } from 'src/directives/role-access.directive';
   styleUrl: './project-approval.component.scss',
   providers: [ProjectDetailsService],
 })
-export class ProjectApprovalComponent implements OnInit {
+export class ProjectApprovalComponent implements OnInit, OnChanges {
   @Input() projectData: any;
   value: string | undefined;
   approvalForm: FormGroup = new FormGroup({});
@@ -40,6 +40,12 @@ export class ProjectApprovalComponent implements OnInit {
 
   ngOnInit() {
     if (this.approvalForm) {
+      this.createapprovalForm();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if (changes.projectData) {
       this.createapprovalForm();
     }
   }

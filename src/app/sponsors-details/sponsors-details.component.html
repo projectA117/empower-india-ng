@@ -9,9 +9,14 @@
       <div class="sponsor-amount">
         <div class="sponsor-amount-txt">Donated Amount</div>
         <div class="sponsor-amount-price">
-          {{ selectedSponsorInformation.donarInfo.amount }}/-
+          {{
+            selectedSponsorInformation.donarInfo.amount
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}/-
         </div>
-        <div class="sponsor-amount-words">(Fifteen Lakhs)</div>
+        <div class="sponsor-amount-words">
+          ({{ selectedSponsorInformation.donarInfo.amountText }})
+        </div>
       </div>
     </div>
     <div class="sponsor-name">
@@ -41,7 +46,12 @@
     <div class="container">
       <h3 class="donated">
         Sponsored Project and Amount Details:
-        <span>{{ selectedSponsorInformation.donarInfo.amount }}/-</span>
+        <span
+          >{{
+            selectedSponsorInformation.donarInfo.amount
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}/-</span
+        >
       </h3>
       <table id="customers">
         <tr>

@@ -53,7 +53,9 @@
           {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
           {{ sponsor.districtName }} District
         </div>
-        <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
+        <div class="sponspor-details-money">
+          {{ sponsor.amount | currency : "INR" : "symbol" : "1.0-0" }}/-
+        </div>
       </div>
     </div>
   </ng-container>
