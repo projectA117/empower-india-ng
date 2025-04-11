@@ -94,8 +94,8 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th> Category</th>
-        <th> Type</th>
+        <th>Category</th>
+        <th>Type</th>
         <th>Status</th>
         <th>Estimation</th>
         <th>Govt Share</th>
@@ -147,14 +147,26 @@
         </td>
         <td>{{ info.projectType }}</td>
         <td>
-          <div class="status-set status-{{ info.statusCode }}">{{ info.statusCode }}</div>
-        </td>
-        <td>₹ {{ info.projectEstimation || 0}}/-</td>
-        <td>
-          ₹ {{ info.projectEstimation * (info.governmentShare / 100) }}/- ({{ info.governmentShare || 0 }} %)
+          <div class="status-set status-{{ info.statusCode }}">
+            {{ info.statusCode }}
+          </div>
         </td>
         <td>
-          ₹ {{ info.projectEstimation * (info.publicShare / 100) }}/- ({{ info.publicShare || 0 }} %)
+          {{
+            info.projectEstimation || 0 | currency : "INR" : "symbol" : "1.0-0"
+          }}/-
+        </td>
+        <td>
+          {{
+            info.projectEstimation * (info.governmentShare / 100)
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}/- ({{ info.governmentShare || 0 }} %)
+        </td>
+        <td>
+          {{
+            info.projectEstimation * (info.publicShare / 100)
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}/- ({{ info.publicShare || 0 }} %)
         </td>
         <td>{{ info.districtName }}</td>
         <td>{{ info.mandalName }}</td>

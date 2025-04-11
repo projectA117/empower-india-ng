@@ -47,7 +47,9 @@
           <td class="text-center">{{ donor.email }}</td>
           <td class="text-center">{{ donor.address }}</td>
           <td class="text-center">{{ donor.memoryOf }}</td>
-          <td class="text-right">₹ {{ donor.amount }} /-</td>
+          <td class="text-right">
+            {{ donor.amount | currency : "INR" : "symbol" : "1.0-0" }} /-
+          </td>
           <td class="text-center block">
             {{ donor.ModeofPayment }}
           </td>

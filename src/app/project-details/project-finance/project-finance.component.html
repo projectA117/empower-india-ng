@@ -3,13 +3,22 @@
     <h4 style="display: inline">Finance Details</h4>
   </div>
   <div>
-    Total Fund <span class="t-fund">₹ {{ totalFunds }}/-</span>
+    Total Fund
+    <span class="t-fund"
+      >{{ totalFunds | currency : "INR" : "symbol" : "1.0-0" }}/-</span
+    >
   </div>
   <div>
-    Total Expenses <span class="t-expenses">₹ {{ totalExpenses }}/-</span>
+    Total Expenses
+    <span class="t-expenses"
+      >{{ totalExpenses | currency : "INR" : "symbol" : "1.0-0" }}/-</span
+    >
   </div>
   <div>
-    Remaining Balance <span class="t-balance">₹ {{ remainingBalance }}/-</span>
+    Remaining Balance
+    <span class="t-balance"
+      >{{ remainingBalance | currency : "INR" : "symbol" : "1.0-0" }}/-</span
+    >
   </div>
   <p-button
     label="Add Expense"
@@ -46,7 +55,12 @@
       <tr>
         <td>{{ showTransaction.transactionDate }}</td>
         <td>{{ showTransaction.expenseType }}</td>
-        <td>{{ showTransaction.transactionAmount }}</td>
+        <td>
+          {{
+            showTransaction.transactionAmount
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}
+        </td>
         <td>{{ showTransaction.spentBy }}</td>
         <td>{{ showTransaction.paidTo }}</td>
         <td>{{ showTransaction.paymentMode }}</td>

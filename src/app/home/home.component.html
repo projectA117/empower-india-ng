@@ -120,7 +120,6 @@
               [src]="sponsor.imgSrc"
               alt="{{ sponsor.firstName }} {{ sponsor.lastName }}"
               class="img-fluid"
-              
             />
             <div class="sponspor-details">
               <div class="sponspor-details-name">
@@ -130,7 +129,9 @@
                 {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
                 {{ sponsor.districtName }} District
               </div>
-              <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
+              <div class="sponspor-details-money">
+                {{ sponsor.amount | currency : "INR" : "symbol" : "1.0-0" }}/-
+              </div>
             </div>
           </div>
         </ng-template>
