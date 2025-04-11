@@ -147,16 +147,6 @@
         </td>
         <td>{{ info.projectType }}</td>
         <td>
-<<<<<<< HEAD
-          <div class="status-set status-{{ info.statusCode }}">{{ info.statusCode }}</div>
-        </td>
-        <td>₹ {{ info.projectEstimation || 0}}/-</td>
-        <td>
-          ₹ {{ info.projectEstimation * (info.governmentShare / 100) }}/- ({{ info.governmentShare || 0 }}%)
-        </td>
-        <td>
-          ₹ {{ info.projectEstimation * (info.publicShare / 100) }}/- ({{ info.publicShare || 0 }}%)
-=======
           <div class="status-set status-{{ info.statusCode }}">
             {{ info.statusCode }}
           </div>
@@ -170,14 +160,13 @@
           {{
             info.projectEstimation * (info.governmentShare / 100)
               | currency : "INR" : "symbol" : "1.0-0"
-          }}/- ({{ info.governmentShare || 0 }} %)
+          }}/- ({{ info.governmentShare || 0 }}%)
         </td>
         <td>
           {{
             info.projectEstimation * (info.publicShare / 100)
               | currency : "INR" : "symbol" : "1.0-0"
-          }}/- ({{ info.publicShare || 0 }} %)
->>>>>>> origin/development
+          }}/- ({{ info.publicShare || 0 }}%)
         </td>
         <td>{{ info.districtName }}</td>
         <td>{{ info.mandalName }}</td>
