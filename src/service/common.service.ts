@@ -59,6 +59,17 @@ export class CommonService {
       );
   }
 
+  getStatusFilter(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/lookup/project-status`)
+      .pipe(
+        map((getStatus) => {
+          return getStatus;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
   getDistricts(): Observable<any> {
     return this.httpClient
       .get<any>(`${environment.apiUrl}/lookup/districts?stateId=1`)

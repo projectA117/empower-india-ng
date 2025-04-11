@@ -86,17 +86,31 @@ export class ProjectFinanceComponent implements OnInit {
 
   addExpence() {
     const payload = {
-      financeDate: this.FinanceForm.get('financeDate')?.value,
-      financeExpenseType: this.FinanceForm.get('financeExpenseType')?.value,
-      financeAmount: this.FinanceForm.get('financeAmount')?.value,
-      financeSpentBy: this.FinanceForm.get('financeSpentBy')?.value,
-      villageId: this.projectData.villageId,
-      financePaidto: this.FinanceForm.get('financePaidto')?.value,
-      id: this.projectData.id,
-      financeModeofPayment: this.FinanceForm.get('financeModeofPayment')?.value,
-      financeApprovedBy: this.FinanceForm.get('financeApprovedBy')?.value,
-      financeDescription: this.FinanceForm.get('financeDescription')?.value,
-      financeBillProofs: this.FinanceForm.get('financeBillProofs')?.value,
+      villageProjectId: this.projectData.id,
+      transactionAmount: this.FinanceForm.get('financeAmount')?.value,
+      paymentMode: this.FinanceForm.get('financeModeofPayment')?.value,
+      transactionDate: this.FinanceForm.get('financeDate')?.value,
+      createdDate: '2025-04-11T14:52:50.310Z',
+      paidTo: this.FinanceForm.get('financePaidto')?.value,
+      expenseType: this.FinanceForm.get('financeExpenseType')?.value,
+      description: this.FinanceForm.get('financeDescription')?.value,
+      billProofs: this.FinanceForm.get('financeBillProofs')?.value
+        ? this.FinanceForm.get('financeBillProofs')?.value
+        : 'No',
+      spentBy: this.FinanceForm.get('financeSpentBy')?.value,
+      approvedBy: this.FinanceForm.get('financeApprovedBy')?.value,
+      // financeDate: this.FinanceForm.get('financeDate')?.value,
+      // financeExpenseType: this.FinanceForm.get('financeExpenseType')?.value,
+      // financeAmount: this.FinanceForm.get('financeAmount')?.value,
+      // financeSpentBy: this.FinanceForm.get('financeSpentBy')?.value,
+      // villageId: this.projectData.villageId,
+      // villageProjectId: this.projectData.id,
+      // financePaidto: this.FinanceForm.get('financePaidto')?.value,
+      // id: this.projectData.id,
+      // financeModeofPayment: this.FinanceForm.get('financeModeofPayment')?.value,
+      // financeApprovedBy: this.FinanceForm.get('financeApprovedBy')?.value,
+      // financeDescription: this.FinanceForm.get('financeDescription')?.value,
+      // financeBillProofs: this.FinanceForm.get('financeBillProofs')?.value,
     };
 
     this.projectDetailsService.addFinanceExpence(payload).subscribe((data) => {
