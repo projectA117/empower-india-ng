@@ -1,4 +1,4 @@
-<form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="add-project">
+<form [formGroup]="projectForm" class="add-project">
   <div class="row">
     <div class="col-8">
       <div class="row pad-sep">
@@ -281,6 +281,7 @@
           type="submit"
           label="Save as Draft"
           class="submit-btn"
+          (click)="onSubmit()"
         >
           Save as Draft
         </button>
@@ -290,8 +291,17 @@
           type="submit"
           label="Update"
           class="submit-btn"
+          (click)="onSubmit()"
         >
           Update
+        </button>
+        <button
+          type="submit"
+          label="Save as Draft"
+          class="submit-btn"
+          (click)="onSubmit('WFA')"
+        >
+          Save as Waiting for Approval
         </button>
       </div>
     </div>
