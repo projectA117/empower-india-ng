@@ -50,6 +50,7 @@ export class ProjectFinanceComponent implements OnInit {
   totalExpenses: number = 0;
   totalFunds: number = 0;
   financeSidebarVisible: boolean = false;
+  isAdd = false;
   FinanceForm: FormGroup = new FormGroup({});
   constructor(
     private productService: ProductService,
@@ -57,9 +58,9 @@ export class ProjectFinanceComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.showTransactionData();
-
     this.createFinanceForm();
   }
+
   showTransactionData() {
     this.projectDetailsService
       .showTransaction(this.projectData.id)
@@ -70,8 +71,10 @@ export class ProjectFinanceComponent implements OnInit {
         this.showTransaction = data.transactions;
       });
   }
+
   createFinanceForm() {
     this.FinanceForm = new FormGroup({
+      id: new FormControl(0),
       financeDate: new FormControl('', [Validators.required]),
       financeExpenseType: new FormControl('', [Validators.required]),
       financeAmount: new FormControl('', [Validators.required]),
@@ -85,27 +88,85 @@ export class ProjectFinanceComponent implements OnInit {
   }
 
   addExpence() {
-    const payload = {
-      financeDate: this.FinanceForm.get('financeDate')?.value,
-      financeExpenseType: this.FinanceForm.get('financeExpenseType')?.value,
-      financeAmount: this.FinanceForm.get('financeAmount')?.value,
-      financeSpentBy: this.FinanceForm.get('financeSpentBy')?.value,
-      villageId: this.projectData.villageId,
-      financePaidto: this.FinanceForm.get('financePaidto')?.value,
-      id: this.projectData.id,
-      financeModeofPayment: this.FinanceForm.get('financeModeofPayment')?.value,
-      financeApprovedBy: this.FinanceForm.get('financeApprovedBy')?.value,
-      financeDescription: this.FinanceForm.get('financeDescription')?.value,
-      financeBillProofs: this.FinanceForm.get('financeBillProofs')?.value,
-    };
 
+    const payload = {
+      villageProjectId: this.projectData.id,
+      transactionAmount: this.FinanceForm.get('financeAmount')?.value,
+      paymentMode: this.FinanceForm.get('financeModeofPayment')?.value,
+      transactionDate: this.FinanceForm.get('financeDate')?.value,
+      paidTo: this.FinanceForm.get('financePaidto')?.value,
+      expenseType: this.FinanceForm.get('financeExpenseType')?.value,
+      description: this.FinanceForm.get('financeDescription')?.value,
+      billProofs: this.FinanceForm.get('financeBillProofs')?.value
+        ? this.FinanceForm.get('financeBillProofs')?.value
+        : 'No',
+      spentBy: this.FinanceForm.get('financeSpentBy')?.value,
+      approvedBy: this.FinanceForm.get('financeApprovedBy')?.value,
+      // financeDate: this.FinanceForm.get('financeDate')?.value,
+      // financeExpenseType: this.FinanceForm.get('financeExpenseType')?.value,
+      // financeAmount: this.FinanceForm.get('financeAmount')?.value,
+      // financeSpentBy: this.FinanceForm.get('financeSpentBy')?.value,
+      // villageId: this.projectData.villageId,
+      // villageProjectId: this.projectData.id,
+      // financePaidto: this.FinanceForm.get('financePaidto')?.value,
+      // id: this.projectData.id,
+      // financeModeofPayment: this.FinanceForm.get('financeModeofPayment')?.value,
+      // financeApprovedBy: this.FinanceForm.get('financeApprovedBy')?.value,
+      // financeDescription: this.FinanceForm.get('financeDescription')?.value,
+      // financeBillProofs: this.FinanceForm.get('financeBillProofs')?.value,
+    };
+    if (!this.isAdd) {
+      payload['id'] = this.FinanceForm.get('id')?.value;
+      this.projectDetailsService.updateFinanceExpence(payload).subscribe((data) => {
+        console.log('...Data', data);
+        if (data) {
+          this.showTransactionData();
+          this.FinanceForm.reset();
+          this.financeSidebarVisible = false;
+          this.isAdd = false;
+          this.FinanceForm.reset();
+        }
+      });
+      return
+    }
     this.projectDetailsService.addFinanceExpence(payload).subscribe((data) => {
       console.log('...Data', data);
       if (data) {
         this.showTransactionData();
         this.FinanceForm.reset();
         this.financeSidebarVisible = false;
+        this.FinanceForm.reset();
       }
     });
+  }
+
+  onEditTransaction(transaction: any) {
+    this.financeSidebarVisible = true;
+    this.isAdd = false;
+    this.FinanceForm.patchValue({
+      id: transaction.id,
+      financeDate: transaction.transactionDate,
+      financeExpenseType: transaction.expenseType,
+      financeAmount: transaction.transactionAmount,
+      financeSpentBy: transaction.spentBy,
+      financePaidto: transaction.paidTo,
+      financeModeofPayment: transaction.paymentMode,
+      financeApprovedBy: transaction.approvedBy,
+      financeDescription: transaction.description,
+      financeBillProofs: transaction.billProofs,
+    });
+  }
+
+
+
+  onDeleteTransaction(transaction: any) {
+    this.projectDetailsService
+      .deleteFinanceExpence(transaction.id, this.projectData.id)
+      .subscribe((data) => {
+        console.log('...Data', data);
+        // if (data) {
+          this.showTransactionData();
+        // }
+      });
   }
 }

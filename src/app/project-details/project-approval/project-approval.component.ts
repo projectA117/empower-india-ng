@@ -121,7 +121,12 @@ export class ProjectApprovalComponent implements OnInit, OnChanges {
       governmentShare: this.approvalForm.get('GovtShare')?.value,
       publicShare: this.approvalForm.get('PublicShare')?.value,
     };
-    this.projectDetailsService.updateApproval(payload).subscribe((data) => {
+    const formData = new FormData();
+    formData.append(
+      'project',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+    this.projectDetailsService.updateApproval(formData).subscribe((data) => {
       console.log('...Data', data);
     });
   }

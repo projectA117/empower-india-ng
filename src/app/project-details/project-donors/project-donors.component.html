@@ -34,6 +34,7 @@
           <th pSortableColumn="Payment" class="text-center">
             Mode of Payment <p-sortIcon field="Payment" />
           </th>
+          <th class="text-center">Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-donor>
@@ -50,8 +51,20 @@
           <td class="text-right">
             {{ donor.amount | currency : "INR" : "symbol" : "1.0-0" }} /-
           </td>
-          <td class="text-center block">
+          <td class="text-right">
             {{ donor.ModeofPayment }}
+          </td>
+          <td class="text-center block">
+            <i
+              class="pi pi-pencil"
+              (click)="onEditSponsors(donor)"
+              *appHasRole="[3]"
+            ></i>
+            <i
+              class="pi pi-trash"
+              (click)="onDelete(donor)"
+              *appHasRole="[3]"
+            ></i>
           </td>
         </tr>
       </ng-template>
@@ -75,7 +88,7 @@
     (ngSubmit)="updatedonorForm()"
   >
     <div class="tab-pop-txt">
-      <h4>Add Sponsor</h4>
+      <h4>{{ donorsAddEditText }}</h4>
       <i class="pi pi-times" (click)="donorsSidebarVisible = false"></i>
     </div>
 

@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { SponsorsComponent } from '../../sponsors/sponsors.component';
 
 export interface Product {
   id?: string;
@@ -52,6 +53,10 @@ export class ProjectDonorsComponent implements OnInit {
   FileUpload: any;
   uploadimage: any;
   imagePreview: any = 'assets/images/upload-img.svg';
+  editdonors = false;
+  donorsAddEditText = 'Add Sponsor';
+  imagePreviews: any;
+  selectedFiles: (File | { base64: string; fromServer: true })[] = [];
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService,
@@ -134,5 +139,39 @@ export class ProjectDonorsComponent implements OnInit {
     this.uploadimage = file;
 
     this.FileUpload = formData;
+  }
+
+  onEditSponsors(selectedSponsorsdata: any) {
+    this.donorForm.reset();
+    this.donorsSidebarVisible = true;
+    this.editdonors = true;
+    this.donorsAddEditText = 'Edit Sponsor';
+    this.donorForm.patchValue({
+      DonorsName: selectedSponsorsdata.firstName,
+      DonorsPhone: selectedSponsorsdata.phoneNumber,
+      DonorsEmail: selectedSponsorsdata.email,
+      DonorsAddress: selectedSponsorsdata.address,
+      description: selectedSponsorsdata.description,
+      DonorsMemoryOf: selectedSponsorsdata.memoryOf,
+      DonorsAmount: selectedSponsorsdata.amount,
+      DonorsModeofPayment: selectedSponsorsdata.modeOfPayment,
+    });
+    if (selectedSponsorsdata.statusImage) {
+      this.imagePreviews.push(
+        `data:image/jpeg;base64,${selectedSponsorsdata.statusImage}`
+      );
+      this.selectedFiles = this.imagePreviews.map((b64) => ({
+        base64: b64,
+        fromServer: true,
+      }));
+    }
+  }
+
+  onDelete(donor: any) {
+    this.projectDetailsService
+      .deleteDonars(donor.id, this.projectData.id)
+      .subscribe((res) => {
+        this.showdonor();
+      });
   }
 }

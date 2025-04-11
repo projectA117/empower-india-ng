@@ -11,13 +11,14 @@ export class ProjectDetailsService {
   constructor(private httpClient: HttpClient) {}
 
   getProjectDetailsById(id: number): Observable<any> {
-    return this.httpClient.get<any>(`${environment.apiUrl}/project/getProjectById?projectId=${id}`)
-    .pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/project/getProjectById?projectId=${id}`)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   showCommittee(id: any): Observable<any> {
@@ -96,18 +97,33 @@ export class ProjectDetailsService {
       );
   }
 
-  showVendorsDetails(): Observable<any> {
-    return this.httpClient.get<any>(`${environment.apiUrl}/vendors`).pipe(
-      map((showTransaction) => {
-        return showTransaction;
-      }),
-      catchError((error) => of(error))
-    );
+  showVendorsDetails(id): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        `${environment.apiUrl}/vendors/getVendorByProjectId?projectId=${id}`
+      )
+      .pipe(
+        map((showTransaction) => {
+          return showTransaction;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
-  addVendors(payLoad: any, id: any): Observable<any> {
+  addVendors(payLoad: any): Observable<any> {
     return this.httpClient
-      .post<any>(`${environment.apiUrl}/vendors?projectId=${id}`, payLoad)
+      .post<any>(`${environment.apiUrl}/vendors`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  deleteVendors(vendorid: any): Observable<any> {
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/vendors/${vendorid}`)
       .pipe(
         map((res) => {
           return res;
@@ -122,6 +138,17 @@ export class ProjectDetailsService {
         `${environment.apiUrl}/donars/addDonars-image?projectId=${id}`,
         payLoad
       )
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  deleteDonars(donarsid: any, projectid: any): Observable<any> {
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/donars/${donarsid}/${projectid}`)
       .pipe(
         map((res) => {
           return res;
@@ -155,6 +182,28 @@ export class ProjectDetailsService {
   addFinanceExpence(payLoad: any): Observable<any> {
     return this.httpClient
       .post<any>(`${environment.apiUrl}/finance/addTransaction`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  updateFinanceExpence(payLoad: any): Observable<any> {
+    return this.httpClient
+      .put<any>(`${environment.apiUrl}/finance/update`, payLoad)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  deleteFinanceExpence(id: number, projectId:  number): Observable<any> {
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/finance/${id}/${projectId}`)
       .pipe(
         map((res) => {
           return res;
@@ -213,42 +262,46 @@ export class ProjectDetailsService {
   }
 
   showWIP(id: number) {
-    return this.httpClient.get<any>(`${environment.apiUrl}/project/status/${id}`)
-    .pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/project/status/${id}`)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   createWIP(payload: any) {
-    return this.httpClient.post<any>(`${environment.apiUrl}/project/status`, payload)
-    .pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/project/status`, payload)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   updateWIP(payload: any) {
-    return this.httpClient.put<any>(`${environment.apiUrl}/project/status`, payload)
-    .pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .put<any>(`${environment.apiUrl}/project/status`, payload)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   deleteWIP(id: number) {
-    return this.httpClient.delete<any>(`${environment.apiUrl}/project/status/${id}`)
-    .pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/project/status/${id}`)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 }

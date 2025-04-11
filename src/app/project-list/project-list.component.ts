@@ -215,6 +215,7 @@ export class ProjectListComponent implements OnInit {
 
     this.getCategories();
     this.getDistricts();
+    this.getStatusFilter();
     this.status = [
       {
         id: 7,
@@ -375,6 +376,34 @@ export class ProjectListComponent implements OnInit {
     );
   }
 
+  getStatusFilter() {
+    this.commonService.getStatusFilter().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.status = data;
+          this.status = this.status.filter(
+            (status) => status.isDeleted != true
+          );
+          const localStorageuser = JSON.parse(localStorage.getItem('user'));
+
+          if (localStorageuser?.roles[0].id == 3) {
+          } else {
+            this.status = this.status.filter(
+              (status) => status.statusCode != 'WFA'
+            );
+            this.status = this.status.filter(
+              (status) => status.statusCode != 'DRAFT'
+            );
+            console.log(this.status);
+          }
+        }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.districts = HardCodedInfo.districts;
+      }
+    );
+  }
   getDistricts() {
     this.commonService.getDistricts().subscribe(
       (data) => {
