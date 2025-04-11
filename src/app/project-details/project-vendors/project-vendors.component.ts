@@ -48,6 +48,7 @@ export class ProjectVendorsComponent implements OnInit {
   VendorsDetails!: [];
   vendorSidebarVisible: boolean = false;
   VendorForm: FormGroup = new FormGroup({});
+  VendorAddEditText: string = 'Add Vendor';
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
@@ -58,9 +59,11 @@ export class ProjectVendorsComponent implements OnInit {
   }
 
   showVendorsDetails() {
-    this.projectDetailsService.showVendorsDetails().subscribe((data) => {
-      this.VendorsDetails = data;
-    });
+    this.projectDetailsService
+      .showVendorsDetails(this.projectData.id)
+      .subscribe((data) => {
+        this.VendorsDetails = data;
+      });
   }
 
   createVendorForm() {
@@ -95,6 +98,23 @@ export class ProjectVendorsComponent implements OnInit {
           this.vendorSidebarVisible = false;
           this.VendorForm.reset();
         }
+      });
+  }
+  onEditVendors(VendorsDetails: any) {
+    this.vendorSidebarVisible = true;
+    this.VendorAddEditText = 'Edit Vendor';
+    this.VendorForm.patchValue({
+      VendorName: VendorsDetails.name,
+      VendorContractorName: VendorsDetails.contractorName,
+      VendorMobile: VendorsDetails.phone,
+      VendorAddress: VendorsDetails.address,
+    });
+  }
+  onDelete(id) {
+    this.projectDetailsService
+      .deleteVendors(id, this.projectData.id)
+      .subscribe((res) => {
+        this.showVendorsDetails();
       });
   }
 }
