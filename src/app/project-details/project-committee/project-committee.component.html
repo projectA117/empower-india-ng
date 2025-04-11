@@ -1,15 +1,10 @@
 <div class="row mb-4">
   <div class="project-detail-h-set tab-h-txt">
-    <h4>Committee Member Details</h4>
+    <h4>Governance Body Details</h4>
     <p-button
-      label="Add Committee Member"
+      label="Add Governance Body Member"
       *appHasRole="[2, 3]"
-      (click)="
-        sidebarVisible = true;
-        updatecommitteeForm.reset();
-        editCommitee = false;
-        updatecommitteeForm.get('villageId')?.setValue(projectData.villageName)
-      "
+      (click)="addCommitteeview()"
     />
   </div>
   <div class="row tab-input-data">
@@ -64,7 +59,7 @@
     (ngSubmit)="updatecommittee()"
   >
     <div class="tab-pop-txt">
-      <h4>Add Committee Member</h4>
+      <h4>{{ addEditText }}</h4>
       <i class="pi pi-times" (click)="sidebarVisible = false"></i>
     </div>
     <div class="pop-data-set">

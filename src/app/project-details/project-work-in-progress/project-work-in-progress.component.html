@@ -4,7 +4,11 @@
     <p-button
       label="Add WIP Details"
       *appHasRole="[3]"
-      (click)="WIPSidebarVisible = true; WIPForm.reset()"
+      (click)="
+        WIPSidebarVisible = true;
+        WIPForm.reset();
+        WIPAddEditText = 'Add WIP Details'
+      "
     />
   </div>
 
@@ -68,7 +72,7 @@
     (ngSubmit)="updateWIPForm()"
   >
     <div class="tab-pop-txt">
-      <h4>Add WIP Details</h4>
+      <h4>{{ WIPAddEditText }}</h4>
       <i class="pi pi-times" (click)="onClear()"></i>
     </div>
 
