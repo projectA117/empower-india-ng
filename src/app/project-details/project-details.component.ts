@@ -59,7 +59,7 @@ export class ProjectDetailsComponent implements OnInit {
       icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png',
     },
     {
-      label: 'Committee',
+      label: 'Governance Body Members',
       icon: 'https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png',
     },
     {
@@ -121,9 +121,9 @@ export class ProjectDetailsComponent implements OnInit {
       // this.tabs.forEach((tab, index) => {
       //   tab.isDisabled = this.isTabDisabled(index);
       // });
-      this.getProjectDetails(params['projectId'])
+      this.getProjectDetails(params['projectId']);
       if (params['fromPage']) {
-        this.fromPage = params['fromPage']
+        this.fromPage = params['fromPage'];
       }
     });
   }
@@ -134,12 +134,12 @@ export class ProjectDetailsComponent implements OnInit {
       this.tabs.forEach((tab, index) => {
         tab.isDisabled = this.isTabDisabled(index);
       });
-    })
+    });
   }
 
   projectKickOff() {
-    this.projectDetailsService.kickOffProject(this.product.id).subscribe((data) => {
-
-    })
+    this.projectDetailsService
+      .kickOffProject(this.product.id)
+      .subscribe((data) => {});
   }
 }

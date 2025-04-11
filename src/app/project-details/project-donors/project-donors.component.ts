@@ -117,6 +117,7 @@ export class ProjectDonorsComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           this.showdonor();
+          this.donorsSidebarVisible = false;
         }
       });
   }

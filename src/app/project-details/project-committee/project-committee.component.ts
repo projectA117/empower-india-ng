@@ -50,6 +50,7 @@ export class ProjectCommitteeComponent implements OnInit {
   updatecommitteeForm: FormGroup = new FormGroup({});
   Committee: any = [];
   editCommitee: boolean = false;
+  addEditText = 'add Governance Body Member';
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
@@ -97,6 +98,7 @@ export class ProjectCommitteeComponent implements OnInit {
   editCommittee(Committee: any) {
     this.sidebarVisible = true;
     this.editCommitee = true;
+    this.addEditText = 'edit Governance Body Member';
     console.log('...Committee', Committee);
 
     this.updatecommitteeForm.setValue({
@@ -107,6 +109,16 @@ export class ProjectCommitteeComponent implements OnInit {
       villageId: this.projectData.villageName,
       Mobile: Committee.phoneNumber,
     });
+  }
+
+  addCommitteeview() {
+    this.sidebarVisible = true;
+    this.updatecommitteeForm.reset();
+    this.editCommitee = false;
+    this.updatecommitteeForm
+      .get('villageId')
+      ?.setValue(this.projectData.villageName);
+    this.addEditText = 'add Governance Body Member';
   }
 
   updatecommittee() {
