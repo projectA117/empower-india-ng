@@ -143,9 +143,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group relative">
                   <label for="password">Password</label>
                   <input
+                    #registerpasswordinput
                     type="password"
                     formControlName="password"
                     class="form-control"
@@ -153,6 +154,10 @@
                       'is-invalid': f.password.touched && f.password.errors
                     }"
                   />
+                  <i
+                    class="mb-4 pi pi-eye text-2xl text-muted-color cursor-pointer registertogglePassword"
+                    (click)="changePasswordType(registerpasswordinput)"
+                  ></i>
                   <div
                     *ngIf="f.password.touched && f.password.errors"
                     class="invalid-feedback"
