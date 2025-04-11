@@ -162,4 +162,11 @@ export class RegisterComponent {
 
     // this.FileUpload = formData;
   }
+  changePasswordType(passwordinput: any) {
+    passwordinput.type =
+      passwordinput.type === 'password' ? 'text' : 'password';
+    setTimeout(() => {
+      passwordinput.type = 'password';
+    }, 1000);
+  }
 }

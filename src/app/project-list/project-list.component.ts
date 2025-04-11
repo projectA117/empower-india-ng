@@ -317,7 +317,7 @@ export class ProjectListComponent implements OnInit {
 
         this.serverError = false;
         this.projects.forEach((project: any) => {
-          const sponsorAmount = project.sponsersList.reduce(
+          const sponsorAmount = project?.sponsersList?.reduce(
             (total, sponsor) => total + Number(sponsor.amount),
             0
           );

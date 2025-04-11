@@ -49,6 +49,7 @@ export class ProjectWorkInProgressComponent implements OnInit {
   WIPSidebarVisible: boolean = false;
   WIPForm: FormGroup = new FormGroup({});
   editWIP: boolean = false;
+  WIPAddEditText = 'Add WIP Details';
   isLoading: boolean = false;
   imagePreviews: string[] = [];
   selectedFiles: (File | { base64: string; fromServer: true })[] = [];
@@ -142,6 +143,7 @@ export class ProjectWorkInProgressComponent implements OnInit {
     this.onClear();
     this.WIPSidebarVisible = true;
     this.editWIP = true;
+    this.WIPAddEditText = 'Edit WIP Details';
     this.WIPForm.patchValue({
       id: wip.id,
       WIPDate: new Date(wip.createdDate),

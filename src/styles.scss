@@ -1496,3 +1496,39 @@ h6 {
     border-bottom-right-radius: 5px;
     cursor: pointer;
 }
+
+
+.village-table{
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  // tr:nth-child(even){background-color: #f2f2f2}
+  tr{
+    background-color: #F2F7FF;
+    color: #444;
+  }
+  th {
+    background-color: #E1EBFB;
+    color: #444;
+  }
+}
+
+.vill-project-set{
+  position: relative;
+  h4{
+    color: #BF3700;
+    font-size: 18px;
+  }
+  .projects-actions-buttons{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
