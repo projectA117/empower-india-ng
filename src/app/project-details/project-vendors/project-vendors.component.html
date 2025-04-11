@@ -3,7 +3,7 @@
     <h4>Vendor Details</h4>
     <p-button
       label="Add Vendor"
-      (click)="vendorSidebarVisible = true; VendorAddEditText = 'Add Vendor'"
+      (click)="vendorSidebarVisible = true; VendorAddEditText = 'Add'"
       *appHasRole="[2, 3]"
     />
   </div>
@@ -41,7 +41,7 @@
             ></i>
             <i
               class="pi pi-trash"
-              (click)="onDelete(VendorsDetails)"
+              (click)="onDelete(VendorsDetails.id)"
               *appHasRole="[3]"
             ></i>
           </td>
@@ -62,7 +62,7 @@
     (ngSubmit)="updateVendor()"
   >
     <div class="tab-pop-txt">
-      <h4>{{ VendorAddEditText }}</h4>
+      <h4>{{ VendorAddEditText }} Vendor</h4>
       <i class="pi pi-times" (click)="vendorSidebarVisible = false"></i>
     </div>
 
@@ -129,7 +129,7 @@
         class="cancel-btn"
       />
       <p-button
-        label="Add "
+        [label]="VendorAddEditText"
         type="submit"
         class="submit-btn"
         [disabled]="!VendorForm.valid"
