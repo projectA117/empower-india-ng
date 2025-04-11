@@ -48,6 +48,14 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  changePasswordType(passwordinput: any) {
+    passwordinput.type =
+      passwordinput.type === 'password' ? 'text' : 'password';
+    setTimeout(() => {
+      passwordinput.type = 'password';
+    }, 1000);
+  }
+
   onSubmit() {
     const payload = {
       userName: this.signinForm.get('username')?.value,

@@ -245,4 +245,11 @@ export class UsersComponent {
     this.useredit = false;
     this.addUserFlag = true;
   }
+  changePasswordType(passwordinput: any) {
+    passwordinput.type =
+      passwordinput.type === 'password' ? 'text' : 'password';
+    setTimeout(() => {
+      passwordinput.type = 'password';
+    }, 1000);
+  }
 }
