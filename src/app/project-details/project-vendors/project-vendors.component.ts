@@ -83,25 +83,23 @@ export class ProjectVendorsComponent implements OnInit {
 
   updateVendor() {
     const payload = {
-      id: this.VendorForm.get('id')?.value,
+      id: this.projectData?.id, //this.VendorForm.get('id')?.value,
       name: this.VendorForm.get('VendorName')?.value,
       contractorName: this.VendorForm.get('VendorContractorName')?.value,
       phone: this.VendorForm.get('VendorMobile')?.value,
       address: this.VendorForm.get('VendorAddress')?.value,
-      "projectId": this.projectData.id,
+      projectId: this.projectData.id,
       //villageId: this.projectData.villageId,
       //id: this.projectData.id,
     };
-    this.projectDetailsService
-      .addVendors(payload)
-      .subscribe((data) => {
-        console.log('...Data', data);
-        if (data) {
-          this.showVendorsDetails();
-          this.vendorSidebarVisible = false;
-          this.VendorForm.reset();
-        }
-      });
+    this.projectDetailsService.addVendors(payload).subscribe((data) => {
+      console.log('...Data', data);
+      if (data) {
+        this.showVendorsDetails();
+        this.vendorSidebarVisible = false;
+        this.VendorForm.reset();
+      }
+    });
   }
   onEditVendors(VendorsDetails: any) {
     this.vendorSidebarVisible = true;
@@ -116,10 +114,8 @@ export class ProjectVendorsComponent implements OnInit {
   }
 
   onDelete(id) {
-    this.projectDetailsService
-      .deleteVendors(id)
-      .subscribe((res) => {
-        this.showVendorsDetails();
-      });
+    this.projectDetailsService.deleteVendors(id).subscribe((res) => {
+      this.showVendorsDetails();
+    });
   }
 }
