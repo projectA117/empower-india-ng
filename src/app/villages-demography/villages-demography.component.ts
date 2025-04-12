@@ -35,6 +35,7 @@ import { MainOccupationComponent } from './main-occupation/main-occupation.compo
 import { UnemployedYouthComponent } from './unemployed-youth/unemployed-youth.component';
 import { RoleDirective } from 'src/directives/role-access.directive';
 import { lastValueFrom } from 'rxjs';
+import { MapComponent } from '../map/map.component';
 
 interface PageEvent {
   first: number;
@@ -63,6 +64,7 @@ interface PageEvent {
     MainOccupationComponent,
     UnemployedYouthComponent,
     RoleDirective,
+    MapComponent
   ],
   providers: [MessageService, ConfirmationService, ProductService],
   templateUrl: './villages-demography.component.html',

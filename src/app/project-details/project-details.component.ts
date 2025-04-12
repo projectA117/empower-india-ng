@@ -15,6 +15,7 @@ import { ProjectBankDetailsComponent } from './project-bank-details/project-bank
 import { ProjectPublishComponent } from './project-publish/project-publish.component';
 import { RoleDirective } from 'src/directives/role-access.directive';
 import { ProjectDetailsService } from '@service/project-details.service';
+import { MapComponent } from '../map/map.component';
 export interface Tab {
   label: string;
   icon?: string;
@@ -39,6 +40,7 @@ export interface Tab {
     ProjectBankDetailsComponent,
     ProjectPublishComponent,
     RoleDirective,
+    MapComponent
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',
