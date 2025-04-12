@@ -6,29 +6,73 @@
 
   <h3 style="visibility: hidden">Projects List <span>55</span></h3>
   <div class="header-set-filter">
-    <p-dropdown [filter]="true" appendTo="body" [options]="status" [(ngModel)]="selectedStatus" optionLabel="name"
-      optionValue="status" placeholder="Select a Status" (onChange)="StatusChange($event)"
-      [showClear]="selectedStatus?.length > 0" />
+    <p-dropdown
+      [filter]="true"
+      appendTo="body"
+      [options]="status"
+      [(ngModel)]="selectedStatus"
+      optionLabel="name"
+      optionValue="status"
+      placeholder="Select a Status"
+      (onChange)="StatusChange($event)"
+      [showClear]="selectedStatus?.length > 0"
+    />
 
-    <p-dropdown [filter]="true" appendTo="body" [options]="categories" [(ngModel)]="selectedcategory"
-      optionLabel="description" optionValue="id" placeholder="Select a Category" (onChange)="categoryChange($event)"
-      [showClear]="selectedcategory?.length > 0" />
+    <p-dropdown
+      [filter]="true"
+      appendTo="body"
+      [options]="categories"
+      [(ngModel)]="selectedcategory"
+      optionLabel="description"
+      optionValue="id"
+      placeholder="Select a Category"
+      (onChange)="categoryChange($event)"
+      [showClear]="selectedcategory?.length > 0"
+    />
 
-    <p-dropdown filterBy="name" [filter]="true" appendTo="body" [options]="districts" [(ngModel)]="selectedDistrict"
-      optionLabel="name" placeholder="Select a District" [showClear]="selectedDistrict?.id"
-      (onChange)="getMandals($event)" />
-    <p-dropdown [filter]="true" appendTo="body" [options]="mandals" [(ngModel)]="selectedMandal" optionLabel="name"
-      placeholder="Select a Mandal" (onChange)="getvilages($event)" [showClear]="selectedMandal?.id" />
-    <p-dropdown [filter]="true" appendTo="body" [options]="villages" [(ngModel)]="selectedVilage" optionLabel="name"
-      placeholder="Select a Vilage" [showClear]="true" (onChange)="vilageChange($event)"
-      [showClear]="selectedVilage?.id" />
+    <p-dropdown
+      filterBy="name"
+      [filter]="true"
+      appendTo="body"
+      [options]="districts"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="name"
+      placeholder="Select a District"
+      [showClear]="selectedDistrict?.id"
+      (onChange)="getMandals($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      appendTo="body"
+      [options]="mandals"
+      [(ngModel)]="selectedMandal"
+      optionLabel="name"
+      placeholder="Select a Mandal"
+      (onChange)="getvilages($event)"
+      [showClear]="selectedMandal?.id"
+    />
+    <p-dropdown
+      [filter]="true"
+      appendTo="body"
+      [options]="villages"
+      [(ngModel)]="selectedVilage"
+      optionLabel="name"
+      placeholder="Select a Vilage"
+      [showClear]="true"
+      (onChange)="vilageChange($event)"
+      [showClear]="selectedVilage?.id"
+    />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
   </div>
 </div>
 
 }
 
-<div class="container-fluid p-0 mt-140" id="SelectedVilageDetails" *ngIf="isSelectedVilage">
+<div
+  class="container-fluid p-0 mt-140"
+  id="SelectedVilageDetails"
+  *ngIf="isSelectedVilage"
+>
   <div class="container-fluid">
     <div class="row project-detail-name-h">
       <div class="d-flex justify-content-between">
@@ -64,7 +108,11 @@
               <div>
                 <div class="edit-village">
                   @if (ShowVilage()) {
-                  <img src="assets/images/icon-edit.svg" (click)="editVillage()" *appHasRole="[3]" />
+                  <img
+                    src="assets/images/icon-edit.svg"
+                    (click)="editVillage()"
+                    *appHasRole="[3]"
+                  />
                   <!-- <button class="submit-btn-m"  style="float: right" >
                       Edit village Details
                     </button> -->
@@ -76,15 +124,15 @@
                     <div class="project-detail-set-h">Latitude, Longitude</div>
                     <div class="project-detail-set-v mt-2">
                       {{
-                      getVillagesDemographyData?.latitude
-                      ? getVillagesDemographyData.latitude
-                      : ""
+                        getVillagesDemographyData?.latitude
+                          ? getVillagesDemographyData.latitude
+                          : ""
                       }}
                       ,
                       {{
-                      getVillagesDemographyData?.longitude
-                      ? getVillagesDemographyData.longitude
-                      : ""
+                        getVillagesDemographyData?.longitude
+                          ? getVillagesDemographyData.longitude
+                          : ""
                       }}
                     </div>
                   </div>
@@ -126,7 +174,7 @@
                     <div class="project-detail-set-h">Female</div>
                     <div class="project-detail-set-v mt-2">
                       {{
-                      this.getVillagesDemographyData?.adultFemalePopulation
+                        this.getVillagesDemographyData?.adultFemalePopulation
                       }}
                     </div>
                   </div>
@@ -141,7 +189,7 @@
                     <div class="project-detail-set-h">Above 18 Female</div>
                     <div class="project-detail-set-v mt-2">
                       {{
-                      this.getVillagesDemographyData?.childFemalePopulation
+                        this.getVillagesDemographyData?.childFemalePopulation
                       }}
                     </div>
                   </div>
@@ -172,10 +220,13 @@
                 </div>
               </ng-template>
               <div>
-                <app-community-wise-population [villagesDemographyData]="CommunityPopulationData"
-                  [communityData]="CommunityOptions" [vilageData]="getVillagesDemographyData"
+                <app-community-wise-population
+                  [villagesDemographyData]="CommunityPopulationData"
+                  [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData"
                   [selectedVilageData]="selectedVilage"
-                  (closeDialogEvent)="reFreshVilageData($event)"></app-community-wise-population>
+                  (closeDialogEvent)="reFreshVilageData($event)"
+                ></app-community-wise-population>
               </div>
             </p-tabPanel>
 
@@ -189,8 +240,12 @@
               </ng-template>
 
               <div>
-                <app-unemployed-youth [unemployedData]="unEmployedYouthVillage" [communityData]="CommunityOptions"
-                  [vilageData]="getVillagesDemographyData" [selectedVilageData]="selectedVilage"></app-unemployed-youth>
+                <app-unemployed-youth
+                  [unemployedData]="unEmployedYouthVillage"
+                  [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"
+                ></app-unemployed-youth>
               </div>
             </p-tabPanel>
 
@@ -204,9 +259,13 @@
               </ng-template>
 
               <div>
-                <app-employedyouth [employedYouthVillage]="employedYouthVillage" [selectedVilageData]="selectedVilage"
-                  [communityData]="CommunityOptions" [vilageData]="getVillagesDemographyData"
-                  (closeDialogEvent)="reFreshVilageData($event)"></app-employedyouth>
+                <app-employedyouth
+                  [employedYouthVillage]="employedYouthVillage"
+                  [selectedVilageData]="selectedVilage"
+                  [communityData]="CommunityOptions"
+                  [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
+                ></app-employedyouth>
               </div>
             </p-tabPanel>
             <p-tabPanel>
@@ -218,9 +277,12 @@
                 </div>
               </ng-template>
               <div>
-                <app-main-occupation [occupationsData]="occupationsData"
-                  [occupationsLookupData]="villagelookupsData.occupation" [vilageData]="getVillagesDemographyData"
-                  [selectedVilageData]="selectedVilage"></app-main-occupation>
+                <app-main-occupation
+                  [occupationsData]="occupationsData"
+                  [occupationsLookupData]="villagelookupsData.occupation"
+                  [vilageData]="getVillagesDemographyData"
+                  [selectedVilageData]="selectedVilage"
+                ></app-main-occupation>
               </div>
             </p-tabPanel>
             <p-tabPanel>
@@ -232,10 +294,15 @@
                 </div>
               </ng-template>
               <div>
-                <app-land-utilization [landUtilizationData]="landUtilizationData" [landUtilizationLookupData]="
+                <app-land-utilization
+                  [landUtilizationData]="landUtilizationData"
+                  [landUtilizationLookupData]="
                     villagelookupsData.landUtilization
-                  " [vilageData]="getVillagesDemographyData" (closeDialogEvent)="reFreshVilageData($event)"
-                  [selectedVilageData]="selectedVilage"></app-land-utilization>
+                  "
+                  [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"
+                ></app-land-utilization>
               </div>
             </p-tabPanel>
 
@@ -248,10 +315,15 @@
                 </div>
               </ng-template>
               <div>
-                <app-cultivation-crops [cultivationCropsData]="cultivationCropsData" [cultivationCropsLookupData]="
+                <app-cultivation-crops
+                  [cultivationCropsData]="cultivationCropsData"
+                  [cultivationCropsLookupData]="
                     villagelookupsData.cultivationCrops
-                  " [vilageData]="getVillagesDemographyData" (closeDialogEvent)="reFreshVilageData($event)"
-                  [selectedVilageData]="selectedVilage"></app-cultivation-crops>
+                  "
+                  [vilageData]="getVillagesDemographyData"
+                  (closeDialogEvent)="reFreshVilageData($event)"
+                  [selectedVilageData]="selectedVilage"
+                ></app-cultivation-crops>
               </div>
             </p-tabPanel>
 
@@ -264,10 +336,13 @@
                 </div>
               </ng-template>
               <div>
-                <app-institutions [institutionsData]="institutionsData"
-                  [institutionsLookupData]="villagelookupsData.institutions" [vilageData]="getVillagesDemographyData"
+                <app-institutions
+                  [institutionsData]="institutionsData"
+                  [institutionsLookupData]="villagelookupsData.institutions"
+                  [vilageData]="getVillagesDemographyData"
                   (closeDialogEvent)="reFreshVilageData($event)"
-                  [selectedVilageData]="selectedVilage"></app-institutions>
+                  [selectedVilageData]="selectedVilage"
+                ></app-institutions>
               </div>
             </p-tabPanel>
           </p-tabView>
@@ -409,7 +484,11 @@
                   <div>
                     @if (projectTab.tabName === 'Draft') {
 
-                    <p-table [value]="projectTab.projectList" dataKey="id" editMode="row">
+                    <p-table
+                      [value]="projectTab.projectList"
+                      dataKey="id"
+                      editMode="row"
+                    >
                       <ng-template pTemplate="header">
                         <tr>
                           <th style="width: 25%">Project Category</th>
@@ -418,16 +497,27 @@
                           <th style="width: 20%">Actions</th>
                         </tr>
                       </ng-template>
-                      <ng-template pTemplate="body" let-project let-editing="editing" let-ri="rowIndex">
+                      <ng-template
+                        pTemplate="body"
+                        let-project
+                        let-editing="editing"
+                        let-ri="rowIndex"
+                      >
                         <tr [pEditableRow]="project">
                           <!-- Project Category -->
                           <td>
                             <p-cellEditor>
                               <ng-template pTemplate="input">
-                                <p-dropdown [options]="allCategories" optionLabel="name" optionValue="id"
-                                  [(ngModel)]="project.projectCategoryId" (onChange)="onCategoryChange(project)"
-                                  placeholder="Select Category" [style]="{ width: '100%' }"
-                                  appendTo="body"></p-dropdown>
+                                <p-dropdown
+                                  [options]="allCategories"
+                                  optionLabel="name"
+                                  optionValue="id"
+                                  [(ngModel)]="project.projectCategoryId"
+                                  (onChange)="onCategoryChange(project)"
+                                  placeholder="Select Category"
+                                  [style]="{ width: '100%' }"
+                                  appendTo="body"
+                                ></p-dropdown>
                               </ng-template>
                               <ng-template pTemplate="output">
                                 {{ getCategoryName(project.projectCategoryId) }}
@@ -439,19 +529,26 @@
                           <td>
                             <p-cellEditor>
                               <ng-template pTemplate="input">
-                                <p-dropdown [options]="
+                                <p-dropdown
+                                  [options]="
                                     getTypesByCategory(
                                       project.projectCategoryId
                                     )
-                                  " optionLabel="description" optionValue="id" [(ngModel)]="project.projectTypeId"
-                                  placeholder="Select Type" [style]="{ width: '100%' }" appendTo="body"></p-dropdown>
+                                  "
+                                  optionLabel="description"
+                                  optionValue="id"
+                                  [(ngModel)]="project.projectTypeId"
+                                  placeholder="Select Type"
+                                  [style]="{ width: '100%' }"
+                                  appendTo="body"
+                                ></p-dropdown>
                               </ng-template>
                               <ng-template pTemplate="output">
                                 {{
-                                getTypeDescription(
-                                project.projectCategoryId,
-                                project.projectTypeId
-                                )
+                                  getTypeDescription(
+                                    project.projectCategoryId,
+                                    project.projectTypeId
+                                  )
                                 }}
                               </ng-template>
                             </p-cellEditor>
@@ -461,8 +558,13 @@
                           <td>
                             <p-cellEditor>
                               <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="project.description"
-                                  placeholder="Enter Description" style="width: 100%" />
+                                <input
+                                  pInputText
+                                  type="text"
+                                  [(ngModel)]="project.description"
+                                  placeholder="Enter Description"
+                                  style="width: 100%"
+                                />
                               </ng-template>
                               <ng-template pTemplate="output">
                                 {{ project.description }}
@@ -472,23 +574,51 @@
 
                           <!-- Actions -->
                           <td>
-                            <img src="assets/images/icon-edit.svg" pRipple pInitEditableRow *ngIf="!editing"
-                              (click)="onRowEditInit(project)" class="cursor-hand" />
+                            <img
+                              src="assets/images/icon-edit.svg"
+                              pRipple
+                              pInitEditableRow
+                              *ngIf="!editing"
+                              (click)="onRowEditInit(project)"
+                              class="cursor-hand"
+                            />
                             <!-- <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow label="Edit"
                                 (click)="onRowEditInit(project)" class="p-button-rounded p-button-text"
                                 class="submit-btn-m"></button> -->
-                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow label="Save"
+                            <button
+                              *ngIf="editing"
+                              pButton
+                              pRipple
+                              type="button"
+                              pSaveEditableRow
+                              label="Save"
                               (click)="createPayload(project, 'DRAFT')"
                               class="p-button-rounded p-button-text p-button-success mr-2"
-                              class="submit-btn-m"></button>
-                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                              label="Save as Waiting for Approval" (click)="createPayload(project, 'WFA')"
+                              class="submit-btn-m"
+                            ></button>
+                            <button
+                              *ngIf="editing"
+                              pButton
+                              pRipple
+                              type="button"
+                              pSaveEditableRow
+                              label="Save as Waiting for Approval"
+                              (click)="createPayload(project, 'WFA')"
                               class="p-button-rounded p-button-text p-button-success mr-2"
-                              class="submit-btn-m"></button>
-                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow label="Cancel"
+                              class="submit-btn-m"
+                            ></button>
+                            <button
+                              *ngIf="editing"
+                              pButton
+                              pRipple
+                              type="button"
+                              pCancelEditableRow
+                              label="Cancel"
                               (click)="
                                 onRowEditCancel(project, ri, projectTab.tabName)
-                              " class="p-button-rounded p-button-text p-button-danger"></button>
+                              "
+                              class="p-button-rounded p-button-text p-button-danger"
+                            ></button>
                           </td>
                         </tr>
                       </ng-template>
@@ -501,145 +631,172 @@
                       </ng-template>
                     </p-table>
                     } @else {
-                    <p-table #dt [value]="projectTab.projectList" [rows]="10" [paginator]="false"
-                      [globalFilterFields]="['name']"  [(selection)]="project"
-                      [rowHover]="true" dataKey="id">
-                      
-                      <ng-template pTemplate="body" let-info>
-                          <div class="row vill-project-set">
-                            <div class="vill-project-img col-1">
-                              <div class="project-detail-set-h">{{ info.projectType }}</div>
-                              <div class="project-detail-set-v mt-2"><img
-                                  [src]="'assets/images/projects/' + (projectImages[info.projectType] || projectImages[info.projectCategory] || 'default.png')"
-                                  class="img-fluid" [alt]="info.projectType" /></div>
+
+                    <div class="container-fluid">
+                      <div
+                        class="row projects-list-tab mt-3"
+                        *ngFor="let info of projectTab.projectList"
+                      >
+                        <div class="col-1">
+                          <div class="project-detail-set-h">
+                            {{ info.projectType }}
+                          </div>
+                          <div class="project-detail-set-v mt-2">
+                            <img
+                              [src]="
+                                'assets/images/projects/' +
+                                (projectImages[info.projectType] ||
+                                  projectImages[info.projectCategory] ||
+                                  'default.png')
+                              "
+                              class="img-fluid"
+                              [alt]="info.projectType"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <h4>Project Share Details</h4>
+                          <div class="project-cost">
+                            <div class="project-detail-set-h">Project Cost</div>
+                            <div class="project-detail-set-v mt-2">
+                              {{
+                                info.projectEstimation || 0
+                                  | currency : "INR" : "symbol" : "1.0-0"
+                              }}/-
                             </div>
-                            <div class="col-11">
-                              <div class="row">
-
-
-                              <div class="col">
-                                <h4>Project Share Details</h4>
-                                <div class="project-cost">
-                                  <div class="project-detail-set-h">Project Cost</div>
-                                  <div class="project-detail-set-v mt-2">{{info.projectEstimation || 0 | currency :
-                                    "INR" : "symbol" : "1.0-0"}}/- </div>
-                                </div>
-                                <div class="project-cost">
-                                  <div class="project-detail-set-h">Gov. Share ({{ info.governmentShare || 0 }} %)</div>
-                                  <div class="project-detail-set-v mt-2">{{info.projectEstimation *
-                                    (info.governmentShare / 100) | currency : "INR" : "symbol" : "1.0-0"}}/- </div>
-                                </div>
-                                <div class="project-cost">
-                                  <div class="project-detail-set-h">Private Share ({{ info.publicShare || 0 }} % )</div>
-                                  <div class="project-detail-set-v mt-2">{{ info.projectEstimation * (info.publicShare /
-                                    100) | currency : "INR" : "symbol" : "1.0-0"}} /- </div>
-                                </div>
-                              </div>
-
-                                <div class="col">
-                                  Total Expenses :
-                                  {{
-                                  info?.villageProjectExpenseResponse
-                                  .totalExpenses
+                          </div>
+                          <div class="project-cost">
+                            <div class="project-detail-set-h">
+                              Gov. Share ({{ info.governmentShare || 0 }}
+                              %)
+                            </div>
+                            <div class="project-detail-set-v mt-2">
+                              {{
+                                info.projectEstimation *
+                                  (info.governmentShare / 100)
                                   | currency : "INR" : "symbol" : "1.0-0"
-                                  }}, Total Funds :
-                                  {{
-                                  info?.villageProjectExpenseResponse.totalFunds
+                              }}/-
+                            </div>
+                          </div>
+                          <div class="project-cost">
+                            <div class="project-detail-set-h">
+                              Private Share ({{ info.publicShare || 0 }} % )
+                            </div>
+                            <div class="project-detail-set-v mt-2">
+                              {{
+                                info.projectEstimation *
+                                  (info.publicShare / 100)
                                   | currency : "INR" : "symbol" : "1.0-0"
-                                  }}, Remaining Balance :
-                                  {{
-                                  info?.villageProjectExpenseResponse
-                                  .remainingBalance
-                                  | currency : "INR" : "symbol" : "1.0-0"
-                                  }}
-                                </div>
-                                <div class="villages-sponsors col">
-                                  @if(info?.villageProjectExpenseResponse.transactions.length
-                                  > 0) {
-                                  <div class="village-table">
-                                    <h4>Expenses</h4>
-                                    <table>
-                                      <thead>
-                                        <tr>
-                                          <th>Item</th>
-                                          <th>Qua. / Days</th>
-                                          <th>Date</th>
-                                          <th>Spent By</th>
-                                          <th>Paid To</th>
-                                          <th>Mode of Payment</th>
-                                          <th>Amount</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr *ngFor=" let expense of info ?.villageProjectExpenseResponse.transactions ">
-                                          <td>{{ expense?.expenseType }}</td>
-                                          <td>Qua. / Days</td>
-                                          <td>Date</td>
-                                          <td>{{ expense?.spentBy }}</td>
-                                          <td>{{ expense?.paidTo }}</td>
-                                          <td>{{ expense?.paymentMode }}</td>
-                                          <td>Amount</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                  } @else { -- }
-                                </div>
-
-                              <div class="project-detail-set-v col">
-                                @if(info?.sponsersList &&
-                                info?.sponsersList.length > 0) {
-                                <ul style="margin: 0; padding: 0" *ngFor="let sponsers of info?.sponsersList">
-                                  <li>
+                              }}
+                              /-
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          @if(dummySponsers) {
+                          <div class="village-table">
+                            <h4>Sponsors</h4>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let sponsers of dummySponsers">
+                                  <td>
                                     {{ sponsers?.firstName }}
-                                    {{ sponsers?.lastName }} |
+                                    {{ sponsers?.lastName }}
+                                  </td>
+
+                                  <td>
                                     {{
-                                    sponsers?.amount
-                                    | currency : "INR" : "symbol" : "1.0-0"
+                                      sponsers?.amount
+                                        | currency : "INR" : "symbol" : "1.0-0"
                                     }}
                                     Rs
-                                  </li>
-                                </ul>
-                                } @else { -- }
-                              </div>
-
-                              <div class="project-detail-set-v col">
-                                @if(info?.committeeMembersList
-                                &&info?.committeeMembersList.length > 0) {
-                                <ul style="margin: 0; padding: 0" *ngFor="
-                                let committee of info?.committeeMembersList
-                              ">
-                                  <li>
-                                    {{ committee?.firstName }}
-                                    {{ committee?.lastName }} |
-                                    {{ committee?.phoneNumber }}
-                                  </li>
-                                </ul>
-                                } @else { -- }
-                              </div>
-                            </div>
-
-
-                            </div>
-
-                            <div class="projects-actions-buttons">
-                              <img src="assets/images/icon-view.svg" (click)="getProjectDetails(info)" />
-                              <img src="assets/images/icon-edit.svg" (click)="getProjectDetails(info)"
-                                *appHasRole="[3, 2]" />
-                              <img src="assets/images/icon-delete.svg" *appHasRole="[3, 2]" />
-                            </div>
-
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
-                         
-                      </ng-template>
-                      <ng-template pTemplate="emptymessage">
-                        <tr>
-                          <td colspan="9" class="text-center">
-                            No {{ projectTab.tabName }} Projects Found
-                          </td>
-                        </tr>
-                      </ng-template>
-                    </p-table>
+                          } @else { -- }
+                        </div>
+                        <div class="col-3">
+                          @if(info?.committeeMembersList
+                          &&info?.committeeMembersList.length > 0) {
+                          <div class="village-table">
+                            <h4>Governance Body Details</h4>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Email</th>
+                                  <th>Mobile</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr
+                                  *ngFor="
+                                    let committee of info?.committeeMembersList
+                                  "
+                                >
+                                  <td>
+                                    {{ committee?.firstName }}
+                                    {{ committee?.lastName }}
+                                  </td>
+                                  <td>{{ committee?.email }}</td>
+                                  <td>{{ committee?.phoneNumber }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          } @else { -- }
+                        </div>
+                        <div class="col-4">
+                          <div class="villages-sponsors col">
+                            @if(info?.villageProjectExpenseResponse.transactions.length
+                            > 0) {
+                            <div class="village-table">
+                              <h4>Expenses</h4>
+                              <table>
+                                <thead>
+                                  <tr>
+                                    <th>Item</th>
+                                    <th>Days</th>
+                                    <th>Date</th>
+                                    <th>Spent By</th>
+                                    <th>Paid To</th>
+                                    <th>MOP</th>
+                                    <th>Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    *ngFor="
+                                      let expense of info
+                                        ?.villageProjectExpenseResponse
+                                        .transactions
+                                    "
+                                  >
+                                    <td>{{ expense?.expenseType }}</td>
+                                    <td>Qua. / Days</td>
+                                    <td>Date</td>
+                                    <td>{{ expense?.spentBy }}</td>
+                                    <td>{{ expense?.paidTo }}</td>
+                                    <td>{{ expense?.paymentMode }}</td>
+                                    <td>Amount</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            } @else { -- }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     }
                   </div>
                 </ng-template>
@@ -653,13 +810,17 @@
 
     <!-- tab panel end  -->
 
-    <div class="row mb-4 pl-4 pr-4 projects-list-tab mt-3" style="
+    <div
+      class="row mb-4 pl-4 pr-4 projects-list-tab mt-3"
+      style="
         display: none;
         background-color: #fff;
         border: 1px solid #000;
         padding-top: 10px;
         --bs-gutter-x: 0;
-      " *ngFor="let project of getVillagesDemographyData?.projectResponseList">
+      "
+      *ngFor="let project of getVillagesDemographyData?.projectResponseList"
+    >
       <div class="project-detail-set col-2">
         <div class="project-detail-set-h">Project Type</div>
         <div class="project-detail-set-v mt-2">
@@ -677,7 +838,7 @@
         <div class="project-detail-set-h">Estimation</div>
         <div class="project-detail-set-v mt-2">
           {{
-          project.projectEstimation | currency : "INR" : "symbol" : "1.0-0"
+            project.projectEstimation | currency : "INR" : "symbol" : "1.0-0"
           }}
           /-
         </div>
@@ -700,7 +861,10 @@
       <div class="project-detail-set col-4">
         <div class="project-detail-set-h">Sponsors</div>
         <div class="project-detail-set-v mt-2">
-          <ul style="margin: 0; padding: 0" *ngFor="let sponsers of project?.sponsersList">
+          <ul
+            style="margin: 0; padding: 0"
+            *ngFor="let sponsers of project?.sponsersList"
+          >
             <li>
               {{ sponsers?.firstName }} {{ sponsers?.lastName }},
               {{ sponsers?.phoneNumber }}, {{ sponsers?.email }}
@@ -711,7 +875,10 @@
       <div class="project-detail-set col-4">
         <div class="project-detail-set-h">Committee Members</div>
         <div class="project-detail-set-v mt-2">
-          <ul style="margin: 0; padding: 0" *ngFor="let committee of project?.committeeMembersList">
+          <ul
+            style="margin: 0; padding: 0"
+            *ngFor="let committee of project?.committeeMembersList"
+          >
             <li>
               {{ committee?.firstName }} {{ committee?.lastName }},
               {{ committee?.phoneNumber }}, {{ committee?.email }}
@@ -739,10 +906,24 @@
   </div>
 </div>
 
-<div class="main-container projects-set-list" id="VilageList" *ngIf="!isSelectedVilage">
-  <p-table #dt [value]="getVillagesDemographyDataList" [rows]="10" [paginator]="false" [globalFilterFields]="['name']"
-    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="project" [rowHover]="true" dataKey="id"
-    selectionMode="single" [(selection)]="selectedProduct">
+<div
+  class="main-container projects-set-list"
+  id="VilageList"
+  *ngIf="!isSelectedVilage"
+>
+  <p-table
+    #dt
+    [value]="getVillagesDemographyDataList"
+    [rows]="10"
+    [paginator]="false"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="project"
+    [rowHover]="true"
+    dataKey="id"
+    selectionMode="single"
+    [(selection)]="selectedProduct"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="districtName">
@@ -801,20 +982,39 @@
 
         <td>
           <div class="projects-actions-buttons">
-            <img src="assets/images/icon-view.svg" (click)="selectedVillage(info)" />
+            <img
+              src="assets/images/icon-view.svg"
+              (click)="selectedVillage(info)"
+            />
           </div>
         </td>
       </tr>
     </ng-template>
   </p-table>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"
-    [showCurrentPageReport]="true" [showPageLinks]="true" [showJumpToPageDropdown]="false"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" />
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="true"
+    [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+  />
 </div>
 
-<p-dialog header="Update Village Information" appendTo="body" [modal]="true" [(visible)]="villageFormVisible"
-  [style]="{ width: '90%', right: 'inherit', height: '80%' }">
-  <form [formGroup]="villageForm" (ngSubmit)="updateVillageDataForm()" *ngIf="villageFormVisible">
+<p-dialog
+  header="Update Village Information"
+  appendTo="body"
+  [modal]="true"
+  [(visible)]="villageFormVisible"
+  [style]="{ width: '90%', right: 'inherit', height: '80%' }"
+>
+  <form
+    [formGroup]="villageForm"
+    (ngSubmit)="updateVillageDataForm()"
+    *ngIf="villageFormVisible"
+  >
     <div class="formgrid grid">
       <div class="field col-12 md:col-3">
         <label for="firstname6" class="block">Majority Religion</label>
@@ -825,21 +1025,50 @@
           aria-describedby="Religion"
         /> -->
 
-        <p-dropdown [options]="religionData" formControlName="Religion" optionLabel="name" optionValue="id"
-          placeholder="Select Religion" #Religion class="w-full" [autoWidth]="false" [style]="{ minWidth: '100%' }" />
+        <p-dropdown
+          [options]="religionData"
+          formControlName="Religion"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Religion"
+          #Religion
+          class="w-full"
+          [autoWidth]="false"
+          [style]="{ minWidth: '100%' }"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Primary Language</label>
-        <p-dropdown [options]="languageData" formControlName="Language" optionLabel="name" optionValue="id"
-          placeholder="Select Language" #Language class="w-full" [autoWidth]="false" [style]="{ minWidth: '100%' }" />
+        <p-dropdown
+          [options]="languageData"
+          formControlName="Language"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Language"
+          #Language
+          class="w-full"
+          [autoWidth]="false"
+          [style]="{ minWidth: '100%' }"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Pin Code</label>
-        <input pInputText formControlName="pinCode" aria-describedby="pinCode" class="w-full" #pinCode />
+        <input
+          pInputText
+          formControlName="pinCode"
+          aria-describedby="pinCode"
+          class="w-full"
+          #pinCode
+        />
       </div>
       <div class="field col-12 md:col-3">
-        <label for="lastname6" style="display: block">Latitude and Longitude</label>
-        <p-button label="Get Geolocation" (onClick)="getLocation(getVillagesDemographyData)" />
+        <label for="lastname6" style="display: block"
+          >Latitude and Longitude</label
+        >
+        <p-button
+          label="Get Geolocation"
+          (onClick)="getLocation(getVillagesDemographyData)"
+        />
 
         {{ GeolocationError }}
 
@@ -850,59 +1079,115 @@
 
       <div class="field col-12 md:col-3">
         <label for="firstname6">Boundaries of the village</label>
-        <input pInputText formControlName="Boundaries" aria-describedby="Boundaries" class="w-full" />
+        <input
+          pInputText
+          formControlName="Boundaries"
+          aria-describedby="Boundaries"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Geographical Area</label>
-        <input pInputText formControlName="Geographical" aria-describedby="Geographical" class="w-full" />
+        <input
+          pInputText
+          formControlName="Geographical"
+          aria-describedby="Geographical"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Total House Holds</label>
-        <input pInputText formControlName="totalHouse" aria-describedby="totalHouse" class="w-full" />
+        <input
+          pInputText
+          formControlName="totalHouse"
+          aria-describedby="totalHouse"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Population</label>
-        <input pInputText formControlName="Population" aria-describedby="Population" class="w-full" />
+        <input
+          pInputText
+          formControlName="Population"
+          aria-describedby="Population"
+          class="w-full"
+        />
       </div>
 
       <div class="field col-12 md:col-3">
         <label for="firstname6">Male</label>
-        <input pInputText formControlName="PopulationMale" aria-describedby="PopulationMale" class="w-full" />
+        <input
+          pInputText
+          formControlName="PopulationMale"
+          aria-describedby="PopulationMale"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Female</label>
-        <input pInputText formControlName="PopulationFemale" aria-describedby="PopulationFemale" class="w-full" />
+        <input
+          pInputText
+          formControlName="PopulationFemale"
+          aria-describedby="PopulationFemale"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Above 18 Male</label>
-        <input pInputText formControlName="PopulationAboveEighteenMale" aria-describedby="PopulationAboveEighteenMale"
-          class="w-full" />
+        <input
+          pInputText
+          formControlName="PopulationAboveEighteenMale"
+          aria-describedby="PopulationAboveEighteenMale"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6"> Above 18 Female</label>
-        <input pInputText formControlName="PopulationAboveEighteenFeMale"
-          aria-describedby="PopulationAboveEighteenFeMale" class="w-full" />
+        <input
+          pInputText
+          formControlName="PopulationAboveEighteenFeMale"
+          aria-describedby="PopulationAboveEighteenFeMale"
+          class="w-full"
+        />
       </div>
 
       <div class="field col-12 md:col-3">
         <label for="firstname6"> Seniro Citizens Above 60 Male</label>
-        <input pInputText formControlName="PopulationAbove60Male" aria-describedby="PopulationAbove60Male"
-          class="w-full" />
+        <input
+          pInputText
+          formControlName="PopulationAbove60Male"
+          aria-describedby="PopulationAbove60Male"
+          class="w-full"
+        />
       </div>
       <div class="field col-12 md:col-3">
         <label for="lastname6">Seniro Citizens Above 60 Female</label>
-        <input class="w-full" pInputText formControlName="PopulationAbove60FeMale"
-          aria-describedby="PopulationAbove60FeMale" />
+        <input
+          class="w-full"
+          pInputText
+          formControlName="PopulationAbove60FeMale"
+          aria-describedby="PopulationAbove60FeMale"
+        />
       </div>
 
       <div class="field col-12 md:col-3">
         <label for="lastname6">Area</label>
-        <input class="w-full" pInputText formControlName="area" aria-describedby="area" />
+        <input
+          class="w-full"
+          pInputText
+          formControlName="area"
+          aria-describedby="area"
+        />
       </div>
     </div>
 
     <div class="flex justify-content-end gap-2">
-      <p-button label="Cancel" severity="secondary" (onClick)="villageFormVisible = false" class="defaultPadding" />
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        (onClick)="villageFormVisible = false"
+        class="defaultPadding"
+      />
       <p-button label="Save" type="submit" class="defaultPadding" />
     </div>
   </form>
