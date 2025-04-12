@@ -22,7 +22,7 @@
     <p-menubar [model]="items" />
     @if (isLoggedIn()) {
 
-    <button class="logout-button" (click)="logout()">Logout</button>
+    <button class="logout-button" (click)="logout()"><i class="fa-light fa-right-to-bracket"></i> Logout</button>
     } @else {
     <div class="signin-signup" window.location.href="/signin">
       <a href="/signin">Login</a>
