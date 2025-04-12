@@ -1007,8 +1007,9 @@ h6 {
 
 
 .projects-set-list {
-  height: calc(100vh - 195px);
+  height: calc(100vh - 175px);
   overflow: auto;
+  min-height: calc(100vh - 175px);
 }
 
 .header-set {
@@ -1535,5 +1536,13 @@ h6 {
     position: absolute;
     right: 0;
     top: 0;
+  }
+}
+
+.upload-picture-set{
+  img{
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 4px #bdbdbd;
   }
 }
