@@ -503,8 +503,8 @@ h6 {
 .p-dialog {
   right: 0;
   position: absolute;
-  top: 135px;
-  height: calc(100% - 135px);
+  top: 120px;
+  height: calc(100% - 120px);
   max-height: inherit;
 }
 
@@ -787,7 +787,7 @@ h6 {
 .f-menu {
   padding: 0 30px 0 30px;
   background-color: #fff;
-  box-shadow: 0px 5px 10px #00000012;
+  box-shadow:0px 5px 10px #00000085;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1024,6 +1024,7 @@ h6 {
     gap: 10px;
     margin: 0;
     color: #507619;
+    font-size: 1.5rem;
 
     span {
       background-color: #4F7619;
@@ -1483,7 +1484,7 @@ h6 {
 }
 
 .mt-140{
-  margin-top: 140px;
+  margin-top: 120px;
 }
 
 .p-tabview-panel{

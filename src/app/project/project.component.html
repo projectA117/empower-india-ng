@@ -83,19 +83,20 @@
             />
           </div>
         </div>
+        <div class="col-6">
+          <div class="project-detail-set-h">Latitude </div>
+          <div class="project-detail-set-v mt-2"><b>{{ Latitude }}</b></div>
+        </div>
+        <div class="col-6">
+          <div class="project-detail-set-h">Longitude </div>
+          <div class="project-detail-set-v mt-2"><b>{{ longitude }}</b></div>
+        </div>
         <div class="field col-6">
           <p-button label="Get Geolocation" (onClick)="getLocation()" />
         </div>
         <div class="field col-6">
           {{ GeolocationError }}
 
-          <label for="lastname6">Latitude: </label>
-          {{ Latitude }}
-
-          <br />
-
-          <label for="lastname6">Longitude: </label>
-          {{ longitude }}
         </div>
         <!--  <div class="col-6">
           <label for="latitude" class="formbuilder-select-label form-label"
@@ -208,7 +209,7 @@
           </small>
         </div>
 
-        <div class="col-6">
+        <div class="col-12">
           <label class="form-label">Project Description</label>
           <textarea
             pInputTextarea
@@ -308,8 +309,10 @@
 
     <div class="col-4">
       <div class="upload-picture-set">
-        <div class="upload-picture">Upload Picture</div>
-        <input type="file" (change)="onUpload($event)" accept="image/*" />
+        <label class="custom-file-upload upload-picture">
+          <input type="file" (change)="onUpload($event)" accept="image/*" id="file-upload"  />
+          <div for="file-upload" class="custom-file-upload ">Upload Picture</div>
+      </label>
         <img [src]="imagePreview" class="img-fluid" />
       </div>
     </div>

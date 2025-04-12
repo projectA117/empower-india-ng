@@ -96,6 +96,8 @@
     <div class="projects-list-tab mt-3">
       <div class="container-fluid">
         <div class="row">
+          <div class="col-9">
+
           <p-tabView styleClass="tabview-custom">
             <p-tabPanel>
               <ng-template pTemplate="header">
@@ -120,7 +122,7 @@
                 </div>
 
                 <div class="row pl-4 pr-4">
-                  <div class="project-detail-set col-2">
+                  <!-- <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">Latitude, Longitude</div>
                     <div class="project-detail-set-v mt-2">
                       {{
@@ -135,7 +137,7 @@
                           : ""
                       }}
                     </div>
-                  </div>
+                  </div> -->
                   <div class="project-detail-set col-2">
                     <div class="project-detail-set-h">
                       Boundaries of the village
@@ -215,7 +217,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Community wise Population
+                    Community
                   </span>
                 </div>
               </ng-template>
@@ -234,7 +236,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Unemployed Youth
+                    Unemployed 
                   </span>
                 </div>
               </ng-template>
@@ -253,7 +255,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Employed Youth
+                    Employed 
                   </span>
                 </div>
               </ng-template>
@@ -272,7 +274,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Main Occupation
+                     Occupation
                   </span>
                 </div>
               </ng-template>
@@ -289,7 +291,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Land Utilization
+                    Land 
                   </span>
                 </div>
               </ng-template>
@@ -310,7 +312,7 @@
               <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                   <span class="font-bold white-space-nowrap m-0">
-                    Cultivation Crops
+                     Crops
                   </span>
                 </div>
               </ng-template>
@@ -346,6 +348,14 @@
               </div>
             </p-tabPanel>
           </p-tabView>
+        </div>
+
+        <div class="col-3">
+          <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15338.095735714427!2d79.29297505349089!3d16.038279154185524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb54dc67a411ff1%3A0xf1208c440a4882f5!2sYerragondapalem%2C%20Andhra%20Pradesh%20523327!5e0!3m2!1sen!2sin!4v1744310470256!5m2!1sen!2sin"
+          width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
           <!-- <p-tabView styleClass="tabview-custom">
           <p-tabPanel>
             <ng-template pTemplate="header">

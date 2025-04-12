@@ -114,3 +114,13 @@
         margin: 0;
     }
 }
+
+.upload-picture-set{
+    input[type="file"] {
+        display: none;
+      }
+      
+      .custom-file-upload {
+        cursor: pointer;
+      }
+}
