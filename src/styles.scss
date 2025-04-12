@@ -503,8 +503,8 @@ h6 {
 .p-dialog {
   right: 0;
   position: absolute;
-  top: 135px;
-  height: calc(100% - 135px);
+  top: 120px;
+  height: calc(100% - 120px);
   max-height: inherit;
 }
 
@@ -1024,6 +1024,7 @@ h6 {
     gap: 10px;
     margin: 0;
     color: #507619;
+    font-size: 1.5rem;
 
     span {
       background-color: #4F7619;
