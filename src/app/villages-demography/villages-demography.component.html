@@ -14,8 +14,8 @@
       optionLabel="name"
       optionValue="status"
       placeholder="Select a Status"
-      (onChange)="StatusChange($event)"
       [showClear]="selectedStatus?.length > 0"
+      (onChange)="StatusChange($event)"
     />
 
     <p-dropdown
@@ -26,8 +26,8 @@
       optionLabel="description"
       optionValue="id"
       placeholder="Select a Category"
+      [showClear]="this.selectedcategory?.toString()?.length > 0"
       (onChange)="categoryChange($event)"
-      [showClear]="selectedcategory?.length > 0"
     />
 
     <p-dropdown

@@ -46,17 +46,18 @@ export class AppComponent {
     private router: Router
   ) {
     effect(() => {
-      const userRole = this.commonService.user()?.roles?.map(
-        (role: any) => role.id
-      ) ?? [];
+      const userRole =
+        this.commonService.user()?.roles?.map((role: any) => role.id) ?? [];
       this.items = [
         {
           label: 'HOME',
           routerLink: 'home',
+          command: () => this.removeFilters(),
         },
         {
           label: 'ABOUT US',
           routerLink: 'about-us',
+          command: () => this.removeFilters(),
         },
         // {
         //   label: 'VISION',
@@ -69,26 +70,41 @@ export class AppComponent {
         {
           label: 'SPONSORS',
           routerLink: 'sponsors',
+          command: () => this.removeFilters(),
         },
         {
           label: 'GALLERY',
           routerLink: 'gallery',
+          command: () => this.removeFilters(),
         },
         {
           label: 'Contact',
           routerLink: 'contact',
+          command: () => this.removeFilters(),
         },
         {
           label: 'villages',
           routerLink: 'villages',
+          command: () => this.removeFilters(),
         },
         {
           label: 'users',
           routerLink: 'users',
-          visible: userRole.some(role => [3].includes(role))
-        }
+          visible: userRole.some((role) => [3].includes(role)),
+          command: () => this.removeFilters(),
+        },
       ];
-    })
+    });
+  }
+
+  removeFilters() {
+    this.commonService.selectedProjectFilters = {
+      category: '',
+      district: {},
+      mandal: {},
+      vilage: {},
+      status: '',
+    };
   }
 
   ngOnInit() {

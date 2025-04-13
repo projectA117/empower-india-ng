@@ -9,6 +9,13 @@ import { environment } from '../environments/environment';
 export class CommonService {
   user = signal<any>(null);
   roles = signal<any[]>([]);
+  selectedProjectFilters = {
+    category: '',
+    district: {},
+    mandal: {},
+    vilage: {},
+    status: '',
+  };
   projectStatus = signal<any[]>([]);
 
   constructor(private httpClient: HttpClient) {

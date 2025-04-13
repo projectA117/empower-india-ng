@@ -31,9 +31,7 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-
         <div class="col-6">
-
           <div class="row mb-4">
             <div class="project-detail-h-set">
               <h4 class="mb-1">Location Details</h4>
@@ -116,10 +114,12 @@
         </div>
 
         <div class="col-6">
-          <app-map [villageName]="product?.villageName" [mandalName]="product?.mandalName"></app-map>
+          <app-map
+            [villageName]="product?.villageName"
+            [mandalName]="product?.mandalName"
+          ></app-map>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -127,7 +127,11 @@
 <div class="projects-list-tab mt-3">
   <div class="container-fluid">
     <div class="row">
-      <p-tabView styleClass="tabview-custom" [scrollable]="true" (onChange)="onTabChange(tabs[$event.index].label)">
+      <p-tabView
+        styleClass="tabview-custom"
+        [scrollable]="true"
+        (onChange)="onTabChange(tabs[$event.index].label)"
+      >
         <p-tabPanel *ngFor="let tab of tabs" [disabled]="tab.isDisabled">
           <ng-template pTemplate="header">
             <div class="flex align-items-center gap-2">
@@ -142,12 +146,16 @@
           <ng-container *ngIf="activeTab === tab.label">
             <!-- Estimation -->
             <div *ngIf="activeTab === 'Estimation'">
-              <app-project-approval [projectData]="product"></app-project-approval>
+              <app-project-approval
+                [projectData]="product"
+              ></app-project-approval>
             </div>
 
             <!-- Committee -->
             <div *ngIf="activeTab === 'Governance Body Members'">
-              <app-project-committee [projectData]="product"></app-project-committee>
+              <app-project-committee
+                [projectData]="product"
+              ></app-project-committee>
             </div>
 
             <!-- Sponsors -->
@@ -157,42 +165,59 @@
 
             <!-- Vendors -->
             <div *ngIf="activeTab === 'Vendors'">
-              <app-project-vendors [projectData]="product"></app-project-vendors>
+              <app-project-vendors
+                [projectData]="product"
+              ></app-project-vendors>
             </div>
 
             <!-- Bank Details -->
             <div *ngIf="activeTab === 'Bank Details'">
-              <app-project-bank-details [projectData]="product"></app-project-bank-details>
+              <app-project-bank-details
+                [projectData]="product"
+              ></app-project-bank-details>
             </div>
 
             <!-- Project Publish -->
             <div *ngIf="activeTab === 'Project Publish'">
-              <app-project-publish [projectData]="product"></app-project-publish>
+              <app-project-publish
+                [projectData]="product"
+              ></app-project-publish>
             </div>
 
             <!-- Project Kick-off -->
             <div *ngIf="activeTab === 'KickOff'">
               <h1>Project Kick-off</h1>
               <p>Project total estimation amount is collected.</p>
-              <p-button *appHasRole="[3]" label="Kick Off" [disabled]="
-                    !product.disableAddSponsor &&
-                    product.status?.toLowerCase() !== 'waiting for donor'
-                  " (click)="projectKickOff()"></p-button>
+              <p-button
+                *appHasRole="[3]"
+                label="Kick Off"
+                [disabled]="
+                  !product.disableAddSponsor &&
+                  product.status?.toLowerCase() !== 'waiting for donor'
+                "
+                (click)="projectKickOff()"
+              ></p-button>
             </div>
 
             <!-- Finance -->
             <div *ngIf="activeTab === 'Finance'">
-              <app-project-finance [projectData]="product"></app-project-finance>
+              <app-project-finance
+                [projectData]="product"
+              ></app-project-finance>
             </div>
 
             <!-- Work In Progress -->
             <div *ngIf="activeTab === 'Work In Progress'">
-              <app-project-work-in-progress [projectData]="product"></app-project-work-in-progress>
+              <app-project-work-in-progress
+                [projectData]="product"
+              ></app-project-work-in-progress>
             </div>
 
             <!-- Project Sign Off -->
             <div *ngIf="activeTab === 'Project Sign off'">
-              <app-project-signoff [projectData]="product"></app-project-signoff>
+              <app-project-signoff
+                [projectData]="product"
+              ></app-project-signoff>
             </div>
           </ng-container>
         </p-tabPanel>

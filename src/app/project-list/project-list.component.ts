@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '@service/loader.service';
 import { ProjectSponsorsComponent } from '../project-sponsors/project-sponsors.component';
 import { RoleDirective } from 'src/directives/role-access.directive';
-import { map } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 interface PageEvent {
   first: number;
   rows: number;
@@ -406,11 +406,54 @@ export class ProjectListComponent implements OnInit {
   }
   getDistricts() {
     this.commonService.getDistricts().subscribe(
-      (data) => {
+      async (data) => {
         if (data.length > 0) {
           this.districts = data;
+          if (
+            this.commonService.selectedProjectFilters.mandal &&
+            Object.keys(this.commonService.selectedProjectFilters.mandal)
+              .length > 0
+          ) {
+            this.mandals = await lastValueFrom(
+              this.commonService.getMandals(
+                this.commonService.selectedProjectFilters.district?.['id']
+              )
+            );
+            this.selectedMandal = this.mandals.find(
+              (d) =>
+                d.id == this.commonService.selectedProjectFilters.mandal?.['id']
+            );
+          }
+
+          if (
+            this.commonService.selectedProjectFilters.vilage &&
+            Object.keys(this.commonService.selectedProjectFilters.vilage)
+              .length > 0
+          ) {
+            this.villages = await lastValueFrom(
+              this.commonService.getVillages(
+                this.commonService.selectedProjectFilters.mandal?.['id']
+              )
+            );
+            this.selectedVilage = this.villages.find(
+              (d) =>
+                d.id == this.commonService.selectedProjectFilters.vilage?.['id']
+            );
+          }
+
+          this.selectedStatus =
+            this.commonService.selectedProjectFilters.status;
+          this.selectedcategory =
+            this.commonService.selectedProjectFilters.category;
+          //  this.selectedVilage =
+          //  this.commonService.selectedProjectFilters.vilage;
+          // this.selectedMandal = this.commonService.selectedProjectFilters.mandal;
+          this.selectedDistrict =
+            this.commonService.selectedProjectFilters.district;
+
           if (this.selectedDistrict && this.selectedDistrict.id) {
-            this.projectDMVSearch();
+            // this.projectDMVSearch();
+            this.getProjects();
           }
         }
       },
@@ -537,6 +580,13 @@ export class ProjectListComponent implements OnInit {
   getProjectDetails(project: any) {
     //this.project = project;
     //this.productService.selectedProject.next(project);
+    this.commonService.selectedProjectFilters = {
+      category: this.selectedcategory,
+      district: this.selectedDistrict,
+      mandal: this.selectedMandal,
+      vilage: this.selectedVilage,
+      status: this.selectedStatus,
+    };
     this.router.navigate(['project-details'], {
       queryParams: { projectId: project.id },
     });
