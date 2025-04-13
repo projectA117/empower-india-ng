@@ -13,6 +13,7 @@
       "typeRoots": [
         "node_modules/@types"
       ],
+      "skipLibCheck": true,
       "lib": [
         "es2022",
         "dom"
@@ -22,4 +23,5 @@
         "@service/*": ["src/service/*"]
       }
     }
+   
 }
