@@ -264,13 +264,16 @@ export class HomeComponent {
       next: (data) => {
         if (!data.error) {
           this.topSponsers = data.content;
-          this.topSponsers = this.topSponsers.map(item => ({
-            ...item, 
-            imgSrc: `data:image/png;base64,${item.image}`
+          this.topSponsers = this.topSponsers.filter(
+            (project) => project.image != null
+          );
+          this.topSponsers = this.topSponsers.map((item) => ({
+            ...item,
+            imgSrc: `data:image/png;base64,${item.image}`,
           }));
         }
-        
-        console.log(data);  
+
+        console.log(data);
       },
       error: (err) => console.error('An error occurred :', err),
     });

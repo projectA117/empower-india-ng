@@ -21,6 +21,7 @@ export interface Tab {
   icon?: string;
   component?: any;
   isDisabled?: boolean;
+  show?: boolean;
 }
 @Component({
   selector: 'app-project-details',
@@ -40,7 +41,7 @@ export interface Tab {
     ProjectBankDetailsComponent,
     ProjectPublishComponent,
     RoleDirective,
-    MapComponent
+    MapComponent,
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',
@@ -54,6 +55,7 @@ export class ProjectDetailsComponent implements OnInit {
   ) {}
 
   activeTab: string = 'Estimation'; // Set default active tab
+  hideTabs = ['Bank Details', 'Project Publish', 'KickOff', 'Project Sign off'];
 
   tabs = [
     {
@@ -132,8 +134,17 @@ export class ProjectDetailsComponent implements OnInit {
 
   getProjectDetails(id) {
     this.projectDetailsService.getProjectDetailsById(id).subscribe((data) => {
+      const localStorageuser = JSON.parse(localStorage.getItem('user'));
+
       this.product = data;
-      this.tabs.forEach((tab, index) => {
+      if (!localStorageuser) {
+        const filtertabs = this.tabs.filter((tab) => {
+          return !this.hideTabs.includes(tab.label);
+        });
+        this.tabs = filtertabs;
+      }
+
+      this.tabs.forEach((tab: any, index) => {
         tab.isDisabled = this.isTabDisabled(index);
       });
     });
