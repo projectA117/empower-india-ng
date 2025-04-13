@@ -68,9 +68,11 @@ export class MapViewComponent implements OnInit {
 
     this.map.data.setStyle((feature: any) => {
       return {
-        strokeColor: '#666666',
-        strokeWeight: 1,
-        strokeOpacity: 1
+        strokeColor: '#000000',
+        strokeWeight: 2,
+        strokeOpacity: .75,
+        fillColor: '#d1eafa',       
+        fillOpacity: 0.5    
       };
     });
 
@@ -174,7 +176,7 @@ export class MapViewComponent implements OnInit {
   
     this.geoJsonData.features.forEach((feature: any) => {
       const coords = feature.geometry.coordinates;
-      const key = `${coords[1]},${coords[0]}`; // lat,lng as key
+      const key = `${coords[1]},${coords[0]}`; 
   
       if (!coordMap.has(key)) {
         coordMap.set(key, []);
@@ -189,7 +191,6 @@ export class MapViewComponent implements OnInit {
   
       const marker = new google.maps.Marker({
         position: latLng,
-        // 🚫 DO NOT SET `map: this.map` here
         title: `Projects at this location`
       });
   
