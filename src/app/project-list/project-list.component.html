@@ -183,12 +183,18 @@
               src="assets/images/icon-view.svg"
               (click)="getProjectDetails(info)"
             />
+            @if(info.statusCode === 'DRAFT' || info.statusCode === 'WFA') {
             <img
               src="assets/images/icon-edit.svg"
               (click)="editProject(info)"
               *appHasRole="[3, 2]"
             />
-            <img src="assets/images/icon-delete.svg" *appHasRole="[3, 2]" />
+            <img
+              src="assets/images/icon-delete.svg"
+              *appHasRole="[3, 2]"
+              (click)="deleteProject(info.id)"
+            />
+            }
           </div>
         </td>
       </tr>
