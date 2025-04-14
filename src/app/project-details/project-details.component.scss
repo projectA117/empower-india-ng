@@ -80,7 +80,7 @@
     justify-content: space-between;
     align-items: center;
     border: 1px solid #ccc;
-    padding: 3px 10px;
+    padding: 5px 10px;
     border-radius: 40px;
     cursor: pointer;
     &:hover{
@@ -112,3 +112,18 @@
         font-size: 22px;
     }
   }
+
+  .project-kickoff{
+    flex-direction: column;
+    width: 100%;
+  }    
+  
+  .project-publish-form{
+    display: flex;
+    margin: 15px 0;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+    font-size: 20px;
+}

@@ -75,9 +75,9 @@
 >
   <div class="container-fluid">
     <div class="row project-detail-name-h">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
         <div class="page-breadcrumb">
-          {{ selectedDistrict?.name }} › {{ selectedMandal?.name }} ›
+          {{ selectedDistrict?.name }} <span>|</span> {{ selectedMandal?.name }} <span>|</span>
           {{ selectedVilage?.name }}
         </div>
         <div class="all-projects-arrow-set" (click)="hideSelectedVillage(info)">
@@ -648,7 +648,7 @@
                         class="row projects-list-tab mt-3"
                         *ngFor="let info of projectTab.projectList"
                       >
-                        <div class="projects-actions-buttons">
+                        <div class="projects-actions-buttons data-actions">
                           <img
                             src="assets/images/icon-view.svg"
                             (click)="getProjectDetails(info)"

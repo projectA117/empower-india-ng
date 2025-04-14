@@ -194,7 +194,7 @@ export class CommonService {
 
   getTopSponsers(): Observable<any> {
     return this.httpClient
-      .get<any>(`${environment.apiUrl}/donars/all-donars?topN=5`)
+      .get<any>(`${environment.apiUrl}/donars/all-donars?topN=10`)
       .pipe(
         map((sponsors) => {
           return sponsors;

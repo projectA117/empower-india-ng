@@ -1,9 +1,11 @@
 @if (ShowVilage()) {
+  <div class="add-edit">
 <p-button
-  label="Edit or Add"
+label="Add / Edit"
   (onClick)="updateemployedYouthData()"
   *appHasRole="[3]"
 />
+</div>
 }
 
 <p-table [value]="employedYouthVillage" class="tab-data-table">

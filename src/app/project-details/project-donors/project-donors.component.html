@@ -1,5 +1,5 @@
 <div class="row mb-4">
-  <div class="project-detail-h-set tab-h-txt">
+  <div class="bottom-table-head">
     <h4>Sponsor Details</h4>
     <p-button
       label="Add Sponsor"
@@ -34,7 +34,7 @@
           <th pSortableColumn="Payment" class="text-center">
             Mode of Payment <p-sortIcon field="Payment" />
           </th>
-          <th class="text-center">Actions</th>
+          <th >Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-donor>
@@ -54,17 +54,14 @@
           <td class="text-right">
             {{ donor.ModeofPayment }}
           </td>
-          <td class="text-center block">
-            <i
-              class="pi pi-pencil"
-              (click)="onEditSponsors(donor)"
-              *appHasRole="[3]"
-            ></i>
-            <i
-              class="pi pi-trash"
-              (click)="onDelete(donor)"
-              *appHasRole="[3]"
-            ></i>
+          <td>
+
+            <div class="d-flex gap-3 action-btns">
+              <img src="assets/images/icon-edit.svg" (click)="onEditSponsors(donor)" *appHasRole="[3]">
+              <img src="assets/images/icon-delete.svg" (click)="onDelete(donor)" *appHasRole="[3]">
+            </div>
+
+           
           </td>
         </tr>
       </ng-template>

@@ -1,5 +1,5 @@
 <div class="row mb-4">
-  <div class="project-detail-h-set tab-h-txt">
+  <div class="bottom-table-head">
     <h4>Bank Details</h4>
     <p-button
       label="Add Bank Details"
@@ -16,14 +16,14 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 10%">Bank Name</th>
-          <th style="width: 20%">Bank Address</th>
-          <th style="width: 10%">Bank Phone Number</th>
-          <th style="width: 20%">Account Name</th>
-          <th style="width: 20%">Account Number</th>
-          <th style="width: 10%">IFSC Code</th>
-          <th style="width: 10%">Swift Code</th>
-          <th style="width: 20%"></th>
+          <th>Bank Name</th>
+          <th>Bank Address</th>
+          <th>Bank Phone Number</th>
+          <th>Account Name</th>
+          <th>Account Number</th>
+          <th>IFSC Code</th>
+          <th>Swift Code</th>
+          <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-bank>
@@ -36,7 +36,7 @@
           <td>{{ bank.ifscCode }}</td>
           <td>{{ bank.swiftCode }}</td>
           <td>
-            <i class="pi pi-pencil" (click)="edit(bank)" *appHasRole="[3]"></i>
+            <img src="assets/images/icon-edit.svg" (click)="deleteCommittee(Committee)" *appHasRole="[2, 3]">
           </td>
         </tr>
       </ng-template>

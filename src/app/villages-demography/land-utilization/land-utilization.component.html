@@ -1,9 +1,11 @@
 @if (ShowVilage()) {
+  <div class="add-edit">
 <p-button
-  label="Edit or Add"
+label="Add / Edit"
   (onClick)="updateLandUtilizationData()"
   *appHasRole="[3]"
 />
+</div>
 }
 <p-table [value]="landUtilizationData" class="tab-data-table">
   <ng-template pTemplate="header">
