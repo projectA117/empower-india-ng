@@ -88,6 +88,11 @@ export class AppComponent {
           command: () => this.removeFilters(),
         },
         {
+          label: 'map',
+          routerLink: 'map',
+          command: () => window.location.reload(),
+        },
+        {
           label: 'users',
           routerLink: 'users',
           visible: userRole.some((role) => [3].includes(role)),

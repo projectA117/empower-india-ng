@@ -5,7 +5,8 @@ import {
   ElementRef,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  OnDestroy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +19,7 @@ declare const google: any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('map', { static: true }) mapElement!: ElementRef;
 
   @Input() villageName: string = '';
@@ -39,6 +40,15 @@ export class MapComponent implements OnInit, OnChanges {
       if (this.villageName && this.mandalName && this.map) {
         this.zoomToLocation();
       }
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      google.maps.event.clearInstanceListeners(this.map);
+    }
+    if (this.marker) {
+      this.marker.setMap(null);
     }
   }
 
