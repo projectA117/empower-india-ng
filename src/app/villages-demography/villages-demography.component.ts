@@ -186,7 +186,38 @@ export class VillagesDemographyComponent implements OnInit {
     private productService: ProductService,
     private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    effect(() => {
+      this.projectMenuTab = [];
+      if (this.isLoggedIn()) {
+        this.projectMenuTab.push({
+          tabName: 'Draft',
+          statusCode: 'DRAFT',
+          projectList: [],
+        });
+        this.projectMenuTab.push({
+          tabName: 'Waiting for approval',
+          statusCode: 'WFA',
+          projectList: [],
+        });
+      }
+      this.projectMenuTab.push({
+        tabName: 'Waiting For Sponsor',
+        statusCode: 'WFD',
+        projectList: [],
+      });
+      this.projectMenuTab.push({
+        tabName: 'Work in Progress',
+        statusCode: 'WIP',
+        projectList: [],
+      });
+      this.projectMenuTab.push({
+        tabName: 'Completed',
+        statusCode: 'COMPLETED',
+        projectList: [],
+      });
+    })
+  }
 
   ngOnInit() {
     this.getCategories();
@@ -231,6 +262,7 @@ export class VillagesDemographyComponent implements OnInit {
       // this.tabs.forEach((tab, index) => {
       //   tab.isDisabled = this.isTabDisabled(index);
       // });
+      this.queryParams = queryParams;
       if (queryParams['villageId']) {
         this.showSelectedVillage({
           villageId: queryParams['villageId'],
@@ -386,34 +418,7 @@ export class VillagesDemographyComponent implements OnInit {
       this.institutionsData =
         this.getVillagesDemographyData.institutionsVillages;
       this.CommunityPopulationData = this.getVillagesDemographyData.populations;
-      this.projectMenuTab = [];
-      if (this.isLoggedIn()) {
-        this.projectMenuTab.push({
-          tabName: 'Draft',
-          statusCode: 'DRAFT',
-          projectList: [],
-        });
-        this.projectMenuTab.push({
-          tabName: 'Waiting for approval',
-          statusCode: 'WFA',
-          projectList: [],
-        });
-      }
-      this.projectMenuTab.push({
-        tabName: 'Waiting For Sponsor',
-        statusCode: 'WFD',
-        projectList: [],
-      });
-      this.projectMenuTab.push({
-        tabName: 'Work in Progress',
-        statusCode: 'WIP',
-        projectList: [],
-      });
-      this.projectMenuTab.push({
-        tabName: 'Completed',
-        statusCode: 'COMPLETED',
-        projectList: [],
-      });
+
 
       this.getVillagesDemographyData?.projectResponseList?.forEach(
         (project) => {
@@ -518,7 +523,12 @@ export class VillagesDemographyComponent implements OnInit {
   vilageChange(event: any) {
     // this.projectDMVSearch();
     this.isSelectedVilage = true;
-    this.getVillagesDemography(event.value.id);
+    // this.getVillagesDemography(event.value.id);
+    this.selectedVillage({
+        villageId: event.value.id,
+        districtId: this.selectedDistrict.id,
+        mandalId: this.selectedMandal.id,
+      });
   }
   villagelookups() {
     this.commonService.villagelookups().subscribe((data: any) => {
