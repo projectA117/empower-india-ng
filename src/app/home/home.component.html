@@ -121,6 +121,43 @@
   </div>
 </div>
 
+<div style="display: flex">
+  <div style="width: 50%">
+    <p-table [value]="districtProjects">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 30%">District</th>
+          <th style="width: 20%">Projects</th>
+          <th style="width: 50%">Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-districtProjects>
+        <tr>
+          <td>{{ districtProjects.districtName }}</td>
+          <td>{{ districtProjects.totalCount }}</td>
+          <td>
+            <p-progressBar
+              [value]="
+                (districtProjects.completed / districtProjects.totalCount) * 100
+              "
+            >
+              <ng-template pTemplate="content" let-value>
+                <span
+                  >{{ districtProjects.completed }}/
+                  {{ districtProjects.totalCount }}</span
+                >
+              </ng-template>
+            </p-progressBar>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div style="width: 50%">
+    <app-map-view [classFromParent]="'map-container'"></app-map-view>
+  </div>
+</div>
+
 <div class="top-sponsors">
   <div class="container">
     <h3>
@@ -146,7 +183,7 @@
             />
             <!-- <div class="sponspor-details">
               <div class="sponspor-details-name">
-                {{ sponsor.firstName }} {{ sponsor.lastName }}
+                {{ sponsor.firstName }}
               </div>
               <div class="sponspor-details-v">
                 {{ sponsor.villageName }} | {{ sponsor.mandalName }} |

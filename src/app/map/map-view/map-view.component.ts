@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommonService } from '@service/common.service';
 import { map, Observable, forkJoin } from 'rxjs';
@@ -16,6 +16,7 @@ declare const google: any;
 })
 export class MapViewComponent implements OnInit, OnDestroy {
   @ViewChild('fullMap', { static: true }) fullMapElement!: ElementRef;
+  @Input() classFromParent: string = 'full-map-container';
 
   private apiKey = 'AIzaSyD76jhu0z9_Jw6amx3SQ8MZ-z68QdFSwGI';
   private defaultZoom = 7;

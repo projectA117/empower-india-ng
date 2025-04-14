@@ -47,13 +47,14 @@ export class CommonService {
   }
 
   deleteProject(id: number) {
-    return this.httpClient.delete<any>(`${environment.apiUrl}/project/${id}`)
-    .pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((error) => of(error))
-    );
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/project/${id}`)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
   }
 
   getProjectStatus(): Observable<any> {
@@ -142,9 +143,6 @@ export class CommonService {
         catchError((error) => of(error))
       );
   }
-
-
-  
 
   villageslookupProjects(payLoad: any): Observable<any> {
     return this.httpClient
@@ -389,6 +387,17 @@ export class CommonService {
       .pipe(
         map((res) => {
           return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  getProjectsCountByDistrict(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/project/projects-count-by-district`)
+      .pipe(
+        map((response) => {
+          return response;
         }),
         catchError((error) => of(error))
       );

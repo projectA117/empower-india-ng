@@ -3,6 +3,7 @@
     <h4>Sponsor Details</h4>
     <p-button
       label="Add Sponsor"
+      [disabled]="totalCollected === projectCost"
       (click)="donorsSidebarVisible = true"
       *appHasRole="[1, 3, 2]"
     />
@@ -91,14 +92,44 @@
 
     <div class="pop-data-set">
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Donor Name</div>
+        <div class="project-detail-set-h">First Name</div>
         <div class="project-detail-set-v mt-2">
           <input
             pInputText
-            id="DonorsName"
-            formControlName="DonorsName"
-            aria-describedby="DonorsName"
+            id="DonorsFirstName"
+            formControlName="DonorsFirstName"
+            aria-describedby="DonorsFirstName"
           />
+          <small
+            *ngIf="
+              donorForm.get('DonorsFirstName').invalid &&
+              donorForm.get('DonorsFirstName').touched
+            "
+            class="p-error"
+          >
+            First Name is required
+          </small>
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Last Name</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="DonorsLastName"
+            formControlName="DonorsLastName"
+            aria-describedby="DonorsLastName"
+          />
+          <small
+            *ngIf="
+              donorForm.get('DonorsLastName').invalid &&
+              donorForm.get('DonorsLastName').touched
+            "
+            class="p-error"
+          >
+            Last Name is required
+          </small>
         </div>
       </div>
 
@@ -106,13 +137,21 @@
         <div class="project-detail-set-h">Phone</div>
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
-            mode="decimal"
             id="DonorsPhone"
+            mode="decimal"
+            [useGrouping]="false"
             formControlName="DonorsPhone"
             aria-describedby="DonorsPhone"
-            inputId="DonorsPhone"
-            [useGrouping]="false"
-          />
+          ></p-inputNumber>
+          <small
+            *ngIf="
+              donorForm.get('DonorsPhone').invalid &&
+              donorForm.get('DonorsPhone').touched
+            "
+            class="p-error"
+          >
+            Valid phone number is required
+          </small>
         </div>
       </div>
 
@@ -125,6 +164,15 @@
             formControlName="DonorsEmail"
             aria-describedby="DonorsEmail"
           />
+          <small
+            *ngIf="
+              donorForm.get('DonorsEmail').invalid &&
+              donorForm.get('DonorsEmail').touched
+            "
+            class="p-error"
+          >
+            Valid email is required
+          </small>
         </div>
       </div>
 
@@ -138,8 +186,16 @@
             id="DonorsAddress"
             aria-describedby="DonorsAddress"
             formControlName="DonorsAddress"
+          ></textarea>
+          <small
+            *ngIf="
+              donorForm.get('DonorsAddress').invalid &&
+              donorForm.get('DonorsAddress').touched
+            "
+            class="p-error"
           >
-          </textarea>
+            Address is required
+          </small>
         </div>
       </div>
 
@@ -156,33 +212,31 @@
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Description</div>
-        <div class="project-detail-set-v mt-2">
-          <textarea
-            rows="5"
-            cols="30"
-            pInputTextarea
-            id="description"
-            aria-describedby="description"
-            formControlName="description"
-          >
-          </textarea>
-        </div>
-      </div>
-
-      <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">Amount</div>
         <div class="project-detail-set-v mt-2">
           <p-inputNumber
             id="DonorsAmount"
             mode="decimal"
+            locale="en-IN"
+            [min]="1"
+            [max]="remainingAmount"
+            [minFractionDigits]="2"
             formControlName="DonorsAmount"
-          />
+          ></p-inputNumber>
+          <small
+            *ngIf="
+              donorForm.get('DonorsAmount').invalid &&
+              donorForm.get('DonorsAmount').touched
+            "
+            class="p-error"
+          >
+            Valid amount is required
+          </small>
         </div>
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Mode of Payment</div>
+        <div class="project-detail-set-h">Mode of Payment (Cash / Online)</div>
         <div class="project-detail-set-v mt-2">
           <input
             pInputText
@@ -190,6 +244,15 @@
             aria-describedby="DonorsModeofPayment"
             formControlName="DonorsModeofPayment"
           />
+          <small
+            *ngIf="
+              donorForm.get('DonorsModeofPayment').invalid &&
+              donorForm.get('DonorsModeofPayment').touched
+            "
+            class="p-error"
+          >
+            Payment mode is required
+          </small>
         </div>
       </div>
 
@@ -207,12 +270,7 @@
         (click)="donorsSidebarVisible = false"
         class="cancel-btn"
       />
-      <p-button
-        label="Add "
-        type="submit"
-        class="submit-btn"
-        [disabled]="!donorForm.valid"
-      />
+      <p-button label="Add " type="submit" class="submit-btn" />
     </div>
   </form>
 </p-sidebar>

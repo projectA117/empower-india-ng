@@ -57,6 +57,9 @@ export class ProjectDonorsComponent implements OnInit {
   donorsAddEditText = 'Add Sponsor';
   imagePreviews: any;
   selectedFiles: (File | { base64: string; fromServer: true })[] = [];
+  totalCollected: number = 0;
+  projectCost: number = 0;
+  remainingAmount: number = 0;
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService,
@@ -69,7 +72,8 @@ export class ProjectDonorsComponent implements OnInit {
 
   createdonorForm() {
     this.donorForm = new FormGroup({
-      DonorsName: new FormControl('', [Validators.required]),
+      DonorsFirstName: new FormControl('', [Validators.required]),
+      DonorsLastName: new FormControl('', [Validators.required]),
       DonorsPhone: new FormControl(null, [
         Validators.required,
         Validators.pattern(`^[0-9]{10}$`),
@@ -94,12 +98,18 @@ export class ProjectDonorsComponent implements OnInit {
       .showDonars(this.projectData.id)
       .subscribe((data) => {
         this.doners = data;
+
+        this.totalCollected = this.doners.reduce((sum, doner) => sum + doner['amount'], 0);
+        this.projectCost =
+          this.projectData.projectEstimation *
+          (this.projectData.publicShare / 100);
+        this.remainingAmount = this.projectCost - this.totalCollected;
       });
   }
   updatedonorForm() {
     const payload = {
-      firstName: this.donorForm.get('DonorsName')?.value,
-      lastName: this.donorForm.get('DonorsName')?.value,
+      firstName: this.donorForm.get('DonorsFirstName')?.value,
+      lastName: this.donorForm.get('DonorsLastName')?.value,
       phoneNumber: this.donorForm.get('DonorsPhone')?.value,
       email: this.donorForm.get('DonorsEmail')?.value,
       address: this.donorForm.get('DonorsAddress')?.value,
@@ -123,6 +133,7 @@ export class ProjectDonorsComponent implements OnInit {
         if (data) {
           this.showdonor();
           this.donorsSidebarVisible = false;
+          this.donorForm.reset();
         }
       });
   }

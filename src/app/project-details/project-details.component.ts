@@ -137,6 +137,14 @@ export class ProjectDetailsComponent implements OnInit {
       const localStorageuser = JSON.parse(localStorage.getItem('user'));
 
       this.product = data;
+      const sponsorAmount = this.product?.sponsersList?.reduce(
+        (total, sponsor) => total + Number(sponsor.amount),
+        0
+      );
+      const publicEstimate =
+      this.product.projectEstimation * (this.product.publicShare / 100);
+      this.product.sponsorAmount = sponsorAmount;
+      this.product.disableAddSponsor = publicEstimate <= sponsorAmount;
       if (!localStorageuser) {
         const filtertabs = this.tabs.filter((tab) => {
           return !this.hideTabs.includes(tab.label);
@@ -153,6 +161,8 @@ export class ProjectDetailsComponent implements OnInit {
   projectKickOff() {
     this.projectDetailsService
       .kickOffProject(this.product.id)
-      .subscribe((data) => {});
+      .subscribe((data) => {
+        this.getProjectDetails(this.product.id)
+      });
   }
 }
