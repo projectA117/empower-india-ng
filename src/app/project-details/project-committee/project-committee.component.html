@@ -1,5 +1,5 @@
 <div class="row mb-4">
-  <div class="project-detail-h-set tab-h-txt">
+  <div class="bottom-table-head">
     <h4>Governance Body Details</h4>
     <p-button
       label="Add Governance Body Member"
@@ -23,7 +23,7 @@
             Mobile <p-sortIcon field="name" />
           </th>
 
-          <th pSortableColumn="quantity" style="width: 20%"></th>
+          <th pSortableColumn="quantity" style="width: 20%">Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-Committee>
@@ -31,16 +31,11 @@
           <td>{{ Committee.firstName }} {{ Committee.lastName }}</td>
           <td>{{ Committee.phoneNumber }}</td>
           <td>
-            <i
-              class="pi pi-pencil"
-              (click)="editCommittee(Committee)"
-              *appHasRole="[2, 3]"
-            ></i>
-            <i
-              class="pi pi-trash"
-              (click)="deleteCommittee(Committee)"
-              *appHasRole="[2, 3]"
-            ></i>
+            <div class="d-flex gap-3 action-btns">
+            <img src="assets/images/icon-edit.svg" (click)="editCommittee(Committee)" *appHasRole="[2, 3]">
+            <img src="assets/images/icon-delete.svg" (click)="deleteCommittee(Committee)" *appHasRole="[2, 3]">
+          </div>
+            
           </td>
         </tr>
       </ng-template>

@@ -1,9 +1,12 @@
 @if (ShowVilage()) {
-<p-button
-  label="Edit or Add"
+<div class="add-edit">
+  <p-button
+  label="Add / Edit"
   (onClick)="updatePopulationData()"
   *appHasRole="[3]"
 />
+</div>
+
 }
 
 <p-table [value]="villagesDemographyData" class="tab-data-table">

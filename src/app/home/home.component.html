@@ -35,12 +35,14 @@
         <div class="col-lg-7 col-md-12">
           <div class="vision-mission-txt">
             <h3>OUR <span>VISION</span></h3>
-            <p>
+            <p class="d-flex gap-3">
               Empower Andhra Development is a mission to create a cleaner,
-              greener, and more sustainable Andhra Pradesh
+              greener, and more sustainable Andhra Pradesh.
+              <img src="assets/images/our-vision.svg" width="100"/>
             </p>
             <h3 class="mt-6">OUR <span>MISSION</span></h3>
-            <p>
+            <p class="d-flex gap-3">
+              <img src="assets/images/our-mission.svg" width="100" height="100"/>
               Empower Andhra Development is a mission to create a cleaner,
               greener, and more sustainable Andhra Pradesh by fostering
               collaboration between public and private sectors. By identifying
@@ -51,10 +53,27 @@
           </div>
         </div>
       </div>
+      <div class="row mt-6">
+        <div class="col-lg-3 col-md-6">
+          <img src="assets/images/badge-sponsors.svg" class="img-fluid" />
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <img src="assets/images/badge-collected.svg" class="img-fluid" />
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <img src="assets/images/badge-empowered.svg" class="img-fluid" />
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <img src="assets/images/badge-benifi.svg" class="img-fluid" />
+        </div>
+        
+      </div>
     </div>
+    
   </div>
   <!-- <img src="assets/images/vision-mission.jpg" class="img-fluid" /> -->
 </div>
+
 
 <div class="building-starter">
   <div class="container">
@@ -141,14 +160,17 @@
 
 <div class="top-sponsors">
   <div class="container">
-    <h3>Top 5 Sponsors</h3>
+    <h3>
+      Our Champions Behind the Scenes
+      <div>Top 10 Sponsors</div>
+    </h3>
   </div>
   <div class="container">
     <div class="top-five-sponsors">
       <p-carousel
         [value]="topSponsers"
         [showNavigators]="false"
-        [numVisible]="5"
+        [numVisible]="10"
         [circular]="false"
         [responsiveOptions]="responsiveOptionss"
       >
@@ -159,7 +181,7 @@
               alt="{{ sponsor.firstName }} {{ sponsor.lastName }}"
               class="img-fluid"
             />
-            <div class="sponspor-details">
+            <!-- <div class="sponspor-details">
               <div class="sponspor-details-name">
                 {{ sponsor.firstName }}
               </div>
@@ -170,7 +192,7 @@
               <div class="sponspor-details-money">
                 {{ sponsor.amount | currency : "INR" : "symbol" : "1.0-0" }}/-
               </div>
-            </div>
+            </div> -->
           </div>
         </ng-template>
       </p-carousel>

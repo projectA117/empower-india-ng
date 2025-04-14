@@ -14,9 +14,9 @@
 <div class="main-container-in">
   <div class="projects-list-detail">
     <div class="row project-detail-name-h">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
         <div class="page-breadcrumb">
-          {{ product?.districtName }} | {{ product?.mandalName }} |
+          {{ product?.districtName }} <span>|</span> {{ product?.mandalName }} <span>|</span>
           {{ product?.villageName }}
         </div>
         <div class="all-projects-arrow-set" onclick="history.back()">
@@ -186,7 +186,13 @@
 
             <!-- Project Kick-off -->
             <div *ngIf="activeTab === 'KickOff'">
-              <h1>Project Kick-off</h1>
+              <div class="bottom-table-head">
+                <div class="project-kickoff">
+
+              <h4>Project Kick-off</h4>
+
+              <div class="project-publish-form">
+
               <p>Project total estimation amount is collected.</p>
               <p-button
                 *appHasRole="[3]"
@@ -194,6 +200,12 @@
                 [disabled]="!product.disableAddSponsor"
                 (click)="projectKickOff()"
               ></p-button>
+            </div>
+
+              </div>
+
+            </div>
+
             </div>
 
             <!-- Finance -->

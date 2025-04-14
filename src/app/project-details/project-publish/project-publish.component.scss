@@ -13,3 +13,18 @@
   color: #bf3700;
   font-size: 10px;
 }
+
+.project-publish-form{
+  display: flex;
+      margin: 15px 0;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      font-size: 20px;
+      p{
+        margin: 0;
+      }
+      i{
+        font-size: 20px;
+      }
+}

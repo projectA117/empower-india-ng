@@ -647,7 +647,7 @@ h6 {
 }
 
 .p-sidebar-right {
-  top: 135px;
+  top: 120px;
 }
 
 
@@ -679,30 +679,30 @@ h6 {
   }
 }
 
-.tab-data-table {
-  tr {
-    td:last-child {
-      display: flex;
-      gap: 15px;
-    }
+// .tab-data-table {
+//   tr {
+//     td:last-child {
+//       display: flex;
+//       gap: 15px;
+//     }
 
-    td {
-      text-align: left !important;
-    }
+//     td {
+//       text-align: left !important;
+//     }
 
-    th {
-      text-align: left !important;
-      padding: 0.75rem 1rem;
-      border: 1px solid #e2e8f0;
-      border-width: 0 0 1px 0;
-      font-weight: 600;
-      color: #334155;
-      background: #ffffff;
-      transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, outline-color 0.2s;
-    }
+//     th {
+//       text-align: left !important;
+//       padding: 0.75rem 1rem;
+//       border: 1px solid #e2e8f0;
+//       border-width: 0 0 1px 0;
+//       font-weight: 600;
+//       color: #334155;
+//       background: #ffffff;
+//       transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, outline-color 0.2s;
+//     }
 
-  }
-}
+//   }
+// }
 
 .tab-data-table tr:nth-child(odd) {
   background-color: #F7FAFC;
@@ -1255,7 +1255,7 @@ h6 {
   cursor: pointer;
 
   &:hover {
-      transform: translateY(-2px) scale(1.015) translateZ(0);
+      // transform: translateY(-2px) scale(1.015) translateZ(0);
       box-shadow: 0 14px 26px rgba(0, 0, 0, 0.14);
       transition: all 0.2s ease-out;
       border: 1px solid #4F7619;
@@ -1494,7 +1494,7 @@ h6 {
 
 .edit-village{
   position: absolute;
-    right: -17px;
+    right: 0;
     top: -18px;
     padding: 10px;
     background-color: #EDF0F5;
@@ -1544,5 +1544,54 @@ h6 {
     border-radius: 10px;
     border: 1px solid #ccc;
     box-shadow: 0px 2px 4px #bdbdbd;
+  }
+}
+
+.data-actions{
+  position: absolute;
+  right: 12px;
+  top: 1px;
+  width: auto;
+  padding: 10px;
+  background-color: #EDF0F5;
+  border-top-right-radius: 4px;
+}
+
+.p-tabview .p-tabview-panels{
+  padding: 1.25rem 0;
+}
+
+.add-edit{
+  margin-bottom: 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.bottom-table-head{
+  padding: 0px 30px 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    h4{
+      color: #4F7619;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+    }
+}
+
+.action-btns{
+  img{
+    cursor: pointer;
+  }
+}
+.page-breadcrumb{
+  font-size: 18px;
+  font-weight: 500;
+  span{
+    font-family: 200;
+    color: #ccc;
   }
 }

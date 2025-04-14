@@ -128,7 +128,7 @@
     justify-content: space-between;
     align-items: center;
     border: 1px solid #ccc;
-    padding: 3px 10px;
+    padding: 5px 10px;
     border-radius: 40px;
     cursor: pointer;
     &:hover{
@@ -155,5 +155,20 @@
         color: #4F7619;
         font-weight: bold;
         font-size: 22px;
+    }
+  }
+
+
+  .project-info-one{
+    background-color: #F2F7FF;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    h3{
+        color: #BF3700;
+        text-align: center;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 10px;
+        
     }
   }
