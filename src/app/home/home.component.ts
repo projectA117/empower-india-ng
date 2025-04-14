@@ -3,11 +3,14 @@ import { ProductService } from '@service/productservice';
 import { CarouselModule } from 'primeng/carousel';
 import { Router } from '@angular/router';
 import { CommonService } from '@service/common.service';
+import { TableModule } from 'primeng/table';
+import { MapViewComponent } from '../map/map-view/map-view.component';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule],
+  imports: [CarouselModule, TableModule, MapViewComponent, ProgressBarModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   providers: [ProductService],
@@ -18,6 +21,7 @@ export class HomeComponent {
   topSponsers: any[] = [];
   responsiveOptions: any[] | undefined;
   responsiveOptionss: any[] | undefined;
+  districtProjects: any[] = [];
 
   // constructor(private productService: ProductService) {}
   constructor(
@@ -28,6 +32,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.getTopSponsers();
+    this.getProjectsCountByDistrict();
 
     // this.topSponsers = [
     //   {
@@ -277,5 +282,16 @@ export class HomeComponent {
       },
       error: (err) => console.error('An error occurred :', err),
     });
+  }
+
+  getProjectsCountByDistrict() {
+    this.commonService.getProjectsCountByDistrict().subscribe({
+      next: (data) => {
+        if (data && data.length) {
+          this.districtProjects = data
+        }
+      },
+      error: (err) => console.error('An error occurred :', err),
+      });
   }
 }
