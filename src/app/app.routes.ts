@@ -15,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { VillagesDemographyComponent } from './villages-demography/villages-demography.component';
 import { VillagesDemographyEditComponent } from './villages-demography-edit/villages-demography-edit.component';
 import { UsersComponent } from './users/users.component';
+import { MapViewComponent } from './map/map-view/map-view.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'villages', component: VillagesDemographyComponent },
   { path: 'users', component: UsersComponent},
+  {path: 'map', component:MapViewComponent},
   {
     path: 'villages-demography-edit',
     component: VillagesDemographyEditComponent,
