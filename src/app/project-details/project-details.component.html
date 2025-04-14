@@ -191,10 +191,7 @@
               <p-button
                 *appHasRole="[3]"
                 label="Kick Off"
-                [disabled]="
-                  !product.disableAddSponsor &&
-                  product.status?.toLowerCase() !== 'waiting for donor'
-                "
+                [disabled]="!product.disableAddSponsor"
                 (click)="projectKickOff()"
               ></p-button>
             </div>
