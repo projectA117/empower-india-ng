@@ -1,30 +1,11 @@
-<p-toast
-  position="bottom-right"
-  [life]="1000"
-  [autoZIndex]="true"
-  [baseZIndex]="1000"
-/>
+<p-toast position="bottom-right" [life]="1000" [autoZIndex]="true" [baseZIndex]="1000" />
 <div class="header-set">
   <h3>Users List</h3>
   <div class="header-set-filter">
-    <p-dropdown
-      filterBy="name"
-      [filter]="true"
-      [options]="districts"
-      appendTo="body"
-      [(ngModel)]="selectedDistrict"
-      optionLabel="name"
-      placeholder="Select a District"
-      (onChange)="districtChange($event)"
-    />
-    <p-dropdown
-      [options]="roles()"
-      [(ngModel)]="selectedRole"
-      appendTo="body"
-      optionLabel="name"
-      placeholder="Select a Role"
-      (onChange)="roleChange($event)"
-    />
+    <p-dropdown filterBy="name" [filter]="true" [options]="districts" appendTo="body" [(ngModel)]="selectedDistrict"
+      optionLabel="name" placeholder="Select a District" (onChange)="districtChange($event)" />
+    <p-dropdown [options]="roles()" [(ngModel)]="selectedRole" appendTo="body" optionLabel="name"
+      placeholder="Select a Role" (onChange)="roleChange($event)" />
     <button class="submit-btn-m" (click)="reset()">Reset</button>
     <button class="submit-btn-m" (click)="addNewUser()">Add User</button>
   </div>
@@ -52,18 +33,10 @@
         <td>{{ user.districtId ? districtMap[user.districtId] : "--" }}</td>
         <td>
           <div class="right-0 flex">
-            <p-inputSwitch
-              class="mr-5"
-              [(ngModel)]="user.isEnabled"
-              (ngModelChange)="activeInactiveChange($event, user)"
-            />
+            <p-inputSwitch class="mr-5" [(ngModel)]="user.isEnabled"
+              (ngModelChange)="activeInactiveChange($event, user)" />
 
-            <img
-              src="assets/images/icon-edit.svg"
-              (click)="editUsers(user)"
-              *appHasRole="[2, 3]"
-              class="cursor-hand"
-            />
+            <img src="assets/images/icon-edit.svg" (click)="editUsers(user)" *appHasRole="[2, 3]" class="cursor-hand" />
           </div>
         </td>
       </tr>
@@ -75,194 +48,145 @@
     </ng-template>
   </p-table>
 
-  <p-dialog
-    [(visible)]="addUserFlag"
-    [style]="{ width: '20%' }"
-    [header]="AddEditUser"
-    [modal]="true"
-    styleClass="p-fluid"
-    (onHide)="onHideDialog()"
-  >
+  <p-dialog [(visible)]="addUserFlag" [style]="{ width: '20%' }" [header]="AddEditUser" [modal]="true"
+    styleClass="p-fluid" (onHide)="onHideDialog()">
     <ng-container *ngIf="addUserFlag">
       <form [formGroup]="userForm" (ngSubmit)="addUser()">
         <div class="form-login">
           <div class="login-scroll">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input
-                type="text"
-                formControlName="firstName"
-                class="form-control"
-                [ngClass]="{
+
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">First Name</div>
+              <div class="project-detail-set-v mt-2">
+                <input type="text" formControlName="firstName" class="form-control" [ngClass]="{
                   'is-invalid': f.firstName.touched && f.firstName.errors
-                }"
-              />
-              <div
-                *ngIf="f.firstName.touched && f.firstName.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.firstName.touched && f.firstName.errors.required">
-                  firstName is required
+                }" />
+                <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstName.touched && f.firstName.errors.required">
+                    firstName is required
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input
-                type="text"
-                formControlName="lastName"
-                class="form-control"
-                [ngClass]="{
+
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">Last Name</div>
+              <div class="project-detail-set-v mt-2">
+                <input type="text" formControlName="lastName" class="form-control" [ngClass]="{
                   'is-invalid': f.lastName.touched && f.lastName.errors
-                }"
-              />
-              <div
-                *ngIf="f.lastName.touched && f.lastName.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.lastName.touched && f.lastName.errors.required">
-                  last Name is required
+                }" />
+                <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+                  <div *ngIf="f.lastName.touched && f.lastName.errors.required">
+                    last Name is required
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="phoneNumber">Phone Number</label>
-              <input
-                type="text"
-                formControlName="phoneNumber"
-                class="form-control"
-                [ngClass]="{
+
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">Phone Number</div>
+              <div class="project-detail-set-v mt-2">
+                <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{
                   'is-invalid': f.phoneNumber.touched && f.phoneNumber.errors
-                }"
-              />
-              <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
-                <div
-                  *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.required"
-                >
-                  Phone Number is required
-                </div>
-                <div
-                  *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.pattern"
-                >
-                  Phone Number length should be 10
+                }" />
+                <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                  <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.required">
+                    Phone Number is required
+                  </div>
+                  <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors.pattern">
+                    Phone Number length should be 10
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="email">E-mail </label>
-              <input
-                type="text"
-                formControlName="email"
-                class="form-control"
-                [ngClass]="{
+
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">e-Mail</div>
+              <div class="project-detail-set-v mt-2">
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{
                   'is-invalid': f.email.touched && f.email.errors
-                }"
-              />
-              <div *ngIf="f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.touched && f.email.errors.required">
-                  e-mail is required
-                </div>
+                }" />
+                <div *ngIf="f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.touched && f.email.errors.required">
+                    e-mail is required
+                  </div>
 
-                <div *ngIf="f.email.touched && f.email.errors.pattern">
-                  valied e-mail pattern is required
+                  <div *ngIf="f.email.touched && f.email.errors.pattern">
+                    valied e-mail pattern is required
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="username">User Name</label>
-              <input
-                type="text"
-                formControlName="userName"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': f.userName.touched && f.userName.errors
-                }"
-              />
-              <div
-                *ngIf="f.userName.touched && f.userName.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.userName.touched && f.userName.errors.required">
-                  User Name is required
-                </div>
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">User Name</div>
+              <div class="project-detail-set-v mt-2">
+                <input pInputText id="lastName" formControlName="lastName" aria-describedby="lastName" />
               </div>
             </div>
-            <div class="form-group relative" *ngIf="!useredit">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                #userpasswordinput
-                formControlName="password"
-                class="form-control"
-                [ngClass]="{
+
+
+            <div class="project-detail-set mt-4" *ngIf="!useredit">
+              <div class="project-detail-set-h">Password</div>
+              <div class="project-detail-set-v mt-2 pos-rel">
+                <input type="password" #userpasswordinput formControlName="password" class="form-control" [ngClass]="{
                   'is-invalid': f.password.touched && f.password.errors
-                }"
-              />
-              <i
-                class="mb-4 pi pi-eye text-2xl text-muted-color cursor-pointer usertogglePassword"
-                (click)="changePasswordType(userpasswordinput)"
-              ></i>
-              <div
-                *ngIf="f.password.touched && f.password.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.password.touched && f.password.errors.required">
-                  Password is required
-                </div>
-                <div *ngIf="f.password.touched && f.password.errors.minlength">
-                  Password must be at least 6 characters
+                }" />
+                <i class="mb-4 pi pi-eye text-2xl text-muted-color cursor-pointer usertogglePassword"
+                  (click)="changePasswordType(userpasswordinput)"></i>
+                <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.touched && f.password.errors.required">
+                    Password is required
+                  </div>
+                  <div *ngIf="f.password.touched && f.password.errors.minlength">
+                    Password must be at least 6 characters
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="firstName">Role</label>
-              <p-dropdown
-                [options]="roles()"
-                formControlName="role"
-                optionLabel="name"
-                placeholder="Select a Role"
-              />
-              <div
-                *ngIf="f.role.touched && f.role.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.role.touched && f.role.errors.required">
-                  Role is required
+
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">Role</div>
+              <div class="project-detail-set-v mt-2">
+                <p-dropdown [options]="roles()" formControlName="role" optionLabel="name" placeholder="Select a Role" />
+                <div *ngIf="f.role.touched && f.role.errors" class="invalid-feedback">
+                  <div *ngIf="f.role.touched && f.role.errors.required">
+                    Role is required
+                  </div>
                 </div>
               </div>
             </div>
+
             @if(f.role.value && (f.role.value.id === 4 || f.role.value.id ===
             5)) {
-            <div class="form-group">
-              <label for="firstName">Assigned District</label>
-              <p-dropdown
-                filterBy="name"
-                [filter]="true"
-                [options]="districts"
-                formControlName="assignedDistrict"
-                optionLabel="name"
-                placeholder="Select a District"
-              />
-              <div
-                *ngIf="f.assignedDistrict.touched && f.assignedDistrict.errors"
-                class="invalid-feedback"
-              >
-                <div
-                  *ngIf="
+            <div class="project-detail-set mt-4">
+              <div class="project-detail-set-h">Assigned District</div>
+              <div class="project-detail-set-v mt-2">
+                <p-dropdown filterBy="name" [filter]="true" [options]="districts" formControlName="assignedDistrict"
+                  optionLabel="name" placeholder="Select a District" />
+                <div *ngIf="f.assignedDistrict.touched && f.assignedDistrict.errors" class="invalid-feedback">
+                  <div *ngIf="
                     f.assignedDistrict.touched &&
                     f.assignedDistrict.errors.required
-                  "
-                >
-                  District is required
+                  ">
+                    District is required
+                  </div>
                 </div>
               </div>
             </div>
             }
+
+
+
+
+
+
+
+
           </div>
         </div>
         <div class="form-group">

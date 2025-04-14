@@ -50,7 +50,7 @@ export class ProjectCommitteeComponent implements OnInit {
   updatecommitteeForm: FormGroup = new FormGroup({});
   Committee: any = [];
   editCommitee: boolean = false;
-  addEditText = 'add Governance Body Member';
+  addEditText = 'Add Governance Body Member';
   constructor(
     private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
@@ -118,7 +118,7 @@ export class ProjectCommitteeComponent implements OnInit {
     this.updatecommitteeForm
       .get('villageId')
       ?.setValue(this.projectData.villageName);
-    this.addEditText = 'add Governance Body Member';
+    this.addEditText = 'Add Governance Body Member';
   }
 
   updatecommittee() {
