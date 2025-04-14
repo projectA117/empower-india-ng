@@ -46,6 +46,16 @@ export class CommonService {
     });
   }
 
+  deleteProject(id: number) {
+    return this.httpClient.delete<any>(`${environment.apiUrl}/project/${id}`)
+    .pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError((error) => of(error))
+    );
+  }
+
   getProjectStatus(): Observable<any> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/status`).pipe(
       map((response) => {

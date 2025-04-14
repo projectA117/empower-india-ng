@@ -641,4 +641,10 @@ export class ProjectListComponent implements OnInit {
       );
     }
   }
+
+  deleteProject(id: number) {
+    this.commonService.deleteProject(id).subscribe(data => {
+      this.getProjects();
+    });
+  }
 }
