@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommonService } from '@service/common.service';
 import { map, Observable, forkJoin } from 'rxjs';
@@ -14,11 +14,11 @@ declare const google: any;
   templateUrl: './map-view.component.html',
   styleUrls: ['./map-view.component.scss']
 })
-export class MapViewComponent implements OnInit {
+export class MapViewComponent implements OnInit, OnDestroy {
   @ViewChild('fullMap', { static: true }) fullMapElement!: ElementRef;
 
   private apiKey = 'AIzaSyD76jhu0z9_Jw6amx3SQ8MZ-z68QdFSwGI';
-  private defaultZoom = 8;
+  private defaultZoom = 7;
   private defaultCenter = { lat: 16.5062, lng: 80.6480 };
   private readonly DISTRICT_ZOOM = 7;
   private readonly CLUSTER_ZOOM = 10;
@@ -41,8 +41,36 @@ export class MapViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.resetState();
     this.initializeMap();
     this.getProjects();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.map) {
+        google.maps.event.trigger(this.map, 'resize');
+        this.map.setCenter(this.defaultCenter);
+        this.map.setZoom(this.map.getZoom()!);
+      }
+    }, 0);
+  }
+
+  ngOnDestroy(): void {
+    this.clearOverlays();
+    this.resetState();
+    if (this.map) google.maps.event.clearInstanceListeners(this.map);
+    if (this.infoWindow) this.infoWindow.close();
+  }
+
+  resetState(): void {
+    this.projects = [];
+    this.totalRecords = null;
+    this.geoJsonData = null;
+    this.markers = [];
+    this.circles = [];
+    this.allMarkers = [];
+    this.markerClusterer = null;
   }
 
   initializeMap(): void {
@@ -66,17 +94,15 @@ export class MapViewComponent implements OnInit {
     this.infoWindow = new google.maps.InfoWindow({ maxWidth: 320, disableAutoPan: true });
 
     this.map.data.loadGeoJson('assets/andhra-pradesh.geojson', null, (features) => {
-      if (features.length === 0) {
-        console.error('No features loaded from GeoJSON.');
-      }
+      if (features.length === 0) console.error('No features loaded from GeoJSON.');
     });
 
     this.map.data.setStyle(() => ({
       strokeColor: '#000000',
       strokeWeight: 2,
-      strokeOpacity: 0.75,
+      strokeOpacity: 0.8,
       fillColor: '#d1eafa',
-      fillOpacity: 0.5
+      fillOpacity: 0.6
     }));
 
     this.map.data.addListener('addfeature', () => {
@@ -94,10 +120,9 @@ export class MapViewComponent implements OnInit {
   }
 
   handleZoomChange(currentZoom: number): void {
+    console.log(`Zoom level changed to: ${currentZoom}`);
     if (!this.geoJsonData) return;
-
     this.clearOverlays();
-
     if (currentZoom <= this.DISTRICT_ZOOM) {
       this.addDistrictCircles();
     } else if (currentZoom <= this.CLUSTER_ZOOM) {
@@ -108,17 +133,12 @@ export class MapViewComponent implements OnInit {
   }
 
   showClusteredMarkers(): void {
-    if (!this.allMarkers.length) {
-      this.createAllMarkers();
-    }
+    if (!this.allMarkers.length) this.createAllMarkers();
 
     this.markerClusterer = new MarkerClusterer({
       markers: this.allMarkers,
       map: this.map,
-      algorithm: new SuperClusterAlgorithm({
-        radius: 60,
-        maxZoom: this.MARKER_ZOOM
-      }),
+      algorithm: new SuperClusterAlgorithm({ radius: 60, maxZoom: this.MARKER_ZOOM }),
       renderer: {
         render: ({ count, position, markers }) => {
           const marker = new google.maps.Marker({
@@ -126,15 +146,15 @@ export class MapViewComponent implements OnInit {
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
               scale: Math.max(20, Math.min(count * 3, 35)),
-              fillColor: "#ff4444",
-              fillOpacity: 0.7,
+              fillColor: "#ff5252",
+              fillOpacity: 0.85,
               strokeWeight: 2,
-              strokeColor: "#ff0000"
+              strokeColor: "#b71c1c",
+              labelOrigin: new google.maps.Point(0, 0)
             },
             label: {
               text: String(count),
-              color: "white",
-              fontSize: "12px"
+              color: "#fff",
             },
             zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count
           });
@@ -144,27 +164,17 @@ export class MapViewComponent implements OnInit {
           marker.addListener('mouseover', () => {
             hoverTimeout = window.setTimeout(() => {
               const content = `
-                <div class="cluster-info-window">
-                  <div class="cluster-info-title">${count} Projects in this area</div>
-                  <div class="cluster-info-list">
-                  ${markers.slice(0, 5).map(m => {
+                <div style='font-family: Arial; font-size: 13px; max-width: 280px;'>
+                  <div style='font-weight: bold;'>${count} Projects in this area</div>
+                  <div>
+                    ${markers.slice(0, 5).map(m => {
                 const projectType = (m as any)['projectType'] ?? '';
                 const location = (m as any)['location'] ?? '';
-                return `
-                      <div class="cluster-info-item">
-                        <strong>${projectType}</strong><br>
-                        ${location}
-                      </div>
-                    `;
-              }).join('')}                  
-                    ${markers.length > 5 ? `
-                      <div class="cluster-info-item">
-                        And ${markers.length - 5} more projects...
-                      </div>
-                    ` : ''}
+                return `<div><strong>${projectType}</strong><br>${location}</div>`;
+              }).join('')}
+                    ${markers.length > 5 ? `<div>And ${markers.length - 5} more projects...</div>` : ''}
                   </div>
-                </div>
-              `;
+                </div>`;
               this.infoWindow!.setContent(content);
               this.infoWindow!.open(this.map, marker);
             }, 200);
@@ -182,9 +192,7 @@ export class MapViewComponent implements OnInit {
   }
 
   showIndividualMarkers(): void {
-    if (!this.allMarkers.length) {
-      this.createAllMarkers();
-    }
+    if (!this.allMarkers.length) this.createAllMarkers();
     this.allMarkers.forEach(marker => marker.setMap(this.map));
   }
 
@@ -202,7 +210,7 @@ export class MapViewComponent implements OnInit {
           path: google.maps.SymbolPath.CIRCLE,
           scale: 8,
           fillColor: "#4285F4",
-          fillOpacity: 0.7,
+          fillOpacity: 0.8,
           strokeWeight: 1,
           strokeColor: "#ffffff"
         }
@@ -212,15 +220,16 @@ export class MapViewComponent implements OnInit {
       marker.set('location', `${feature.properties.villageName}, ${feature.properties.mandalName}`);
 
       const content = `
-        <div class="info-window-content">
-          <div class="info-window-title">${feature.properties.projectType} - ${feature.properties.projectCategory}</div> 
-          <div class="info-window-details">
+        <div style='font-family: Arial, sans-serif; padding: 10px; max-width: 300px;'>
+          <div style='font-size: 18px; font-weight: bold; color: #333;'>
+            ${feature.properties.projectType} - ${feature.properties.projectCategory}
+          </div>
+          <div style='font-size: 14px; color: #555;'>
             <strong>Location:</strong> ${feature.properties.villageName}, ${feature.properties.mandalName}<br>
             <strong>Status:</strong> ${feature.properties.status}<br>
             <strong>Budget:</strong> ₹${feature.properties.projectEstimation}
           </div>
-        </div>
-      `;
+        </div>`;
 
       let mouseOverTimeout: number;
 
@@ -256,16 +265,13 @@ export class MapViewComponent implements OnInit {
 
     this.geoJsonData.features.forEach((feature: any) => {
       const districtName = feature.properties.districtName;
-      if (!districtMap.has(districtName)) {
-        districtMap.set(districtName, []);
-      }
+      if (!districtMap.has(districtName)) districtMap.set(districtName, []);
       districtMap.get(districtName)!.push(feature);
     });
 
     districtMap.forEach((featuresInDistrict, districtName) => {
-      const avgLat = featuresInDistrict.reduce((sum, feature) => sum + feature.geometry.coordinates[1], 0) / featuresInDistrict.length;
-      const avgLng = featuresInDistrict.reduce((sum, feature) => sum + feature.geometry.coordinates[0], 0) / featuresInDistrict.length;
-
+      const avgLat = featuresInDistrict.reduce((sum, f) => sum + f.geometry.coordinates[1], 0) / featuresInDistrict.length;
+      const avgLng = featuresInDistrict.reduce((sum, f) => sum + f.geometry.coordinates[0], 0) / featuresInDistrict.length;
       const center = new google.maps.LatLng(avgLat, avgLng);
 
       const circle = new google.maps.Circle({
@@ -273,7 +279,7 @@ export class MapViewComponent implements OnInit {
         strokeOpacity: 0.8,
         strokeWeight: 2,
         fillColor: '#FF0000',
-        fillOpacity: 0.35,
+        fillOpacity: 0.5,
         map: this.map,
         center,
         radius: 15000,
@@ -285,23 +291,22 @@ export class MapViewComponent implements OnInit {
         map: this.map,
         label: {
           text: featuresInDistrict.length.toString(),
-          color: 'white'
+          color: '#ffffff',
+          fontWeight: 'bold'
         },
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 0
+          scale: 0,
+          labelOrigin: new google.maps.Point(0, 0)
         }
       });
 
       const content = `
-        <div class="info-window-content">
-          <div class="info-window-title">${districtName} District</div>
-          <div class="info-window-details">
-            <strong>Total Projects:</strong> ${featuresInDistrict.length}<br>
-            <div style="margin-top: 8px;">Click to view projects in this district</div>
-          </div>
-        </div>
-      `;
+        <div style='font-family: Arial;'>
+          <div style='font-weight: bold;'>${districtName} District</div>
+          <div>Total Projects: ${featuresInDistrict.length}</div>
+          <div style='margin-top: 8px;'>Click to view projects in this district</div>
+        </div>`;
 
       let mouseOverTimeout: number;
 
@@ -330,17 +335,12 @@ export class MapViewComponent implements OnInit {
     const payload = 'page=0&size=10000000';
     this.commonService.getProjects(payload).subscribe(
       (data: any) => {
-        if (!data.content) {
-          this.projects = [];
-          return;
-        }
+        if (!data.content) return this.projects = [];
         this.projects = data.content;
         this.totalRecords = data.totalElements;
         this.convertToGeoJson(this.projects).subscribe(geoJsonData => {
           this.geoJsonData = geoJsonData;
           this.addDistrictCircles();
-        }, err => {
-          console.error('Error converting to GeoJSON:', err);
         });
       },
       err => {
@@ -354,9 +354,7 @@ export class MapViewComponent implements OnInit {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${this.apiKey}`;
     return this.http.get<any>(url).pipe(
       map(response => {
-        if (response.results?.length > 0) {
-          return response.results[0].geometry.location;
-        }
+        if (response.results?.length > 0) return response.results[0].geometry.location;
         throw new Error('Unable to geocode address');
       })
     );

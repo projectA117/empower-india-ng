@@ -89,7 +89,8 @@ export class AppComponent {
         },
         {
           label: 'map',
-          routerLink: 'map'
+          routerLink: 'map',
+          command: () => window.location.reload(),
         },
         {
           label: 'users',
