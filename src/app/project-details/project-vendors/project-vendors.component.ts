@@ -83,7 +83,7 @@ export class ProjectVendorsComponent implements OnInit {
 
   updateVendor() {
     const payload = {
-      id: this.projectData?.id, //this.VendorForm.get('id')?.value,
+      id: this.VendorForm.get('id')?.value ?? null, //,
       name: this.VendorForm.get('VendorName')?.value,
       contractorName: this.VendorForm.get('VendorContractorName')?.value,
       phone: this.VendorForm.get('VendorMobile')?.value,
