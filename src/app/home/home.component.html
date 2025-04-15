@@ -318,8 +318,13 @@
         [responsiveOptions]="responsiveOptionss"
       >
         <ng-template let-sponsor pTemplate="item">
-          <div class="sponsor-card pos-rel" (click)="showSponsorDetails(sponsor)">
-            <div class="sponspor-details">
+          <div class="sponsor-card" (click)="showSponsorDetails(sponsor)">
+            <img
+              [src]="sponsor.imgSrc"
+              alt="{{ sponsor.firstName }} {{ sponsor.lastName }}"
+              class="img-fluid"
+            />
+            <!-- <div class="sponspor-details">
               <div class="sponspor-details-name">
                 {{ sponsor.firstName }}
               </div>
@@ -330,13 +335,7 @@
               <div class="sponspor-details-money">
                 {{ sponsor.amount | currency : "INR" : "symbol" : "1.0-0" }}/-
               </div>
-            </div>
-            <img
-              [src]="sponsor.imgSrc"
-              alt="{{ sponsor.firstName }} {{ sponsor.lastName }}"
-              class="img-fluid"
-            />
-            <!--  -->
+            </div> -->
           </div>
         </ng-template>
       </p-carousel>
