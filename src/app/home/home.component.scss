@@ -75,7 +75,7 @@
 
 .building-starter {
     padding: 50px 0;
-    background-color: #fff;
+    // background-color: #fff;
 
     h3 {
         color: #444;
@@ -196,9 +196,8 @@
 
   .project-excecution-summary-header {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
   }
 
   .status-indicators {
@@ -243,25 +242,37 @@
   }
 
   .project-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    width: 50%;
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // gap: 1rem;
   }
 
   .total-card {
-    grid-column: span 3;
+    // grid-column: span 3;
   }
+.bottom-project-card-all{
+    width: calc(50% - 12px)!important;
+    background: linear-gradient(222deg, #FFEFF3 2.94%, #FFF 95.58%)!important;
 
-  .project-card {
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    padding: 0.5rem;
 
+}
+  .bottom-project-card{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #E5E5E5;
+    background: linear-gradient(222deg, #FFEFC9 2.94%, #FFF 95.58%);
+    width: calc(25% - 13px);
+
+    .p-card-content{
+        padding: 0;
+    }
     .project-title {
-      color: #b75d32;
+        
+      color: #BF3700;
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      font-size: 18px;
+      margin-bottom: 15px;
     }
 
     .project-completed {
@@ -300,6 +311,31 @@
   }
 
   .map-container {
-    width: 50%;
   }
+}
+
+.projects-execution-summary{
+    padding: 50px 20px;
+    background-color: #fff;
+    
+}
+
+.project-excecution-row{
+    display: flex;
+    width:100%;
+}
+
+.project-cards{
+    display: flex;
+}
+
+
+
+.badge-value{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    font-size: 60px;
+    color: #444;
+    font-weight: 100;
 }
