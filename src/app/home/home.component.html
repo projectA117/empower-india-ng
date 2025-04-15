@@ -1,0 +1,403 @@
+<div class="home-banner">
+  <div class="banner-stats">
+    <div class="banner-stats-txt">
+      <div>50+ <span>Villages Empowered</span></div>
+      <div>10 Cr+ <span>Fundraised</span></div>
+      <div>100+ <span>Sponsors</span></div>
+    </div>
+  </div>
+  <div class="pos-rel">
+    <p-carousel
+      [value]="products"
+      [numVisible]="1"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptionss"
+      autoplayInterval="3000"
+    >
+      <ng-template let-product pTemplate="item">
+        <img
+          src="assets/images/banner/{{ product.image }}"
+          [alt]="product.name"
+          class="w-full"
+        />
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>
+
+<div class="vision-mission">
+  <div class="vm-content-set">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-12">
+          <img src="assets/images/vision-mission-img.png" class="img-fluid" />
+        </div>
+        <div class="col-lg-7 col-md-12">
+          <div class="vision-mission-txt">
+            <h3>OUR <span>VISION</span></h3>
+            <p class="d-flex gap-3">
+              Empower Andhra Development is a mission to create a cleaner,
+              greener, and more sustainable Andhra Pradesh.
+              <img src="assets/images/our-vision.svg" width="100" />
+            </p>
+            <h3 class="mt-6">OUR <span>MISSION</span></h3>
+            <p class="d-flex gap-3">
+              <img
+                src="assets/images/our-mission.svg"
+                width="100"
+                height="100"
+              />
+              Empower Andhra Development is a mission to create a cleaner,
+              greener, and more sustainable Andhra Pradesh by fostering
+              collaboration between public and private sectors. By identifying
+              community needs and encouraging government bodies and private
+              sponsors to fund impactful initiatives, we bridge the gap to drive
+              meaningful and lasting change.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-6">
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">{{ dashBoardData?.donorCount || 0 }}</div>
+          <img src="assets/images/badge-sponsors.svg" class="img-fluid" />
+          
+        </div>
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">
+          {{
+            dashBoardData?.villageProjectDonorAmount || 0
+              | currency : "INR" : "" : "1.0-0"
+          }}
+        </div>
+          <img src="assets/images/badge-collected.svg" class="img-fluid" />
+          
+        </div>
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">{{ dashBoardData?.villageCount || 0 }}</div>
+          <img src="assets/images/badge-empowered.svg" class="img-fluid" />
+          
+        </div>
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">
+          {{ dashBoardData?.totalPopulation || 0 }}</div>
+          <img src="assets/images/badge-benifi.svg" class="img-fluid" />
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="building-starter">
+  <div class="container">
+    <h3>
+      Building a Stronger Community
+      <div>With Your Support</div>
+    </h3>
+  </div>
+  <div class="container">
+    <p-carousel
+      [value]="category"
+      [numVisible]="5"
+      [numScroll]="3"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template let-categoryItem pTemplate="item">
+        <div class="border-round m-2 project-card">
+          <div class="mb-3">
+            <div
+              class="relative mx-auto cur-pointer"
+              (click)="showprojectcategoryDetails(categoryItem)"
+            >
+              <img
+                src="assets/images/projects/{{ categoryItem.image }}"
+                [alt]="categoryItem.description"
+              />
+              <p-tag
+                [value]="categoryItem.id"
+                [severity]="getSeverity('INSTOCK')"
+                class="absolute"
+                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
+              />
+            </div>
+          </div>
+          <h4>
+            {{ categoryItem.description }}
+          </h4>
+          <button (click)="showprojectcategoryDetails(categoryItem)">
+            Sponsor
+          </button>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>
+
+  <!-- <img src="assets/images/vision-mission.jpg" class="img-fluid" /> -->
+</div>
+
+
+<!-- app.component.html -->
+<div class="projects-execution-summary">
+  <!-- Header -->
+  <div class="project-excecution-summary-header">
+    <div class="project-excecution-row">
+
+    <div class="status-indicators col-7">
+      <div class="status-item">
+        <div class="status-icon completed"></div>
+        <span>Completed</span>
+      </div>
+      <div class="status-item">
+        <div class="status-icon active"></div>
+        <span>Active</span>
+      </div>
+      <div class="status-item">
+        <div class="status-icon waiting"></div>
+        <span>Waiting for Sponsor</span>
+      </div>
+    </div>
+    <h1 class="dashboard-title col-5">PROJECTS EXECUTION SUMMARY</h1>
+  </div>
+
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="row">
+    <!-- Left side - Project Cards -->
+    <div class="col-7">
+      <!-- Total Portfolio Card -->
+      <div class="row gap-3">
+
+      <div class="bottom-project-card bottom-project-card-all col-4">
+          <div class="project-title">{{ totalProjects.districtName }}</div>
+          <div class="d-flex gap-3">
+            <div class="project-number">{{ totalProjects.totalCount }}</div>
+            <div class="d-flex flex-column gap-3 w-full">
+              <p-progressBar
+                [value]="
+                  (totalProjects.completed / totalProjects.totalCount) * 100
+                "
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span
+                    >{{ totalProjects.completed }}/
+                    {{ totalProjects.totalCount }}</span
+                  >
+                </ng-template>
+              </p-progressBar>
+              <p-progressBar
+                [value]="
+                  (totalProjects.inprogress / totalProjects.totalCount) * 100
+                "
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span
+                    >{{ totalProjects.inprogress }}/
+                    {{ totalProjects.totalCount }}</span
+                  >
+                </ng-template>
+              </p-progressBar>
+              <p-progressBar
+                [value]="
+                  (totalProjects.waitingForSponsor / totalProjects.totalCount) *
+                  100
+                "
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span
+                    >{{ totalProjects.waitingForSponsor }}/
+                    {{ totalProjects.totalCount }}</span
+                  >
+                </ng-template>
+              </p-progressBar>
+            </div>
+          </div>
+        
+      </div>
+
+      <!-- Regional Cards -->
+      @for (project of districtProjects; track project.districtName) {
+      <div class="bottom-project-card col-3">
+        <div class="project-title">{{ project.districtName }}</div>
+        <div class="d-flex gap-3">
+          <div class="project-number">{{ project.totalCount }}</div>
+          <div class="d-flex gap-3 w-full flex-column">
+            <p-progressBar
+              [value]="(project.completed / project.totalCount) * 100"
+            >
+              <ng-template pTemplate="content" let-value>
+                <span>{{ project.completed }}/ {{ project.totalCount }}</span>
+              </ng-template>
+            </p-progressBar>
+            <p-progressBar
+              [value]="(project.inprogress / project.totalCount) * 100"
+            >
+              <ng-template pTemplate="content" let-value>
+                <span>{{ project.inprogress }}/ {{ project.totalCount }}</span>
+              </ng-template>
+            </p-progressBar>
+            <p-progressBar
+              [value]="(project.waitingForSponsor / project.totalCount) * 100"
+            >
+              <ng-template pTemplate="content" let-value>
+                <span
+                  >{{ project.waitingForSponsor }}/
+                  {{ project.totalCount }}</span
+                >
+              </ng-template>
+            </p-progressBar>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    </div>
+
+    <!-- Right side - Map -->
+    <div class="col-5 pos-rel">
+      <app-map-view [classFromParent]="'map-container'"></app-map-view>
+    </div>
+  </div>
+</div>
+
+<!-- <div style="display: flex">
+  <div style="width: 50%">
+    <p-table [value]="districtProjects">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 30%">District</th>
+          <th style="width: 20%">Projects</th>
+          <th style="width: 50%">Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-districtProjects>
+        <tr>
+          <td>{{ districtProjects.districtName }}</td>
+          <td>{{ districtProjects.totalCount }}</td>
+          <td>
+            <p-progressBar
+              [value]="
+                (districtProjects.completed / districtProjects.totalCount) * 100
+              "
+            >
+              <ng-template pTemplate="content" let-value>
+                <span
+                  >{{ districtProjects.completed }}/
+                  {{ districtProjects.totalCount }}</span
+                >
+              </ng-template>
+            </p-progressBar>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div style="width: 50%">
+    <app-map-view [classFromParent]="'map-container'"></app-map-view>
+  </div>
+</div> -->
+
+<div class="top-sponsors">
+  <div class="container">
+    <h3>
+      Our Champions Behind the Scenes
+      <div>Top 10 Sponsors</div>
+    </h3>
+  </div>
+  <div class="container">
+    <div class="top-five-sponsors">
+      <p-carousel
+        [value]="topSponsers"
+        [showNavigators]="false"
+        [numVisible]="10"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptionss"
+      >
+        <ng-template let-sponsor pTemplate="item">
+          <div class="sponsor-card" (click)="showSponsorDetails(sponsor)">
+            <img
+              [src]="sponsor.imgSrc"
+              alt="{{ sponsor.firstName }} {{ sponsor.lastName }}"
+              class="img-fluid"
+            />
+            <!-- <div class="sponspor-details">
+              <div class="sponspor-details-name">
+                {{ sponsor.firstName }}
+              </div>
+              <div class="sponspor-details-v">
+                {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
+                {{ sponsor.districtName }} District
+              </div>
+              <div class="sponspor-details-money">
+                {{ sponsor.amount | currency : "INR" : "symbol" : "1.0-0" }}/-
+              </div>
+            </div> -->
+          </div>
+        </ng-template>
+      </p-carousel>
+
+      <!-- <div
+        class="sponsor-card"
+        *ngFor="let sponsor of topSponsers"
+        (click)="showSponsorDetails()"
+      >
+        <img
+          src="assets/images/sponsors/{{ sponsor.image }}"
+          class="img-fluid"
+          width="100%"
+        />
+        <div class="sponspor-details">
+          <div class="sponspor-details-name">
+            {{ sponsor.firstName }} {{ sponsor.lastName }}
+          </div>
+          <div class="sponspor-details-v">
+            {{ sponsor.villageName }} | {{ sponsor.mandalName }} |
+            {{ sponsor.districtName }} District
+          </div>
+          <div class="sponspor-details-money">₹ {{ sponsor.amount }}/-</div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="ep-footer">
+  <div class="container">
+    <div class="d-flex jusify-space-between">
+      <div class="d-flex flex-column">
+        <h3>Help</h3>
+        <div style="line-height: 20px">
+          <div>+91 9288227228</div>
+          <div>
+            <a href="mailto:info&#64;empowerandhra.com"
+              >info&#64;empowerandhra.com</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column follow-us-img">
+        <h3>Follow us</h3>
+        <div class="d-flex gap-3">
+          <img src="assets/images/icon-whatsapp.png" />
+          <img src="assets/images/icon-facebook.png" />
+          <img src="assets/images/icon-instagram.png" />
+          <img src="assets/images/icon-twitter.png" />
+          <img src="assets/images/icon-youtube.png" />
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex jusify-space-between">
+      <div class="d-flex footer-copyrights">
+        <div>2025 © Empower Andhra</div>
+        <div><a href="#">Terms of Service</a></div>
+        <div><a href="#">Privacy Policy</a></div>
+      </div>
+      <div>Site last updated on: 12-APR-2025</div>
+    </div>
+  </div>
+</div>

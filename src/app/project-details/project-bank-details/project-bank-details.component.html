@@ -1,0 +1,159 @@
+<div class="row mb-4">
+  <div class="bottom-table-head">
+    <h4>Bank Details</h4>
+    <p-button
+      label="Add Bank Details"
+      (click)="addBankDetails()"
+      *appHasRole="[3]"
+    />
+  </div>
+  <div class="row tab-input-data">
+    <p-table
+      [value]="bankDetails"
+      [tableStyle]="{ 'min-width': '60rem' }"
+      stripedRows
+      class="tab-data-table"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Bank Name</th>
+          <th>Bank Address</th>
+          <th>Bank Phone Number</th>
+          <th>Account Name</th>
+          <th>Account Number</th>
+          <th>IFSC Code</th>
+          <th>Swift Code</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-bank>
+        <tr>
+          <td>{{ bank.bankName }}</td>
+          <td>{{ bank.bankAddress }}</td>
+          <td>{{ bank.bankPhoneNumber }}</td>
+          <td>{{ bank.accountName }}</td>
+          <td>{{ bank.accountNumber }}</td>
+          <td>{{ bank.ifscCode }}</td>
+          <td>{{ bank.swiftCode }}</td>
+          <td>
+            <img src="assets/images/icon-edit.svg" (click)="deleteCommittee(Committee)" *appHasRole="[2, 3]">
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-sidebar
+  [(visible)]="bankDetailsSliderVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="bankDetailsForm"
+    *ngIf="bankDetailsSliderVisible"
+    (ngSubmit)="onSubmitBankDetails()"
+  >
+    <div class="tab-pop-txt">
+      <h4>{{ editForm ? "Edit" : "Add" }} Bank Details</h4>
+      <i class="pi pi-times" (click)="onCancel()"></i>
+    </div>
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Bank Name</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="bankName"
+            formControlName="bankName"
+            aria-describedby="bankName"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Account Number</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="accountNumber"
+            formControlName="accountNumber"
+            aria-describedby="accountNumber"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Account Name</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="accountName"
+            formControlName="accountName"
+            aria-describedby="accountName"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">IFSC Code</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="ifscCode"
+            formControlName="ifscCode"
+            aria-describedby="ifscCode"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Swift Code</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="swiftCode"
+            formControlName="swiftCode"
+            aria-describedby="swiftCode"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Bank Phone Number</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="bankPhoneNumber"
+            formControlName="bankPhoneNumber"
+            aria-describedby="bankPhoneNumber"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Bank Address</div>
+        <div class="project-detail-set-v mt-2">
+          <textarea
+            pInputTextarea
+            id="bankAddress"
+            aria-describedby="bankAddress"
+            formControlName="bankAddress"
+            rows="5"
+            cols="30"
+            id="Address"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="tab-footer-btns">
+      <p-button label="Cancel " (click)="onCancel()" class="cancel-btn" />
+      <p-button
+        label="Add"
+        type="submit"
+        class="submit-btn"
+        [disabled]="!bankDetailsForm.valid"
+      />
+    </div>
+  </form>
+</p-sidebar>

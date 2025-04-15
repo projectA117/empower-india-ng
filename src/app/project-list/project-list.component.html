@@ -1,0 +1,271 @@
+<div class="header-set">
+  <h3>
+    Projects List <span>{{ totalRecords }}</span>
+  </h3>
+
+  <div class="header-set-filter">
+    <p-dropdown
+      [filter]="true"
+      [options]="status"
+      [(ngModel)]="selectedStatus"
+      optionLabel="statusName"
+      optionValue="statusCode"
+      placeholder="Select a Status"
+      (onChange)="StatusChange($event)"
+      [showClear]="selectedStatus?.length > 0"
+    />
+
+    <p-dropdown
+      [filter]="true"
+      [options]="categories"
+      [(ngModel)]="selectedcategory"
+      optionLabel="description"
+      optionValue="id"
+      placeholder="Select a Category"
+      [showClear]="this.selectedcategory?.toString()?.length > 0"
+      (onChange)="categoryChange($event)"
+    />
+    <p-dropdown
+      filterBy="name"
+      [filter]="true"
+      [options]="districts"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="name"
+      placeholder="Select a District"
+      [showClear]="selectedDistrict?.id"
+      (onChange)="getMandals($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="mandals"
+      [(ngModel)]="selectedMandal"
+      optionLabel="name"
+      placeholder="Select a Mandal"
+      [showClear]="selectedMandal?.id"
+      (onChange)="getvilages($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="villages"
+      [(ngModel)]="selectedVilage"
+      optionLabel="name"
+      placeholder="Select a Vilage"
+      [showClear]="selectedVilage?.id"
+      (onChange)="vilageChange($event)"
+    />
+    <!-- <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input
+        pInputText
+        type="text"
+        (input)="dt.filterGlobal($event.target.value, 'contains')"
+        placeholder="Search..."
+      />
+    </span> -->
+    <button class="submit-btn-m" (click)="reset()">Reset</button>
+    <p-button
+      label="Add New Project"
+      (onClick)="createProject()"
+      *appHasRole="[3, 2]"
+    />
+  </div>
+</div>
+<div class="main-container projects-set-list">
+  <p-toast />
+  <div class="error_content text-center" *ngIf="serverError">
+    <h1>{{ datastatus }}</h1>
+
+    <h2><span>Oh no!</span> There's not Much Left Here for you</h2>
+  </div>
+
+  <div
+    class="error_content text-center"
+    *ngIf="datastatus == '200' && projects?.length < 1"
+  >
+    <h2><span>Oh no!</span> There's not Much Left Here for you</h2>
+  </div>
+
+  <p-table
+    #dt
+    [value]="projects"
+    [rows]="10"
+    [paginator]="false"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="project"
+    [rowHover]="true"
+    dataKey="id"
+    class="gk"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Category</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Estimation</th>
+        <th>Govt Share</th>
+        <th>Private Share</th>
+        <th>District</th>
+        <th>Mandal</th>
+        <th>Village</th>
+        <th>Pin code</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-info>
+      <tr>
+        <td style="position: relative">
+          <img
+            [src]="
+              'assets/images/projects/' +
+              (projectImages[info.projectType] ||
+                projectImages[info.projectCategory] ||
+                'default.png')
+            "
+            class="img-fluid projects-list-img"
+            [alt]="info.projectType"
+            (click)="getProjectProgressImages(info, info.statusImage)"
+          />
+          <div
+            *ngIf="info.statusImage"
+            (click)="getProjectProgressImages(info, info.statusImage)"
+            class="rounded-6 flex items-center justify-center py-0.5p pr-2 h-2p absolute bottom-0 left-1.5p z-1 po:mb-0.8p po:ml-0.6p"
+            style="
+              background: linear-gradient(
+                  279deg,
+                  rgb(155, 0, 0) 0%,
+                  rgb(209, 19, 38) 100%
+                )
+                0% 0% no-repeat padding-box padding-box transparent;
+              padding: 5px 0;
+            "
+          >
+            <img
+              src="https://static.99acres.com/universalapp/img/toapzImage.png"
+              style="width: 16px"
+            />
+            <span
+              class="text-14 text-white capitalize tracking-normal text-left font-semibold"
+              >Progress images</span
+            >
+          </div>
+        </td>
+        <td>{{ info.projectType }}</td>
+        <td>
+          <div class="status-set status-{{ info.statusCode }}">
+            {{ info.statusCode }}
+          </div>
+        </td>
+        <td>
+          {{
+            info.projectEstimation || 0 | currency : "INR" : "symbol" : "1.0-0"
+          }}/-
+        </td>
+        <td>
+          {{
+            info.projectEstimation * (info.governmentShare / 100)
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}/- ({{ info.governmentShare || 0 }}%)
+        </td>
+        <td>
+          {{
+            info.projectEstimation * (info.publicShare / 100)
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}/- ({{ info.publicShare || 0 }}%)
+        </td>
+        <td>{{ info.districtName }}</td>
+        <td>{{ info.mandalName }}</td>
+        <td>{{ info.villageName }}</td>
+        <td>{{ info.pinCode }}</td>
+        <td>
+          <div class="projects-actions-buttons">
+            <img
+              src="assets/images/icon-view.svg"
+              (click)="getProjectDetails(info)"
+            />
+            @if(info.statusCode === 'DRAFT' || info.statusCode === 'WFA') {
+            <img
+              src="assets/images/icon-edit.svg"
+              (click)="editProject(info)"
+              *appHasRole="[3, 2]"
+            />
+            <img
+              src="assets/images/icon-delete.svg"
+              *appHasRole="[3, 2]"
+              (click)="deleteProject(info.id)"
+            />
+            }
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="true"
+    [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+  />
+
+  <p-galleria
+    [(value)]="images"
+    [(visible)]="displayCustom"
+    [(activeIndex)]="activeIndex"
+    [responsiveOptions]="responsiveOptions"
+    [numVisible]="7"
+    [circular]="true"
+    [fullScreen]="true"
+    [showItemNavigators]="true"
+    [showThumbnails]="false"
+  >
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
+    </ng-template>
+  </p-galleria>
+
+  <!-- <div class="tab-pop-txt">
+    <h4>Add Vendor</h4>
+    <i class="pi pi-times"></i>
+  </div> -->
+
+  <p-dialog
+    [(visible)]="showProjectDialog"
+    [style]="{ width: '60%' }"
+    [header]="
+      addNewProject
+        ? 'Add Project'
+        : updateExistingProject
+        ? 'Update Project'
+        : 'Sponsor'
+    "
+    [modal]="true"
+    styleClass="p-fluid"
+    (onHide)="onHideDialog()"
+  >
+    <ng-container *ngIf="addNewProject">
+      <app-project
+        (closeDialogEvent)="refresh($event)"
+        [project]="project"
+        [addNewProject]="addNewProject"
+      ></app-project>
+    </ng-container>
+    <ng-container *ngIf="updateExistingProject">
+      <app-project
+        (closeDialogEvent)="refresh($event)"
+        [project]="project"
+        [updateExistingProject]="updateExistingProject"
+      ></app-project>
+    </ng-container>
+    <ng-container *ngIf="showSponsorDialog">
+      <!-- Content for the Sponsor Dialog goes here -->
+      <app-project-sponsors
+        (closeDialogEvent)="refresh($event)"
+        [projectData]="project"
+      ></app-project-sponsors>
+    </ng-container>
+  </p-dialog>
+</div>

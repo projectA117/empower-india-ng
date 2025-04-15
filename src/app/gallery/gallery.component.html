@@ -1,0 +1,133 @@
+<div class="header-set">
+  <h3>Gallery</h3>
+
+  <div class="header-set-filter">
+    <p-dropdown
+      filterBy="name"
+      [filter]="true"
+      [options]="districts"
+      [(ngModel)]="selectedDistrict"
+      optionLabel="name"
+      placeholder="Select a District"
+      (onChange)="getMandals($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="mandals"
+      [(ngModel)]="selectedMandal"
+      optionLabel="name"
+      placeholder="Select a Mandal"
+      (onChange)="getvilages($event)"
+    />
+    <p-dropdown
+      [filter]="true"
+      [options]="villages"
+      [(ngModel)]="selectedVilage"
+      optionLabel="name"
+      placeholder="Select a Vilage"
+      (onChange)="vilageChange($event)"
+    />
+    <button class="submit-btn-m" (click)="reset()">Reset</button>
+    <p-button
+      label="Add New Image"
+      (onClick)="createProject()"
+      *appHasRole="[3, 2]"
+    />
+  </div>
+</div>
+
+<div class="main-container sponsors-list gallery-set projects-set-list">
+  <ng-container *ngIf="images?.length > 0 && !noRecords; else noSponsors">
+    <div *ngIf="images" class="grid">
+      <div
+        *ngFor="let image of images; let index = index"
+        key="index"
+        class="col-lg-2 col-md-2 col-sm-4 col-xs-2"
+      >
+        <img
+          [src]="image.imgSrc"
+          [alt]="image.eventType"
+          style="cursor: pointer"
+          (click)="imageClick(index)"
+        />
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noSponsors>
+    <div class="col-12 text-center">
+      <p>No records found.</p>
+    </div>
+  </ng-template>
+
+  <p-galleria
+    [(value)]="images"
+    [(visible)]="displayCustom"
+    [(activeIndex)]="activeIndex"
+    [responsiveOptions]="responsiveOptions"
+    [numVisible]="7"
+    [circular]="true"
+    [fullScreen]="true"
+    [showItemNavigators]="true"
+    [showThumbnails]="false"
+  >
+    <ng-template pTemplate="item" let-item>
+      <img
+        [src]="item.imgSrc"
+        alt="{{ item.villageName }} "
+        class="img-fluid"
+        width="100%"
+      />
+    </ng-template>
+  </p-galleria>
+
+  <p-dialog
+    [(visible)]="showImageUploadDialog"
+    [style]="{ width: '25%' }"
+    header="Upload New Image"
+    [modal]="true"
+    styleClass="p-fluid"
+    (onHide)="onHideDialog()"
+  >
+    <app-gallery-image-upload
+      (closeSidebar)="showSponsorDialog = false"
+      (closeDialogEvent)="refresh($event)"
+    ></app-gallery-image-upload>
+  </p-dialog>
+</div>
+
+<div class="ep-footer">
+  <div class="container">
+    <div class="d-flex jusify-space-between">
+      <div class="d-flex flex-column">
+        <h3>Help</h3>
+        <div style="line-height: 20px">
+          <div>+91 9288227228</div>
+          <div>
+            <a href="mailto:info&#64;empowerandhra.com" class="link"
+              >info&#64;empowerandhra.com</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column follow-us-img">
+        <h3>Follow us</h3>
+        <div class="d-flex gap-3">
+          <img src="assets/images/icon-whatsapp.png" />
+          <img src="assets/images/icon-facebook.png" />
+          <img src="assets/images/icon-instagram.png" />
+          <img src="assets/images/icon-twitter.png" />
+          <img src="assets/images/icon-youtube.png" />
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex jusify-space-between">
+      <div class="d-flex footer-copyrights">
+        <div>2025 © Empower Andhra</div>
+        <div><a href="#">Terms of Service</a></div>
+        <div><a href="#">Privacy Policy</a></div>
+      </div>
+      <div>Site last updated on: 12-APR-2025</div>
+    </div>
+  </div>
+</div>

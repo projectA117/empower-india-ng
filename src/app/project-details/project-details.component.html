@@ -1,0 +1,236 @@
+<div class="project-detail-banner">
+  <div class="project-detail-banner-gray"></div>
+  <div class="banner-txt">
+    <div class="banner-txt-set">
+      <div class="banner-txt-a">{{ product?.projectCategory }}</div>
+      <div class="banner-txt-b">{{ product?.projectType }}</div>
+      <div class="banner-txt-c">
+        {{ product?.villageName }} | {{ product?.location }}
+      </div>
+    </div>
+  </div>
+  <img src="assets/images/sponsor-bg.jpg" class="img-fluid" />
+</div>
+<div class="main-container-in">
+  <div class="projects-list-detail">
+    <div class="row project-detail-name-h">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="page-breadcrumb">
+          {{ product?.districtName }} <span>|</span> {{ product?.mandalName }} <span>|</span>
+          {{ product?.villageName }}
+        </div>
+        <div class="all-projects-arrow-set" onclick="history.back()">
+          <img src="assets/images/back-arrow.svg" />
+          @if (fromPage === 'project') {
+          <div>All Projects</div>
+          } @else {
+          <div>Back to village</div>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div class="row mb-4">
+            <div class="project-detail-h-set">
+              <h4 class="mb-1">Location Details</h4>
+            </div>
+            <!-- <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">District</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product?.districtName }}
+          </div>
+        </div> -->
+            <!-- <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Mandal</div>
+          <div class="project-detail-set-v mt-2">{{ product?.mandalName }}</div>
+        </div> -->
+            <!-- <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Village</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product?.villageName }}
+          </div>
+        </div> -->
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Pin Code</div>
+              <div class="project-detail-set-v mt-2">
+                {{ product?.pinCode }}
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Colony</div>
+              <div class="project-detail-set-v mt-2">
+                {{ product?.location }}
+              </div>
+            </div>
+
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Latitude, Longitude</div>
+              <div class="project-detail-set-v mt-2">
+                {{ product?.latitude }} , {{ product?.longitude }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="project-detail-h-set">
+              <h4 class="mb-1">Project Details</h4>
+            </div>
+            <!-- <div class="project-detail-set col-2">
+          <div class="project-detail-set-h">Project ID</div>
+          <div class="project-detail-set-v mt-2">
+            {{ product?.id }}
+          </div>
+        </div> -->
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Project Category</div>
+              <div class="project-detail-set-v mt-2">
+                {{ product?.projectCategory }}
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Project Type</div>
+              <div class="project-detail-set-v mt-2">
+                {{ product?.projectType }}
+              </div>
+            </div>
+            <div class="project-detail-set col-4">
+              <div class="project-detail-set-h">Status</div>
+              <div class="project-detail-set-v mt-2">
+                {{ product?.statusCode }}
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="project-detail-h-set">
+              <h4>Project Description</h4>
+            </div>
+
+            <div class="project-detail-set col-12">
+              <div class="project-detail-set-h">{{ product?.description }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <app-map
+            [villageName]="product?.villageName"
+            [mandalName]="product?.mandalName"
+          ></app-map>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="projects-list-tab mt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <p-tabView
+        styleClass="tabview-custom"
+        [scrollable]="true"
+        (onChange)="onTabChange(tabs[$event.index].label)"
+      >
+        <p-tabPanel *ngFor="let tab of tabs" [disabled]="tab.isDisabled">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+              <p-avatar [image]="tab.icon" shape="circle" />
+              <span class="font-bold white-space-nowrap m-0">
+                {{ tab.label }}
+              </span>
+            </div>
+          </ng-template>
+
+          <!-- Handle dynamic content using activeTab -->
+          <ng-container *ngIf="activeTab === tab.label">
+            <!-- Estimation -->
+            <div *ngIf="activeTab === 'Estimation'">
+              <app-project-approval
+                [projectData]="product"
+              ></app-project-approval>
+            </div>
+
+            <!-- Committee -->
+            <div *ngIf="activeTab === 'Governance Body Members'">
+              <app-project-committee
+                [projectData]="product"
+              ></app-project-committee>
+            </div>
+
+            <!-- Sponsors -->
+            <div *ngIf="activeTab === 'Sponsors'">
+              <app-project-donors [projectData]="product"></app-project-donors>
+            </div>
+
+            <!-- Vendors -->
+            <div *ngIf="activeTab === 'Vendors'">
+              <app-project-vendors
+                [projectData]="product"
+              ></app-project-vendors>
+            </div>
+
+            <!-- Bank Details -->
+            <div *ngIf="activeTab === 'Bank Details'">
+              <app-project-bank-details
+                [projectData]="product"
+              ></app-project-bank-details>
+            </div>
+
+            <!-- Project Publish -->
+            <div *ngIf="activeTab === 'Project Publish'">
+              <app-project-publish
+                [projectData]="product"
+              ></app-project-publish>
+            </div>
+
+            <!-- Project Kick-off -->
+            <div *ngIf="activeTab === 'KickOff'">
+              <div class="bottom-table-head">
+                <div class="project-kickoff">
+
+              <h4>Project Kick-off</h4>
+
+              <div class="project-publish-form">
+
+              <p>Project total estimation amount is collected.</p>
+              <p-button
+                *appHasRole="[3]"
+                label="Kick Off"
+                [disabled]="!product.disableAddSponsor"
+                (click)="projectKickOff()"
+              ></p-button>
+            </div>
+
+              </div>
+
+            </div>
+
+            </div>
+
+            <!-- Finance -->
+            <div *ngIf="activeTab === 'Finance'">
+              <app-project-finance
+                [projectData]="product"
+              ></app-project-finance>
+            </div>
+
+            <!-- Work In Progress -->
+            <div *ngIf="activeTab === 'Work In Progress'">
+              <app-project-work-in-progress
+                [projectData]="product"
+              ></app-project-work-in-progress>
+            </div>
+
+            <!-- Project Sign Off -->
+            <div *ngIf="activeTab === 'Project Sign off'">
+              <app-project-signoff
+                [projectData]="product"
+              ></app-project-signoff>
+            </div>
+          </ng-container>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>

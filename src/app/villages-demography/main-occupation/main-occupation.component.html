@@ -1,0 +1,106 @@
+@if (ShowVilage()) {
+  <div class="add-edit">
+<p-button
+label="Add / Edit"
+  (onClick)="updateOccupationsData()"
+  *appHasRole="[3]"
+/>
+</div>
+}
+
+<p-table [value]="occupationsData" class="tab-data-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="firstName" class="text-center">
+        Sc No <p-sortIcon field="firstName" />
+      </th>
+
+      <th pSortableColumn="address" class="text-center">
+        Occupation <p-sortIcon field="address" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">
+        Number of Families <p-sortIcon field="Amount" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">&nbsp;</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-occupationsData>
+    <tr>
+      <td class="text-center">
+        {{ occupationsData.id }}
+      </td>
+
+      <td class="text-right">
+        {{ getOccupationName(occupationsData.occupationId) }}
+      </td>
+
+      <td class="text-right">{{ occupationsData.noOfFamilies }}</td>
+
+      <td>
+        <i
+          class="pi pi-pencil"
+          (click)="editOccupationsData(occupationsData)"
+          *appHasRole="[3]"
+        ></i>
+        <i
+          class="pi pi-trash"
+          (click)="deleteOccupationsData(occupationsData)"
+          *appHasRole="[3]"
+        ></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="occupationsDataVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="occupationsForm"
+    (ngSubmit)="updateoccupationsForm()"
+    *ngIf="occupationsDataVisible"
+  >
+    <div class="tab-pop-txt">
+      <h4>Add Occupation</h4>
+      <i class="pi pi-times" (click)="occupationsDataVisible = false"></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Occupation</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [options]="occupationsLookupData"
+            formControlName="occupation"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Occupation"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Number of Families</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber formControlName="NumberofFamilies" #NumberofFamilies />
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button
+        label="Cancel "
+        (click)="occupationsDataVisible = false"
+        class="cancel-btn"
+      />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!occupationsForm.valid"
+      />
+    </div>
+  </form>
+</p-sidebar>

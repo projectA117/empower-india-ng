@@ -1,0 +1,79 @@
+@if (ShowVilage()) {
+  <div class="add-edit">
+<p-button
+label="Add / Edit"
+  (onClick)="updateInstitutionsData()"
+  *appHasRole="[3]"
+/>
+</div>
+}
+<p-table [value]="institutionsData" class="tab-data-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="firstName" class="text-center">
+        Sc No <p-sortIcon field="firstName" />
+      </th>
+
+      <th pSortableColumn="address" class="text-center">
+        Institutions <p-sortIcon field="address" />
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-institution>
+    <tr>
+      <td class="text-center">
+        {{ institution.id }}
+      </td>
+
+      <td class="text-right">
+        {{ getInstitutionName(institution.instituteId) }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="institutionsDataVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="institutionDataForm"
+    (ngSubmit)="updateInstitutionDataForm()"
+    *ngIf="institutionsDataVisible"
+  >
+    <div class="tab-pop-txt">
+      <h4>Add Institutions</h4>
+      <i class="pi pi-times" (click)="institutionsDataVisible = false"></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Institutions</div>
+
+        <p-dropdown
+          [options]="institutionsLookupData"
+          formControlName="institutions"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select Institutions"
+          #Institutions
+        />
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button
+        label="Cancel "
+        (click)="institutionsDataVisible = false"
+        class="cancel-btn"
+      />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!institutionDataForm.valid"
+      />
+    </div>
+  </form>
+</p-sidebar>

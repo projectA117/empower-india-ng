@@ -1,0 +1,320 @@
+<form [formGroup]="projectForm" class="add-project">
+  <div class="row">
+    <div class="col-8">
+      <div class="row pad-sep">
+        <h4>Location</h4>
+        <div class="col-6">
+          <label for="district" class="formbuilder-select-label form-label"
+            >District</label
+          >
+          <p-dropdown
+            id="district"
+            [filter]="true"
+            [options]="districts"
+            formControlName="districtId"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select a District"
+            (onChange)="getMandals($event.value)"
+          />
+          <small
+            class="p-error"
+            *ngIf="
+              submitted && projectForm.controls['districtId'].errors?.required
+            "
+          >
+            District is required.
+          </small>
+        </div>
+        <div class="col-6">
+          <label for="mandal" class="formbuilder-select-label form-label"
+            >Mandal</label
+          >
+          <p-dropdown
+            id="mandal"
+            [filter]="true"
+            [options]="mandals"
+            formControlName="mandalId"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select a Mandal"
+            (onChange)="getvillages($event.value)"
+          />
+          <small
+            class="p-error"
+            *ngIf="
+              submitted && projectForm.controls['mandalId'].errors?.required
+            "
+          >
+            Mandal is required.
+          </small>
+        </div>
+        <div class="col-6">
+          <label for="village" class="formbuilder-select-label form-label"
+            >Village</label
+          >
+          <p-dropdown
+            id="village"
+            [filter]="true"
+            [options]="villages"
+            formControlName="villageId"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select a Village"
+          />
+          <small
+            class="p-error"
+            *ngIf="
+              submitted && projectForm.controls['villageId'].errors?.required
+            "
+          >
+            Village is required.
+          </small>
+        </div>
+
+        <div class="col-6">
+          <div class="project-detail-set-h">Colony / Street / Location</div>
+          <div class="project-detail-set-v mt-2">
+            <input
+              id="address"
+              type="text"
+              pInputText
+              formControlName="location"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="project-detail-set-h">Latitude </div>
+          <div class="project-detail-set-v mt-2"><b>{{ Latitude }}</b></div>
+        </div>
+        <div class="col-6">
+          <div class="project-detail-set-h">Longitude </div>
+          <div class="project-detail-set-v mt-2"><b>{{ longitude }}</b></div>
+        </div>
+        <div class="field col-6">
+          <p-button label="Get Geolocation" (onClick)="getLocation()" />
+        </div>
+        <div class="field col-6">
+          {{ GeolocationError }}
+
+        </div>
+        <!--  <div class="col-6">
+          <label for="latitude" class="formbuilder-select-label form-label"
+            >Latitude</label
+          >
+          <input
+            id="latitude"
+            type="text"
+            pInputText
+            formControlName="latitude"
+          />
+        </div>
+
+        <div class="col-6">
+          <label for="latitude" class="formbuilder-select-label form-label"
+            >Longitude</label
+          >
+          <input
+            id="longitude"
+            type="text"
+            pInputText
+            formControlName="longitude"
+          />
+        </div> -->
+
+        <h4 class="mt-1">Project Details</h4>
+
+        <!-- <div class="col-12">
+          <div class="d-flex gap-3">
+            <span class="project-type">Project Status </span>
+            <div class="d-flex gap-3 align-center">
+              <div class="d-flex gap-2 align-center project-radio">
+                <input
+                  class="radio-button-style"
+                  type="radio"
+                  value="Draft"
+                  formControlName="projectNeed"
+                />
+                <label class="form-label project-type" for="Draft">Draft</label>
+              </div>
+
+              <div class="d-flex gap-2 align-center project-radio">
+                <input
+                  class="radio-button-style"
+                  type="radio"
+                  value="New"
+                  formControlName="projectNeed"
+                />
+                <label class="form-label project-type" for="New">New</label>
+              </div>
+              <div class="d-flex gap-2 align-center project-radio">
+                <input
+                  class="radio-button-style"
+                  type="radio"
+                  value="Existing"
+                  formControlName="projectNeed"
+                />
+                <label class="form-label project-type" for="Existing"
+                  >Existing</label
+                >
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="col-6">
+          <label for="category" class="formbuilder-select-label form-label"
+            >Project Category</label
+          >
+          <p-dropdown
+            id="projectCategory"
+            [filter]="true"
+            [options]="categories"
+            formControlName="projectCategoryId"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Projects Category"
+            (onChange)="getProjectTypes($event.value)"
+          />
+          <small
+            class="p-error"
+            *ngIf="
+              submitted &&
+              projectForm.controls['projectCategoryId'].errors?.required
+            "
+          >
+            Category is required.
+          </small>
+        </div>
+
+        <div class="col-6">
+          <label for="projectName" class="form-label">Project Type</label>
+          <p-dropdown
+            id="projectName"
+            [filter]="true"
+            [options]="projectTypes"
+            formControlName="projectTypeId"
+            optionLabel="description"
+            optionValue="id"
+            placeholder="Select Project Type"
+          />
+          <small
+            class="p-error"
+            *ngIf="
+              submitted &&
+              projectForm.controls['projectTypeId'].errors?.required
+            "
+          >
+            Project Type is required.
+          </small>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Project Description</label>
+          <textarea
+            pInputTextarea
+            formControlName="description"
+            rows="3"
+            cols="20"
+          >
+          </textarea>
+        </div>
+        <!--
+        <div class="col-6">
+          <label for="projectEstimation" class="form-label"
+            >Project Estimation (In INR)</label
+          >
+          <p-inputNumber
+            id="projectEstimation"
+            formControlName="projectEstimation"
+          />
+        </div>
+
+        <div class="col-6">
+          <label for="govtShare" class="form-label"
+            >Government Share % (₹ {{ governmentShareAmount }}/-)</label
+          >
+          <p-inputNumber id="govtShare" formControlName="governmentShare" />
+        </div>
+
+        <div class="col-6">
+          <label for="publicShare" class="form-label"
+            >Private Share (₹
+            {{
+              projectForm.get("governmentShare").value
+                ? (projectForm.get("projectEstimation").value || 0) -
+                  governmentShareAmount
+                : 0
+            }}/-)</label
+          >
+          <p-inputNumber id="publicShare" formControlName="publicShare" />
+        </div>
+
+        <div class="col-6">
+          <label for="publicShare" class="form-label"
+            >Project Start Date
+            </label
+          >
+          <p-inputNumber id="publicShare" formControlName="publicShare" />
+        </div>
+
+        <div class="col-6">
+          <label for="publicShare" class="form-label"
+            >Project expected End Date
+            </label
+          >
+          <p-inputNumber id="publicShare" formControlName="publicShare" />
+        </div>
+-->
+      </div>
+
+      <div class="tab-footer-btns">
+        <button
+          (click)="cancel()"
+          type="button"
+          label="Cancel"
+          class="cancel-btn"
+        >
+          Cancel
+        </button>
+        <button
+          *ngIf="addNewProject"
+          type="submit"
+          label="Save as Draft"
+          class="submit-btn"
+          (click)="onSubmit()"
+        >
+          Save as Draft
+        </button>
+
+        <button
+          *ngIf="updateExistingProject"
+          type="submit"
+          label="Update"
+          class="submit-btn"
+          (click)="onSubmit()"
+        >
+          Update
+        </button>
+        <button
+          type="submit"
+          label="Save as Draft"
+          class="submit-btn"
+          (click)="onSubmit('WFA')"
+        >
+          Save as Waiting for Approval
+        </button>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="upload-picture-set">
+        <label class="custom-file-upload upload-picture">
+          <input type="file" (change)="onUpload($event)" accept="image/*" id="file-upload"  />
+          <div for="file-upload" class="custom-file-upload ">Upload Picture</div>
+      </label>
+        <img [src]="imagePreview" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+</form>
