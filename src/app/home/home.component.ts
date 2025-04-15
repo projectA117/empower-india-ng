@@ -6,11 +6,12 @@ import { CommonService } from '@service/common.service';
 import { TableModule } from 'primeng/table';
 import { MapViewComponent } from '../map/map-view/map-view.component';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule, TableModule, MapViewComponent, ProgressBarModule],
+  imports: [CarouselModule, TableModule, MapViewComponent, ProgressBarModule, CardModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   providers: [ProductService],
@@ -22,6 +23,7 @@ export class HomeComponent {
   responsiveOptions: any[] | undefined;
   responsiveOptionss: any[] | undefined;
   districtProjects: any[] = [];
+  totalProjects: any = {};
 
   // constructor(private productService: ProductService) {}
   constructor(
@@ -288,7 +290,19 @@ export class HomeComponent {
     this.commonService.getProjectsCountByDistrict().subscribe({
       next: (data) => {
         if (data && data.length) {
-          this.districtProjects = data
+          this.districtProjects = data;
+          this.districtProjects = this.districtProjects.map((item) => ({
+            ...item,
+            totalCount: item.completed + item.inprogress + item.waitingForSponsor,
+          }));
+          this.totalProjects = {
+            districtName: 'Total',
+            totalCount: data.reduce((acc, project) => acc + project.totalCount, 0),
+            completed: data.reduce((acc, project) => acc + project.completed, 0),
+            inprogress: data.reduce((acc, project) => acc + project.inprogress, 0),
+            waitingForSponsor: data.reduce((acc, project) => acc + project.waitingForSponsor, 0),
+          }
+
         }
       },
       error: (err) => console.error('An error occurred :', err),
