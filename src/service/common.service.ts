@@ -402,4 +402,13 @@ export class CommonService {
         catchError((error) => of(error))
       );
   }
+
+  getDashBoardData(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/dash-board`).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((error) => of(error))
+    );
+  }
 }

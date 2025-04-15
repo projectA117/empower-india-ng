@@ -60,15 +60,22 @@
       <div class="row mt-6">
         <div class="col-lg-3 col-md-6">
           <img src="assets/images/badge-sponsors.svg" class="img-fluid" />
+          {{ dashBoardData?.donorCount || 0 }}
         </div>
         <div class="col-lg-3 col-md-6">
           <img src="assets/images/badge-collected.svg" class="img-fluid" />
+          {{
+            dashBoardData?.villageProjectDonorAmount || 0
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}
         </div>
         <div class="col-lg-3 col-md-6">
           <img src="assets/images/badge-empowered.svg" class="img-fluid" />
+          {{ dashBoardData?.villageCount || 0 }}
         </div>
         <div class="col-lg-3 col-md-6">
           <img src="assets/images/badge-benifi.svg" class="img-fluid" />
+          {{ dashBoardData?.totalPopulation || 0 }}
         </div>
       </div>
     </div>
