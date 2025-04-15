@@ -120,8 +120,17 @@ export class MapViewComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  resetMapView(): void {
+    if (this.map) {
+      setTimeout(() => {
+        this.map.panTo(this.defaultCenter);
+        this.map.setZoom(this.defaultZoom);
+      }, 300); 
+    }
+  }
+
   handleZoomChange(currentZoom: number): void {
-    console.log(`Zoom level changed to: ${currentZoom}`);
     if (!this.geoJsonData) return;
     this.clearOverlays();
     if (currentZoom <= this.DISTRICT_ZOOM) {
