@@ -58,17 +58,31 @@
         </div>
       </div>
       <div class="row mt-6">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">{{ dashBoardData?.donorCount || 0 }}</div>
           <img src="assets/images/badge-sponsors.svg" class="img-fluid" />
+          
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">
+          {{
+            dashBoardData?.villageProjectDonorAmount || 0
+              | currency : "INR" : "" : "1.0-0"
+          }}
+        </div>
           <img src="assets/images/badge-collected.svg" class="img-fluid" />
+          
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">{{ dashBoardData?.villageCount || 0 }}</div>
           <img src="assets/images/badge-empowered.svg" class="img-fluid" />
+          
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 pos-rel">
+          <div class="badge-value">
+          {{ dashBoardData?.totalPopulation || 0 }}</div>
           <img src="assets/images/badge-benifi.svg" class="img-fluid" />
+          
         </div>
       </div>
     </div>
@@ -153,66 +167,60 @@
   <!-- Dashboard Content -->
   <div class="row">
     <!-- Left side - Project Cards -->
-    <div class="project-cards col-7">
+    <div class="col-7">
       <!-- Total Portfolio Card -->
-      <div class="row">
+      <div class="row gap-3">
 
-      <p-card styleClass="project-card total-card col-4">
-        <div class="project-title">{{ totalProjects.districtName }}</div>
-        <div class="d-flex gap-3">
-          <div class="project-number">{{ totalProjects.totalCount }}</div>
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              gap: 10px;
-              width: 100%;
-            "
-          >
-            <p-progressBar
-              [value]="
-                (totalProjects.completed / totalProjects.totalCount) * 100
-              "
-            >
-              <ng-template pTemplate="content" let-value>
-                <span
-                  >{{ totalProjects.completed }}/
-                  {{ totalProjects.totalCount }}</span
-                >
-              </ng-template>
-            </p-progressBar>
-            <p-progressBar
-              [value]="
-                (totalProjects.inprogress / totalProjects.totalCount) * 100
-              "
-            >
-              <ng-template pTemplate="content" let-value>
-                <span
-                  >{{ totalProjects.inprogress }}/
-                  {{ totalProjects.totalCount }}</span
-                >
-              </ng-template>
-            </p-progressBar>
-            <p-progressBar
-              [value]="
-                (totalProjects.waitingForSponsor / totalProjects.totalCount) *
-                100
-              "
-            >
-              <ng-template pTemplate="content" let-value>
-                <span
-                  >{{ totalProjects.waitingForSponsor }}/
-                  {{ totalProjects.totalCount }}</span
-                >
-              </ng-template>
-            </p-progressBar>
+      <div class="bottom-project-card bottom-project-card-all col-4">
+          <div class="project-title">{{ totalProjects.districtName }}</div>
+          <div class="d-flex gap-3">
+            <div class="project-number">{{ totalProjects.totalCount }}</div>
+            <div class="d-flex flex-column gap-3 w-full">
+              <p-progressBar
+                [value]="
+                  (totalProjects.completed / totalProjects.totalCount) * 100
+                "
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span
+                    >{{ totalProjects.completed }}/
+                    {{ totalProjects.totalCount }}</span
+                  >
+                </ng-template>
+              </p-progressBar>
+              <p-progressBar
+                [value]="
+                  (totalProjects.inprogress / totalProjects.totalCount) * 100
+                "
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span
+                    >{{ totalProjects.inprogress }}/
+                    {{ totalProjects.totalCount }}</span
+                  >
+                </ng-template>
+              </p-progressBar>
+              <p-progressBar
+                [value]="
+                  (totalProjects.waitingForSponsor / totalProjects.totalCount) *
+                  100
+                "
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span
+                    >{{ totalProjects.waitingForSponsor }}/
+                    {{ totalProjects.totalCount }}</span
+                  >
+                </ng-template>
+              </p-progressBar>
+            </div>
           </div>
-        </div>
-      </p-card>
+        
+      </div>
 
       <!-- Regional Cards -->
       @for (project of districtProjects; track project.districtName) {
-      <p-card styleClass="project-card col-3">
+      <div class="bottom-project-card col-3">
         <div class="project-title">{{ project.districtName }}</div>
         <div class="d-flex gap-3">
           <div class="project-number">{{ project.totalCount }}</div>
@@ -243,7 +251,7 @@
             </p-progressBar>
           </div>
         </div>
-      </p-card>
+      </div>
       }
     </div>
 
