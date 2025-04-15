@@ -15,8 +15,7 @@ interface PageEvent {
 @Component({
   selector: 'app-sponsors',
   standalone: true,
-  imports: [CommonModule, ImportsModule,
-    RoleDirective,],
+  imports: [CommonModule, ImportsModule, RoleDirective],
   templateUrl: './sponsors.component.html',
   styleUrl: './sponsors.component.scss',
   providers: [CommonService],
@@ -35,10 +34,7 @@ export class SponsorsComponent implements OnInit {
   villages: any[];
   districts: any[];
   noRecords: boolean = false;
-  constructor(
-    private router: Router,
-    private commonService: CommonService
-  ) { }
+  constructor(private router: Router, private commonService: CommonService) {}
 
   ngOnInit() {
     this.getAllSponsers();
@@ -60,7 +56,7 @@ export class SponsorsComponent implements OnInit {
         }
       },
       (err) => {
-        console.log("Error:", err);
+        console.log('Error:', err);
       }
     );
   }
@@ -78,7 +74,7 @@ export class SponsorsComponent implements OnInit {
         this.getAllSponsers();
       },
       (err) => {
-        console.log("Error:", err);
+        console.log('Error:', err);
       }
     );
   }
@@ -94,7 +90,7 @@ export class SponsorsComponent implements OnInit {
         this.getAllSponsers();
       },
       (err) => {
-        console.log("Error:", err);
+        console.log('Error:', err);
       }
     );
   }
@@ -128,12 +124,12 @@ export class SponsorsComponent implements OnInit {
           this.totalRecords = 0;
           return;
         }
-        this.allSponsers = data.content;
-        this.allSponsers = this.allSponsers.map(item => ({
+        this.allSponsers = data.content.slice(0, 10);
+        this.allSponsers = this.allSponsers.map((item) => ({
           ...item,
-          imgSrc: `data:image/png;base64,${item.image}`
+          imgSrc: `data:image/png;base64,${item.image}`,
         }));
-        this.totalRecords = data.totalElements;
+        this.totalRecords = 10;
       },
       (err) => {
         this.noRecords = true;
@@ -158,6 +154,4 @@ export class SponsorsComponent implements OnInit {
     this.pageNumber = event.page;
     this.getAllSponsers();
   }
-
-
 }

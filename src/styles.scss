@@ -1651,3 +1651,12 @@ h6 {
 .p-progressbar{
   height: 15px;
 }
+
+::ng-deep .customCompletedProgress .p-progressbar-label span{
+  color: yellow;
+}
+
+::ng-deep .customCompletedProgress .p-progressbar-value {
+  --background: #BE2F2F !important;
+  --p-progressbar-background:var(--accent-color) !important;
+}

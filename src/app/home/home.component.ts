@@ -11,7 +11,13 @@ import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule, TableModule, MapViewComponent, ProgressBarModule, CardModule],
+  imports: [
+    CarouselModule,
+    TableModule,
+    MapViewComponent,
+    ProgressBarModule,
+    CardModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   providers: [ProductService],
@@ -198,20 +204,32 @@ export class HomeComponent {
           this.districtProjects = data;
           this.districtProjects = this.districtProjects.map((item) => ({
             ...item,
-            totalCount: item.completed + item.inprogress + item.waitingForSponsor,
+            totalCount:
+              item.completed + item.inprogress + item.waitingForSponsor,
           }));
           this.totalProjects = {
             districtName: 'Total',
-            totalCount: data.reduce((acc, project) => acc + project.totalCount, 0),
-            completed: data.reduce((acc, project) => acc + project.completed, 0),
-            inprogress: data.reduce((acc, project) => acc + project.inprogress, 0),
-            waitingForSponsor: data.reduce((acc, project) => acc + project.waitingForSponsor, 0),
-          }
-
+            totalCount: data.reduce(
+              (acc, project) => acc + project.totalCount,
+              0
+            ),
+            completed: data.reduce(
+              (acc, project) => acc + project.completed,
+              0
+            ),
+            inprogress: data.reduce(
+              (acc, project) => acc + project.inprogress,
+              0
+            ),
+            waitingForSponsor: data.reduce(
+              (acc, project) => acc + project.waitingForSponsor,
+              0
+            ),
+          };
         }
       },
       error: (err) => console.error('An error occurred :', err),
-      });
+    });
   }
 
   getDashboardData() {
@@ -219,6 +237,10 @@ export class HomeComponent {
       next: (data) => {
         console.log('Dashboard data:', data);
         this.dashBoardData = data;
+        this.dashBoardData.villageProjectDonorAmount =
+          this.dashBoardData.villageProjectDonorAmount
+            .toString()
+            .substring(0, 3) * 1;
       },
       error: (err) => console.error('An error occurred :', err),
     });
