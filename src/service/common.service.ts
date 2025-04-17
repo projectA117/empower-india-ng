@@ -2,7 +2,6 @@ import { Observable, catchError, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { effect, Injectable, signal, Signal } from '@angular/core';
 import { environment } from '../environments/environment';
-import { AuthService } from './auth.service'
 
 @Injectable({
   providedIn: 'root',
