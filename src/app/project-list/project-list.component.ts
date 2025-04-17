@@ -643,8 +643,23 @@ export class ProjectListComponent implements OnInit {
   }
 
   deleteProject(id: number) {
-    this.commonService.deleteProject(id).subscribe(data => {
+    this.commonService.deleteProject(id).subscribe((data) => {
       this.getProjects();
+    });
+  }
+  changeProjectStatus(project: any, status: string) {
+    const payload = { ...project, statusCode: status };
+    const formData = new FormData();
+
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'project',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+    this.commonService.updateProject(formData).subscribe((data) => {
+      if (!data.error) {
+        this.getProjects();
+      }
     });
   }
 }

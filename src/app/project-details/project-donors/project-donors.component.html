@@ -3,7 +3,7 @@
     <h4>Sponsor Details</h4>
     <p-button
       label="Add Sponsor"
-      [disabled]="totalCollected === projectCost"
+      [disabled]="remainingAmount <= 0"
       (click)="donorsSidebarVisible = true"
       *appHasRole="[1, 3, 2]"
     />
@@ -35,7 +35,7 @@
           <th pSortableColumn="Payment" class="text-center">
             Mode of Payment <p-sortIcon field="Payment" />
           </th>
-          <th >Actions</th>
+          <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-donor>
@@ -56,13 +56,18 @@
             {{ donor.ModeofPayment }}
           </td>
           <td>
-
             <div class="d-flex gap-3 action-btns">
-              <img src="assets/images/icon-edit.svg" (click)="onEditSponsors(donor)" *appHasRole="[3]">
-              <img src="assets/images/icon-delete.svg" (click)="onDelete(donor)" *appHasRole="[3]">
+              <img
+                src="assets/images/icon-edit.svg"
+                (click)="onEditSponsors(donor)"
+                *appHasRole="[3]"
+              />
+              <img
+                src="assets/images/icon-delete.svg"
+                (click)="onDelete(donor)"
+                *appHasRole="[3]"
+              />
             </div>
-
-           
           </td>
         </tr>
       </ng-template>
@@ -223,6 +228,7 @@
             [minFractionDigits]="2"
             formControlName="DonorsAmount"
           ></p-inputNumber>
+
           <small
             *ngIf="
               donorForm.get('DonorsAmount').invalid &&

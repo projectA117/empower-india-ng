@@ -16,6 +16,7 @@ import { VillagesDemographyComponent } from './villages-demography/villages-demo
 import { VillagesDemographyEditComponent } from './villages-demography-edit/villages-demography-edit.component';
 import { UsersComponent } from './users/users.component';
 import { MapViewComponent } from './map/map-view/map-view.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,10 +34,11 @@ export const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'villages', component: VillagesDemographyComponent },
-  { path: 'users', component: UsersComponent},
-  {path: 'map', component:MapViewComponent},
+  { path: 'users', component: UsersComponent },
+  { path: 'map', component: MapViewComponent },
   {
     path: 'villages-demography-edit',
     component: VillagesDemographyEditComponent,
   },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
 ];

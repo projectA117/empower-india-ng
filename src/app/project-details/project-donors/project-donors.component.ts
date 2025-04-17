@@ -54,6 +54,7 @@ export class ProjectDonorsComponent implements OnInit {
   uploadimage: any;
   imagePreview: any = 'assets/images/upload-img.svg';
   editdonors = false;
+  selectedSponsor: any;
   donorsAddEditText = 'Add Sponsor';
   imagePreviews: any;
   selectedFiles: (File | { base64: string; fromServer: true })[] = [];
@@ -99,7 +100,10 @@ export class ProjectDonorsComponent implements OnInit {
       .subscribe((data) => {
         this.doners = data;
 
-        this.totalCollected = this.doners.reduce((sum, doner) => sum + doner['amount'], 0);
+        this.totalCollected = this.doners.reduce(
+          (sum, doner) => sum + doner['amount'],
+          0
+        );
         this.projectCost =
           this.projectData.projectEstimation *
           (this.projectData.publicShare / 100);
@@ -118,6 +122,10 @@ export class ProjectDonorsComponent implements OnInit {
       amount: this.donorForm.get('DonorsAmount')?.value,
       modeOfPayment: this.donorForm.get('DonorsModeofPayment')?.value,
     };
+
+    if (this.editdonors) {
+      payload['id'] = this.selectedSponsor.id;
+    }
 
     const formData = new FormData();
     formData.append('donarImage', this.uploadimage); // Add the file
@@ -156,9 +164,11 @@ export class ProjectDonorsComponent implements OnInit {
     this.donorForm.reset();
     this.donorsSidebarVisible = true;
     this.editdonors = true;
+    this.selectedSponsor = selectedSponsorsdata;
     this.donorsAddEditText = 'Edit Sponsor';
     this.donorForm.patchValue({
-      DonorsName: selectedSponsorsdata.firstName,
+      DonorsFirstName: selectedSponsorsdata.firstName,
+      DonorsLastName: selectedSponsorsdata.lastName,
       DonorsPhone: selectedSponsorsdata.phoneNumber,
       DonorsEmail: selectedSponsorsdata.email,
       DonorsAddress: selectedSponsorsdata.address,
