@@ -73,7 +73,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5" class="text-center">No Sponsors Found</td>
+          <td colspan="8" class="text-center">No Sponsors Found</td>
         </tr>
       </ng-template>
     </p-table>
@@ -276,7 +276,11 @@
         (click)="donorsSidebarVisible = false"
         class="cancel-btn"
       />
-      <p-button label="Add " type="submit" class="submit-btn" />
+      <p-button
+        [label]="editdonors ? 'Edit' : 'Add'"
+        type="submit"
+        class="submit-btn"
+      />
     </div>
   </form>
 </p-sidebar>

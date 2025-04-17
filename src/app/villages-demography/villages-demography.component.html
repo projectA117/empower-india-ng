@@ -77,7 +77,8 @@
     <div class="row project-detail-name-h">
       <div class="d-flex justify-content-between align-items-center">
         <div class="page-breadcrumb">
-          {{ selectedDistrict?.name }} <span>|</span> {{ selectedMandal?.name }} <span>|</span>
+          {{ selectedDistrict?.name }} <span>|</span>
+          {{ selectedMandal?.name }} <span>|</span>
           {{ selectedVilage?.name }}
         </div>
         <div class="all-projects-arrow-set" (click)="hideSelectedVillage(info)">
@@ -726,7 +727,12 @@
                           @if(info?.sponsersList && info?.sponsersList.length >
                           0) {
                           <div class="village-table">
-                            <h4>Sponsors</h4>
+                            <h4>
+                              Sponsors
+                              <span class="chip-set">{{
+                                info?.sponsersList.length
+                              }}</span>
+                            </h4>
                             <table>
                               <thead>
                                 <tr>
@@ -759,7 +765,12 @@
                           @if(info?.committeeMembersList
                           &&info?.committeeMembersList.length > 0) {
                           <div class="village-table">
-                            <h4>Governance Body Details</h4>
+                            <h4>
+                              Governance Body Details
+                              <span class="chip-set">{{
+                                info?.committeeMembersList.length
+                              }}</span>
+                            </h4>
                             <table>
                               <thead>
                                 <tr>
@@ -791,7 +802,13 @@
                             @if(info?.villageProjectExpenseResponse.transactions.length
                             > 0) {
                             <div class="village-table">
-                              <h4>Expenses</h4>
+                              <h4>
+                                Expenses
+                                <span class="chip-set">{{
+                                  info?.villageProjectExpenseResponse
+                                    .transactions.length
+                                }}</span>
+                              </h4>
                               <table>
                                 <thead>
                                   <tr>

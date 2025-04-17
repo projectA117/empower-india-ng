@@ -177,6 +177,7 @@ export class ProjectDonorsComponent implements OnInit {
       DonorsAmount: selectedSponsorsdata.amount,
       DonorsModeofPayment: selectedSponsorsdata.modeOfPayment,
     });
+    this.donorForm.get('DonorsAmount').disable();
     if (selectedSponsorsdata.statusImage) {
       this.imagePreviews.push(
         `data:image/jpeg;base64,${selectedSponsorsdata.statusImage}`

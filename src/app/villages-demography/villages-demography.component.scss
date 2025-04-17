@@ -52,7 +52,7 @@
     padding: 10px 30px;
     margin-top:120px;
     margin-bottom: 0;
-    
+
     h3{
         display: flex;
         align-items: center;
@@ -93,7 +93,7 @@
     img{
        &:hover{
         cursor: pointer;
-       } 
+       }
     }
 }
 
@@ -122,6 +122,14 @@
     }
 }
 
+.chip-set {
+  background-color: #E1EBFB;;
+  border-radius: 100px;
+  padding: 6px;
+  font-size: 14px;
+  // color: #fff;
+}
+
 .all-projects-arrow-set{
     display: flex;
     gap: 10px;
@@ -142,7 +150,7 @@
         font-size: 15px;
     }
   }
- 
+
  .project-detail-name-h{
     border-bottom: 1px solid #ccc;
     background-color: #f8f8f8;
@@ -169,6 +177,6 @@
         font-weight: 600;
         font-size: 18px;
         padding: 10px;
-        
+
     }
   }
