@@ -106,6 +106,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ProductService } from 'src/service/productservice';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 
 @NgModule({
   imports: [
@@ -323,6 +325,9 @@ import { HttpClientModule } from '@angular/common/http';
     InputIconModule,
     AutoFocusModule,
   ],
-  providers: [ProductService],
+  providers: [
+    ProductService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
 })
 export class ImportsModule {}

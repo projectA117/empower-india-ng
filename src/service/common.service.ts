@@ -2,6 +2,7 @@ import { Observable, catchError, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { effect, Injectable, signal, Signal } from '@angular/core';
 import { environment } from '../environments/environment';
+import { AuthService } from './auth.service'
 
 @Injectable({
   providedIn: 'root',
@@ -229,6 +230,10 @@ export class CommonService {
       .pipe(
         map((response) => {
           this.setUser(response);
+          const token = response.jwtToken;
+          if (token) {
+             this.saveToken(token);      
+            }  
           return response;
         }),
         catchError((error) => of(error))
@@ -242,6 +247,10 @@ export class CommonService {
       .post<any>(`${environment.apiUrl}/users`, payLoad)
       .pipe(
         map((response) => {
+          const token = response.jwtToken;
+          if (token) {
+             this.saveToken(token);      
+          }
           //this.setUser(response);
           return response;
         }),
@@ -251,10 +260,30 @@ export class CommonService {
 
   onLogout() {
     this.user.set(null);
+    this.logout();
   }
 
   setUser(user: any) {
     this.user.set(user);
+   
+  }
+
+  
+  logout() {
+    localStorage.removeItem('token');    
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    return !!token;
   }
 
   //4304
