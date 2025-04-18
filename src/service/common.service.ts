@@ -230,10 +230,7 @@ export class CommonService {
       .pipe(
         map((response) => {
           this.setUser(response);
-          const token = response.jwtToken;
-          if (token) {
-             this.authService.saveToken(token);      
-            }  
+          this.authService.saveToken(response.jwtToken);  
           return response;
         }),
         catchError((error) => of(error))
@@ -247,10 +244,7 @@ export class CommonService {
       .post<any>(`${environment.apiUrl}/users`, payLoad)
       .pipe(
         map((response) => {
-          const token = response.jwtToken;
-          if (token) {
-             this.authService.saveToken(token);      
-          }
+          this.authService.saveToken(response.jwtToken);      
           //this.setUser(response);
           return response;
         }),
