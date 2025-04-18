@@ -65,7 +65,7 @@ export class SigninComponent implements OnInit {
       if (data) {
         this.signinForm.reset();
         if (data.id) {
-          sessionStorage.setItem('token', JSON.stringify(data.token));
+          sessionStorage.setItem('token', JSON.stringify(data.jwtToken));
           this.router.navigate(['/home']);
         } else {
           this.invalidUserNameOrPassword = true;
