@@ -253,7 +253,9 @@ export class CommonService {
   }
 
   onLogout() {
+    sessionStorage.clear();
     this.user.set(null);
+    sessionStorage.clear();
     this.authService.logout(); 
   }
 

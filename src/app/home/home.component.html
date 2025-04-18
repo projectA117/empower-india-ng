@@ -175,6 +175,7 @@
             <div class="project-number">{{ totalProjects.totalCount }}</div>
             <div class="d-flex flex-column gap-3 w-full">
               <p-progressBar
+                color="#8bc34a"
                 [value]="
                   (totalProjects.completed / totalProjects.totalCount) * 100
                 "
@@ -187,6 +188,7 @@
                 </ng-template>
               </p-progressBar>
               <p-progressBar
+                color="#ff7043"
                 [value]="
                   (totalProjects.inprogress / totalProjects.totalCount) * 100
                 "
@@ -199,6 +201,7 @@
                 </ng-template>
               </p-progressBar>
               <p-progressBar
+                color="#9575cd"
                 [value]="
                   (totalProjects.waitingForSponsor / totalProjects.totalCount) *
                   100
@@ -223,6 +226,7 @@
             <div class="project-number">{{ project.totalCount }}</div>
             <div class="d-flex gap-3 w-full flex-column">
               <p-progressBar
+                color="#8bc34a"
                 [value]="(project.completed / project.totalCount) * 100"
               >
                 <ng-template pTemplate="content" let-value>
@@ -230,6 +234,7 @@
                 </ng-template>
               </p-progressBar>
               <p-progressBar
+                color="#ff7043"
                 [value]="(project.inprogress / project.totalCount) * 100"
               >
                 <ng-template pTemplate="content" let-value>
@@ -239,6 +244,7 @@
                 </ng-template>
               </p-progressBar>
               <p-progressBar
+                color="#9575cd"
                 [value]="(project.waitingForSponsor / project.totalCount) * 100"
               >
                 <ng-template pTemplate="content" let-value>
@@ -392,8 +398,8 @@
     <div class="d-flex jusify-space-between">
       <div class="d-flex footer-copyrights">
         <div>2025 © Empower Andhra</div>
-        <div><a href="#">Terms of Service</a></div>
-        <div><a href="#">Privacy Policy</a></div>
+        <div><a routerLink="/privacy-policy">Terms of Service</a></div>
+        <div><a routerLink="/privacy-policy">Privacy Policy</a></div>
       </div>
       <div>Site last updated on: 12-APR-2025</div>
     </div>
