@@ -105,9 +105,7 @@ import { AutoFocusModule } from 'primeng/autofocus';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ProductService } from 'src/service/productservice';
-import { HttpClientModule } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   imports: [
@@ -326,8 +324,7 @@ import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
     AutoFocusModule,
   ],
   providers: [
-    ProductService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    ProductService
   ],
 })
 export class ImportsModule {}

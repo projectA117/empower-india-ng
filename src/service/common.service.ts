@@ -2,6 +2,7 @@ import { Observable, catchError, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { effect, Injectable, signal, Signal } from '@angular/core';
 import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class CommonService {
   };
   projectStatus = signal<any[]>([]);
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService ) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.user.set(JSON.parse(storedUser));
@@ -231,7 +232,7 @@ export class CommonService {
           this.setUser(response);
           const token = response.jwtToken;
           if (token) {
-             this.saveToken(token);      
+             this.authService.saveToken(token);      
             }  
           return response;
         }),
@@ -248,7 +249,7 @@ export class CommonService {
         map((response) => {
           const token = response.jwtToken;
           if (token) {
-             this.saveToken(token);      
+             this.authService.saveToken(token);      
           }
           //this.setUser(response);
           return response;
@@ -259,31 +260,13 @@ export class CommonService {
 
   onLogout() {
     this.user.set(null);
-    this.logout();
+    this.authService.logout(); 
   }
 
   setUser(user: any) {
-    this.user.set(user);
+    this.user.set(user);   
+  }
    
-  }
-
-  
-  logout() {
-    localStorage.removeItem('token');    
-  }
-
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
-
-  isLoggedIn(): boolean {
-    const token = this.getToken();
-    return !!token;
-  }
 
   //4304
 
