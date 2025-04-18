@@ -194,6 +194,27 @@
               *appHasRole="[3, 2]"
               (click)="deleteProject(info.id)"
             />
+            } @if(info.statusCode === 'WIP') {
+            <p-button
+              *appHasRole="[3]"
+              label="Hold"
+              class="smallPbutons"
+              (onClick)="changeProjectStatus(info, 'HOLD')"
+            ></p-button>
+
+            <p-button
+              *appHasRole="[3]"
+              label="WFD"
+              class="smallPbutons"
+              (onClick)="changeProjectStatus(info, 'WFD')"
+            ></p-button>
+            } @if( info.statusCode === 'WFD') {
+            <p-button
+              *appHasRole="[3]"
+              label="HOLD"
+              class="smallPbutons"
+              (onClick)="changeProjectStatus(info, 'HOLD')"
+            ></p-button>
             }
           </div>
         </td>

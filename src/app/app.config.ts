@@ -7,16 +7,21 @@ import { routes } from './app.routes';
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { LoaderInterceptor } from 'src/interceptors/loader.interceptor';
+import { authInterceptor } from 'src/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     provideRouter(routes),
     importProvidersFrom(BrowserAnimationsModule),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([authInterceptor])
+    ),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

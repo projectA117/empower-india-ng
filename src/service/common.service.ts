@@ -251,6 +251,7 @@ export class CommonService {
 
   onLogout() {
     this.user.set(null);
+    sessionStorage.clear();
   }
 
   setUser(user: any) {

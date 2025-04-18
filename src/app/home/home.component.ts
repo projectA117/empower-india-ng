@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@service/productservice';
 import { CarouselModule } from 'primeng/carousel';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonService } from '@service/common.service';
 import { TableModule } from 'primeng/table';
 import { MapViewComponent } from '../map/map-view/map-view.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CardModule } from 'primeng/card';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ import { CardModule } from 'primeng/card';
     MapViewComponent,
     ProgressBarModule,
     CardModule,
+    RouterModule,
+    RouterLink,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
