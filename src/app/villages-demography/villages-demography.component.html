@@ -78,6 +78,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="page-breadcrumb">
           {{ selectedDistrict?.name }} <span>|</span>
+
           {{ selectedMandal?.name }} <span>|</span>
           {{ selectedVilage?.name }}
         </div>
@@ -765,12 +766,15 @@
                           @if(info?.committeeMembersList
                           &&info?.committeeMembersList.length > 0) {
                           <div class="village-table">
-                            <h4>
+                            <h4 class="inline-block">
                               Governance Body Details
-                              <span class="chip-set">{{
+                              <span class="chip-set vilage-data-count">{{
                                 info?.committeeMembersList.length
                               }}</span>
                             </h4>
+                            <!-- <span class="vilage-data-count">{{
+                              info?.committeeMembersList.length
+                            }}</span> -->
                             <table>
                               <thead>
                                 <tr>
@@ -798,17 +802,21 @@
                           } @else { -- }
                         </div>
                         <div class="col-4">
-                          <div class="villages-sponsors col">
+                          <div class="villages-sponsors">
                             @if(info?.villageProjectExpenseResponse.transactions.length
                             > 0) {
                             <div class="village-table">
-                              <h4>
+                              <h4 class="inline-block">
                                 Expenses
-                                <span class="chip-set">{{
+                                <span class="chip-set vilage-data-count">{{
                                   info?.villageProjectExpenseResponse
                                     .transactions.length
                                 }}</span>
                               </h4>
+                              <!-- <span class="vilage-data-count">{{
+                                info?.villageProjectExpenseResponse.transactions
+                                  .length
+                              }}</span> -->
                               <table>
                                 <thead>
                                   <tr>
