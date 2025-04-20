@@ -2,10 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '@service/productservice';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
-import { CommonService } from '@service/common.service';
 import {
   FormControl,
   FormGroup,
@@ -14,7 +12,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
-import { SponsorsComponent } from '../../sponsors/sponsors.component';
 
 export interface Product {
   id?: string;
@@ -43,7 +40,6 @@ export interface Product {
   ],
   templateUrl: './project-donors.component.html',
   styleUrl: './project-donors.component.scss',
-  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectDonorsComponent implements OnInit {
   @Input() projectData: any;
@@ -62,9 +58,7 @@ export class ProjectDonorsComponent implements OnInit {
   projectCost: number = 0;
   remainingAmount: number = 0;
   constructor(
-    private productService: ProductService,
-    private projectDetailsService: ProjectDetailsService,
-    private commonService: CommonService
+    private projectDetailsService: ProjectDetailsService
   ) {}
   ngOnInit() {
     this.createdonorForm();
@@ -92,6 +86,12 @@ export class ProjectDonorsComponent implements OnInit {
       DonorsMemoryOf: new FormControl('', [Validators.required]),
       DonorsAmount: new FormControl('', [Validators.required]),
       DonorsModeofPayment: new FormControl('', [Validators.required]),
+    });
+
+    this.donorForm.get('DonorsAmount').valueChanges.subscribe((value) => {
+      if (value && value > this.remainingAmount) {
+        this.donorForm.get('DonorsAmount').setValue(this.remainingAmount);
+      }
     });
   }
   showdonor() {
@@ -144,6 +144,13 @@ export class ProjectDonorsComponent implements OnInit {
           this.donorForm.reset();
         }
       });
+  }
+  addClick() {
+    this.donorsSidebarVisible = true;
+    this.donorForm.reset();
+    this.editdonors = false;
+    this.donorsAddEditText = 'Add Sponsor';
+    this.donorForm.get('DonorsAmount').enable();
   }
 
   onUpload(event: any) {

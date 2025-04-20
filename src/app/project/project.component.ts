@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { Project } from '@domain/Project';
@@ -18,7 +17,7 @@ import { HardCodedInfo } from '../../constants/HardCodedInfo';
   templateUrl: './project.component.html',
   standalone: true,
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
-  providers: [MessageService, ConfirmationService, ProductService],
+  providers: [MessageService, ConfirmationService],
   styleUrl: './project.component.scss',
 })
 export class ProjectComponent implements OnInit {

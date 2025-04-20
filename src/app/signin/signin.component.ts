@@ -12,7 +12,6 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { CommonService } from '../../service/common.service';
-import { ProductService } from '@service/productservice';
 
 @Component({
   selector: 'app-signin',
@@ -20,7 +19,7 @@ import { ProductService } from '@service/productservice';
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss',
-  providers: [MessageService, ConfirmationService, ProductService],
+  providers: [MessageService, ConfirmationService],
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup = new FormGroup({});

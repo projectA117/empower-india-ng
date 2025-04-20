@@ -17,17 +17,20 @@
       <div>
         Remaining Balance
         <span class="t-balance"
-          >{{ remainingBalance | currency : "INR" : "symbol" : "1.0-0" }}/-</span
+          >{{
+            remainingBalance | currency : "INR" : "symbol" : "1.0-0"
+          }}/-</span
         >
       </div>
       <p-button
         label="Add Expense"
-        (click)="financeSidebarVisible = true; isAdd = true; FinanceForm.reset()"
+        (click)="
+          financeSidebarVisible = true; isAdd = true; FinanceForm.reset()
+        "
         *appHasRole="[3]"
       />
     </div>
   </div>
- 
 </div>
 
 <div class="justify-content-start flex-wrap mt-15">
@@ -73,11 +76,17 @@
         <td>{{ showTransaction.billProofs }}</td>
         <td class="text-center block">
           <div class="d-flex gap-3 action-btns">
-            <img src="assets/images/icon-edit.svg" (click)="onEditTransaction(showTransaction)" *appHasRole="[3]">
-            <img src="assets/images/icon-delete.svg" (click)="onDeleteTransaction(showTransaction)" *appHasRole="[3]">
+            <img
+              src="assets/images/icon-edit.svg"
+              (click)="onEditTransaction(showTransaction)"
+              *appHasRole="[3]"
+            />
+            <img
+              src="assets/images/icon-delete.svg"
+              (click)="onDeleteTransaction(showTransaction)"
+              *appHasRole="[3]"
+            />
           </div>
-
-          
         </td>
       </tr>
     </ng-template>
@@ -205,16 +214,9 @@
             formControlName="financeBillProofs"
             aria-describedby="financeBillProofs"
           />
-          <p-fileUpload
-            mode="basic"
-            chooseLabel="Choose"
-            chooseIcon="pi pi-upload"
-            name="demo[]"
-            url=""
-            accept="image/*"
-            maxFileSize="1000000"
-            (onUpload)="onUpload($event)"
-          />
+          <div class="project-detail-set-v mt-2">
+            <input type="file" (change)="onUpload($event)" accept="image/*" />
+          </div>
         </div>
       </div>
     </div>

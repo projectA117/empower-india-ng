@@ -104,7 +104,6 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { ProductService } from 'src/service/productservice';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -323,6 +322,5 @@ import { HttpClientModule } from '@angular/common/http';
     InputIconModule,
     AutoFocusModule,
   ],
-  providers: [ProductService],
 })
 export class ImportsModule {}

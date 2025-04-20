@@ -9,7 +9,6 @@ import { ProjectFinanceComponent } from './project-finance/project-finance.compo
 import { ProjectVendorsComponent } from './project-vendors/project-vendors.component';
 import { ProjectWorkInProgressComponent } from './project-work-in-progress/project-work-in-progress.component';
 import { ProjectsignoffComponent } from './project-signoff/project-signoff.component';
-import { ProductService } from '@service/productservice';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectBankDetailsComponent } from './project-bank-details/project-bank-details.component';
 import { ProjectPublishComponent } from './project-publish/project-publish.component';
@@ -45,7 +44,6 @@ export interface Tab {
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',
-  providers: [ProductService],
 })
 export class ProjectDetailsComponent implements OnInit {
   product: any;

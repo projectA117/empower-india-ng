@@ -190,9 +190,9 @@ export class ProjectDetailsService {
       );
   }
 
-  updateFinanceExpence(payLoad: any): Observable<any> {
+  updateFinanceExpence(payLoad: any, id: any): Observable<any> {
     return this.httpClient
-      .put<any>(`${environment.apiUrl}/finance/update`, payLoad)
+      .put<any>(`${environment.apiUrl}/finance/${id}`, payLoad)
       .pipe(
         map((res) => {
           return res;

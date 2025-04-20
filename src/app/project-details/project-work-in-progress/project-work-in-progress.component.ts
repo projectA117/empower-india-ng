@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '@service/productservice';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
 import {
@@ -41,7 +40,6 @@ export interface Product {
   ],
   templateUrl: './project-work-in-progress.component.html',
   styleUrl: './project-work-in-progress.component.scss',
-  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectWorkInProgressComponent implements OnInit {
   @Input() projectData: any;
@@ -55,7 +53,6 @@ export class ProjectWorkInProgressComponent implements OnInit {
   selectedFiles: (File | { base64: string; fromServer: true })[] = [];
 
   constructor(
-    private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
   ) {}
 

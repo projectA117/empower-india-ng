@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
@@ -30,7 +29,7 @@ interface PageEvent {
     ProjectSponsorsComponent,
     RoleDirective,
   ],
-  providers: [MessageService, ConfirmationService, ProductService],
+  providers: [MessageService, ConfirmationService],
   styleUrl: './project-list.component.scss',
   styles: [
     `
@@ -112,7 +111,6 @@ export class ProjectListComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private router: Router,
-    private productService: ProductService,
     private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -578,8 +576,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   getProjectDetails(project: any) {
-    //this.project = project;
-    //this.productService.selectedProject.next(project);
     this.commonService.selectedProjectFilters = {
       category: this.selectedcategory,
       district: this.selectedDistrict,
@@ -593,8 +589,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   getProjectSponsorDetails(project: any) {
-    //this.project = project;
-    //this.productService.selectedProject.next(project);
+
     this.router.navigate(['project-sponsors'], {
       queryParams: { project: JSON.stringify(project) },
     });

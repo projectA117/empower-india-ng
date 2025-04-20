@@ -12,7 +12,6 @@ import {
 } from '@angular/forms';
 import { CommonService } from '@service/common.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProductService } from '@service/productservice';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +19,7 @@ import { ProductService } from '@service/productservice';
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  providers: [MessageService, ConfirmationService, ProductService],
+  providers: [MessageService, ConfirmationService],
 })
 export class RegisterComponent {
   registerForm: FormGroup = new FormGroup({});

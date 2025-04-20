@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '@service/productservice';
 import { CarouselModule } from 'primeng/carousel';
 import { Router, RouterLink } from '@angular/router';
 import { CommonService } from '@service/common.service';
@@ -23,7 +22,6 @@ import { RouterModule } from '@angular/router';
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  providers: [ProductService],
 })
 export class HomeComponent {
   products: any;
@@ -35,10 +33,8 @@ export class HomeComponent {
   totalProjects: any = {};
   dashBoardData: any = {};
 
-  // constructor(private productService: ProductService) {}
   constructor(
     private router: Router,
-    private productService: ProductService,
     private commonService: CommonService
   ) {}
 

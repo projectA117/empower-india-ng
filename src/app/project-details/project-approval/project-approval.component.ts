@@ -5,7 +5,6 @@ import {
   FormControl,
   ReactiveFormsModule,
   FormGroup,
-  Validators,
 } from '@angular/forms';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
@@ -27,7 +26,6 @@ import { RoleDirective } from 'src/directives/role-access.directive';
   ],
   templateUrl: './project-approval.component.html',
   styleUrl: './project-approval.component.scss',
-  providers: [ProjectDetailsService],
 })
 export class ProjectApprovalComponent implements OnInit, OnChanges {
   @Input() projectData: any;

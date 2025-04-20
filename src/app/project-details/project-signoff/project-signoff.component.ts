@@ -2,14 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '@service/productservice';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
 import {
   FormControl,
   FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
@@ -39,7 +36,6 @@ export interface Product {
   ],
   templateUrl: './project-signoff.component.html',
   styleUrl: './project-signoff.component.scss',
-  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectsignoffComponent implements OnInit {
   @Input() projectData: any;
@@ -47,7 +43,6 @@ export class ProjectsignoffComponent implements OnInit {
   ProjectSignOffsidebarVisible: boolean = false;
   ProjectSignOffForm: FormGroup = new FormGroup({});
   constructor(
-    private productService: ProductService,
     private projectDetailsService: ProjectDetailsService
   ) {}
   ngOnInit() {
@@ -65,9 +60,7 @@ export class ProjectsignoffComponent implements OnInit {
     });
   }
   showProjectSignOffDetails() {
-    this.productService.getProductsMini().then((data) => {
-      this.products = data;
-    });
+
   }
   updateWIP() {
     const payload = {

@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '@service/productservice';
 import { DropdownModule } from 'primeng/dropdown';
 import { ImportsModule } from '../imports';
 import {
@@ -10,7 +8,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProjectDetailsService } from '@service/project-details.service';
 import { CommonService } from '@service/common.service';
 
 @Component({
@@ -19,14 +16,10 @@ import { CommonService } from '@service/common.service';
   imports: [ImportsModule, FormsModule, DropdownModule, ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
-  providers: [ProjectDetailsService, ProductService],
 })
 export class ContactComponent implements OnInit {
   contactForm: FormGroup = new FormGroup({});
   constructor(
-    private productService: ProductService,
-    private activatedRoute: ActivatedRoute,
-    private projectDetailsService: ProjectDetailsService,
     private commonService: CommonService
   ) {}
 

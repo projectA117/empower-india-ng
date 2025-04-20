@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '@service/productservice';
 import { DropdownModule } from 'primeng/dropdown';
 import { ImportsModule } from '../imports';
 import {
@@ -11,7 +9,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProjectDetailsService } from '@service/project-details.service';
-import { CommonService } from '@service/common.service';
 import { TableModule } from 'primeng/table';
 
 @Component({
@@ -26,7 +23,6 @@ import { TableModule } from 'primeng/table';
   ],
   templateUrl: './project-sponsors.component.html',
   styleUrl: './project-sponsors.component.scss',
-  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectSponsorsComponent implements OnInit {
   donors!: [];

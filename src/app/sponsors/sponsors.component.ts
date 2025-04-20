@@ -18,7 +18,6 @@ interface PageEvent {
   imports: [CommonModule, ImportsModule, RoleDirective],
   templateUrl: './sponsors.component.html',
   styleUrl: './sponsors.component.scss',
-  providers: [CommonService],
 })
 export class SponsorsComponent implements OnInit {
   allSponsers: any = [];

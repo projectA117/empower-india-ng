@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '@service/productservice';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
 import {
@@ -41,7 +40,6 @@ export interface Product {
   ],
   templateUrl: './project-finance.component.html',
   styleUrl: './project-finance.component.scss',
-  providers: [ProjectDetailsService, ProductService],
 })
 export class ProjectFinanceComponent implements OnInit {
   @Input() projectData: any;
@@ -51,10 +49,13 @@ export class ProjectFinanceComponent implements OnInit {
   totalFunds: number = 0;
   financeSidebarVisible: boolean = false;
   isAdd = false;
+  FileUpload: any;
   FinanceForm: FormGroup = new FormGroup({});
+  uploadimage: any = undefined;
+  imagePreviews: any;
+  selectedFiles: (File | { base64: string; fromServer: true })[] = [];
+  projectDetailsService = inject(ProjectDetailsService)
   constructor(
-    private productService: ProductService,
-    private projectDetailsService: ProjectDetailsService
   ) {}
   ngOnInit() {
     this.showTransactionData();
@@ -102,22 +103,13 @@ export class ProjectFinanceComponent implements OnInit {
         : 'No',
       spentBy: this.FinanceForm.get('financeSpentBy')?.value,
       approvedBy: this.FinanceForm.get('financeApprovedBy')?.value,
-      // financeDate: this.FinanceForm.get('financeDate')?.value,
-      // financeExpenseType: this.FinanceForm.get('financeExpenseType')?.value,
-      // financeAmount: this.FinanceForm.get('financeAmount')?.value,
-      // financeSpentBy: this.FinanceForm.get('financeSpentBy')?.value,
-      // villageId: this.projectData.villageId,
-      // villageProjectId: this.projectData.id,
-      // financePaidto: this.FinanceForm.get('financePaidto')?.value,
-      // id: this.projectData.id,
-      // financeModeofPayment: this.FinanceForm.get('financeModeofPayment')?.value,
-      // financeApprovedBy: this.FinanceForm.get('financeApprovedBy')?.value,
-      // financeDescription: this.FinanceForm.get('financeDescription')?.value,
-      // financeBillProofs: this.FinanceForm.get('financeBillProofs')?.value,
     };
     if (!this.isAdd) {
       payload['id'] = this.FinanceForm.get('id')?.value;
-      this.projectDetailsService.updateFinanceExpence(payload).subscribe((data) => {
+      const formData = new FormData();
+      formData.append('finance',  new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+      formData.append('financeImage', this.uploadimage);
+      this.projectDetailsService.updateFinanceExpence(formData, this.FinanceForm.get('id')?.value).subscribe((data) => {
         console.log('...Data', data);
         if (data) {
           this.showTransactionData();
@@ -129,7 +121,10 @@ export class ProjectFinanceComponent implements OnInit {
       });
       return
     }
-    this.projectDetailsService.addFinanceExpence(payload).subscribe((data) => {
+    const formData = new FormData();
+    formData.append('finance', new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    formData.append('financeImage', this.uploadimage);
+    this.projectDetailsService.addFinanceExpence(formData).subscribe((data) => {
       console.log('...Data', data);
       if (data) {
         this.showTransactionData();
@@ -155,9 +150,30 @@ export class ProjectFinanceComponent implements OnInit {
       financeDescription: transaction.description,
       financeBillProofs: transaction.billProofs,
     });
+    if (transaction.billImage) {
+      this.imagePreviews.push(
+        `data:image/jpeg;base64,${transaction.billImage}`
+      );
+      this.selectedFiles = this.imagePreviews.map((b64) => ({
+        base64: b64,
+        fromServer: true,
+      }));
+    }
   }
 
+  onUpload(event: any) {
+    // const file = event.files;
+    // console.log('...File', file);
 
+    const file = event.target?.files[0]; // Get the selected file
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    this.uploadimage = file;
+
+    this.FileUpload = formData;
+  }
 
   onDeleteTransaction(transaction: any) {
     this.projectDetailsService

@@ -1,21 +1,16 @@
 import {
-  ChangeDetectorRef,
   Component,
   computed,
   effect,
   OnInit,
 } from '@angular/core';
-import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
-import { ProductService } from '@service/productservice';
 import { ImportsModule } from '../imports';
 import { CommonService } from '../../service/common.service';
 import { ProjectComponent } from '../project/project.component';
-import { Project } from 'src/models/Project';
 
 import { HardCodedInfo } from 'src/constants/HardCodedInfo';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoaderService } from '@service/loader.service';
 import {
   FormControl,
   FormGroup,
@@ -66,7 +61,7 @@ interface PageEvent {
     RoleDirective,
     MapComponent
   ],
-  providers: [MessageService, ConfirmationService, ProductService],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './villages-demography.component.html',
   styleUrl: './villages-demography.component.scss',
   styles: [
@@ -183,8 +178,6 @@ export class VillagesDemographyComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private router: Router,
-    private productService: ProductService,
-    private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute
   ) {
     effect(() => {
@@ -360,8 +353,7 @@ export class VillagesDemographyComponent implements OnInit {
     );
   }
   getProjectDetails(project: any) {
-    //this.project = project;
-    //this.productService.selectedProject.next(project);
+
     this.router.navigate(['project-details'], {
       queryParams: { projectId: project.id, fromPage: 'village' },
     });
