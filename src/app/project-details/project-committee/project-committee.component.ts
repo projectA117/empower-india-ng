@@ -49,9 +49,7 @@ export class ProjectCommitteeComponent implements OnInit {
   Committee: any = [];
   editCommitee: boolean = false;
   addEditText = 'Add Governance Body Member';
-  constructor(
-    private projectDetailsService: ProjectDetailsService
-  ) {}
+  constructor(private projectDetailsService: ProjectDetailsService) {}
   ngOnInit() {
     this.createForm();
     this.showCommittee();
@@ -114,7 +112,7 @@ export class ProjectCommitteeComponent implements OnInit {
     this.editCommitee = false;
     this.updatecommitteeForm
       .get('villageId')
-      ?.setValue(this.projectData.villageName);
+      ?.setValue(this.projectData?.villageName);
     this.addEditText = 'Add Governance Body Member';
   }
 

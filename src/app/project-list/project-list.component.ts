@@ -488,11 +488,15 @@ export class ProjectListComponent implements OnInit {
   }
 
   getMandals(event: any) {
-    const districtCode = event.value.id;
+    const districtCode = event?.value?.id ?? null;
     this.mandals = [];
     this.villages = [];
     this.selectedMandal = null;
     this.selectedVilage = null;
+    if (!districtCode) {
+      this.getProjects();
+      return;
+    }
     this.commonService.getMandals(districtCode).subscribe(
       (data) => {
         this.mandals = data;
@@ -506,9 +510,13 @@ export class ProjectListComponent implements OnInit {
   }
 
   getvilages(event: any) {
-    const mandalCode = event.value.id;
+    const mandalCode = event?.value?.id ?? null;
     this.villages = [];
     this.selectedVilage = null;
+    if (!mandalCode) {
+      this.getProjects();
+      return;
+    }
     this.commonService.getVillages(mandalCode).subscribe(
       (data) => {
         this.villages = data;
@@ -541,6 +549,7 @@ export class ProjectListComponent implements OnInit {
     if (val) {
       this.hideDialog();
       this.pageNumber = 0;
+      this.first = 0;
       this.rows = 10;
       this.getProjects();
     }
@@ -589,7 +598,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   getProjectSponsorDetails(project: any) {
-
     this.router.navigate(['project-sponsors'], {
       queryParams: { project: JSON.stringify(project) },
     });
@@ -600,7 +608,9 @@ export class ProjectListComponent implements OnInit {
     this.selectedMandal = null;
     this.selectedVilage = null;
     this.selectedStatus = null;
-    // this.first = 0;
+    this.pageNumber = 0;
+    this.rows = 10;
+    this.first = 0;
     // this.rows = 10;
     this.getProjects();
   }
