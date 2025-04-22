@@ -304,4 +304,48 @@ export class ProjectDetailsService {
         catchError((error) => of(error))
       );
   }
+
+  getProjectSignOff(id: number) {
+    return this.httpClient
+      .get<any>(`${environment.apiUrl}/village-signoff/project/${id}`)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  createProjectSignOff(payload: any) {
+    return this.httpClient
+      .post<any>(`${environment.apiUrl}/village-signoff`, payload)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  updateProjectSignOff(payload: any, id: number) {
+    return this.httpClient
+      .put<any>(`${environment.apiUrl}/village-signoff/${id}`, payload)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
+
+  deleteProjectSignOff(id: number) {
+    return this.httpClient
+      .delete<any>(`${environment.apiUrl}/village-signoff/${id}`)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => of(error))
+      );
+  }
 }
