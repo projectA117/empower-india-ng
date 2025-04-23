@@ -258,6 +258,20 @@ export class CommonService {
     this.user.set(user);
   }
 
+  showInputAdmin(DistID: string): boolean {
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    if (
+      (localStorageuser &&
+        localStorageuser?.roles[0]?.id == 4 &&
+        localStorageuser?.districtId == DistID) ||
+      localStorageuser?.roles[0]?.id == 3
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //4304
 
   getVillagesDemography(payLoad: any): Observable<any> {

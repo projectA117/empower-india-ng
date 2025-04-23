@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import {
   FormsModule,
@@ -11,6 +17,8 @@ import { ImportsModule } from 'src/app/imports';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { AdminAccessDirective } from 'src/directives/admin-access.directive';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-project-approval',
@@ -23,6 +31,7 @@ import { RoleDirective } from 'src/directives/role-access.directive';
     DropdownModule,
     ReactiveFormsModule,
     RoleDirective,
+    AdminAccessDirective,
   ],
   templateUrl: './project-approval.component.html',
   styleUrl: './project-approval.component.scss',
@@ -34,7 +43,10 @@ export class ProjectApprovalComponent implements OnInit, OnChanges {
   value1: number;
   governmentShareAmount: number = 0;
   nonAdmin: any = '';
-  constructor(private projectDetailsService: ProjectDetailsService) {}
+  constructor(
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
+  ) {}
 
   ngOnInit() {
     if (this.approvalForm) {
@@ -43,7 +55,7 @@ export class ProjectApprovalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      if (changes.projectData) {
+    if (changes.projectData) {
       this.createapprovalForm();
     }
   }
@@ -58,12 +70,7 @@ export class ProjectApprovalComponent implements OnInit, OnChanges {
   // }
 
   localStorageuser() {
-    const localStorageuser = JSON.parse(localStorage.getItem('user'));
-    if (!localStorageuser || localStorageuser.roles[0].id != 3) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
   }
 
   profileImageShowHide() {

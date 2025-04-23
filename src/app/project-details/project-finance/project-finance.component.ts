@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { CommonService } from '@service/common.service';
 
 export interface Product {
   id?: string;
@@ -54,14 +55,15 @@ export class ProjectFinanceComponent implements OnInit {
   uploadimage: any = undefined;
   imagePreviews: any;
   selectedFiles: (File | { base64: string; fromServer: true })[] = [];
-  projectDetailsService = inject(ProjectDetailsService)
-  constructor(
-  ) {}
+  projectDetailsService = inject(ProjectDetailsService);
+  constructor(private commonService: CommonService) {}
   ngOnInit() {
     this.showTransactionData();
     this.createFinanceForm();
   }
-
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
+  }
   showTransactionData() {
     this.projectDetailsService
       .showTransaction(this.projectData.id)
@@ -89,7 +91,6 @@ export class ProjectFinanceComponent implements OnInit {
   }
 
   addExpence() {
-
     const payload = {
       villageProjectId: this.projectData.id,
       transactionAmount: this.FinanceForm.get('financeAmount')?.value,
@@ -107,22 +108,30 @@ export class ProjectFinanceComponent implements OnInit {
     if (!this.isAdd) {
       payload['id'] = this.FinanceForm.get('id')?.value;
       const formData = new FormData();
-      formData.append('finance',  new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+      formData.append(
+        'finance',
+        new Blob([JSON.stringify(payload)], { type: 'application/json' })
+      );
       formData.append('financeImage', this.uploadimage);
-      this.projectDetailsService.updateFinanceExpence(formData, this.FinanceForm.get('id')?.value).subscribe((data) => {
-        console.log('...Data', data);
-        if (data) {
-          this.showTransactionData();
-          this.FinanceForm.reset();
-          this.financeSidebarVisible = false;
-          this.isAdd = false;
-          this.FinanceForm.reset();
-        }
-      });
-      return
+      this.projectDetailsService
+        .updateFinanceExpence(formData, this.FinanceForm.get('id')?.value)
+        .subscribe((data) => {
+          console.log('...Data', data);
+          if (data) {
+            this.showTransactionData();
+            this.FinanceForm.reset();
+            this.financeSidebarVisible = false;
+            this.isAdd = false;
+            this.FinanceForm.reset();
+          }
+        });
+      return;
     }
     const formData = new FormData();
-    formData.append('finance', new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    formData.append(
+      'finance',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
     formData.append('financeImage', this.uploadimage);
     this.projectDetailsService.addFinanceExpence(formData).subscribe((data) => {
       console.log('...Data', data);
@@ -181,7 +190,7 @@ export class ProjectFinanceComponent implements OnInit {
       .subscribe((data) => {
         console.log('...Data', data);
         // if (data) {
-          this.showTransactionData();
+        this.showTransactionData();
         // }
       });
   }

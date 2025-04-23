@@ -22,13 +22,15 @@
           }}/-</span
         >
       </div>
+      @if (localStorageuser()) {
       <p-button
         label="Add Expense"
         (click)="
           financeSidebarVisible = true; isAdd = true; FinanceForm.reset()
         "
-        *appHasRole="[3]"
+        *appHasRole="[3, 4]"
       />
+      }
     </div>
   </div>
 </div>
@@ -75,18 +77,20 @@
         <td>{{ showTransaction.description }}</td>
         <td>{{ showTransaction.billProofs }}</td>
         <td class="text-center block">
+          @if (localStorageuser()) {
           <div class="d-flex gap-3 action-btns">
             <img
               src="assets/images/icon-edit.svg"
               (click)="onEditTransaction(showTransaction)"
-              *appHasRole="[3]"
+              *appHasRole="[3, 4]"
             />
             <img
               src="assets/images/icon-delete.svg"
               (click)="onDeleteTransaction(showTransaction)"
-              *appHasRole="[3]"
+              *appHasRole="[3, 4]"
             />
           </div>
+          }
         </td>
       </tr>
     </ng-template>

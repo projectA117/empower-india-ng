@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { SidebarModule } from 'primeng/sidebar';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { CommonService } from '@service/common.service';
 
 @Component({
   selector: 'app-project-bank-details',
@@ -36,6 +37,8 @@ export class ProjectBankDetailsComponent {
   bankDetailsSliderVisible = false;
   editForm = false;
   projectDetailsService = inject(ProjectDetailsService);
+
+  constructor(private commonService: CommonService) {}
 
   ngOnInit() {
     console.log(this.projectData.id);
@@ -88,6 +91,10 @@ export class ProjectBankDetailsComponent {
           this.bankDetails = data;
         }
       });
+  }
+
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
   }
 
   onSubmitBankDetails() {

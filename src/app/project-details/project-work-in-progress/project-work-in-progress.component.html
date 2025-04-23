@@ -1,15 +1,17 @@
 <div class="row mb-4">
   <div class="bottom-table-head">
     <h4>WIP Details</h4>
+    @if (localStorageuser()) {
     <p-button
       label="Add WIP Details"
-      *appHasRole="[3]"
+      *appHasRole="[3, 4]"
       (click)="
         WIPSidebarVisible = true;
         WIPForm.reset();
         WIPAddEditText = 'Add WIP Details'
       "
     />
+    }
   </div>
 
   <div class="justify-content-start flex-wrap mt-15">
@@ -44,13 +46,20 @@
             } @else { -- No Image -- }
           </td>
           <td>
-
+            @if (localStorageuser()) {
             <div class="d-flex gap-3 action-btns">
-              <img src="assets/images/icon-edit.svg" (click)="onEditWIP(WIP)" *appHasRole="[3]">
-              <img src="assets/images/icon-delete.svg" (click)="onDelete(WIP.id)" *appHasRole="[3]">
+              <img
+                src="assets/images/icon-edit.svg"
+                (click)="onEditWIP(WIP)"
+                *appHasRole="[3, 4]"
+              />
+              <img
+                src="assets/images/icon-delete.svg"
+                (click)="onDelete(WIP.id)"
+                *appHasRole="[3, 4]"
+              />
             </div>
-
-            
+            }
           </td>
         </tr>
       </ng-template>

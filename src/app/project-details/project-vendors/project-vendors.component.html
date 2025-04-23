@@ -1,11 +1,13 @@
 <div class="row mb-4">
   <div class="bottom-table-head">
     <h4>Vendor Details</h4>
+    @if (localStorageuser()) {
     <p-button
       label="Add Vendor"
       (click)="vendorSidebarVisible = true; VendorAddEditText = 'Add'"
-      *appHasRole="[2, 3]"
+      *appHasRole="[4, 3]"
     />
+    }
   </div>
 
   <div class="justify-content-start flex-wrap mt-15">
@@ -33,14 +35,20 @@
           <td>{{ VendorsDetails.phone }}</td>
           <td>{{ VendorsDetails.address }}</td>
           <td>
-
+            @if (localStorageuser()) {
             <div class="d-flex gap-3 action-btns">
-              <img src="assets/images/icon-edit.svg" (click)="onEditVendors(VendorsDetails)" *appHasRole="[3]">
-              <img src="assets/images/icon-delete.svg" (click)="onDelete(VendorsDetails.id)" *appHasRole="[3]">
+              <img
+                src="assets/images/icon-edit.svg"
+                (click)="onEditVendors(VendorsDetails)"
+                *appHasRole="[3, 4]"
+              />
+              <img
+                src="assets/images/icon-delete.svg"
+                (click)="onDelete(VendorsDetails.id)"
+                *appHasRole="[3, 4]"
+              />
             </div>
-
-
-            
+            }
           </td>
         </tr>
       </ng-template>

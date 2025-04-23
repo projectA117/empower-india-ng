@@ -183,34 +183,42 @@
               src="assets/images/icon-view.svg"
               (click)="getProjectDetails(info)"
             />
-            @if(info.statusCode === 'DRAFT' || info.statusCode === 'WFA') {
+            @if(info.statusCode === 'DRAFT' || info.statusCode === 'WFA' &&
+            localStorageuser(info) ) {
+            <p-button
+              *appHasRole="[3, 4]"
+              label="Hold"
+              class="smallPbutons"
+              (onClick)="changeProjectStatus(info, 'HOLD')"
+            ></p-button>
             <img
               src="assets/images/icon-edit.svg"
               (click)="editProject(info)"
-              *appHasRole="[3, 2]"
+              *appHasRole="[3, 2, 4]"
             />
             <img
               src="assets/images/icon-delete.svg"
-              *appHasRole="[3, 2]"
+              *appHasRole="[3, 2, 4]"
               (click)="deleteProject(info.id)"
             />
-            } @if(info.statusCode === 'WIP') {
+            } @if(info.statusCode === 'WIP' && localStorageuser(info) ) {
             <p-button
-              *appHasRole="[3]"
+              *appHasRole="[3, 4]"
               label="Hold"
               class="smallPbutons"
               (onClick)="changeProjectStatus(info, 'HOLD')"
             ></p-button>
 
             <p-button
-              *appHasRole="[3]"
+              *appHasRole="[3, 4]"
               label="WFD"
               class="smallPbutons"
               (onClick)="changeProjectStatus(info, 'WFD')"
             ></p-button>
-            } @if( info.statusCode === 'WFD') {
+            } @if((info.statusCode === 'WFD' && localStorageuser(info) ) ||
+            (info.statusCode === 'WFS' && localStorageuser(info) )) {
             <p-button
-              *appHasRole="[3]"
+              *appHasRole="[3, 4]"
               label="HOLD"
               class="smallPbutons"
               (onClick)="changeProjectStatus(info, 'HOLD')"
