@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { CommonService } from '@service/common.service';
 
 export interface Product {
   id?: string;
@@ -49,10 +50,17 @@ export class ProjectCommitteeComponent implements OnInit {
   Committee: any = [];
   editCommitee: boolean = false;
   addEditText = 'Add Governance Body Member';
-  constructor(private projectDetailsService: ProjectDetailsService) {}
+  constructor(
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
+  ) {}
   ngOnInit() {
     this.createForm();
     this.showCommittee();
+  }
+
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
   }
 
   createForm() {

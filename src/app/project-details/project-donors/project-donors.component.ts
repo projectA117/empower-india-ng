@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { CommonService } from '@service/common.service';
 
 export interface Product {
   id?: string;
@@ -58,11 +59,16 @@ export class ProjectDonorsComponent implements OnInit {
   projectCost: number = 0;
   remainingAmount: number = 0;
   constructor(
-    private projectDetailsService: ProjectDetailsService
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
   ) {}
   ngOnInit() {
     this.createdonorForm();
     this.showdonor();
+  }
+
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
   }
 
   createdonorForm() {

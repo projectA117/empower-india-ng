@@ -15,6 +15,7 @@ import { ProjectPublishComponent } from './project-publish/project-publish.compo
 import { RoleDirective } from 'src/directives/role-access.directive';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { MapComponent } from '../map/map.component';
+import { CommonService } from '@service/common.service';
 export interface Tab {
   label: string;
   icon?: string;
@@ -49,7 +50,8 @@ export class ProjectDetailsComponent implements OnInit {
   product: any;
   constructor(
     private projectDetailsService: ProjectDetailsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private commonService: CommonService
   ) {}
 
   activeTab: string = 'Estimation'; // Set default active tab
@@ -130,6 +132,10 @@ export class ProjectDetailsComponent implements OnInit {
     });
   }
 
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.product?.districtId);
+  }
+
   getProjectDetails(id) {
     this.projectDetailsService.getProjectDetailsById(id).subscribe((data) => {
       const localStorageuser = JSON.parse(localStorage.getItem('user'));
@@ -140,7 +146,7 @@ export class ProjectDetailsComponent implements OnInit {
         0
       );
       const publicEstimate =
-      this.product.projectEstimation * (this.product.publicShare / 100);
+        this.product.projectEstimation * (this.product.publicShare / 100);
       this.product.sponsorAmount = sponsorAmount;
       this.product.disableAddSponsor = publicEstimate <= sponsorAmount;
       if (!localStorageuser) {
@@ -160,7 +166,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.projectDetailsService
       .kickOffProject(this.product.id)
       .subscribe((data) => {
-        this.getProjectDetails(this.product.id)
+        this.getProjectDetails(this.product.id);
       });
   }
 }

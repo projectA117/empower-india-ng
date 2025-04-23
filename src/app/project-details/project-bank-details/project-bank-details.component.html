@@ -1,11 +1,13 @@
 <div class="row mb-4">
   <div class="bottom-table-head">
     <h4>Bank Details</h4>
+    @if (localStorageuser()) {
     <p-button
       label="Add Bank Details"
       (click)="addBankDetails()"
-      *appHasRole="[3]"
+      *appHasRole="[3, 4]"
     />
+    }
   </div>
   <div class="row tab-input-data">
     <p-table
@@ -36,7 +38,13 @@
           <td>{{ bank.ifscCode }}</td>
           <td>{{ bank.swiftCode }}</td>
           <td>
-            <img src="assets/images/icon-edit.svg" (click)="deleteCommittee(Committee)" *appHasRole="[2, 3]">
+            @if (localStorageuser()) {
+            <img
+              src="assets/images/icon-edit.svg"
+              (click)="deleteCommittee(Committee)"
+              *appHasRole="[3, 4]"
+            />
+            }
           </td>
         </tr>
       </ng-template>

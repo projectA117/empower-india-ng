@@ -4,11 +4,7 @@ import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { ProjectDetailsService } from '@service/project-details.service';
 import { ImportsModule } from 'src/app/imports';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
 import { CommonService } from '@service/common.service';
 
@@ -52,6 +48,9 @@ export class ProjectsignoffComponent implements OnInit {
     this.createProjectSignOffForm();
     this.showProjectSignOffDetails();
   }
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
+  }
 
   createProjectSignOffForm() {
     this.ProjectSignOffForm = new FormGroup({
@@ -64,7 +63,7 @@ export class ProjectsignoffComponent implements OnInit {
           '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
         ),
       ]),
-      phoneNumber:new FormControl('', [
+      phoneNumber: new FormControl('', [
         Validators.required,
         Validators.pattern(`^[0-9]{10}$`),
         Validators.minLength(10),
@@ -74,9 +73,11 @@ export class ProjectsignoffComponent implements OnInit {
   }
 
   showProjectSignOffDetails() {
-    this.projectDetailsService.getProjectSignOff(this.projectData?.id).subscribe((data) => {
-      this.products = data;
-    });
+    this.projectDetailsService
+      .getProjectSignOff(this.projectData?.id)
+      .subscribe((data) => {
+        this.products = data;
+      });
   }
 
   addProjectSignOff() {
@@ -98,12 +99,14 @@ export class ProjectsignoffComponent implements OnInit {
       ...this.ProjectSignOffForm.value,
       projectId: this.projectData?.id,
     };
-    this.projectDetailsService.createProjectSignOff(payload).subscribe((data) => {
-      if (data) {
-        this.showProjectSignOffDetails();
-        this.onCancel();
-      }
-    });
+    this.projectDetailsService
+      .createProjectSignOff(payload)
+      .subscribe((data) => {
+        if (data) {
+          this.showProjectSignOffDetails();
+          this.onCancel();
+        }
+      });
   }
 
   deleteProjectSignOff(id: number) {
@@ -130,14 +133,15 @@ export class ProjectsignoffComponent implements OnInit {
     const payload = {
       ...this.ProjectSignOffForm.value,
       projectId: this.projectData?.id,
-
     };
-    this.projectDetailsService.updateProjectSignOff(payload, this.ProjectSignOffForm.get('id').value).subscribe((data) => {
-      if (data) {
-        this.showProjectSignOffDetails();
-        this.onCancel();
-      }
-    });
+    this.projectDetailsService
+      .updateProjectSignOff(payload, this.ProjectSignOffForm.get('id').value)
+      .subscribe((data) => {
+        if (data) {
+          this.showProjectSignOffDetails();
+          this.onCancel();
+        }
+      });
   }
 
   onCancel() {

@@ -1,11 +1,13 @@
 <div class="row mb-4">
   <div class="bottom-table-head">
     <h4>Governance Body Details</h4>
+    @if (localStorageuser()) {
     <p-button
       label="Add Governance Body Member"
-      *appHasRole="[2, 3]"
+      *appHasRole="[4, 3]"
       (click)="addCommitteeview()"
     />
+    }
   </div>
   <div class="row tab-input-data">
     <p-table
@@ -31,11 +33,20 @@
           <td>{{ Committee.firstName }} {{ Committee.lastName }}</td>
           <td>{{ Committee.phoneNumber }}</td>
           <td>
+            @if (localStorageuser()) {
             <div class="d-flex gap-3 action-btns">
-            <img src="assets/images/icon-edit.svg" (click)="editCommittee(Committee)" *appHasRole="[2, 3]">
-            <img src="assets/images/icon-delete.svg" (click)="deleteCommittee(Committee)" *appHasRole="[2, 3]">
-          </div>
-            
+              <img
+                src="assets/images/icon-edit.svg"
+                (click)="editCommittee(Committee)"
+                *appHasRole="[4, 3]"
+              />
+              <img
+                src="assets/images/icon-delete.svg"
+                (click)="deleteCommittee(Committee)"
+                *appHasRole="[4, 3]"
+              />
+            </div>
+            }
           </td>
         </tr>
       </ng-template>

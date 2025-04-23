@@ -267,6 +267,10 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
+  localStorageuser(info: any) {
+    return this.commonService.showInputAdmin(info?.districtId);
+  }
+
   getProjects() {
     let params = '';
 
@@ -384,7 +388,10 @@ export class ProjectListComponent implements OnInit {
           );
           const localStorageuser = JSON.parse(localStorage.getItem('user'));
 
-          if (localStorageuser?.roles[0].id == 3) {
+          if (
+            localStorageuser?.roles[0].id == 3 ||
+            localStorageuser?.roles[0].id == 4
+          ) {
           } else {
             this.status = this.status.filter(
               (status) => status.statusCode != 'WFA'

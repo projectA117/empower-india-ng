@@ -16,7 +16,8 @@
     <div class="row project-detail-name-h">
       <div class="d-flex justify-content-between align-items-center">
         <div class="page-breadcrumb">
-          {{ product?.districtName }} <span>|</span> {{ product?.mandalName }} <span>|</span>
+          {{ product?.districtName }} <span>|</span> {{ product?.mandalName }}
+          <span>|</span>
           {{ product?.villageName }}
         </div>
         <div class="all-projects-arrow-set" onclick="history.back()">
@@ -188,24 +189,21 @@
             <div *ngIf="activeTab === 'KickOff'">
               <div class="bottom-table-head">
                 <div class="project-kickoff">
+                  <h4>Project Kick-off</h4>
 
-              <h4>Project Kick-off</h4>
-
-              <div class="project-publish-form">
-
-              <p>Project total estimation amount is collected.</p>
-              <p-button
-                *appHasRole="[3]"
-                label="Kick Off"
-                [disabled]="!product.disableAddSponsor"
-                (click)="projectKickOff()"
-              ></p-button>
-            </div>
-
+                  <div class="project-publish-form">
+                    <p>Project total estimation amount is collected.</p>
+                    @if (localStorageuser()) {
+                    <p-button
+                      *appHasRole="[3, 4]"
+                      label="Kick Off"
+                      [disabled]="!product.disableAddSponsor"
+                      (click)="projectKickOff()"
+                    ></p-button>
+                    }
+                  </div>
+                </div>
               </div>
-
-            </div>
-
             </div>
 
             <!-- Finance -->

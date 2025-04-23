@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RoleDirective } from 'src/directives/role-access.directive';
+import { CommonService } from '@service/common.service';
 
 export interface Product {
   id?: string;
@@ -48,13 +49,16 @@ export class ProjectVendorsComponent implements OnInit {
   VendorForm: FormGroup = new FormGroup({});
   VendorAddEditText: string = 'Add Vendor';
   constructor(
-    private projectDetailsService: ProjectDetailsService
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
   ) {}
   ngOnInit() {
     this.showVendorsDetails();
     this.createVendorForm();
   }
-
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
+  }
   showVendorsDetails() {
     this.projectDetailsService
       .showVendorsDetails(this.projectData.id)

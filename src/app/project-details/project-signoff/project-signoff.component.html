@@ -1,10 +1,11 @@
 <div class="row mb-4">
   <div class="bottom-table-head">
     <h4>Project Sign Off Details</h4>
+    @if (localStorageuser()) {
     <div class="flex gap-2">
       <p-button
         label="Completed"
-        *appHasRole="[3]"
+        *appHasRole="[3, 4]"
         (click)="completeProject()"
         [disabled]="products && products.length < 2"
       >
@@ -12,9 +13,10 @@
       <p-button
         label="Add Sign Off Details"
         (click)="addProjectSignOff()"
-        *appHasRole="[3]"
+        *appHasRole="[3, 4]"
       />
     </div>
+    }
   </div>
 
   <div class="justify-content-start flex-wrap mt-15">
@@ -34,18 +36,20 @@
           <td>{{ product.email }}</td>
           <td>{{ product.phoneNumber }}</td>
           <td>
+            @if (localStorageuser()) {
             <div class="d-flex gap-3 action-btns">
               <img
                 src="assets/images/icon-edit.svg"
                 (click)="editProjectSignOff(product)"
-                *appHasRole="[2, 3]"
+                *appHasRole="[4, 3]"
               />
               <img
                 src="assets/images/icon-delete.svg"
                 (click)="deleteProjectSignOff(product.id)"
-                *appHasRole="[2, 3]"
+                *appHasRole="[4, 3]"
               />
             </div>
+            }
           </td>
         </tr>
       </ng-template>

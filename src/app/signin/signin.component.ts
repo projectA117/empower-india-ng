@@ -72,7 +72,7 @@ export class SigninComponent implements OnInit {
             severity: 'error',
             summary: 'Error',
             detail:
-              data.error ??
+              data.error.errorMessage ??
               'The application has encountered an unknown error. Please try again later.',
           });
         }
