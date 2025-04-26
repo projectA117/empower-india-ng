@@ -1,0 +1,196 @@
+<div class="row mb-4">
+  <div class="bottom-table-head">
+    <h4>WIP Details</h4>
+    @if (localStorageuser()) {
+    <p-button
+      label="Add WIP Details"
+      *appHasRole="[3, 4]"
+      (click)="
+        WIPSidebarVisible = true;
+        WIPForm.reset();
+        WIPAddEditText = 'Add WIP Details'
+      "
+    />
+    }
+  </div>
+
+  <div class="justify-content-start flex-wrap mt-15">
+    <p-table [value]="WIPDetails" class="tab-data-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="Vendor">Date <p-sortIcon field="Vendor" /></th>
+          <th pSortableColumn="Contractor">
+            Description <p-sortIcon field="Contractor" />
+          </th>
+
+          <th pSortableColumn="Auditor">
+            Auditor <p-sortIcon field="Auditor" />
+          </th>
+          <th pSortableColumn="Photos">
+            Photos/Videos <p-sortIcon field="Photos" />
+          </th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-WIP>
+        <tr>
+          <td>{{ WIP.createdDate | date : "dd-MM-yyyy" }}</td>
+          <td>{{ WIP.status }}</td>
+          <td>{{ WIP.createdBy }}</td>
+          <td>
+            @if(WIP.statusImage) {
+            <img
+              style="width: 100px; height: 100px"
+              [src]="'data:image/jpeg;base64,' + WIP.statusImage"
+            />
+            } @else { -- No Image -- }
+          </td>
+          <td>
+            @if (localStorageuser()) {
+            <div class="d-flex gap-3 action-btns">
+              <img
+                src="assets/images/icon-edit.svg"
+                (click)="onEditWIP(WIP)"
+                *appHasRole="[3, 4]"
+              />
+              <img
+                src="assets/images/icon-delete.svg"
+                (click)="onDelete(WIP.id)"
+                *appHasRole="[3, 4]"
+              />
+            </div>
+            }
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-sidebar
+  [(visible)]="WIPSidebarVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="WIPForm"
+    *ngIf="WIPSidebarVisible"
+    (ngSubmit)="updateWIPForm()"
+  >
+    <div class="tab-pop-txt">
+      <h4>{{ WIPAddEditText }}</h4>
+      <i class="pi pi-times" (click)="onClear()"></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Date</div>
+        <div class="project-detail-set-v mt-2">
+          <p-calendar formControlName="WIPDate" id="WIPDate" />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Description</div>
+        <div class="project-detail-set-v mt-2">
+          <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            id="WIPDescription"
+            formControlName="WIPDescription"
+            aria-describedby="WIPDescription"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Auditor</div>
+        <div class="project-detail-set-v mt-2">
+          <input
+            pInputText
+            id="WIPAuditor"
+            formControlName="WIPAuditor"
+            aria-describedby="WIPAuditor"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="flex items-center">
+          <p-checkbox
+            id="WIPPublishToGallery"
+            inputId="WIPPublishToGallery"
+            name="WIPPublishToGallery"
+            value="Publish To Gallery"
+            formControlName="WIPPublishToGallery"
+          />
+          <label
+            for="WIPPublishToGallery"
+            class="ml-2"
+            style="line-height: 30px"
+          >
+            Publish To Gallery
+          </label>
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Photos / Videos</div>
+        <div class="project-detail-set-v mt-2">
+          <!-- <input
+            pInputText
+            id="WIPPhotosVideos"
+            formControlName="WIPPhotosVideos"
+            aria-describedby="WIPPhotosVideos"
+          /> -->
+
+          <!-- <p-fileUpload
+            [multiple]="true"
+            chooseLabel="Choose"
+            chooseIcon="pi pi-upload"
+            name="demo[]"
+            accept="image/*"
+            maxFileSize="1000000"
+            (onSelect)="onUpload($event)"
+            (onRemove)="onUpload($event)"
+          /> -->
+          <div class="upload-container">
+            <input
+              type="file"
+              (change)="onFileChange($event)"
+              multiple
+              accept="image/*"
+            />
+
+            <div class="preview-container">
+              <div
+                class="preview"
+                *ngFor="let img of imagePreviews; let i = index"
+              >
+                <img [src]="img" />
+                <button
+                  type="button"
+                  class="remove-btn"
+                  (click)="removeImage(i)"
+                >
+                  ✖
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-footer-btns">
+      <p-button label="Cancel " (click)="onClear()" class="cancel-btn" />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        (click)="updateWIPForm()"
+        [disabled]="!WIPForm.valid"
+      />
+    </div>
+  </form>
+</p-sidebar>

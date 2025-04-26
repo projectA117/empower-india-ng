@@ -1,0 +1,154 @@
+@if (ShowVilage()) {
+  <div class="add-edit">
+<p-button
+label="Add / Edit"
+  (onClick)="updateunEmployedYouth()"
+  *appHasRole="[3]"
+/>
+</div>
+}
+
+<p-table [value]="unemployedData" class="tab-data-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="firstName" class="text-center">
+        Sc No <p-sortIcon field="firstName" />
+      </th>
+      <th pSortableColumn="firstName" class="text-center">
+        Community<p-sortIcon field="firstName" />
+      </th>
+
+      <th pSortableColumn="address" class="text-center">
+        18-30 <p-sortIcon field="address" />
+      </th>
+
+      <th pSortableColumn="Amount" class="text-right">
+        31-45 <p-sortIcon field="Amount" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">
+        45-60 <p-sortIcon field="Amount" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">
+        Total <p-sortIcon field="Amount" />
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-unEmployee>
+    <tr>
+      <td class="text-center">{{ unEmployee.id }}</td>
+
+      <td class="text-right">{{ getCommunityName(unEmployee.communityId) }}</td>
+
+      <td class="text-right">{{ unEmployee.age1830 }}</td>
+
+      <td class="text-right">{{ unEmployee.age3145 }}</td>
+
+      <td class="text-right">{{ unEmployee.age4660 }}</td>
+
+      <td class="text-right">{{ unEmployee.total }}</td>
+
+      <td>
+        <i
+          class="pi pi-pencil"
+          (click)="editUnEmployeeData(unEmployee)"
+          *appHasRole="[3]"
+        ></i>
+        <i
+          class="pi pi-trash"
+          (click)="deleteUnEmployeeData(unEmployee)"
+          *appHasRole="[3]"
+        ></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="unEmployedYouthVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="unemployedYouthForm"
+    *ngIf="unEmployedYouthVisible"
+    (ngSubmit)="updateunEmployedYouthForm()"
+  >
+    <div class="tab-pop-txt">
+      <h4>Add Un Employed Youth</h4>
+      <i class="pi pi-times" (click)="unEmployedYouthVisible = false"></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Community</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [options]="communityData"
+            formControlName="community"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Community"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">18-30</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="belowThirty"
+            formControlName="belowThirty"
+            #belowThirty
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">31-45</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="belowFortyFive"
+            formControlName="belowFortyFive"
+            #belowFortyFive
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">45-60</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="belowSixty"
+            formControlName="belowSixty"
+            #belowSixty
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Total</div>
+        <div class="project-detail-set-v mt-2">
+          {{
+            (belowThirty?.value == "" ? 0 : belowThirty?.value) +
+              (belowFortyFive?.value == "" ? 0 : belowFortyFive?.value) +
+              (belowSixty?.value == "" ? 0 : belowSixty?.value)
+          }}
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button
+        label="Cancel "
+        (click)="unEmployedYouthVisible = false; editCommitee = false"
+        class="cancel-btn"
+      />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!unemployedYouthForm.valid"
+      />
+    </div>
+  </form>
+</p-sidebar>

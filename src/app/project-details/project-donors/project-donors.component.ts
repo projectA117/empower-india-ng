@@ -1,0 +1,284 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
+import { ProjectDetailsService } from '@service/project-details.service';
+import { ImportsModule } from 'src/app/imports';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { RoleDirective } from 'src/directives/role-access.directive';
+import { CommonService } from '@service/common.service';
+
+export interface Product {
+  id?: string;
+  code?: string;
+  name?: string;
+  description?: string;
+  price?: number;
+  quantity?: number;
+  inventoryStatus?: string;
+  category?: string;
+  image?: string;
+  rating?: number;
+}
+
+@Component({
+  selector: 'app-project-donors',
+  standalone: true,
+  imports: [
+    ButtonModule,
+    TableModule,
+    CommonModule,
+    ImportsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RoleDirective,
+  ],
+  templateUrl: './project-donors.component.html',
+  styleUrl: './project-donors.component.scss',
+})
+export class ProjectDonorsComponent implements OnInit {
+  @Input() projectData: any;
+  doners!: [];
+  donorsSidebarVisible: boolean = false;
+  donorForm: FormGroup = new FormGroup({});
+  FileUpload: any;
+  uploadimage: any;
+  imagePreview: any = 'assets/images/upload-img.svg';
+  editdonors = false;
+  selectedSponsor: any;
+  donorsAddEditText = 'Add Sponsor';
+  imagePreviews: any;
+  selectedFiles: (File | { base64: string; fromServer: true })[] = [];
+  totalCollected: number = 0;
+  projectCost: number = 0;
+  remainingAmount: number = 0;
+  constructor(
+    private projectDetailsService: ProjectDetailsService,
+    private commonService: CommonService
+  ) {}
+  ngOnInit() {
+    this.createdonorForm();
+    this.showdonor();
+  }
+
+  localStorageuser() {
+    return this.commonService.showInputAdmin(this.projectData?.districtId);
+  }
+
+  createdonorForm() {
+    this.donorForm = new FormGroup({
+      DonorsFirstName: new FormControl('', [Validators.required]),
+      DonorsLastName: new FormControl('', [Validators.required]),
+      DonorsPhone: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(`^[0-9]{10}$`),
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]),
+      DonorsEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'
+        ),
+      ]),
+      DonorsAddress: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      DonorsMemoryOf: new FormControl('', [Validators.required]),
+      DonorsAmount: new FormControl('', [Validators.required]),
+      DonorsModeofPayment: new FormControl('', [Validators.required]),
+    });
+
+    this.donorForm.get('DonorsAmount').valueChanges.subscribe((value) => {
+      if (value && value > this.remainingAmount) {
+        this.donorForm.get('DonorsAmount').setValue(this.remainingAmount);
+      }
+    });
+  }
+  showdonor() {
+    this.projectDetailsService
+      .showDonars(this.projectData.id)
+      .subscribe((data) => {
+        this.doners = data;
+
+        this.totalCollected = this.doners.reduce(
+          (sum, doner) => sum + doner['amount'],
+          0
+        );
+        this.projectCost =
+          this.projectData.projectEstimation *
+          (this.projectData.publicShare / 100);
+        this.remainingAmount = this.projectCost - this.totalCollected;
+      });
+  }
+  updatedonorForm() {
+    const payload = {
+      firstName: this.donorForm.get('DonorsFirstName')?.value,
+      lastName: this.donorForm.get('DonorsLastName')?.value,
+      phoneNumber: this.donorForm.get('DonorsPhone')?.value,
+      email: this.donorForm.get('DonorsEmail')?.value,
+      address: this.donorForm.get('DonorsAddress')?.value,
+      description: this.donorForm.get('description')?.value,
+      memoryOf: this.donorForm.get('DonorsMemoryOf')?.value,
+      amount: this.donorForm.get('DonorsAmount')?.value,
+      modeOfPayment: this.donorForm.get('DonorsModeofPayment')?.value,
+    };
+
+    if (this.editdonors) {
+      payload['id'] = this.selectedSponsor.id;
+    }
+
+    const formData = new FormData();
+    formData.append('donarImage', this.uploadimage); // Add the file
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'donar',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+
+    this.projectDetailsService
+      .addDonors(formData, this.projectData.id)
+      .subscribe((data) => {
+        if (data) {
+          this.showdonor();
+          this.donorsSidebarVisible = false;
+          this.donorForm.reset();
+        }
+      });
+  }
+  addClick() {
+    this.donorsSidebarVisible = true;
+    this.donorForm.reset();
+    this.editdonors = false;
+    this.donorsAddEditText = 'Add Sponsor';
+    this.sponsorType = 'new';
+    this.donorForm.get('DonorsAmount').enable();
+  }
+
+  onUpload(event: any) {
+    // const file = event.files;
+    // console.log('...File', file);
+
+    const file = event.target?.files[0]; // Get the selected file
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    this.uploadimage = file;
+
+    this.FileUpload = formData;
+  }
+
+  onEditSponsors(selectedSponsorsdata: any) {
+    this.donorForm.reset();
+    this.donorsSidebarVisible = true;
+    this.editdonors = true;
+    this.selectedSponsor = selectedSponsorsdata;
+    this.donorsAddEditText = 'Edit Sponsor';
+    this.donorForm.patchValue({
+      DonorsFirstName: selectedSponsorsdata.firstName,
+      DonorsLastName: selectedSponsorsdata.lastName,
+      DonorsPhone: selectedSponsorsdata.phoneNumber,
+      DonorsEmail: selectedSponsorsdata.email,
+      DonorsAddress: selectedSponsorsdata.address,
+      description: selectedSponsorsdata.description,
+      DonorsMemoryOf: selectedSponsorsdata.memoryOf,
+      DonorsAmount: selectedSponsorsdata.amount,
+      DonorsModeofPayment: selectedSponsorsdata.modeOfPayment,
+    });
+    this.donorForm.get('DonorsAmount').disable();
+    if (selectedSponsorsdata.statusImage) {
+      this.imagePreviews.push(
+        `data:image/jpeg;base64,${selectedSponsorsdata.statusImage}`
+      );
+      this.selectedFiles = this.imagePreviews.map((b64) => ({
+        base64: b64,
+        fromServer: true,
+      }));
+    }
+  }
+
+  isSearching: boolean = false;
+  filteredDonors: any[] = [];
+  selectedDonor: any = null;
+  sponsorType: string = 'new';
+
+  searchDonors(event: any) {
+    this.isSearching = true;
+
+    // Get the search term
+    const searchTerm = event.query;
+
+    // Call your API with the search term
+    this.projectDetailsService.searchDonors(searchTerm).subscribe(
+      (donors) => {
+        this.filteredDonors = donors;
+        this.isSearching = false;
+      },
+      (error) => {
+        console.error('Error fetching donors:', error);
+        this.isSearching = false;
+      }
+    );
+  }
+
+  onDonorSelected(donor: any) {
+    this.selectedDonor = donor.value;
+
+    // Populate form with donor data
+    this.donorForm.patchValue({
+      ID: donor.value.id,
+      DonorsFirstName: donor.value.firstName,
+      DonorsLastName: donor.value.lastName,
+      DonorsPhone: donor.value.phoneNumber,
+      DonorsEmail: donor.value.email,
+      DonorsAddress: donor.value.address,
+    });
+  }
+
+  clearUserSelection() {
+    this.selectedDonor = null;
+    this.donorForm.reset();
+  }
+
+  onSponsorTypeChange(event: any) {
+    this.donorForm.reset();
+    this.selectedDonor = null;
+    if (event === 'new') {
+      this.donorForm.get('DonorsFirstName')?.enable();
+      this.donorForm.get('DonorsLastName')?.enable();
+      this.donorForm.get('DonorsPhone')?.enable();
+      this.donorForm.get('DonorsEmail')?.enable();
+      this.donorForm.get('DonorsAddress')?.enable();
+    } else if (event === 'existing') {
+      this.donorForm.get('DonorsFirstName')?.disable();
+      this.donorForm.get('DonorsLastName')?.disable();
+      this.donorForm.get('DonorsPhone')?.disable();
+      this.donorForm.get('DonorsEmail')?.disable();
+      this.donorForm.get('DonorsAddress')?.disable();
+    }
+  }
+
+  existingDonorSelected(event: any) {
+    const selectedDonor = event.value;
+    this.donorForm.get('DonorsFirstName')?.setValue(selectedDonor.firstName);
+    this.donorForm.get('DonorsLastName')?.setValue(selectedDonor.lastName);
+    this.donorForm.get('DonorsPhone')?.setValue(selectedDonor.phoneNumber);
+    this.donorForm.get('DonorsEmail')?.setValue(selectedDonor.email);
+    this.donorForm.get('DonorsAddress')?.setValue(selectedDonor.address);
+  }
+
+
+  onDelete(donor: any) {
+    this.projectDetailsService
+      .deleteDonars(donor.id, this.projectData.id)
+      .subscribe((res) => {
+        this.showdonor();
+      });
+  }
+}

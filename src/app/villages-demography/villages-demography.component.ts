@@ -1,0 +1,768 @@
+import {
+  Component,
+  computed,
+  effect,
+  OnInit,
+} from '@angular/core';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
+import { ImportsModule } from '../imports';
+import { CommonService } from '../../service/common.service';
+import { ProjectComponent } from '../project/project.component';
+
+import { HardCodedInfo } from 'src/constants/HardCodedInfo';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
+import { CommunityWisePopulationComponent } from './community-wise-population/community-wise-population.component';
+import { CultivationCropsComponent } from './cultivation-crops/cultivation-crops.component';
+import { EmployedyouthComponent } from './employedyouth/employedyouth.component';
+import { InstitutionsComponent } from './institutions/institutions.component';
+import { LandUtilizationComponent } from './land-utilization/land-utilization.component';
+import { MainOccupationComponent } from './main-occupation/main-occupation.component';
+import { UnemployedYouthComponent } from './unemployed-youth/unemployed-youth.component';
+import { RoleDirective } from 'src/directives/role-access.directive';
+import { lastValueFrom } from 'rxjs';
+import { MapComponent } from '../map/map.component';
+
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
+
+@Component({
+  selector: 'app-villages-demography',
+  standalone: true,
+  imports: [
+    ImportsModule,
+    ProjectComponent,
+    ImportsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    TableModule,
+    CommonModule,
+    CommunityWisePopulationComponent,
+    CultivationCropsComponent,
+    EmployedyouthComponent,
+    InstitutionsComponent,
+    LandUtilizationComponent,
+    MainOccupationComponent,
+    UnemployedYouthComponent,
+    RoleDirective,
+    MapComponent
+  ],
+  providers: [MessageService, ConfirmationService],
+  templateUrl: './villages-demography.component.html',
+  styleUrl: './villages-demography.component.scss',
+  styles: [
+    `
+      :host ::ng-deep .p-dialog .product-image {
+        width: 150px;
+        margin: 0 auto 2rem auto;
+        display: block;
+      }
+    `,
+  ],
+})
+export class VillagesDemographyComponent implements OnInit {
+  getVillagesDemographyData: any = [];
+  getVillagesDemographyDataList: any = [];
+  unEmployedYouthVillage: any = [];
+  employedYouthVillage: any = [];
+  villagelookupsData: any = [];
+  occupationsData: any = [];
+  landUtilizationData: any = [];
+  cultivationCropsData: any = [];
+  institutionsData: any = [];
+  CommunityPopulationData: any = [];
+  CommunityOptions: any = [];
+  selectedCommunity: any = {};
+  vilagEditMode: boolean = false;
+  selectedDistrict: any = {};
+  selectedMandal: any = {};
+  selectedVilage: any = {};
+  religionData: any = [
+    {
+      id: 1,
+      name: 'Hindus',
+    },
+    {
+      id: 2,
+      name: 'Christians',
+    },
+    {
+      id: 3,
+      name: 'Muslims',
+    },
+    {
+      id: 4,
+      name: 'Buddhists',
+    },
+    {
+      id: 5,
+      name: 'Jains',
+    },
+    {
+      id: 6,
+      name: 'Sikhs',
+    },
+  ];
+  languageData: any = [
+    {
+      id: 1,
+      name: 'Telugu',
+    },
+    {
+      id: 2,
+      name: 'Hindi',
+    },
+    {
+      id: 3,
+      name: 'Urdu',
+    },
+    {
+      id: 4,
+      name: 'English',
+    },
+  ];
+  project: any = null;
+  districts: any = [];
+  mandals: any = [];
+  villages: any = [];
+  villageFormVisible: boolean = false;
+  communityWisePopulationVisible: boolean = false;
+  villageForm: FormGroup = new FormGroup({});
+  GeolocationError = '';
+  timeZone: string = '';
+  Latitude: number;
+  longitude: number;
+  categories: any = [];
+  status: any = [];
+  selectedStatus: any = '';
+  selectedcategory: any = '';
+  totalRecords: number = 0;
+  first: number = 0;
+  rows: number = 10;
+  pageNumber: number = 0;
+  datastatus: any;
+  serverError: boolean = false;
+  isSelectedVilage: boolean = false;
+  isLoggedIn = computed(() => this.commonService.user() !== null);
+  projectMenuTab: any[] = [];
+  projectImages = {
+    Computers: 'computer.png',
+    Dustbins: 'dustbin.png',
+    'Library Books': 'library.png',
+    'Audio System': 'music.png',
+    Toilets: 'public_toilets.png',
+    'RO Plant': 'ro_plants.png',
+    'Sanitary Pad': 'sanitary.png',
+    'Sports Kits': 'sports.png',
+    'Bus Shelter': 'bus_shelter.png',
+    School: 'schools.png',
+  };
+
+  queryParams: any = {};
+
+
+  constructor(
+    private commonService: CommonService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    effect(() => {
+      this.projectMenuTab = [];
+      if (this.isLoggedIn()) {
+        this.projectMenuTab.push({
+          tabName: 'Draft',
+          statusCode: 'DRAFT',
+          projectList: [],
+        });
+        this.projectMenuTab.push({
+          tabName: 'Waiting for approval',
+          statusCode: 'WFA',
+          projectList: [],
+        });
+      }
+      this.projectMenuTab.push({
+        tabName: 'Waiting For Sponsor',
+        statusCode: 'WFD',
+        projectList: [],
+      });
+      this.projectMenuTab.push({
+        tabName: 'Work in Progress',
+        statusCode: 'WIP',
+        projectList: [],
+      });
+      this.projectMenuTab.push({
+        tabName: 'Completed',
+        statusCode: 'COMPLETED',
+        projectList: [],
+      });
+    })
+  }
+
+  ngOnInit() {
+    this.getCategories();
+    this.timeZone = this.getTimeZone();
+    //  this.getDistricts();
+    this.villagelookups();
+    const localStorageuserData = JSON.parse(localStorage.getItem('user'));
+
+    if (localStorageuserData && localStorageuserData.districtId) {
+      this.defaultDistricts();
+    } else {
+      this.getDistricts();
+      this.getFilterVillagesDemographyData();
+    }
+
+    this.status = [
+      {
+        id: 3,
+        name: 'REJECTED',
+        status: 'REJECTED',
+      },
+      {
+        id: 4,
+        name: 'WORK IN PROGRESS',
+        status: 'WIP',
+      },
+      {
+        id: 5,
+        name: 'WAITING FOR SPONSORS',
+        status: 'WFD',
+      },
+
+      {
+        id: 6,
+        name: 'COMPLETED',
+        status: 'COMPLETED',
+      },
+    ];
+
+    this.activatedRoute.queryParams.subscribe((queryParams) => {
+      // this.product = JSON.parse(params['project']);
+      // this.tabs.forEach((tab, index) => {
+      //   tab.isDisabled = this.isTabDisabled(index);
+      // });
+      this.queryParams = queryParams;
+      if (queryParams['villageId']) {
+        this.showSelectedVillage({
+          villageId: queryParams['villageId'],
+          districtId: queryParams['districtId'],
+          mandalId: queryParams['mandalId'],
+        });
+      }
+    });
+  }
+
+  async defaultDistricts() {
+    this.districts = await lastValueFrom(this.commonService.getDistricts());
+    const localStorageuserData = JSON.parse(localStorage.getItem('user'));
+    this.selectedDistrict = this.districts.find(
+      (d) => d.id == localStorageuserData.districtId
+    );
+    this.getFilterVillagesDemographyData();
+    this.mandals = await lastValueFrom(
+      this.commonService.getMandals(this.selectedDistrict.id)
+    );
+  }
+
+  customSort(event: SortEvent) {
+    console.log(event);
+  }
+
+  allCategories: any = [];
+  allProjectTypes: any = {};
+
+  getCategories(isDefaultLoad?: boolean) {
+    this.commonService.getProjectCategories().subscribe(
+      (data) => {
+        // this.categories = data.projects;
+        this.allCategories = data;
+
+        for (var i = 0; i < data.length; i += 1) {
+          if (data[i].projects.length > 0) {
+            this.categories = [].concat.apply(
+              this.categories,
+              data[i].projects
+            );
+            console.log(this.categories);
+          }
+        }
+      },
+
+      (err) => {
+        //Temp fix for Gopi
+        this.categories = HardCodedInfo.categories;
+      }
+    );
+  }
+
+  onCategoryChange(project: any) {
+    project.projectTypeId = null;
+  }
+
+  getTypesByCategory(categoryId: number) {
+    const category = this.allCategories.find((cat) => cat.id === categoryId);
+    return category ? category.projects : [];
+  }
+
+  getCategoryName(categoryId: number) {
+    const category = this.allCategories.find((cat) => cat.id === categoryId);
+    return category?.name || '';
+  }
+
+  getTypeDescription(categoryId: number, typeId: number) {
+    const types = this.getTypesByCategory(categoryId);
+    const type = types.find((t) => t.id === typeId);
+    return type?.description || '';
+  }
+
+  createPayload(project, statusCode) {
+    const payload = {
+      ...project,
+      statusCode: statusCode,
+    };
+
+    const formData = new FormData();
+    // Add the file
+    // formData.append('user', this.testpayload);
+    formData.append(
+      'project',
+      new Blob([JSON.stringify(payload)], { type: 'application/json' })
+    );
+
+    this.commonService.updateProject(formData).subscribe(
+      (data) => {
+        console.log('...Data', data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  getProjectDetails(project: any) {
+
+    this.router.navigate(['project-details'], {
+      queryParams: { projectId: project.id, fromPage: 'village' },
+    });
+  }
+
+  categoryChange(event: any) {
+    this.getFilterVillagesDemographyData();
+  }
+
+  StatusChange(event: any) {
+    this.getFilterVillagesDemographyData();
+  }
+
+  reFreshVilageData(event: boolean) {
+    if (event) {
+      this.getVillagesDemography(this.selectedVilage.id);
+    }
+  }
+
+  ShowVilage() {
+    if (this.selectedVilage?.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  deleteProject(id: number) {
+    this.commonService.deleteProject(id).subscribe(data => {
+      if (this.queryParams['villageId']) {
+        this.showSelectedVillage({
+          villageId: this.queryParams['villageId'],
+          districtId: this.queryParams['districtId'],
+          mandalId: this.queryParams['mandalId'],
+        });
+      }
+    });
+  }
+
+  getVillagesDemography(id: any) {
+    this.commonService.getVillagesDemography(id).subscribe((data: any) => {
+      // this.selectedDistrict = this.districts
+      this.getVillagesDemographyData = data;
+      this.unEmployedYouthVillage =
+        this.getVillagesDemographyData.unEmployedYouthVillage;
+
+      this.employedYouthVillage =
+        this.getVillagesDemographyData.employedYouthVillage;
+      this.occupationsData = this.getVillagesDemographyData.occupations;
+      this.landUtilizationData =
+        this.getVillagesDemographyData.landUtilizationVillage;
+      this.cultivationCropsData =
+        this.getVillagesDemographyData.cultivationCropsVillage;
+      this.institutionsData =
+        this.getVillagesDemographyData.institutionsVillages;
+      this.CommunityPopulationData = this.getVillagesDemographyData.populations;
+
+
+      this.getVillagesDemographyData?.projectResponseList?.forEach(
+        (project) => {
+          const projectTab = this.projectMenuTab.find(
+            (p) => p.statusCode === project.statusCode
+          );
+          if (projectTab) {
+            projectTab.projectList.push(project);
+          }
+        }
+      );
+    });
+  }
+  createVillageForm() {
+    this.villageForm = new FormGroup({
+      // Village: new FormControl('', [Validators.required]),
+      // Panchayat: new FormControl('', [Validators.required]),
+      // District: new FormControl('', [Validators.required]),
+      // Mandal: new FormControl('', [Validators.required]),
+      area: new FormControl('', [Validators.required]),
+      Religion: new FormControl('', [Validators.required]),
+      Language: new FormControl('', [Validators.required]),
+      pinCode: new FormControl('', [Validators.required]),
+      Boundaries: new FormControl('', [Validators.required]),
+      Geographical: new FormControl('', [Validators.required]),
+      totalHouse: new FormControl('', [Validators.required]),
+      Population: new FormControl('', [Validators.required]),
+      PopulationMale: new FormControl('', [Validators.required]),
+      PopulationFemale: new FormControl('', [Validators.required]),
+      PopulationAboveEighteenMale: new FormControl('', [Validators.required]),
+      PopulationAboveEighteenFeMale: new FormControl('', [Validators.required]),
+      PopulationAbove60Male: new FormControl('', [Validators.required]),
+      PopulationAbove60FeMale: new FormControl('', [Validators.required]),
+    });
+
+    this.villageForm.patchValue({
+      TimeZone: this.timeZone,
+    });
+  }
+
+  getDistricts() {
+    this.commonService.getDistricts().subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.districts = data;
+        }
+      },
+      (err) => {
+        //Temp fix for Gopi
+        this.districts = HardCodedInfo.districts;
+      }
+    );
+  }
+
+  getMandals(event: any) {
+    const districtCode = event?.value?.id ? event.value.id : null;
+    this.first = 0;
+    this.pageNumber = 0;
+    this.mandals = [];
+    this.villages = [];
+    this.selectedMandal = null;
+    this.selectedVilage = null;
+    if (districtCode) {
+      this.commonService.getMandals(districtCode).subscribe(
+        (data) => {
+          this.mandals = data;
+          // this.projectDMVSearch();
+          this.getFilterVillagesDemographyData();
+        },
+        (err) => {
+          //Temp fix for Gopi
+          this.mandals = HardCodedInfo.mandals;
+        }
+      );
+    } else {
+      this.getFilterVillagesDemographyData();
+    }
+  }
+
+  getvilages(event: any) {
+    const mandalCode = event?.value?.id ? event.value.id : null;
+    this.first = 0;
+    this.pageNumber = 0;
+    this.villages = [];
+    this.selectedVilage = null;
+    if (mandalCode) {
+      this.commonService.getVillages(mandalCode).subscribe(
+        (data) => {
+          this.villages = data;
+          this.getFilterVillagesDemographyData();
+        },
+        (err) => {
+          //Temp fix for Gopi
+          this.villages = HardCodedInfo.villages;
+        }
+      );
+    } else {
+      this.getFilterVillagesDemographyData();
+    }
+  }
+
+  vilageChange(event: any) {
+    // this.projectDMVSearch();
+    this.isSelectedVilage = true;
+    // this.getVillagesDemography(event.value.id);
+    this.selectedVillage({
+        villageId: event.value.id,
+        districtId: this.selectedDistrict.id,
+        mandalId: this.selectedMandal.id,
+      });
+  }
+  villagelookups() {
+    this.commonService.villagelookups().subscribe((data: any) => {
+      this.villagelookupsData = data;
+      this.CommunityOptions = data.community;
+    });
+  }
+  projectDMVSearch() {}
+  reset() {
+    this.selectedVilage = null;
+    this.isSelectedVilage = false;
+    this.pageNumber = 0;
+    this.first = 0;
+    this.selectedDistrict = null;
+    this.selectedMandal = null;
+    this.selectedcategory = null;
+    this.selectedStatus = null;
+    this.getFilterVillagesDemographyData();
+  }
+
+  editVillage() {
+    this.createVillageForm();
+    this.villageFormVisible = true;
+    this.vilagEditMode = true;
+    this.villageForm.patchValue({
+      area: this.getVillagesDemographyData.area,
+      Religion: this.religionData[0].id,
+      Language: this.languageData[0].id,
+      pinCode: this.getVillagesDemographyData.pinCode,
+      Boundaries: this.getVillagesDemographyData.boundariesVillage,
+      Geographical: this.getVillagesDemographyData.geographicalArea,
+      totalHouse: this.getVillagesDemographyData.noOfHouses,
+      Population: this.getVillagesDemographyData.totalPopulation,
+      PopulationMale: this.getVillagesDemographyData.adultMalePopulation,
+      PopulationFemale: this.getVillagesDemographyData.adultFemalePopulation,
+      PopulationAboveEighteenMale:
+        this.getVillagesDemographyData.childMalePopulation,
+      PopulationAboveEighteenFeMale:
+        this.getVillagesDemographyData.childFemalePopulation,
+      PopulationAbove60Male: this.getVillagesDemographyData.area,
+      PopulationAbove60FeMale: this.getVillagesDemographyData.area,
+    });
+  }
+
+  getLocation(getVillagesDemographyData: any) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          getVillagesDemographyData.latitude = position.coords.latitude;
+          getVillagesDemographyData.longitude = position.coords.longitude;
+        },
+        (error) => {
+          alert('Sorry, no position available.');
+        }
+      );
+    } else {
+      this.GeolocationError = 'Geolocation is not supported by this browser.';
+    }
+  }
+
+  getTimeZone() {
+    var offset = new Date().getTimezoneOffset(),
+      o = Math.abs(offset);
+    return (
+      (offset < 0 ? '+' : '-') +
+      ('00' + Math.floor(o / 60)).slice(-2) +
+      ':' +
+      ('00' + (o % 60)).slice(-2)
+    );
+  }
+
+  updateVillageDataForm() {
+    this.villageFormVisible = false;
+    const payload = {
+      id: this.getVillagesDemographyData.id,
+      villageId:
+        this.getVillagesDemographyData.villageId ?? this.selectedVilage.id,
+      noOfHouses: this.villageForm.value.totalHouse,
+      totalPopulation: this.villageForm.value.Population,
+      boundariesVillage: this.villageForm.value.Boundaries,
+      geographicalArea: this.villageForm.value.Geographical,
+      adultMalePopulation: this.villageForm.value.PopulationMale,
+      adultFemalePopulation: this.villageForm.value.PopulationFemale,
+      childMalePopulation: this.villageForm.value.PopulationAboveEighteenMale,
+      childFemalePopulation:
+        this.villageForm.value.PopulationAboveEighteenFeMale,
+      above60Male: this.villageForm.value.PopulationAbove60Male,
+      above60Female: this.villageForm.value.PopulationAbove60FeMale,
+      area: this.villageForm.value.area,
+      latitude: this.getVillagesDemographyData.latitude,
+      longitude: this.getVillagesDemographyData.longitude,
+      pinCode: this.villageForm.value.pinCode,
+    };
+    // console.log(payload);
+    if (this.vilagEditMode) {
+      this.commonService.saveVilageData(payload).subscribe((data) => {
+        if (data) {
+          this.villageForm.reset();
+          this.getVillagesDemography(this.selectedVilage.id);
+        }
+      });
+    } else {
+      this.commonService
+        .updateCommunityVilageData(payload)
+        .subscribe((data) => {
+          if (data) {
+            this.villageForm.reset();
+          }
+        });
+    }
+  }
+
+  selectedVillage(data) {
+    this.router.navigate([], {
+      queryParams: {
+        villageId: data.villageId,
+        districtId: data.districtId,
+        mandalId: data.mandalId,
+      },
+      queryParamsHandling: 'merge', // this merges with existing query params
+    });
+  }
+
+  async showSelectedVillage(data: any) {
+    this.districts = await lastValueFrom(this.commonService.getDistricts());
+    this.selectedDistrict = this.districts.find((d) => d.id == data.districtId);
+    console.log(this.selectedDistrict);
+
+    this.mandals = await lastValueFrom(
+      this.commonService.getMandals(this.selectedDistrict.id)
+    );
+    this.selectedMandal = this.mandals.find((d) => d.id == data.mandalId);
+
+    this.villages = await lastValueFrom(
+      this.commonService.getVillages(this.selectedMandal.id)
+    );
+    this.selectedVilage = this.villages.find((d) => d.id == data.villageId);
+    this.isSelectedVilage = true;
+
+    this.getVillagesDemography(data.villageId);
+  }
+
+  hideSelectedVillage(data: any) {
+    this.isSelectedVilage = false;
+    this.selectedVilage = null;
+    this.pageNumber = 0;
+    this.first = 0;
+    this.getFilterVillagesDemographyData();
+    this.router.navigate([], {
+      queryParams: {}, // empty object removes all
+      queryParamsHandling: '', // do not merge with existing params
+    });
+    //this.reset();
+  }
+
+  localStorageuser() {
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    if (!localStorageuser || localStorageuser.roles[0].id != 3) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  getFilterVillagesDemographyData() {
+    let params = '';
+
+    if (this.selectedDistrict && this.selectedDistrict.id) {
+      params = 'districtId=' + this.selectedDistrict.id;
+    }
+    if (this.selectedMandal && this.selectedMandal.id) {
+      params += '&mandalId=' + this.selectedMandal.id;
+    }
+    if (this.selectedVilage && this.selectedVilage.id) {
+      params += '&villageId=' + this.selectedVilage.id;
+    }
+
+    if (this.selectedcategory && params.length > 0 && this.selectedcategory) {
+      params += '&typeId=' + this.selectedcategory;
+    } else if (this.selectedcategory && params.length == 0) {
+      params += 'typeId=' + this.selectedcategory;
+    }
+
+    if (this.selectedStatus && params.length > 0 && this.selectedStatus) {
+      params += '&status=' + this.selectedStatus;
+    } else if (this.selectedStatus && params.length == 0) {
+      params += 'status=' + this.selectedStatus;
+    }
+    params += '&page=' + this.pageNumber;
+    params += '&size=' + this.rows;
+    const localStorageuser = JSON.parse(localStorage.getItem('user'));
+    const userid = localStorageuser?.id;
+    if (userid) {
+      params += '&userId=' + userid;
+    }
+
+    this.commonService.villageslookupProjects(params).subscribe(
+      (data: any) => {
+        if (!data.content) {
+          this.getVillagesDemographyDataList = [];
+          this.totalRecords = 0;
+          this.datastatus = data.status;
+          this.serverError = true;
+          return;
+        }
+
+        const localStorageuser = JSON.parse(localStorage.getItem('user'));
+
+        if (localStorageuser?.roles[0].id == 3) {
+          this.getVillagesDemographyDataList = data.content;
+        } else {
+          this.getVillagesDemographyDataList = data.content.filter(
+            (item: any) => item.statusCode != 'NEW'
+          );
+        }
+
+        this.serverError = false;
+
+        this.totalRecords = data.totalElements;
+      },
+      (err) => {
+        //Temp fix for Gopi
+        // this.projects = HardCodedInfo.projects;
+      }
+    );
+  }
+
+  onPageChange(event: PageEvent) {
+    this.first = event.first;
+    this.rows = event.rows;
+    this.pageNumber = event.page;
+    this.getFilterVillagesDemographyData();
+  }
+
+  clonedProjects: { [s: string]: any } = {};
+  onRowEditInit(project) {
+    this.clonedProjects[project.id] = { ...project };
+  }
+
+  onRowEditCancel(project: any, index: number, tabName) {
+    const tabMenu = this.projectMenuTab.find((p) => p.tabName === tabName);
+    tabMenu.projectList[index] = this.clonedProjects[project.id as string];
+    delete this.clonedProjects[project.id as string];
+  }
+}

@@ -1,0 +1,111 @@
+@if (ShowVilage()) {
+  <div class="add-edit">
+<p-button
+label="Add / Edit"
+  (onClick)="updateLandUtilizationData()"
+  *appHasRole="[3]"
+/>
+</div>
+}
+<p-table [value]="landUtilizationData" class="tab-data-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="firstName" class="text-center">
+        Sc No <p-sortIcon field="firstName" />
+      </th>
+
+      <th pSortableColumn="address" class="text-center">
+        Purpose of Land utilized <p-sortIcon field="address" />
+      </th>
+      <th pSortableColumn="Amount" class="text-right">
+        Area in Acrs <p-sortIcon field="Amount" />
+      </th>
+      <th>&nbsp;</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-utilizationData>
+    <tr>
+      <td class="text-center">
+        {{ utilizationData.id }}
+      </td>
+
+      <td class="text-right">
+        {{ getutilizationName(utilizationData.landTypeId) }}
+      </td>
+
+      <td class="text-right">
+        {{ utilizationData.totalArea }}
+      </td>
+
+      <td>
+        <i
+          class="pi pi-pencil"
+          (click)="editUtilizationData(utilizationData)"
+          *appHasRole="[3]"
+        ></i>
+        <i
+          class="pi pi-trash"
+          (click)="deleteUtilizationData(utilizationData)"
+          *appHasRole="[3]"
+        ></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="landUtilizationDataVisible"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <form
+    [formGroup]="landUtilizationForm"
+    (ngSubmit)="updatelandUtilizationForm()"
+    *ngIf="landUtilizationDataVisible"
+  >
+    <div class="tab-pop-txt">
+      <h4>Add Land Utilization</h4>
+      <i class="pi pi-times" (click)="landUtilizationDataVisible = false"></i>
+    </div>
+
+    <div class="pop-data-set">
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Purpose of Land utilized</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [options]="landUtilizationLookupData"
+            formControlName="landUtilization"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select Land Utilization"
+          />
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Area in Acrs</div>
+        <div class="project-detail-set-v mt-2">
+          <p-inputNumber
+            inputId="areaInAcrs"
+            formControlName="areaInAcrs"
+            #areaInAcrs
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-footer-btns">
+      <p-button
+        label="Cancel "
+        (click)="landUtilizationDataVisible = false"
+        class="cancel-btn"
+      />
+      <p-button
+        label="Add "
+        type="submit"
+        class="submit-btn"
+        [disabled]="!landUtilizationForm.valid"
+      />
+    </div>
+  </form>
+</p-sidebar>
