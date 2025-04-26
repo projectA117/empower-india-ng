@@ -156,6 +156,7 @@ export class ProjectDonorsComponent implements OnInit {
     this.donorForm.reset();
     this.editdonors = false;
     this.donorsAddEditText = 'Add Sponsor';
+    this.sponsorType = 'new';
     this.donorForm.get('DonorsAmount').enable();
   }
 
@@ -201,6 +202,77 @@ export class ProjectDonorsComponent implements OnInit {
       }));
     }
   }
+
+  isSearching: boolean = false;
+  filteredDonors: any[] = [];
+  selectedDonor: any = null;
+  sponsorType: string = 'new';
+
+  searchDonors(event: any) {
+    this.isSearching = true;
+
+    // Get the search term
+    const searchTerm = event.query;
+
+    // Call your API with the search term
+    this.projectDetailsService.searchDonors(searchTerm).subscribe(
+      (donors) => {
+        this.filteredDonors = donors;
+        this.isSearching = false;
+      },
+      (error) => {
+        console.error('Error fetching donors:', error);
+        this.isSearching = false;
+      }
+    );
+  }
+
+  onDonorSelected(donor: any) {
+    this.selectedDonor = donor.value;
+
+    // Populate form with donor data
+    this.donorForm.patchValue({
+      ID: donor.value.id,
+      DonorsFirstName: donor.value.firstName,
+      DonorsLastName: donor.value.lastName,
+      DonorsPhone: donor.value.phoneNumber,
+      DonorsEmail: donor.value.email,
+      DonorsAddress: donor.value.address,
+    });
+  }
+
+  clearUserSelection() {
+    this.selectedDonor = null;
+    this.donorForm.reset();
+  }
+
+  onSponsorTypeChange(event: any) {
+    this.donorForm.reset();
+    this.selectedDonor = null;
+    if (event === 'new') {
+      this.donorForm.get('DonorsFirstName')?.enable();
+      this.donorForm.get('DonorsLastName')?.enable();
+      this.donorForm.get('DonorsPhone')?.enable();
+      this.donorForm.get('DonorsEmail')?.enable();
+      this.donorForm.get('DonorsAddress')?.enable();
+    } else if (event === 'existing') {
+      this.donorForm.get('DonorsFirstName')?.disable();
+      this.donorForm.get('DonorsLastName')?.disable();
+      this.donorForm.get('DonorsPhone')?.disable();
+      this.donorForm.get('DonorsEmail')?.disable();
+      this.donorForm.get('DonorsAddress')?.disable();
+    }
+  }
+
+  existingDonorSelected(event: any) {
+    const selectedDonor = event.value;
+    this.donorForm.get('DonorsFirstName')?.setValue(selectedDonor.firstName);
+    this.donorForm.get('DonorsLastName')?.setValue(selectedDonor.lastName);
+    this.donorForm.get('DonorsPhone')?.setValue(selectedDonor.phoneNumber);
+    this.donorForm.get('DonorsEmail')?.setValue(selectedDonor.email);
+    this.donorForm.get('DonorsAddress')?.setValue(selectedDonor.address);
+  }
+
 
   onDelete(donor: any) {
     this.projectDetailsService

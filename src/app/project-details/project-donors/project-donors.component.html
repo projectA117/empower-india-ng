@@ -100,6 +100,80 @@
     </div>
 
     <div class="pop-data-set">
+      @if (!editdonors) {
+      <div class="sponsor-type">
+        <span>Are you a Sponsor</span>
+        <div class="d-flex">
+          <div class="field-radiobutton ml-2">
+            <p-radioButton
+              name="sponsorTypeRight"
+              value="new"
+              [(ngModel)]="sponsorType"
+              (ngModelChange)="onSponsorTypeChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+              inputId="newRight"
+            ></p-radioButton>
+            <label for="newRight" class="ml-2"> Yes</label>
+          </div>
+          <div class="field-radiobutton ml-2">
+            <p-radioButton
+              name="sponsorTypeRight"
+              value="existing"
+              [(ngModel)]="sponsorType"
+              (ngModelChange)="onSponsorTypeChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+              inputId="existingRight"
+            ></p-radioButton>
+            <label for="existingRight" class="ml-2">No</label>
+          </div>
+        </div>
+      </div>
+      <!-- User search for existing sponsors -->
+      <div class="row" *ngIf="sponsorType === 'existing'">
+        <div class="col-12 mb-3">
+          <p-autoComplete
+            [suggestions]="filteredDonors"
+            (completeMethod)="searchDonors($event)"
+            [field]="'firstName'"
+            [dropdown]="true"
+            [forceSelection]="true"
+            placeholder="Search for existing donors"
+            (onSelect)="onDonorSelected($event)"
+            class="w-100"
+          >
+            <ng-template let-user pTemplate="item">
+              <div class="user-item">
+                <div class="user-id">ID: {{ user.id }}</div>
+                <div class="user-name">
+                  {{ user.firstName }} {{ user.lastName }}
+                </div>
+                <div class="user-email">{{ user.email }}</div>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="empty">
+              <div class="user-empty">
+                <p>No existing donors found.</p>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+          <!-- <div *ngIf="selectedDonor" class="mt-2">
+                <span class="selected-user-label"
+                  >Selected Donor: {{ selectedDonor.firstName }}
+                  {{ selectedDonor.lastName }} (ID: {{ selectedDonor.id }})</span
+                >
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-times"
+                  class="p-button-text p-button-sm"
+                  (click)="clearUserSelection()"
+                ></button>
+              </div> -->
+        </div>
+      </div>
+      }
+
       <div class="project-detail-set mt-4">
         <div class="project-detail-set-h">First Name</div>
         <div class="project-detail-set-v mt-2">

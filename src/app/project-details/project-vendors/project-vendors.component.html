@@ -15,16 +15,18 @@
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="Vendor">
-            Vendor Name <p-sortIcon field="Vendor" />
+            Vendor/Company Name <p-sortIcon field="Vendor" />
           </th>
           <th pSortableColumn="Contractor">
-            Contractor Name <p-sortIcon field="Contractor" />
+            Contact Person Name <p-sortIcon field="Contractor" />
           </th>
 
           <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone" /></th>
           <th pSortableColumn="Address">
             Address <p-sortIcon field="Address" />
           </th>
+          <th>Supplier</th>
+          <th>Material</th>
           <th>Actions</th>
         </tr>
       </ng-template>
@@ -34,6 +36,12 @@
           <td>{{ VendorsDetails.name }}</td>
           <td>{{ VendorsDetails.phone }}</td>
           <td>{{ VendorsDetails.address }}</td>
+          <td>
+            {{ VendorsDetails.isSupplier ? "Yes" : "No" }}
+          </td>
+          <td>
+            {{ VendorsDetails.material || "--" }}
+          </td>
           <td>
             @if (localStorageuser()) {
             <div class="d-flex gap-3 action-btns">
@@ -73,7 +81,7 @@
 
     <div class="pop-data-set">
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Vendor Name</div>
+        <div class="project-detail-set-h">Vendor/Company Name</div>
         <div class="project-detail-set-v mt-2">
           <input
             pInputText
@@ -85,7 +93,7 @@
       </div>
 
       <div class="project-detail-set mt-4">
-        <div class="project-detail-set-h">Contractor Name</div>
+        <div class="project-detail-set-h">Contact Name</div>
         <div class="project-detail-set-v mt-2">
           <input
             pInputText
@@ -123,6 +131,35 @@
             cols="30"
             id="Address"
           ></textarea>
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="flex items-center">
+          <p-checkbox
+            id="isSupplier"
+            inputId="isSupplier"
+            name="isSupplier"
+            value="Yes"
+            formControlName="isSupplier"
+          />
+          <label for="isSupplier" class="ml-2" style="line-height: 30px">
+            Is Supplier
+          </label>
+        </div>
+      </div>
+
+      <div class="project-detail-set mt-4">
+        <div class="project-detail-set-h">Material</div>
+        <div class="project-detail-set-v mt-2">
+          <p-dropdown
+            [filter]="true"
+            [options]="materialList"
+            optionLabel="label"
+            optionValue="value"
+            formControlName="material"
+            placeholder="Select a Material"
+          />
         </div>
       </div>
     </div>

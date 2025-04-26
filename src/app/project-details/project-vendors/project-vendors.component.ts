@@ -48,6 +48,20 @@ export class ProjectVendorsComponent implements OnInit {
   vendorSidebarVisible: boolean = false;
   VendorForm: FormGroup = new FormGroup({});
   VendorAddEditText: string = 'Add Vendor';
+  materialList: any = [
+    {
+      label: 'Electronics',
+      value: 'Electronics',
+    },
+    {
+      label: 'Hardware',
+      value: 'Hardware',
+    },
+    {
+      label: 'Other',
+      value: 'Other',
+    },
+  ]
   constructor(
     private projectDetailsService: ProjectDetailsService,
     private commonService: CommonService
@@ -79,20 +93,28 @@ export class ProjectVendorsComponent implements OnInit {
         Validators.maxLength(10),
       ]),
       VendorAddress: new FormControl('', [Validators.required]),
+      isSupplier: new FormControl(''),
+      material: new FormControl('', [Validators.required]),
     });
   }
 
   updateVendor() {
     const payload = {
-      id: this.VendorForm.get('id')?.value ?? null, //,
+
       name: this.VendorForm.get('VendorName')?.value,
       contractorName: this.VendorForm.get('VendorContractorName')?.value,
       phone: this.VendorForm.get('VendorMobile')?.value,
       address: this.VendorForm.get('VendorAddress')?.value,
       projectId: this.projectData.id,
+      isSupplier: this.VendorForm.get('isSupplier')?.value ? 1: 0,
+      material: this.VendorForm.get('material')?.value,
       //villageId: this.projectData.villageId,
       //id: this.projectData.id,
     };
+
+    if (this.VendorForm.get('id').value) {
+      payload['id'] = this.VendorForm.get('id').value;
+    }
     this.projectDetailsService.addVendors(payload).subscribe((data) => {
       console.log('...Data', data);
       if (data) {
@@ -111,6 +133,8 @@ export class ProjectVendorsComponent implements OnInit {
       VendorContractorName: VendorsDetails.contractorName,
       VendorMobile: VendorsDetails.phone,
       VendorAddress: VendorsDetails.address,
+      isSupplier: VendorsDetails.isSupplier ? 'Yes': 'No',
+      material: VendorsDetails.material,
     });
   }
 
